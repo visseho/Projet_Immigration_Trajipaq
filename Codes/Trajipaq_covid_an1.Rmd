@@ -34,8 +34,9 @@ library(srvyr)
 library(survey)
 library(ggpubr)
 library(writexl)
+library(haven)
 
-trajipaq_covid <- read_rds("../Data/trajipaq_covid.RData")
+Base_Trajipaq_Finale_Ok <- read_dta("~/GitHub/Projet_Immigration_Trajipaq/Data/Base_Trajipaq_Finale_Ok.dta")
 
 ```
 
