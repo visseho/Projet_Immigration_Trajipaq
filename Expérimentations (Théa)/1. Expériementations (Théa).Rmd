@@ -1,0 +1,41 @@
+---
+title: "Expérimentations"
+author: "Théa Carlier"
+date: "2023-05-02"
+output: html_document
+---
+
+```{r}
+
+rm(list = ls())
+
+library(tidyverse)
+library(summarytools)
+library(srvyr)
+library(survey)
+library(ggpubr)
+library(writexl)
+library(haven)
+
+Base_Trajipaq_Finale_Ok <- read_dta("~/GitHub/Projet_Immigration_Trajipaq/Data/Base_Trajipaq_Finale_Ok.dta")
+
+```
+
+# Régression logistique entre deux variables numériques (VD = nominal dichotomique, VI = ratio)
+
+```{r}
+#transformation de la variable COV12 (Nous avons eu de la difficulté à obtenir des soins de santé quand nous en avions besoin)
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(COV12_2 = case_when(
+         COV12 == 1 ~ 0,
+         COV12 == 2 ~ 1
+    ))
+
+#régression logistique entre COV12_2 (VD) et Q14I (Depuis quelle année vivez-vous au Québec)
+model1 <- glm(formula = COV12_2 ~ Q14I, family = "binomial", data = Base_Trajipaq_Finale_Ok)
+summary(model1)
+
+#Les résultats indiquent que le risque d'erreur alpha est supérieur à 5%. Conséquemment, la relation étudiée n'est pas significative.
+```
+
