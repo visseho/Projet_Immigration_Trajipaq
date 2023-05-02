@@ -29,14 +29,33 @@ Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
   mutate(COV12_2 = case_when(
          COV12 == 1 ~ 0,
-         COV12 == 2 ~ 1
+         COV12 == 2 ~ 1,
+         COV12 == 98 ~ NA,
+         COV12 == 99 ~ NA,
     ))
+
+#soustraction des réponses (la même année que la résidence permanente, je ne sais pas et je ne souhaite pas répondre)
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  filter(Q14I < 2019)
 
 #régression logistique entre COV12_2 (VD) et Q14I (Depuis quelle année vivez-vous au Québec)
 model1 <- glm(formula = COV12_2 ~ Q14I, family = "binomial", data = Base_Trajipaq_Finale_Ok)
 summary(model1)
 
 #les résultats indiquent que le risque d'erreur alpha est supérieur à 5%. Conséquemment, la relation étudiée n'est pas significative.
+```
+
+# Représentation graphique de la régression logistique
+
+```{r}
+#représentation graphique de la régression logistique
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(COV12_2), !is.na(Q14I)), aes(x = Q14I, y = COV12_2)) + 
+  geom_point() +
+  stat_smooth(method = "glm", color = "blue", se = FALSE,
+    method.args = list(family = binomial))
+
+#résultat invalide car COV_2 est une variable numérique discrète
 ```
 
 # Analyse de la variance (ANOVA) entre deux variables numériques (VD = ordinal, VI = ratio)
