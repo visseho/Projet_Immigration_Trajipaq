@@ -1,0 +1,33 @@
+cran-us:
+  url: http://cran.us.r-project.org
+  packages:
+    - name: bookdown
+      depends:
+        - R-dev
+        - g++
+        - libxml2-dev
+    - name: tidyverse
+      depends:
+        - pandoc
+        - fontconfig-dev
+        - harfbuzz-dev
+        - linux-headers
+        - freetype-dev
+        - pkgconf
+        - fribidi-dev
+        - libjpeg-turbo-dev
+        - tiff-dev
+    - name: dplyr
+    - name: summarytools
+      depends:
+        - imagemagick-dev
+    - name: dplyr
+    - name: summarytools
+    - name: readr
+    - name: questionr
+    - name: rcompanion
+    - name: gplots
+    - name: pander
+    - name: extrafont
+      depends:
+        - ttf-liberation

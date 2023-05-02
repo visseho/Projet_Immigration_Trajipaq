@@ -1,0 +1,64 @@
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Theoretical framework
+
+Family as a unit of analysis can be particularly fruitful when studying health
+inequalities in the context of a societal-wide crisis. Through the lens of the
+COVID-19 pandemic, the following points illustrate why exploring family dynamics
+provides additional insight into the underlying mechanisms of health
+disparities. First, the family is the most fundamental unit of social
+organization. It facilitates access to resources and the transmission of social
+and psychological capital from one generation to the next. Therefore, a better
+analysis of how crises and adverse life events affect people requires a better
+understanding of how families relate to each other and interact with external
+forces. Second, during public health emergencies, families may be thrown into
+different structures due to unprecedented financial, mental, and physical
+challenges. The risk of family dissolution, for example, can be heightened when
+members must spend unusually long periods together at home and have limited
+opportunities to engage with friends and the wider community. Conversely,
+families can develop closer bonds through self-sacrifice, shared
+responsibilities, and increased care and support. As the dependency status of
+seniors increases, the elderlies are also more likely to be integrated into
+formerly nucleus families. We posit that the extent to which a family can adapt
+its functions to meet new challenges is a predictor of the well-being of its
+members and the resilience of its broader population. Third, the family is a
+crucial link to social institutions, such as the health care system, schools,
+and government agencies whose decisions have significant downstream impacts.
+Families are viewed by many public-level entities as a reference when allocating
+resources, enforcing new standards, and responding to emerging needs and
+demands. From this perspective, the family operates at the nexus of individual
+and societal structures, embedding the tripple effects of public policy in its
+most consequential ways. Finally, the family has a crucial role to play in
+determining the life course of its members. As COVID-19 elevates the importance
+of familial bonds, the post-pandemic period might be marked by an increased
+influence of families on the lives of their members and the social structures
+they inhabit.
+
+The above conceptualization echoes several other approaches to studying
+long-term health inequalities. For instance, life course theory emphasizes the
+significance of family ties and social environment as they structure prospects
+for individuals across their life span (Elder, 1977; Elder Jr., 1998; Macmillan,
+2005; Settersten et al., 2020). Likewise, social capital theory and the
+stress-buffering hypothesis consider family systems a crucial factor in health
+and well-being (Choi and Jun, 2020; Cohen and McKay, 1984; Cohen and Wills,
+1985; Harpham et al., 2004; Kawachi and Berkman, 2001; Lavee et al., 1987;
+Mandelbaum et al., 2020). They show that the family can offer tangible (e.g.,
+food, shelter, and money) and intangible resources (e.g., support, social
+status, psychological comfort, and institutional advantages), protecting its
+members from adverse life events. Similarly, the social-ecological model and the
+theory of fundamental causes highlight how the SES, familial and extrafamilial
+factors pattern people's life trajectories and health outcomes (Barkan and
+Rocque, 2018; Clouston and Link, 2021; Figge et al., 2018; Kim, 2020; Libman et
+al., 2012; Ungar, 2015). However, all these approaches are ostensibly focused on
+life periods where the general social context is relatively stable. In this
+article, we present our conceptualization of the family in times of
+unprecedented social upheaval. Specifically, our framework seeks to characterize
+family dynamics as a suitable lens to analyze health inequalities in the face of
+a virulent public health crisis.
+
+\newpage

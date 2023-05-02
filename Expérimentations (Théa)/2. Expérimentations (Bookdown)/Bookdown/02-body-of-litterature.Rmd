@@ -1,0 +1,88 @@
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Current body of literature and knowledge gaps
+
+The literature on the racial and ethnic health disparities during the COVID-19
+crisis can be divided into two main categories: studies addressing the
+socio-economic determinants of health and those examining the delivery of health
+interventions and policies. The first category is primarily comprised of
+research that focuses on the link between socio-economic status (SES) of
+high-risk minority groups and the differential impact of the pandemic
+[@drefahl2020Populationbased; @greenaway2020COVID19; @lopez2021Racial;
+@pacheco2020Job; @sundaram2020Individual]. For instance, an inter-country study
+has found that Middle Eastern, African, and Nordic immigrants in Sweden have a
+higher risk of being hospitalized and even dying from COVID-19 when compared to
+the Swedish born population. In the same study, the SES, proportion of
+working-age households, and neighborhood density were significantly associated
+with the mortality rate [@rostila2021Disparities]. This trend of research
+demonstrates that racial and ethnic minorities are more likely to experience
+stress factors, not only due to the hazards of infection but also because of
+economic and social marginalization [@alahmad2020COVID19; @choi2020Buffering;
+@endale2020COVID19; @fitzpatrick2020Fear; @serafini2021Psychological]. The
+intersectionality of race, sex, and health conditions has also been explored in
+the Canadian context of the pandemic. @ingen2021Neighbourhoodlevel demonstrated
+that Ontarian neighborhoods with immigrant and racialized populations have a
+disproportionate share of COVID-19 infections. In addition, areas with high SES
+report a lesser number of COVID cases than low SES ones
+[@ingen2021Neighbourhoodlevel]. Another study conducted in Quebec confirms the
+strong association between immigrants' backgrounds, SES, and COVID-19 related
+psychological stress [@miconi2021Ethnocultural]. The most recent reviews on the
+topic suggest that immigrants disproportionately live in crowded and inadequate
+housing and are employed in essential industries, leaving them with severe
+income insecurities and poor physiological/psychological well-being
+[@chew2020Clinical; @davis2020Impact]. Studies on SES and health disparities
+have emphasized that this situation is further complicated for immigrant women,
+constrained by gender and afflicted by a significant power imbalance in the
+household and workplace [@alarcao2021Intersections;
+@esegbona-adeigbe2020COVID19; @jehn2021COVID19; @mo2020Differential;
+@nardon2021Skilled; @sabri2020Effect; @st-denis2020Sociodemographic]. According
+to Lightman, immigrants and women of color are overrepresented in long-term care
+facilities in Canada, where COVID infection rates have been exceptionally high.
+They are also subject to exclusionary social and economic practices
+[@lightman2021Caring].
+
+The second category of the literature is primarily comprised of policy analyses,
+research on public health communications, examining the efficacy of COVID
+initiatives, the optimal allocation of government aids, and ethical issues
+associated with applying new health interventions to vulnerable populations and
+their communities [@aragona2020Negative; @cross2021Coronavirus;
+@desai2020COVID19; @doyle2020Migrant; @gilman2020Modelling;
+@hargreaves2020Targeting; @langellier2020Policy; @nezafatmaldonado2020Engaging;
+@silverman2020Ethics; @wilson2020Ethics]. Some of the questions that this body
+of research addresses include: how best to respond to COVID-19 in immigrant
+communities? How do public health policies impact the socio-economic status and
+psychological well-being of different sub-populations? What is the structure of
+the planning and implementation of government aid programs during the current
+crisis? And, how can we design public health communication strategies in a way
+that is culturally sensitive and inclusive?
+
+There are several knowledge gaps in the existing literature. Most of the cited
+studies do not include household data and family structure of immigrants as
+variables that affect exposure risks and health outcomes of COVID-19.
+Consequently, the relationship between immigrant status and COVID-19 is not
+accounted for by household size, and family characteristics (i.e., income,
+education, religion). A key reason is that most of the health data used in such
+research projects are acquired from national registers or administrative
+databases, which provide little information on immigration status and kinship.
+However, as the study of Thomeer and her colleagues theorizes, the extent of
+adverse social and economic impacts of COVID-19 is significantly conditional on
+the composition of an immigrant's family [@thomeer2020How]. Households that
+include a spouse/partner, children, or multigenerational family members most
+likely experience a different level of social, psychological, and medical
+vulnerability than single or nuclear ones. Therefore, studies of immigrant
+populations should account for the breakdown of family configuration to better
+understand the mechanisms linking social determinants and health outcomes.
+Another knowledge gap concerns the current state of Canadian studies of COVID-19
+and its public health crisis. There is a dearth of literature on the challenges
+faced by immigrants and their families in the country. Although the burden of
+COVID-19 infection is disproportionately higher among these marginalized groups
+(St-Denis, 2020; Sundaram et al., 2020), research on the issues they are
+experiencing is sparse and often limited to one aspect.
+<!--Likewise, there is limited focus on the effectiveness of COVID-19 crisis management for immigrants at the policy level. In response to the mounting cases of COVID, the federal government and provinces and territories of Canada have launched multi-pronged public health initiatives to protect society from the epidemic (Migone, 2020). However, many open questions remain unanswered, including, do interventions efficiently reach the migrant groups? What are the likely effects of each program on different immigrant communities? How can an intervention be tailored to the needs of a particular migrant group and their families? -->
+
+\newpage

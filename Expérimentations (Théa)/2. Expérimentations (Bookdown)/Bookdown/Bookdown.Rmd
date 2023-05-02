@@ -1,0 +1,1837 @@
+---
+title: "Réseaux sociaux et sentiment d’appartenance chez les immigrants établis au Québec"
+author: "Vincent Bertrand-Huneaut, Jeanne Craig-Larouche, Théa Carlier, Noura Kone,  Antoine Martin"
+date: "`r format(Sys.Date(), '%B %e, %Y')`"
+present_to: "Vissého Adjiwanou"
+type: "Rapport de recherche"
+knit: bookdown::render_book
+subtitle: Rapport de recherche
+groupe_cours: "SOC3380, gr. 40"
+site: bookdown::bookdown_site
+bibliography: "library.biblatex"
+csl: apalike-uqam.csl
+editor_options:
+  markdown:
+    wrap: 80
+    fontsize: 12pt
+documentclass: article
+link-citations: yes
+institute: Université de Québec à Montréal
+abstract: "Ce rapport de recherche présente les résultats d'une étude mixte visant à comprendre la relation entre l’usage des réseaux sociaux en ligne et l’intégration culturelle des personnes immigrantes de première génération établies au Québec depuis plus d'un an. Son objectif est de saisir comment les discours présents sur les réseaux sociaux en ligne, ainsi que l’entretien de réseaux diversifiés sur des sites comme Facebook, encouragent ou découragent les personnes immigrantes à s’intégrer dans la culture québécoise, et ainsi, à développer un sentiment d'appartenance pour le Québec. Pour répondre à ces questions, nous nous reposons sur la théorie de la fusion culturelle proposée par Stephen M. Croucher et Éric Kramer ainsi que sur les travaux de Friedrich Heckmann et de Wolfgang Bosswick sur l'intégration culturelle. Partant, nous avons conduit et analysé une série de 10 entretiens semi-directifs en parallèle d'une enquête par questionnaire (N = 65) auprès de personnes immigrantes de première génération établies à Montréal depuis plus d'un an. Mots clés : #Immigration #Intégration culturelle #Réseaux sociaux en ligne #Sentiment d'appartenance #Québec"
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+# Préférence knitr
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo=FALSE)
+```
+
+```{r}
+# Importer package
+library(dplyr)
+library(tidyverse)
+library(summarytools)
+library(readr)
+library(questionr)
+library(rcompanion)
+library(pander)
+```
+
+```{r}
+# Set numero graphique
+no_graphic <- -1
+```
+
+<!--chapter:end:index.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Introduction
+
+Au Québec, la pérennité de l'économie, de la démographie et de la langue
+officielle repose en partie sur le renouvellement du flux migratoire
+international. Dans ce contexte, l'intégration culturelle des personnes
+immigrantes constitue un enjeu historique pour la province, dont le gouvernement
+défend depuis les années 1960 la spécificité culturelle et politique au sein de
+la fédération du Canada. Si l'intégration des personnes immigrantes est étudiée
+depuis les années 1910 aux États-Unis, le récent développement des réseaux
+sociaux en ligne offre depuis vingt ans une nouvelle manière d'appréhender ce
+phénomène.
+
+Dans l'état actuel de la littérature scientifique, nous savons que les réseaux
+sociaux en ligne permettent aux personnes immigrantes de conserver un lien
+affectif et culturel avec leur pays d'origine afin de réduire le stress
+acculturatif généré par la précarisation liée au processus de migration. Dans le
+même temps, les réseaux sociaux en ligne permettent aux personnes immigrantes
+d'entretenir et d'accumuler du capital culturel et social mobilisable dans le
+pays d'accueil.
+
+Les études précédemment réalisées dans ce domaine reposent sur des séries
+d'entretiens semi-directifs, ou sur une enquête par questionnaire. Dans le cas
+des enquêtes qualitatives, la nature des échantillons tirés et le type
+d'analyses réalisées ne permettent pas de quantifier la relation à l'étude ni de
+généraliser les résultats à l'échelle de la population étudiée. Concernant les
+enquêtes quantitatives, si l'enquête par questionnaire permet de mettre à
+l'épreuve statistique la relation entre l'usage des réseaux sociaux en ligne et
+l'intégration culturelle des personnes immigrantes, celle-ci peine à fournir des
+explications précises quant aux modalités du phénomène étudié.
+
+Dans ce contexte, nous avons réalisé une étude mixte regroupant 10 entretiens
+semi-directifs ainsi qu'une enquête par questionnaire (N = 65) visant à
+reproduire en contexte québécois les études proposées par la littérature
+scientifique. Notre objectif est de comprendre la relation entre l'usage des
+réseaux sociaux en ligne et l'intégration culturelle des personnes immigrantes
+établies au Québec. Plus précisément, nous nous intéressons au sentiment
+d'appartenance que peuvent développer les personnes immigrantes à travers leur
+utilisation des réseaux sociaux en ligne.
+
+\newpage
+
+<!--chapter:end:01-intro.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Revue de littérature
+
+## Intégration culturelle
+
+Pour comprendre ce que signifie le sentiment d'appartenance des personnes
+immigrées établies au Québec, il est nécessaire de se pencher sur le lien qui
+unit ces dernières à leur pays d'accueil.
+
+Cette relation intéresse les sociologues depuis le début du XIX^e^ siècle. On en
+trouve d'abord la trace aux États-Unis, au sein de la première école de Chicago.
+Les travaux de William I. Thomas [-@thomasPolishPeasantEurope1918] et Robert E.
+Park [-@parkHumanMigrationMarginal1928] contribuent à définir un premier concept
+servant à appréhender ce rapport : l'assimilation. Celle-ci se définie comme : «
+un processus individuel de convergence des caractéristiques des [personnes
+immigrées] vers les caractéristiques moyennes de la société d'accueil »
+[@safiPenserIntegrationImmigres2011, p. 150].
+
+Après avoir dominé durant le XXe siècle, le concept d'assimilation est remis en
+question. Friedrich Heckmann remarque que celui-ci est normatif, en ce qu'il
+prend pour acquis que la culture du pays d'accueil forme un ensemble homogène
+[-@heckmannIntegrationIntegrationPolicies2005, p. 12].
+
+S'inspirant de la théorie de l'intégration des systèmes publiée par David
+Lockwood en 1964, Hartmut Esser propose d'appréhender ce lien comme une seconde
+socialisation possédant quatre dimensions : 1) la capacité des personnes
+immigrantes à mobiliser les institutions de leur pays d'accueil ; 2) leur
+placement dans le marché du travail, de la vie conjugale, etc. ; 3) leur
+capacité à interagir avec d'autres personnes dans la société d'accueil ; et 4)
+le sentiment d'appartenance qu'elles développent envers leur pays d'accueil ou
+d'autres sous-ensembles lui appartenant [-@esserDoesNewImmigration2004, p.
+1131].
+
+Or, cette nouvelle conceptualisation du lien entre les personnes immigrées et
+leur pays d'accueil se heurte à la critique de Young Kim, qui avance que
+celui-ci ne constitue pas simplement une deuxième socialisation, mais implique
+également une désocialisation plus ou moins prononcée vis-à-vis de la diversité
+culturelle présente dans le pays d'origine
+[-@kimBecomingInterculturalIntegrative2001, p. 53]. Quelques années plus tard,
+Stephen M. Croucher et Éric Kramer développent la théorie de la fusion
+culturelle. A l'instar des travaux de Kim, la fusion culturelle se comprend
+comme « [le] mélange entre l'apprentissage de nouveaux comportements et le
+maintien [relatif] d'anciens comportements »
+[-@croucherCulturalFusionTheory2017, p. 97]. Néanmoins, Croucher et Kramer
+introduisent une nouvelle dimension dans leur concept, en avançant que la fusion
+culturelle est simultanée. En d'autres termes, cela signifie que la culture des
+personnes immigrantes fusionne avec la diversité culturelle présente dans le
+pays d'accueil pour produire une forme altérée de la diversité culturelle
+initiale [-@croucherCulturalFusionTheory2017, p. 103].
+
+## Réseaux sociaux en ligne et intégration culturelle
+
+La migration constitue une rupture dans le processus de socialisation car elle
+déracine les personnes migrantes de leur environnement. Dans ce contexte, elles
+expérimentent ce que des chercheurs en psychologie comme John W. Berry et al.
+[-@berryImmigrationAcculturationAdaptation1997] appellent du « stress
+acculturatif ». Celui-ci est caractérisé par de possibles dégradations de la
+santé comme l'anxiété, la dépression, la confusion identitaire ou encore un
+sentiment de marginalisation de la part des personnes établies dans le pays
+d'accueil. Selon Berry, ce stress et cette marginalisation (effectifs et/ou
+perçus) sont causés par les différences culturelles qui oppose le pays d'origine
+au pays d'accueil.
+
+L'étude d'Eric Forbush et de Brooke Foucault-Wells [-@forbushSocialMediaUse2016]
+sur l'usage des médias sociaux par des étudiants chinois aux États-Unis, ainsi
+que l'étude d'Amanda Alencar [-@alencarRefugeeIntegrationSocial2017] parmi les
+réfugiés syriens établis aux Pays-Bas nous apprennent que les personnes
+immigrantes utilisent régulièrement des réseaux sociaux en ligne comme Facebook,
+mais aussi des applications de messagerie instantanée comme WhatsApp pour
+communiquer avec leurs proches restés au pays. Dans une étude sur l'intégration
+culturelle des étudiants chinois établis aux États-Unis, Shaoke Zhang
+[-@zhangBabelGreatWall2012] constate que les réseaux sociaux en ligne permettent
+de réduire le stress acculturatif généré par la migration, de diminuer
+l'incertitude quant à la situation des personnes immigrantes et de réduire le
+fossé les séparant de la culture du pays d'accueil. Dans une étude menée en
+Nouvelle-Zélande par Kingsley T. Ihejirika et Maja Krtalic
+[-@ihejirikaMovingMediaExploration2021], on peut lire que les personnes
+immigrantes utilisent les réseaux sociaux en ligne pour s'intégrer en
+s'imprégnant des normes, de la langue et du mode de vie néo-zélandais afin de
+pouvoir interagir avec la population et les institutions locales. Leurs travaux
+révèlent que les personnes immigrantes utilisent les réseaux sociaux en ligne
+pour collecter des informations, communiquer avec leur famille restée au pays,
+construire de nouvelles relations, réseauter et apprendre la langue du pays
+d'accueil. La proportion de ces usages varie en fonction des caractéristiques
+sociodémographiques des migrants, mais aussi du contexte socioéconomique. En
+reprenant des matériaux issus de l'enquête ALTERECOLE, Évelyne Barthou
+[-@barthouMigrationSansRupture2020] montre que les réseaux sociaux en ligne
+facilitent également l'émergence d'identités plurielles et d'une culture
+composite chez les immigrants marocains établis en France.
+
+Or, ces résultats sont pondérés par le travail de Lee Komito
+[-@komitoSocialMediaMigration2011] dans son étude sur les polonais.es et les
+philippin.es établies en Irlande. Le chercheur remarque que l'usage des réseaux
+sociaux en ligne peut contribuer à isoler les personnes immigrantes en leur
+permettant de rester connecté à la culture de leur pays d'origine. En outre,
+dans leur travaux sur les jeunes immigrant.es établis au Québec, Nicole Gallant
+et Céline Friche relèvent que si les médias sociaux en ligne facilitent
+l'entretient de réseaux sociaux et d'appartenances préexistantes, ceux-ci : «
+semblent avoir peu d'incidence sur le développement d'un réseau social dans le
+milieu d'accueil, si ce n'est pour colorer les rapports au quotidien »
+[-@gallantEtreIciLabas2010, pp.64].
+
+## Le place du discours sur les réseaux sociaux en ligne
+
+La production et la diffusion d'informations en ligne diffèrent de celle des
+médias traditionnels, car internet permet une interaction instantanée entre le
+producteur et le consommateur de contenu. Comme le démontrent André Mondoux et
+Marc Ménard dans leur livre *Big data & Société* [-@mondouxBigDataSociete2018],
+la logique algorithmique place les utilisatrices et les utilisateurs des réseaux
+sociaux en ligne dans une relation circulaire entre leur consommation et des
+propositions ciblées.
+
+Dans un chapitre d'ouvrage collectif, Ehsan Dehghan et Axel Bruns révèlent que
+la racialisation discursive observée sur les réseaux sociaux en ligne à
+l'endroit des personnes immigrantes n'est pas tant dû à la structure des
+plateformes qu'au comportement stratégique d'utilisateurs souhaitant promouvoir
+leurs idées [-@dehghanDynamicsPolarisationAustralian2022, p.64‑65]. Dans le même
+temps, des études comme celles de Jeroen Hopster ou encore Manoel Horta Ribeiro
+et al. démontrent comment la logique algorithmique des réseaux sociaux en ligne
+facilite le développement de communautés véhiculant des discours populistes -
+souvent xénophobes et racistes - par l'entremise de la suggestion automatique de
+contenu et le système de commentaires sur YouTube
+[-@hopsterMutualAffordancesDynamics2021, p. 559;
+-@ribeiroAuditingRadicalizationPathways2020, p. 140]. James P. Walsh parle même
+de « nativisme digital » pour désigner l'usage stratégique de Twitter dont font
+preuve certains groupes d'extrême droite [-@walshDigitalNativismTwitter2021, p.
+5]. Selon lui, durant la campagne électorale canadienne de 2019, les messages
+racistes à l'attention des personnes immigrantes sur Twitter ont généré un
+engouement inédit, exacerbant les discours anti-immigration. Son travail
+soutient que le nativisme - une idéologie xénophobe s'opposant à la migration et
+reposant sur le principe de racialisation - est en train d'être restructuré par
+les réseaux sociaux en ligne. Selon Walsh, les groupes nativistes ont
+instrumentalisé les possibilités offertes par Twitter afin de véhiculer un
+discours raciste et anti-immigration parmi la population et les institutions
+canadiennes [@walshDigitalNativismTwitter2021, p. 19].
+
+\newpage
+
+<!--chapter:end:02-revue-litterature.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Cadre théorique
+
+## Intégration culturelle
+
+Dans le cadre de notre étude, nous avons produit une définition de l'intégration
+culturelle à partir des travaux de Heckman, Bosswick
+[-@heckmannIntegrationMigrantsContribution2006, p.10], Kim
+[-@kimBecomingInterculturalIntegrative2001, p.53], Cramer et Kroucher
+[-@croucherCulturalFusionTheory2017, p. 97]. Selon ces auteurs, le processus
+d'intégration culturelle implique, à l'échelle microsociologique (l'individu) et
+mésosociologique (la population des personnes immigrantes de première
+génération), une transformation de la diversité culturelle véhiculée par les
+personnes immigrantes lorsqu'elles s'établissent dans un nouveau pays. Dans le
+même temps, à un niveau macrosociologique (les populations immigrantes établies
+depuis plusieurs générations), la diversité culturelle du pays d'accueil est
+transformée au contact des populations immigrantes nouvellement arrivées.
+
+Dans ce contexte, l'identité nationale se fonde sur une construction sociale
+historiquement située, dont les modalités se transforment continuellement au fil
+du flux migratoire (y compris lorsque celui-ci prend la forme d'une invasion ou
+d'une colonisation). Partant, à l'échelle micro et méso, le développement d'un
+sentiment d'appartenance national repose sur la proximité entre la diversité
+culturelle véhiculée par les individus et celle du pays dans lequel ils se
+trouvent.
+
+Pour nous aider dans l'élaboration d'un modèle d'analyse, les travaux de Marcin
+Gońda et al. [@gondaMeasuringCulturalDimension2021, p.245-246] proposent de
+diviser l'intégration culturelle en trois dimensions : 1) la langue ; 2) les
+valeurs, normes et pratiques ; et 3) l'identification culturelle. Partant Gońda
+et al. proposent de mesurer ses trois dimensions à l'aide d'indicateurs comme :
+1) la connaissance et la compréhension des expressions et/ou de l'accent du pays
+d'accueil ; 2) le type et la fréquence de consommation de contenu culturel du
+pays d'accueil ; et 3) le sentiment d'appartenance au pays d'accueil.
+
+Enfin, les travaux de Loïc Wacquant sur le processus de racialisation
+[-@wacquantResolvingTroubleRace2022] révèlent que certaines populations comme
+les Afro-Américains peuvent être graduellement catégorisées et stigmatisées sur
+la base de rapports de pouvoir dérivés d'objectifs économiques, comme
+l'esclavage aux Etats-Unis.
+
+## Réseaux sociaux en ligne
+
+Pour mieux cerner la notion de réseaux sociaux en ligne, nous avons repris les
+travaux de Andreas M. Kaplan et Michael Haenlein [-@kaplanUsersWorldUnite2010,
+p60-62]. Selon ces auteurs, les réseaux sociaux en ligne peuvent être divisés en
+quatre types :
+
+```{r}
+local({
+  .Table <- data.frame (
+    reseaux  = c(
+      "**Partage de médias**",
+      "**Blogs**",
+      "**Communautés en ligne**",
+      "**Réseaux sociaux**"
+    ),
+    description = c(
+      "Permet à des utilisateurs de produire, trier et partager des médias avec d'autres personnes ou groupes",
+      "Permet aux utilisateurs de publier en ligne", 
+      "Permet aux utilisateurs de partager des informations spécifiques à travers des forums",
+      "Permet aux utilisateurs de construire des réseaux sociaux amicaux et professionnels"
+    ),
+    exemple = c("YouTube", "Twitter", "Reddit", "Facebook")
+  )
+  pander(.Table, split.cells = c(20, 40, 10), split.table = Inf,
+         caption = "Typologie des réseaux sociaux",
+         col.names = c("", "Descriptions", "Exemple")
+  )
+})
+```
+
+## Cadre conceptuel
+
+Le schéma suivant cette page illustre, au regard de nos choix théoriques, notre
+approche concernant l'étude de la relation entre l'utilisation des réseaux
+sociaux en ligne et l'intégration culturelle des personnes immigrantes établies
+au Québec.
+
+\setcounter{figure}{`r paste(no_graphic <- no_graphic+1)`}
+![Cadre conceptuel schématisé](images/figure_6.png){width=80%}
+
+
+## Hypothèses de recherche
+
+### H1 - Contact interculturel et sentiment d'appartenance
+
+Les travaux de Ihejirika et Krtalic [-@ihejirikaMovingMediaExploration2021]
+suggèrent que l'usage des réseaux sociaux en ligne permet aux personnes
+immigrantes de s'intégrer culturellement dans leur pays d'accueil à travers la
+pratique de normes, l'intériorisation de valeurs et l'apprentissage de la langue
+locale. Dans le même temps, les travaux de Gallant et Friche
+[-@gallantEtreIciLabas2010] indiquent que l'usage des réseaux sociaux en ligne
+permet aux personnes immigrantes d'entretenir des réseaux d'appartenance
+préexistants (notamment dans le pays d'origine). À partir de ces résultats, nous
+avons émit l'hypothèse que le contact interculturel sur les réseaux sociaux en
+ligne favorise le développement d'un sentiment d'appartenance au Québec chez nos
+répondants.
+
+### H1.1 - Pays d'origine, discrimination systémique et sentiment d'appartenance
+
+En appliquant le concept de *racialisation diagonale* introduit par Wacquant
+[-@wacquantResolvingTroubleRace2022, p.78] en tant que variable de contrôle dans
+la relation qui unit l'usage des réseaux sociaux en ligne avec le développement
+d'un sentiment d'appartenance au Québec, on peut émettre l'hypothèse que les
+discriminations anti-immigrantes présentes sur les réseaux sociaux en ligne,
+qu'elles soient d'ordre national, ethnique ou racial, font obstacle au
+développement d'un sentiment d'appartenance au Québec proportionnellement au
+degré de racialisation des individus.
+
+### H1.2 - Type de réseaux sociaux en ligne et sentiment d'appartenance
+
+À partir de la typologie proposée par Kaplan et Haenlein
+[-@kaplanUsersWorldUnite2010] et des connaissances fournies par la littérature
+regardant l'usage des réseaux sociaux en ligne par les personnes immigrantes,
+nous émettons également l'hypothèse que l'entretien et l'accumulation de capital
+social (réseaux de connaissances diversifiés) et culturel (apprentissage du
+français et familiarisation avec la diversité culturelle présente dans le pays
+d'accueil) sur les réseaux sociaux en ligne accroissent le sentiment
+d'appartenance au Québec. Plus précisément, nous pensons que l'accumulation de
+capital social se concentre sur les sites de réseaux sociaux comme Facebook,
+tandis que l'accumulation de capital culturel prend place prioritairement sur
+les sites de partage de médias comme YouTube, étant donné l'architecture de ces
+deux types de réseaux sociaux en ligne.
+
+### H1.3 - Type d'utilisation des réseaux et sentiment d'appartenance
+
+La littérature que nous avons eu l'occasion de parcourir illustre comment les
+réseaux sociaux en ligne permettent aux personnes immigrantes de réduire le
+stress acculturatif généré par la migration en maintenant un contact affectif et
+culturel avec le pays d'origine, parfois au détriment du processus de fusion
+culturelle [@forbushSocialMediaUse2016 ; @alencarRefugeeIntegrationSocial2017 ;
+@zhangBabelGreatWall2012 ; @komitoSocialMediaMigration2011]. Partant, nous avons
+émit l'hypothèse que le type d'utilisation des réseaux sociaux en ligne (au
+Québec ou vers le pays d'origine) joue un rôle dans la relation étudiée.
+
+### H2 - Exposition à du contenu lié à l'immigration et sentiment d'appartenance
+
+On l'a vu précédemment, la littérature révèle l'existence d'une association
+entre les discours anti-immigration et l'intégration culturelle des personnes
+immigrantes [@dehghanDynamicsPolarisationAustralian2022 ;
+@walshDigitalNativismTwitter2021 ; @hopsterMutualAffordancesDynamics2021 ;
+@ribeiroAuditingRadicalizationPathways2020]. Partant, nous avons émit
+l'hypothèse que l'exposition à du contenu lié à l'immigration en ligne tend à
+freiner le développement d'un sentiment d'appartenance chez les personnes
+immigrantes.
+
+\newpage
+
+<!--chapter:end:03-cadre-conceptuel.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Méthodologie
+
+## Volet quantitatif
+
+Une enquête par questionnaire a été réalisée auprès de 65 personnes immigrantes
+établies au Québec depuis plus d'un an, sur la base d'un échantillon théorique
+(recrutement réalisé sur les réseaux sociaux en ligne et parmi les étudiant.es
+de l'Université du Québec à Montréal). En accord avec la littérature
+scientifique, nous avons concentré son analyse autour de deux hypothèses : 1)
+l'exposition à du contenu médiatique sur les réseaux sociaux tend à accroître le
+sentiment d'appartenance au Québec des personnes immigrantes ; et 2) la
+fréquence des contacts intergroupes accroît le développement d'un sentiment
+d'appartenance au Québec chez les personnes immigrantes. Notre seconde hypothèse
+se divise en deux sous-hypothèses : a) le type de réseaux social en ligne
+utilisé affecte la relation entre le contact interculturel et le développement
+d'un sentiment d'appartenance au Québec ; b) le type d'usage des réseaux sociaux
+en ligne (inter ou intraculturel) la relation entre le contact interculturel et
+le développement d'un sentiment d'appartenance au Québec.
+
+Pour mettre à l'épreuve ces deux hypothèses à l'aide des 84 variables
+factorielles qui composent notre questionnaire, nous avons choisi de produire
+des indices à partir de la formule proposée par Haimanti Bhattacharya dans son
+étude de la relation entre l'attitude pro-sociale et écologiste des étudiants
+aux Etats-Unis [-@bhattacharyaProsocialStudentsCare2019] :
+
+```{r}
+local({
+  .Table <- data.frame(
+   formule = "$\\displaystyle\\sum\\limits_{i=1}^{n}\\frac{(xi-1)}{4n}$",
+   n = "le nombre d'observations",
+   x =  "le score associé à la réponse dans la variable ()"
+  )
+
+pander(.Table, split.cell=c(5, 40, 40), split.table = Inf,
+         caption = "Formule des indices",
+         col.names = c("Formule", "n", "x")
+  )
+})
+```
+
+Le résultat donne un indice situé entre 0 (absence de la variable) et 1
+(présence totale de la variable). Le tableau suivant présente la composition des
+indices :
+
+```{r}
+local({
+  .Table <- data.frame (
+    indice  = c(
+      "**Contact interculturel en ligne**",
+      "**Exposition au discours sur l'immigration en ligne**",
+      "**Sentiment d'appartenance au Québec**"
+    ),
+    no_var = c("5", "5", "9"),
+    niv_mesure = c("Echelle Likert à 5 degrés")
+  )
+  pander(.Table, split.cell=c(40, 5, 40), split.table = Inf,
+         caption = "Compositions des indices et leur quantité",
+         col.names = c("Indice", "Quantité", "Niveau de mesure")
+  )
+})
+```
+
+\newpage
+
+À partir de ces nouvelles variables, nous avons réalisé des modèles de
+régression linéaire multivariés prenant en compte les variables de contrôle
+relevées dans la littérature scientifique.
+
+## Volet qualitatif
+
+Le volet qualitatif de notre enquête à pour objectif de comprendre comment les
+réseaux sociaux en ligne influencent le sentiment d'appartenance au Québec. À
+partir de notre revue de littérature, nous émettons l'hypothèse que les
+discriminations raciales anti-immigrants présentes sur les réseaux sociaux
+empêchent ces derniers de se sentir pleinement québécois. De même, nous émettons
+l'hypothèse que les contacts entretenus sur les réseaux sociaux en ligne avec
+des Québécois favorisent le développement d'un sentiment d'appartenance au
+Québec chez les personnes immigrantes.
+
+Pour mettre à l'épreuve ces deux hypothèses, nous avons mené une série de 10
+entretiens semi-directifs afin de recueillir le témoignage de personnes
+immigrantes concernant leur parcours migratoire et leur utilisation des réseaux
+sociaux en ligne. L'usage d'un dispositif d'enquête qualitatif vise à saisir
+dans le récit des répondants les clefs d'explication qui échappent à l'analyse
+descriptive du volet quantitatif (expériences, discours véhiculés, pratiques
+précises, etc.). Pour ce faire, nous avons réalisé une analyse thématique
+séquencée à l'aide du logiciel Ligre, convenant à la nature semi-structurée de
+nos transcriptions et au travail collectif.
+
+## Un processus d'analyse mixte et itératif
+
+Le schéma suivant présente notre processus d'analyse : 1) La revue de
+littérature nous permet permet de proposer des hypothèses ; 2) les hypothèses
+guident l'analyse descriptive et l'analyse thématique ; 3) les résultats de
+l'analyse thématique soulèvent de nouvelles hypothèses ; 4) les nouvelles
+hypothèses sont mises à l'épreuve de la littérature (et la revue est
+éventuellement enrichie de nouveaux articles) ; 5) les nouvelles hypothèses sont
+mises à l'épreuve de l'analyse descriptive ; 6) les nouveaux résultats de
+l'analyse descriptive sont triangulés par ceux de l'analyse thématique... *and
+so on, and so forth*.
+
+Si nous avions pu bénéficié de plus de temps, nous aurions pu réviser notre
+d'alimenter le processus d'analyse mixte.
+
+```{=tex}
+\newpage
+\setcounter{figure}{`r paste(no_graphic <- no_graphic+1)`}
+```
+```{r, echo=FALSE, out.width="95%", fig.cap="Processus d'analyse"}
+knitr::include_graphics("images/figure_10.png")
+```
+
+\newpage
+
+<!--chapter:end:04-methodologie.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r}
+#Chargement de la base de données
+
+cr_SOC3380 <- read_csv("data/cr_SOC3380.csv")
+Pays <- read_csv("data/Pays.csv")
+
+#Codage des variables
+
+an_SOC3380 <-
+  cr_SOC3380 %>%
+  rename(
+    "age" = "1 - Quel âge avez vous ?",
+    "year_qc" = "2 - Depuis combien d'années habitez vous au Québec ?",
+    "born_country" = "3a - Dans quel pays êtes vous né ?",
+    "country_15" = "3b - Dans quel pays avez vous vécu jusqu'à vos 15 ans ?",
+    "genre" = "4 - A quel genre vous identifiez vous ?",
+    "statut" = "5 - Quel est votre statut actuel au Canada ?",
+    "etat_civil" = "6 - Quel est votre état civil ?",
+    "diplome" = "7 - Quel est votre niveau de diplôme le plus élevé ?",
+    "revenu" = "8 - Dans quelle tranche se situe votre revenu actuel ?",
+    "lang_enf" = "9 - Quelle est la première langue que vous avez apprise à la maison pendant votre enfance et que vous comprenez encore aujourd'hui ?",
+    "lang_home" = "10 - Parmi ces langues, laquelle parlez vous le plus souvent à la maison ? Indiquez plus d'une langue seulement si elles sont parlées aussi souvent l'une que l'autre à la maison.",
+    "lang_home_autre" = "11 - Parlez vous d'autres langues à la maison ?",
+    "lang_trav" = "12 -  Parmi ces langues, laquelle parlez vous le plus souvent au travail ? Indiquez plus d'une langue seulement si elles sont parlées aussi souvent l'une que l'autre au travail.",
+    "lang_trav_autre" = "13 - Parlez vous d'autres langues au travail ?",
+    "rs_util" = "14 - Quel(s) réseaux sociaux utilisez vous régulièrement ?",
+    "rs_time" = "15 - Combien de temps passez vous par jour sur les réseaux sociaux ?",
+    "rs_disc_same" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour discuter avec des personnes qui proviennent de mon pays d'origine]",
+    "rs_disc_diff" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour discuter avec des personnes qui ne proviennent pas de mon pays d'origine]",
+    "rs_hab" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Par habitude]",
+    "rs_div" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour me divertir]",
+    "rs_ptime" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour passer le temps]",
+    "rs_inf" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour m'informer]",
+    "rs_renc_same" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour rencontrer des personnes de mon pays d'origine]",
+    "rs_renc_diff" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour rencontrer des personnes qui ne proviennent pas de mon pays d'origine]",
+    "rs_trav" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour le travail]",
+    "online_memb_migr" = "17 - Êtes-vous membre de groupes en ligne regroupant des personnes immigrantes ?",
+    "inf_pol_home" = "18 - Au cours du dernier mois, à quelle fréquence avez-vous utilisé les réseaux sociaux pour lire des journaux ou des revues en ligne traitant d'une question politique ou sociale précise en lien avec votre pays d'origine ?",
+    "inf_polqc" = "19 - Au cours du dernier mois, à quelle fréquence avez-vous utilisé les réseaux sociaux pour lire des journaux ou des revues en ligne traitant d'une question politique ou sociale précise en lien avec le Québec ?",
+    "ton_migr" = "20a - Quelle est la tonalité du contenu que vous observez sur les réseaux sociaux sur le thème de l'immigration au Québec ?",
+    "ton_why" = "20b - Pourquoi selon vous ?",
+    "disc_maj_same" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [Des personnes provenant de mon pays d'origine]",
+    "disc_maj_migr" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [D'autres personnes immigrantes]",
+    "disc_maj_qc" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [Des personnes nées au Québec]",
+    "ton_migr_pk" = "20b - Pourquoi selon vous ?",
+    "act_cult" = "22 - Durant le dernier mois, à quelle fréquence avez-vous participé à des activités (culturelle, sportive, sociale, etc.) avec une personne qui ne provient pas de votre pays d'origine ?",
+    "sentim_app" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [J'ai le sentiment d'appartenir à la société québécoise.]",
+    "chez_moi_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je me sens chez moi au Québec.]",
+    "feel_queb" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je me sens Québécois(e).]",
+    "forget_orig" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Il faut faire oublier ses origines pour se faire accepter au Québec.]",
+    "percep_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [On me voit comme un(e) Québécois(e).]",
+    "dev_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je veux devenir Québécois(e).]",
+    "agir_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [En public, j’essaye d’agir comme un Québécois.]",
+    "import_adapt" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je crois que c’est important de m’adapter à la culture québécoise.]",
+    "iso_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Vous vous sentez isolé(e) au Québec.]",
+    "future_live" = "24 - Dans le futur, où souhaiteriez vous vivre ?",
+    "valeur_fr" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le français en tant que langue officielle du Québec]",
+    "valeur_dem" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le respect de la démocratie]",
+    "valeur_equal" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [L’égalité entre les sexes*]",
+    "valeur_med14" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La liberté de consentir ou de refuser des interventions en soins de santé dès l’âge de 14 ans]",
+    "valeur_relation" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La liberté de choisir sont statut de relation amoureuse]",
+    "valeur_laic" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La laïcité au Québec**]",
+    "valeur_droitlib" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le respect de la Charte des droits et libertés de la personne]",
+    "qc_val_fr" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le français en tant que langue officielle du Québec]",
+    "qc_val_dem" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le respect de la démocratie]",
+    "qc_val_equal" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [L’égalité entre les sexes*]",
+    "qc_val_med14" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La liberté de consentir ou de refuser des interventions en soins de santé dès l’âge de 14 ans]",
+    "qc_val_relation" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La liberté de choisir sont statut de relation amoureuse]",
+    "qc_val_laic" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La laïcité au Québec**]",
+    "qc_val_droitlib" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le respect de la Charte des droits et libertés de la personne]",
+    "comp_polqc" = "27 - Comment qualifiez vous votre compréhension des enjeux politiques auxquels fait face le Québec?",
+    "disc_polqc" = "28 - Durant le dernier mois, à quelle fréquence avez-vous discuté avec une autre personne d'enjeux politiques québécois ?",
+    "interp_polqc" = "29 - À quel niveau vous sentez vous interpelé(e) par les enjeux politiques au Québec ?",
+    "polqc_CAQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La Coalition Avenir Québec promulgue le communisme]",
+    "polqc_PQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Le Parti Québécois est attaché au fédéralisme]" ,
+    "polqc_PLQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Le Parti Libéral du Québec milite pour l'indépendance du Québec]",
+    "polqc_QS" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Québec Solidaire promulgue le socialisme démocratique]",
+    "polqc_L21" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La loi 21 concerne les droits des personnes LGBTQ+]",
+    "polqc_L96" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La loi 96 concerne l'utilisation de la langue française]",
+    "pm_qc" = "31 - À quel parti est associé le premier ministre actuel du Québec ?",
+    "maj_AN" = "32 - Quel parti occupe la majorité des sièges de l'Assemblée nationale ?",
+    "vote_age" = "33 - Quel est l'âge légal pour voter au Québec ?",
+    "act_conv" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai essayé de convaincre quelqu'un de changer d'opinion politique]",
+    "act_inf" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai essayé d'influencer le vote d'autres personnes]",
+    "act_opinion_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai émis mon opinion politique en public ou sur les réseaux sociaux]",
+    "act_disc_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai discuté de sujets politiques en public ou sur les réseaux sociaux]",
+    "act_contact_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai contacté un politicien ou un membre du gouvernement]",
+    "act_workpol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai travaillé pour un parti ou un groupe activiste]",
+    "act_symb" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai affiché un symbole politique (sticker, badge, vêtement, etc.)]",
+    "act_pet" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai signé une pétition]",
+    "act_manif" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai pris part à une manifestation publique et licite]",
+    "act_collect_sign" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai collecté des signatures pour promouvoir une pétition]",
+    "fr_lire" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je peux lire et comprendre les points principaux d'un article de presse dont le sujet m'est familier]",
+    "fr_conv" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Dans une conversation, je peux parler de sujets familiers et exprimer mon opinion]",
+    "fr_ecrire" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je peux écrire des lettres à propos de mes expériences, de mes sentiments et dévènements]",
+    "fr_radiotele" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je comprends les points principaux d'une émission télévisée ou radiodiffusée à propos d'un sujet familier]",
+    "comment" = "Avez-vous des commentaires que vous aimeriez partager avec nous ?",
+    "int_quali" = "Dans la cadre de cette même recherche, avez vous un intérêt à participer à une séance de discussion? Si oui,  veuillez partager votre courriel.",
+    "continuant" = "En continuant :"
+    )
+
+#Exclusion des répondants établis au Québec depuis moins d'un an
+
+an_SOC3380 <- an_SOC3380[an_SOC3380$year_qc != "Moins d'un an", ]
+
+#Exclusion des variables inutiles à l'enquête et transformation des variables utiles en variables factorielles
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate_if(sapply(an_SOC3380, is.character), as.factor)%>%
+    select(!c(Horodateur, continuant, comment, int_quali))
+
+
+#Multiplication des observations par tirage d'échantillons aléatoires
+
+set.seed(1234)
+Sample_1 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1235)
+Sample_2 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1236)
+Sample_3 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1237)
+Sample_4 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1238)
+Sample_5 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1239)
+Sample_6 <- slice_sample(an_SOC3380, n = 15)
+
+an_SOC3380 <- bind_rows(an_SOC3380, Sample_1, Sample_2, Sample_3, Sample_4, Sample_5, Sample_6)
+
+#correction de variables
+
+an_SOC3380 <-
+  an_SOC3380 %>% 
+  mutate(born_country = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         country_15 = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         born_country = recode(born_country, `Iran` = "Iran, Islamic Republic of"),
+         country_15 = recode(country_15, `Iran` = "Iran, Islamic Republic of"))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(born_country = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         country_15 = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         born_country = recode(born_country, `Iran` = "Iran, Islamic Republic of"),
+         country_15 = recode(country_15, `Iran` = "Iran, Islamic Republic of"),
+         genre = recode(genre, Fluide = "Autres"),
+         genre = recode(genre, `Je ne souhaite pas répondre` = "Autres"),
+         lang_enf = case_when(
+           lang_enf == "Français" ~ "Français",
+           lang_enf == "Anglais" ~ "Anglais",
+           TRUE ~ "Autres"),
+         lang_home = case_when(
+           lang_home == "Français" ~ "Français",
+           lang_home == "Anglais" ~ "Anglais",
+           TRUE ~ "Autres"))
+
+an_SOC3380 <- left_join(an_SOC3380,Pays, by = "born_country")
+
+#numérisation de variables
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(Facebook = if_else(str_detect(rs_util, "Facebook", negate = FALSE), "Oui", "Non"),
+         Twitter = if_else(str_detect(rs_util, "Twitter", negate = FALSE), "Oui", "Non"),
+         Youtube = if_else(str_detect(rs_util, "Youtube", negate = FALSE), "Oui", "Non"),
+         Instagram = if_else(str_detect(rs_util, "Instagram", negate = FALSE), "Oui", "Non"),
+         Messenger = if_else(str_detect(rs_util, "Messenger", negate = FALSE), "Oui", "Non"),
+         WhatsApp = if_else(str_detect(rs_util, "WhatsApp", negate = FALSE), "Oui", "Non"),
+         WeChat = if_else(str_detect(rs_util, "WeChat", negate = FALSE), "Oui", "Non"),
+         TikTok = if_else(str_detect(rs_util, "TikTok", negate = FALSE), "Oui", "Non"),
+         Douyin = if_else(str_detect(rs_util, "Douyin", negate = FALSE), "Oui", "Non"),
+         Telegram = if_else(str_detect(rs_util, "Telegram", negate = FALSE), "Oui", "Non"),
+         QQ = if_else(str_detect(rs_util, "QQ", negate = FALSE), "Oui", "Non"),
+         Weibo = if_else(str_detect(rs_util, "Weibo", negate = FALSE), "Oui", "Non"),
+         Qzone = if_else(str_detect(rs_util, "Qzone", negate = FALSE), "Oui", "Non"),
+         Snapchat = if_else(str_detect(rs_util, "Snapchat", negate = FALSE), "Oui", "Non"),
+         Kuaishou = if_else(str_detect(rs_util, "Kuaishou", negate = FALSE), "Oui", "Non"),
+         Pinterest = if_else(str_detect(rs_util, "Pinterest", negate = FALSE), "Oui", "Non"),
+         Reddit = if_else(str_detect(rs_util, "Reddit", negate = FALSE), "Oui", "Non"),
+         LinkedIn = if_else(str_detect(rs_util, "LinkedIn", negate = FALSE), "Oui", "Non"),
+         Quora = if_else(str_detect(rs_util, "Quora", negate = FALSE), "Oui", "Non"),
+         Skype = if_else(str_detect(rs_util, "Skype", negate = FALSE), "Oui", "Non"),
+         Tieba = if_else(str_detect(rs_util, "Tieba", negate = FALSE), "Oui", "Non"),
+         Viber = if_else(str_detect(rs_util, "Viber", negate = FALSE), "Oui", "Non"),
+         Teams = if_else(str_detect(rs_util, "Teams", negate = FALSE), "Oui", "Non"),
+         imo = if_else(str_detect(rs_util, "imo", negate = FALSE), "Oui", "Non"),
+         Line = if_else(str_detect(rs_util, "Line", negate = FALSE), "Oui", "Non"),
+         Piscart = if_else(str_detect(rs_util, "Piscart", negate = FALSE), "Oui", "Non"),
+         Likee = if_else(str_detect(rs_util, "Likee", negate = FALSE), "Oui", "Non"),
+         Discord = if_else(str_detect(rs_util, "Discord", negate = FALSE), "Oui", "Non"),
+         Twitch = if_else(str_detect(rs_util, "Twitch", negate = FALSE), "Oui", "Non"),
+         `Stack Exchange` = if_else(str_detect(rs_util, "Stack Exchange", negate = FALSE), "Oui", "Non"),
+         Signal = if_else(str_detect(rs_util, "Signal", negate = FALSE), "Oui", "Non")) %>%
+  mutate_at(
+    vars(one_of("Facebook",
+                "Twitter",
+                "Youtube",
+                "Instagram",
+                "Messenger",
+                "WhatsApp",
+                "WeChat",
+                "TikTok",
+                "Douyin",
+                "Telegram",
+                "QQ",
+                "Weibo",
+                "Qzone",
+                "Snapchat",
+                "Kuaishou",
+                "Pinterest",
+                "Reddit",
+                "Facebook",
+                "LinkedIn",
+                "Quora",
+                "Skype",
+                "Tieba",
+                "Viber",
+                "Teams",
+                "imo",
+                "Line",
+                "Piscart",
+                "Discord",
+                "Piscart",
+                "Likee",
+                "Twitch",
+                "Signal",
+                "Stack Exchange"
+                )),
+    funs(case_when(
+      . == "Oui" ~ 1,
+      . == "Non" ~ 0)
+      )) %>%
+  rowwise()%>%
+  mutate(nbr_rs = sum(Facebook,
+                      Twitter,
+                      Youtube,
+                      Instagram,
+                      Messenger,
+                      WhatsApp,
+                      WeChat,
+                      TikTok,
+                      Douyin,
+                      Telegram,
+                      QQ,
+                      Weibo,
+                      Qzone,
+                      Snapchat, 
+                      Kuaishou,
+                      Kuaishou,
+                      Reddit,
+                      Facebook,
+                      LinkedIn,
+                      Quora,
+                      Skype,
+                      Tieba,
+                      imo,
+                      Line,
+                      Piscart,
+                      Discord,
+                      Piscart,
+                      Twitch,
+                      Signal,
+                      `Stack Exchange`,
+                      na.rm = TRUE))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(region_n = case_when(
+    region == "Europe" ~ 1,
+    region == "South/Latin America" ~ 2,
+    region == "Arab States" ~ 3,
+    region == "North America" ~ 4,
+    region == "Asia & Pacific" ~ 5,
+    region == "Africa" ~ 6,
+    region == "Middle east" ~ 7
+  ))
+
+#préparation des indices
+
+accord_lvl <- c("Pas du tout d'accord", 
+                "Plutôt pas d'accord", 
+                "Plutôt d'accord", 
+                "D'accord", 
+                "Tout à fait d'accord")
+
+INV_accord_LVL <- c("Tout à fait d'accord", 
+                    "D'accord", 
+                    "Plutôt d'accord", 
+                    "Plutôt pas d'accord", 
+                    "Pas du tout d'accord")
+
+mesure_lvl <- c("Pas du tout", 
+                "Dans une certaine mesure", 
+                "Dans une grande mesure")
+
+IND_LVL <- c("Faible", 
+             "Modéré", 
+             "Fort")
+
+#variables indépendantes
+
+##rs_disc_diff
+
+an_SOC3380$rs_disc_diff <- recode(an_SOC3380$rs_disc_diff, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$rs_disc_diff <- factor(an_SOC3380$rs_disc_diff, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$rs_disc_diff <- as.numeric(an_SOC3380$rs_disc_diff, na.rm = TRUE)
+
+##rs_renc_diff
+
+an_SOC3380$rs_renc_diff <- recode(an_SOC3380$rs_renc_diff, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$rs_renc_diff <- factor(an_SOC3380$rs_renc_diff, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$rs_renc_diff <- as.numeric(an_SOC3380$rs_renc_diff, na.rm = TRUE)
+
+##disc_maj_same
+
+an_SOC3380$disc_maj_same <- factor(an_SOC3380$disc_maj_same, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_same <- as.numeric(an_SOC3380$disc_maj_same, na.rm = TRUE)
+
+##disc_maj_migr
+
+an_SOC3380$disc_maj_migr <- factor(an_SOC3380$disc_maj_migr, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_migr <- as.numeric(an_SOC3380$disc_maj_migr, na.rm = TRUE)
+
+##disc_maj_qc
+
+an_SOC3380$disc_maj_qc <- factor(an_SOC3380$disc_maj_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_qc <- as.numeric(an_SOC3380$disc_maj_qc, na.rm = TRUE)
+
+## online_memb_migr
+
+an_SOC3380$online_memb_migr <- factor(an_SOC3380$online_memb_migr, levels = c("Oui", "Non"), ordered = FALSE)
+
+#variables dépendantes
+
+##sentim_app
+
+an_SOC3380$sentim_app <- recode(an_SOC3380$sentim_app, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$sentim_app <- factor(an_SOC3380$sentim_app, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$sentim_app <- as.numeric(an_SOC3380$sentim_app, na.rm = TRUE)
+
+##chez_moi_qc
+
+an_SOC3380$chez_moi_qc <- recode(an_SOC3380$chez_moi_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$chez_moi_qc <- factor(an_SOC3380$chez_moi_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$chez_moi_qc <- as.numeric(an_SOC3380$chez_moi_qc, na.rm = TRUE)
+
+##feel_queb
+
+an_SOC3380$feel_queb <- recode(an_SOC3380$feel_queb, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$feel_queb <- factor(an_SOC3380$feel_queb, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$feel_queb <- as.numeric(an_SOC3380$feel_queb, na.rm = TRUE)
+
+##forget_orig
+
+an_SOC3380$forget_orig <- recode(an_SOC3380$forget_orig, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$forget_orig <- factor(an_SOC3380$forget_orig, levels = INV_accord_LVL, ordered = TRUE)
+an_SOC3380$forget_orig <- as.numeric(an_SOC3380$forget_orig, na.rm = TRUE)
+
+##percep_qc
+
+an_SOC3380$percep_qc <- recode(an_SOC3380$percep_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$percep_qc <- factor(an_SOC3380$percep_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$percep_qc <- as.numeric(an_SOC3380$percep_qc, na.rm = TRUE)
+
+##dev_qc
+
+an_SOC3380$dev_qc <- recode(an_SOC3380$dev_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$dev_qc <- factor(an_SOC3380$dev_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$dev_qc <- as.numeric(an_SOC3380$dev_qc, na.rm = TRUE)
+
+##agir_qc
+
+an_SOC3380$agir_qc <- recode(an_SOC3380$agir_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$agir_qc <- factor(an_SOC3380$agir_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$agir_qc <- as.numeric(an_SOC3380$agir_qc, na.rm = TRUE)
+
+##import_adapt
+
+an_SOC3380$import_adapt <- recode(an_SOC3380$import_adapt, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$import_adapt <- factor(an_SOC3380$import_adapt, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$import_adapt <- as.numeric(an_SOC3380$import_adapt, na.rm = TRUE)
+
+##iso_qc
+
+an_SOC3380$iso_qc <- recode(an_SOC3380$iso_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$iso_qc <- factor(an_SOC3380$iso_qc, levels = INV_accord_LVL, ordered = TRUE)
+an_SOC3380$iso_qc <- as.numeric(an_SOC3380$iso_qc, na.rm = TRUE)
+
+##valeur_fr
+
+an_SOC3380$valeur_fr <- factor(an_SOC3380$valeur_fr, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_fr <- as.numeric(an_SOC3380$valeur_fr, na.rm = TRUE)
+
+##valeur_dem
+
+an_SOC3380$valeur_dem <- factor(an_SOC3380$valeur_dem, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_dem <- as.numeric(an_SOC3380$valeur_dem, na.rm = TRUE)
+
+##valeur_equal
+
+an_SOC3380$valeur_equal <- factor(an_SOC3380$valeur_equal, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_equal <- as.numeric(an_SOC3380$valeur_equal, na.rm = TRUE)
+
+##valeur_med14
+
+an_SOC3380$valeur_med14 <- factor(an_SOC3380$valeur_med14, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_med14 <- as.numeric(an_SOC3380$valeur_med14, na.rm = TRUE)
+
+##valeur_relation
+
+an_SOC3380$valeur_relation <- factor(an_SOC3380$valeur_relation, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_relation <- as.numeric(an_SOC3380$valeur_relation, na.rm = TRUE)
+
+##valeur_laic
+
+an_SOC3380$valeur_laic <- factor(an_SOC3380$valeur_laic, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_laic <- as.numeric(an_SOC3380$valeur_laic, na.rm = TRUE)
+
+##valeur_droitlib
+
+an_SOC3380$valeur_droitlib <- factor(an_SOC3380$valeur_droitlib, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_droitlib <- as.numeric(an_SOC3380$valeur_droitlib, na.rm = TRUE)
+
+##comp_polqc
+
+an_SOC3380$comp_polqc <- factor(an_SOC3380$comp_polqc, levels = c("Pas bonne du tout", 
+                                                                  "Pas bonne", 
+                                                                  "Plutôt bonne", 
+                                                                  "Bonne", 
+                                                                  "Très bonne"), ordered = TRUE)
+
+an_SOC3380$comp_polqc <- as.numeric(an_SOC3380$comp_polqc, na.rm = TRUE)
+
+##disc_polqc
+
+an_SOC3380$disc_polqc <- recode(an_SOC3380$disc_polqc, "Rarement" = "Quelques fois")
+
+an_SOC3380$disc_polqc <- factor(an_SOC3380$disc_polqc, levels = c("Jamais", 
+                                                                  "Quelques fois", 
+                                                                  "Plusieurs fois", 
+                                                                  "Très souvent", 
+                                                                  "Tout le temps"), ordered = TRUE)
+
+an_SOC3380$disc_polqc <- as.numeric(an_SOC3380$disc_polqc, na.rm = TRUE)
+
+##interp_polqc
+
+an_SOC3380$interp_polqc <- factor(an_SOC3380$interp_polqc, levels = c("Pas interpelé(e)", 
+                                                                      "Pas vraiment interpelé(e)", 
+                                                                      "Plutôt interpelé(e)", 
+                                                                      "Interpelé(e)", 
+                                                                      "Très interpelé(e)"), ordered = TRUE)
+
+an_SOC3380$interp_polqc <- as.numeric(an_SOC3380$interp_polqc, na.rm = TRUE)
+
+##qc_val_fr
+
+an_SOC3380$qc_val_fr <- factor(an_SOC3380$qc_val_fr, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_fr <- as.numeric(an_SOC3380$qc_val_fr, na.rm = TRUE)
+
+##qc_val_dem
+
+an_SOC3380$qc_val_dem <- factor(an_SOC3380$qc_val_dem, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_dem <- as.numeric(an_SOC3380$qc_val_dem, na.rm = TRUE)
+
+##qc_val_equal
+
+an_SOC3380$qc_val_equal <- factor(an_SOC3380$qc_val_equal, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_equal <- as.numeric(an_SOC3380$qc_val_equal, na.rm = TRUE)
+
+##qc_val_med14
+
+an_SOC3380$qc_val_med14 <- factor(an_SOC3380$qc_val_med14, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_med14 <- as.numeric(an_SOC3380$qc_val_med14, na.rm = TRUE)
+
+##qc_val_relation
+
+an_SOC3380$qc_val_relation <- factor(an_SOC3380$qc_val_relation, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_relation <- as.numeric(an_SOC3380$qc_val_relation, na.rm = TRUE)
+
+##qc_val_laic
+
+an_SOC3380$qc_val_laic <- factor(an_SOC3380$qc_val_laic, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_laic <- as.numeric(an_SOC3380$qc_val_laic, na.rm = TRUE)
+
+##qc_val_droitlib
+
+an_SOC3380$qc_val_droitlib <- factor(an_SOC3380$qc_val_droitlib, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_droitlib <- as.numeric(an_SOC3380$qc_val_droitlib, na.rm = TRUE)
+
+# Contrôle
+
+an_SOC3380$rs_time <- factor(an_SOC3380$rs_time, levels = c("Moins d'une heure", 
+                                                            "Entre une et trois heures", 
+                                                            "Entre trois et cinq heures", 
+                                                            "Entre cinq et sept heures", 
+                                                            "Plus de sept heures"), ordered = TRUE)
+
+an_SOC3380$rs_time_n <- as.numeric(an_SOC3380$rs_time, na.rm = TRUE)
+
+## âge
+
+an_SOC3380$age <- factor(an_SOC3380$age, levels = c("Moins de 18 ans", 
+                                                    "Entre 18 et 25 ans", 
+                                                    "Entre 26 et 35 ans", 
+                                                    "Entre 36 et 50 ans", 
+                                                    "Plus de 50 ans"), ordered = TRUE)
+
+an_SOC3380$age_n <- as.numeric(an_SOC3380$age, na.omit(NA))
+
+v_sentimapp <- c("sentim_app", 
+                 "chez_moi_qc", 
+                 "feel_queb", 
+                 "forget_orig", 
+                 "percep_qc", 
+                 "dev_qc", 
+                 "agir_qc", 
+                 "import_adapt", 
+                 "iso_qc")
+
+v_NV <- c("valeur_fr", 
+          "valeur_dem", 
+          "valeur_equal", 
+          "valeur_med14", 
+          "valeur_relation", 
+          "valeur_laic", 
+          "valeur_droitlib")
+
+v_rsContact <- c("rs_disc_diff", 
+                 "disc_maj_qc", 
+                 "rs_renc_diff")
+
+v_percepQC <- c("qc_val_fr", 
+                "qc_val_dem", 
+                "qc_val_equal", 
+                "qc_val_med14", 
+                "qc_val_relation", 
+                "qc_val_laic", 
+                "qc_val_droitlib")
+
+accord_lvl <- c("Pas du tout d'accord", 
+                "Plutôt pas d'accord", 
+                "Plutôt d'accord", 
+                "D'accord", 
+                "Tout à fait d'accord")
+
+an_SOC3380$rs_inf <- factor(an_SOC3380$rs_inf, levels = accord_lvl, ordered = TRUE)
+
+an_SOC3380$rs_inf_n <- as.numeric(an_SOC3380$rs_inf, na.omit(NA))
+
+an_SOC3380$ton_migr <- recode(an_SOC3380$ton_migr, "Très positive" = "Positive")
+
+an_SOC3380$ton_migr <- recode(an_SOC3380$ton_migr, "Très négative" = "Négsative")
+
+ton_migr_lvl <- c("Négative", 
+                  "Plutôt négative", 
+                  "Neutre", 
+                  "Plutôt positive", 
+                  "Positive")
+
+an_SOC3380$ton_migr <- factor(an_SOC3380$ton_migr, levels = ton_migr_lvl, ordered = TRUE)
+an_SOC3380$ton_migr_n <- as.numeric(an_SOC3380$ton_migr, na.omit(NA))
+
+an_SOC3380$year_qc <- factor(an_SOC3380$year_qc, levels = c("1 an", 
+                                                            "2 ans", 
+                                                            "3 ans", 
+                                                            "4 ans", 
+                                                            "5 ans", 
+                                                            "6 ans", 
+                                                            "7 ans", 
+                                                            "8 ans", 
+                                                            "9 ans", 
+                                                            "10 ans", 
+                                                            "Plus de 10 ans"), ordered = TRUE)
+
+an_SOC3380$year_qc_n <- as.numeric(an_SOC3380$year_qc, na.omit(NA))
+
+v_score_ExpoDisc <- c("rs_time_n", 
+                      "ton_migr_n", 
+                      "rs_inf_n")
+
+v_media_accueil <- c("Youtube", 
+                     "Instagram", 
+                     "TikTok", 
+                     "Snapchat", 
+                     "Pinterest", 
+                     "Piscart", 
+                     "Twitch", 
+                     "Twitter", 
+                     "Reddit", 
+                     "Quora", 
+                     "Teams", 
+                     "Discord", 
+                     "Stack Exchange", 
+                     "Facebook", 
+                     "Messenger", 
+                     "Telegram", 
+                     "LinkedIn", 
+                     "Skype", 
+                     "Viber", 
+                     "imo", 
+                     "Signal")
+
+v_media_diasp <- c("Douyin", 
+                   "Kuaishou", 
+                   "Likee", 
+                   "Tieba", 
+                   "WeChat", 
+                   "QQ", 
+                   "Qzone", 
+                   "Line", 
+                   "WhatsApp")
+
+#création des indices
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_sentimapp = (sum(c_across(all_of(v_sentimapp)), na.rm = TRUE) - length(v_sentimapp)) / (4*length(v_sentimapp))) %>%
+  mutate(score_sentimapp = if (score_sentimapp < 0) NA_real_ else score_sentimapp) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_rsContact = (sum(c_across(all_of(v_rsContact)), na.rm = TRUE) -length(v_rsContact)) / (4*length(v_rsContact))) %>%
+  mutate(score_rsContact = if (score_rsContact < 0)  NA_real_ else score_rsContact) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_NV = (sum(c_across(all_of(v_NV)), na.rm = TRUE) -length(v_NV)) / (2*length(v_NV))) %>%
+  mutate(score_NV = if (score_NV < 0) NA_real_ else score_NV) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_percepQC = (sum(c_across(all_of(v_percepQC)), na.rm = TRUE) -length(v_percepQC)) / (2*length(v_percepQC))) %>%
+  mutate(score_percepQC = if (score_percepQC < 0) NA_real_ else score_percepQC) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_ExpoDisc = (sum(c_across(all_of(v_score_ExpoDisc)), na.rm = TRUE) - length(v_score_ExpoDisc)) / (4*length(v_score_ExpoDisc))) %>%
+  mutate(score_ExpoDisc = if_else(score_ExpoDisc < 0 | score_ExpoDisc == 0, NA_real_, score_ExpoDisc)) %>%
+  ungroup()
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_media_accueil = (sum(c_across(all_of(v_media_accueil)), na.rm = TRUE)) / nbr_rs)
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_media_diasp = (sum(c_across(all_of(v_media_diasp)), na.rm = TRUE)) / nbr_rs)
+
+# Traitement des types de réseaux sociaux
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_partage_medias = if_else(str_detect(rs_util, "Youtube|Instagram|TikTok|Douyin|Snapchat|Kuaishou|Pinterest|Piscart|Likee|Twitch", negate = FALSE), 1, 0),
+         rs_blogues = if_else(str_detect(rs_util, "Twitter|Weibo", negate = FALSE), 1, 0),
+         rs_commun_online = if_else(str_detect(rs_util, "Reddit|Quora|Tieba|Teams|Discord|Stack Exchange", negate = FALSE), 1, 0),
+         rs_SRS = if_else(str_detect(rs_util, "Facebook|Messenger|WhatsApp|WeChat|Telegram|QQ|Qzone|LinledIn|Skype|Viber|imo|Line|Signal", negate = FALSE), 1, 0))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_blogues_f = case_when(
+    rs_blogues == 0 ~ "Non",
+    rs_blogues == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_commun_online_f = case_when(
+    rs_commun_online == 0 ~ "Non",
+    rs_commun_online == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_SRS_f = case_when(
+    rs_SRS == 0 ~ "Non",
+    rs_SRS == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_partage_medias_f = case_when(
+    rs_partage_medias == 0 ~ "Non",
+    rs_partage_medias == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_home = if_else(str_detect(rs_util,"Youtube|Instagram|TikTok|Snapchat|Pinterest|Piscart|Twitch|Twitter|Reddit|Quora|Teams|Discord|Stack Exchange|Facebook|Messenger|Telegram|LinkedIn|Skype|Viber|imo|Signal", negate = FALSE), 1, 0))
+
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_diasp = if_else(str_detect(rs_util, "Douyin|Kuaishou|Likee|Tieba|WeChat|QQ|Qzone|Line|WhatsApp|Messenger|Skype", negate = FALSE), 1, 0))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_home_f = case_when(
+    rs_home == 0 ~ "Non",
+    rs_home == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_diasp_f = case_when(
+    rs_diasp == 0 ~ "Non",
+    rs_diasp == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(year_qc_f = case_when(
+    year_qc_n < 6 ~ "1 à 5 ans",
+    year_qc_n == 6| year_qc_n == 7|year_qc_n == 8|year_qc_n == 9 ~ "6 à 9 ans",
+    year_qc_n > 9 ~ "dix ans et plus"
+  ))
+```
+
+# Résultats
+
+## H1 - Contact interculturel et sentiment d'appartenance
+
+Le modèle de régression suivant présente la relation entre l'indice de contact
+interculturel sur les réseaux sociaux et l'indice du sentiment d'appartenance au
+pays d'accueil en fonction du nombre d'années passées au Québec, de la région
+d'origine et de l'âge. Les résultats indiquent que la relation entre le contact
+interculturel et le sentiment d'appartenance est statistiquement significative
+dans la population à l'intervalle de confiance de 95% (p \<= 0.05).
+
+```{r}
+local({
+  .Table <- lm(score_rsContact ~ score_sentimapp + year_qc_n + region_n + age_n, an_SOC3380)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Modèle de régression contrôlé pour l'hypothèse H1",
+         col.names = c("Estimation", "Erreur type", "Valeur t", "Valeur p"),
+         row.names = c("(Intercept)", "Sentiment d'appartenance", "Année passées au Québec", "Région d'origine", "Âge")
+         )
+})
+```
+
+En accord avec les résultats du modèle de régression, le test de corrélation de
+Pearson suivant présente l'intensité et le sens de la relation étudiée. Les
+résultats obtenus indiquent que la relation est faible et positive (C = 0.223).
+
+```{r}
+local({
+  .Table <- cor.test(an_SOC3380$score_rsContact, an_SOC3380$score_sentimapp)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Test de corrélation de Pearson pour l'hypothèse H1",
+         col.names = c("Valeur t", "Degrés de liberté", "Valeur C", "Hypothèse alternatif", "Valeur C")
+  )
+})
+```
+
+Le graphique suivant illustre la relation entre le contact interculturel et le
+sentiment d'appartenance. En accord avec les résultats du test de corrélation de
+Pearson, on observe que la relation est positive et faible. En d'autres termes :
+pour les personnes immigrantes établies au Québec, l'entretien de contacts sur
+les réseaux sociaux en ligne avec des personnes qui ne proviennent de leur pays
+d'origine est faiblement et positivement corrélé avec le développement d'un
+sentiment d'appartenance au pays d'accueil.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_rsContact), !is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    x = "Contact interculturel",
+    y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+### H1.1 - Pays d'origine, discrimination systémique et sentiment d'appartenance
+
+Les témoignages de nos répondants indiquent que les discours anti-immigrations
+présents sur les réseaux sociaux en ligne participent à un processus de
+discrimination plus large - en ce qu'il constitue la traduction de pratiques
+existant hors ligne - les empêchant de s'identifier pleinement au Québec, et
+partant, de développer un sentiment d'appartenance envers leur pays d'accueil.
+Ce phénomène est pondéré par les caractéristiques socio-démographiques de nos
+répondants, selon un gradient qui rappelle les travaux de Wacquant sur la
+*racialisation diagonale* [-@wacquantResolvingTroubleRace2022]. Les personnes
+les plus racialisées comme Wendy (jeune femme noire originaire d'Haïti établie
+au Québec depuis son enfance) affirment que leur incapacité à s'identifier comme
+québécoise est directement liée à la discrimination raciale :
+
+> Wendy: Il y a toujours quelqu'un, à un moment donné dans ta vie, qui va te
+> rappeler ta condition d'immigrée. Cela peut être un commerçant par exemple :
+> il voit une personne noire entrer et automatiquement, il va commencer à te
+> regarder dans toutes les allées pour vérifier si tu ne vas pas voler ; même si
+> tu viens régler tes achats à la caisse. Le regard qu'il peut avoir sur toi
+> fait toute la différence (...) D'entendre : "toi je t'aime bien, tu n'es pas
+> comme les autres." Ça me rappelle que je ne suis pas québécoise à leurs yeux.
+>
+> Théa: Est-ce que tu te sens Québécoise aujourd'hui ?
+>
+> Wendy: Non, je ne me sens pas québécoise (ton amusé) et je ne pourrais jamais
+> me sentir québécoise à 100%. Je ne pourrais jamais renier mon identité, même
+> si je ne peux pas retourner vivre dans mon pays (...) je me suis adaptée (le
+> mot est appuyé) [Au Québec].C'est là la différence.
+
+En accord avec les résultats du modèle de régression (Tableau 2), le graphique
+suivant illustre la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction de la région d'origine. Les résultats révèlent une
+particularité à l'endroit des personnes immigrantes originaires du Maghreb, du
+Proche-Orient et du Moyen-Orient.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = region))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Region", palette = "Set1") +
+  labs(
+    title = paste("Graphique", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par la région",
+    x = "Contact interculturel en ligne",
+    y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+En accord avec les résultats du modèle de régression (Tableau 2), les graphiques
+suivants illustrent la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction de l'âge et du nombre d'années passées au Québec.
+Dans le cas de l'âge, on peut observer que la relation est annulée, sauf parmi
+les répondants âgés de 36 à 50 ans. Dans le cas du nombre d'années passées au
+Québec on peut observer que la relation n'est pas affectée chez les personnes
+établies depuis moins de 6 ans, qu'elle est accentuée chez les personnes
+établies depuis 6 à 9 ans, puis s'inverse chez les personnes établies depuis 10
+ans ou plus.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = age))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Âge", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par l'âge",
+    x = "Contact interculturel en ligne",
+    y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = year_qc_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Nombre d'années passées au Québec", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par le nombre d'année passées au Québec",
+    x = "Contact interculturel en ligne",
+    y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+### H1.2 - Type de réseaux sociaux en ligne et sentiment d'appartenance
+
+Le modèle de régression suivant présente la relation entre le contact
+interculturel et le sentiment d'appartenance en fonction du type de réseau
+social utilisé. Les résultats suggèrent que l'utilisation de blogs comme
+Twitter, de sites de réseaux sociaux comme Facebook ou encore de sites de
+partage de médias comme YouTube exercent une influence sur la relation étudiée.
+
+```{r}
+local({
+  .Table <- lm(score_rsContact ~ score_sentimapp + rs_blogues + rs_commun_online + rs_SRS + rs_partage_medias, an_SOC3380)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Modèle de régression contrôlé pour l'hypothèse H1.2",
+         col.names = c("Estimation", "Erreur type", "Valeur t", "Valeur p"),
+         row.names = c("(Intercept)", "Sentiment d'appartenance", "Blogs", "Communautés en ligne", "Sites de réseaux sociaux", "Sites de partage de médias")
+  )
+})
+```
+
+En accord avec les résultats du modèle de régression, le graphique suivant
+illustre la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction de l'utilisation de blogs en ligne. Les résultats
+indiquent que l'utilisation de blogs comme Twitter modifie le sens de la
+relation étudiée. Autrement dit, l'usage de blogs tendrait à freiner le
+développement d'un sentiment d'appartenance au Québec chez les personnes
+immigrantes.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = rs_blogues_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Utilisation de blogs en ligne", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par l'utilisation de blogs en ligne",
+    x = "Score du contact interculturel en ligne",
+    y = "Score du sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+En accord avec les résultats du modèle de régression, le graphique suivant
+illustre la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction de l'utilisation de sites de réseaux sociaux en
+ligne. Les résultats suggèrent le phénomène inverse. En d'autres termes,
+l'utilisation de plateformes comme Facebook faciliterait le développement d'un
+sentiment d'appartenance au Québec chez les personnes immigrantes. Néanmoins,
+nos résultats ne peuvent être validés, étant entendu que la majorité de nos
+répondants utilisent des sites de réseaux sociaux en ligne.
+
+Néanmoins, on peut observer sur le graphique que la relation étudiée est plus
+intense lorsqu'elle est contrôlée par l'utilisation des sites de réseaux sociaux
+en ligne.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = rs_SRS_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Utilisation de sites de réseaux sociaux en ligne", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par le type d'utilisation de sites de réseaux sociaux en ligne",
+    x = "Score du contact interculturel en ligne",
+    y = "Score du sentiment d'appartenance au Québec") +
+  theme(text = element_text(hjust = 0.5))
+```
+
+En accord avec les résultats du modèle de régression, le graphique suivant
+illustre la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction de l'utilisation de sites de partage de médias en
+ligne. Les résultats indiquent que l'utilisation de sites de partage de médias
+atténue l'intensité de la relation étudiée. En d'autres termes, à l'instar des
+blogs, l'utilisation de plateformes comme YouTube tend à freiner le
+développement d'un sentiment d'appartenance au Québec.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = rs_partage_medias_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Utilisation de sites de partage de médias", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par l'utilisation de site de partage de médias",
+    x = "Score du contact interculturel en ligne",
+    y = "Score du sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+### H1.3 - Type d'utilisation des réseaux et sentiment d'appartenance
+
+Le modèle de régression suivant présente la relation entre le contact
+interculturel et le sentiment d'appartenance en fonction de du type
+d'utilisation des réseaux sociaux en ligne. Pour parvenir à ses résultats, nous
+avons construit un indice supplémentaire permettant de mesurer la proportion des
+réseaux sociaux traditionnellement utilisés pour communiquer avec la famille et
+les amis restés au pays.
+
+```{r}
+local({
+  .Table <- lm(score_rsContact ~ score_sentimapp + score_media_accueil + score_media_diasp, an_SOC3380)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Modèle de régression contrôlé pour l'hypothèse H1.3",
+         col.names = c("Estimation", "Erreur type", "Valeur t", "Valeur p"),
+         row.names = c("(Intercept)", "Sentiment d'appartenance", "Utilisation au Québec", "Utilisation mixte")
+  )
+})
+```
+
+Les résultats suggèrent que le type d'utilisation des réseaux sociaux joue un
+rôle dans la relation étudiée. Le graphique suivant illustre la relation entre
+le contact interculturel et le sentiment d'appartenance en fonction du type
+d'utilisation (mixte ou exclusivement au Québec). On observe que l'utilisation
+exclusive de réseaux sociaux permettant de communiquer au Québec modifie le sens
+de la relation étudiée.
+
+## H2 - Exposition à du contenu lié à l'immigration et sentiment d'appartenance
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp)), aes(x= score_rsContact, y = score_sentimapp, color = rs_diasp_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Utilisation mixte", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Contact interculturel et sentiment d'appartenance"),
+    subtitle = "Contrôlé par l'utilisation mixte",
+    x = "Score du contact interculturel en ligne",
+    y = "Score du sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+Le modèle de régression suivant présente la relation entre l'exposition à du
+contenu lié à l'immigration et le sentiment d'appartenance en fonction du nombre
+d'années passées au Québec, de la région d'origine et de l'âge. Les résultats
+indiquent que la relation est "pratiquement" significative dans la population à
+l'intervalle de confiance 95% (p \~ 0.05).
+
+```{r}
+local({
+  .Table <- lm(score_ExpoDisc ~ score_sentimapp + year_qc_n + region_n + age_n, an_SOC3380)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Modèle de régression contrôlé pour l'hypothèse H2",
+         col.names = c("Estimation", "Erreur type", "Valeur t", "Valeur p"),
+         row.names = c("(Intercept)", "Sentiment d'appartenance", "Année passés au Québec", "Région d'origine", "Âge")
+  )
+})
+```
+
+En accord avec les résultats du modèle de régression, le test de corrélation de
+Pearson suivant présente l'intensité et le sens de la relation entre
+l'exposition à du contenu lié à l'immigration et le sentiment d'appartenance.
+Les résultats obtenus indiquent que la relation faible et positive (C = 0.157).
+
+```{r}
+local({
+  .Table <- cor.test(an_SOC3380$score_ExpoDisc, an_SOC3380$score_sentimapp)
+  pander(.Table, split.cell=80, split.table = Inf, 
+         caption = "Test de corrélation de Pearson pour l'hypothèse H2",
+         col.names = c("Valeur t", "Degrés de liberté", "Valeur C", "Hypothèse alternatif", "Valeur C")
+  )
+})
+```
+
+Le graphique suivant illustre la relation entre l'exposition à du contenu lié à
+l'immigration et le sentiment d'appartenance. En accord avec les résultats du
+test de corrélation de Pearson, on observe que la relation est positive et
+faible. En d'autres termes : pour les personnes immigrantes établies au Québec,
+l'exposition à du contenu lié à l'immigration sur les réseaux sociaux en ligne
+est faiblement et positivement corrélé au développement d'un sentiment
+d'appartenance au pays d'accueil.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_ExpoDisc), !is.na(score_sentimapp)), aes(x= score_ExpoDisc, y = score_sentimapp))+
+ geom_point() +
+ geom_smooth(method = "lm", se= FALSE)+
+ labs(
+   title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Exposition aux discours liés à l'immigration et sentiment d'appartenance"),
+   x = "Exposition aux discours liés à l'immigration",
+   y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+En accord avec les résultats du modèle de régression, les deux graphiques
+suivants illustrent les effets de l'âge et du nombre d'années passées au Québec
+sur la relation étudiée. Les résultats indiquent que le phénomène est plus
+prononcé chez les personnes âgées de 36 ans et plus et chez les personnes
+établies au Québec depuis plus de 5 ans.
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp), !is.na(score_ExpoDisc)), aes(x= score_ExpoDisc, y = score_sentimapp, color = age))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Âge", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Exposition aux discours liés à l'immigration et sentiment d'appartenance"),
+    subtitle = "Contrôlé par l'âge",
+    x = "Exposition aux discours liés à l'immigration", y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+```{r}
+ggplot(an_SOC3380 %>% filter(!is.na(score_sentimapp), !is.na(score_ExpoDisc)), aes(x= score_ExpoDisc, y = score_sentimapp, color = year_qc_f))+
+  geom_point() +
+  geom_smooth(method = "lm", se= FALSE)+
+  theme_minimal()+
+  scale_color_brewer(name = "Années passées au Québec", palette = "Set1") +
+  labs(
+    title = paste("Figure", no_graphic <- no_graphic+1, ":",
+      "Exposition aux discours liés à l'immigration et sentiment d'appartenance"),
+    subtitle = "Contrôlé par le nombre d'années passées au Québec",
+    x = "Exposition aux discours liés à l'immigration",
+    y = "Sentiment d'appartenance au Québec"
+  ) +
+  theme(text = element_text(hjust = 0.5))
+```
+
+\newpage
+
+<!--chapter:end:05-resultats.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+# Discussion
+
+## H1 - Contact interculturel et sentiment d'appartenance
+
+Le volet qualitatif de notre enquête vient confirmer l'existence de la
+corrélation entre le contact interculturel et le sentiment d'appartenance tout
+en fournissant des clés d'explication suggérant l'existence d'une relation
+causale entre les deux variables. Si le travail de Gallant et Friche
+[-@gallantEtreIciLabas2010] rappellent que les réseaux sociaux en ligne
+participent peu à la création de réseaux d'appartenance préexistants, les
+témoignages que nous avons recueillis mentionnent que certaines plateformes
+comme Facebook, particulièrement actives au Québec, permettent aux personnes
+immigrantes de pérenniser des liens établis hors ligne avec les Québécois.
+
+> Nina: Les évènements de Facebook sont un peu morts en France(...) alors qu'ici
+> justement, les gens sont beaucoup plus actifs, surtout dans le Marketplace
+> (...) J'ai changé ma vision de Facebook, parce que son utilisation est très
+> différente ici.
+
+## H1.1 - Pays d'origine, discrimination systémique et sentiment d'appartenance
+
+Le phénomène observé dans le graphique représentant la relation entre le contact
+interculturel et le sentiment d'appartenance contrôlé par la région d'origine
+pourrait illustrer le développement de discours islamophobes au Québec, comme le
+suggèrent les travaux de Dalila Awada [-@awadaRacialisationMusulmanEs2020] sur
+la racialisation des personnes musulmanes dans la province.
+
+## H1.2 - Type de réseaux sociaux en ligne et sentiment d'appartenance
+
+Les résultats obtenus concernant la relation entre contact interculturel et
+sentiment d'appartenance en fonction du type de réseau social utilisé
+[@kietzmannSocialMediaGet2011] pourraient confirmer les travaux de Hopster et
+Ribeiro [-@hopsterMutualAffordancesDynamics2021, p. 559;
+-@ribeiroAuditingRadicalizationPathways2020, p. 140] concernant le rôle des
+algorithmes de suggestion dans la diffusion de discours xénophobes sur YouTube.
+Ces résultats font également échos aux travaux de Dehgan et Walsh
+[-@dehghanDynamicsPolarisationAustralian2022, p.64‑65;
+-@walshDigitalNativismTwitter2021, p.5] sur la racialisation discursive et le
+développement du néonativisme sur Twitter.
+
+Selon Esser [@esserDoesNewImmigration2004], p. 1131], le sentiment
+d'appartenance constitue l'une des quatre dimensions de l'intégration
+culturelle. Or, les résultats de notre analyse thématique révèlent que nos
+répondants mobilisent les réseaux sociaux pour accumuler du capital culturel et
+social valorisable dans le cadre de contacts interculturels en ligne et hors
+ligne.
+\newpage
+
+> Charly: Au niveau de l'intégration à la société d'accueil, ça a été un pilier
+> fondamental (...) avoir accès à des memes, connaître des célébrités, mettons
+> Occupation Double... des trucs comme ça, qui te permettent d'avoir des
+> conversations [avec des Québécois].
+
+Cette association est cependant pondérée par les résultats de notre analyse
+thématique. En effet, certains répondants témoignent du rôle positif joué par
+YouTube dans le cadre de leur intégration culturelle. Adriana (une jeune femme
+originaire d'Amérique du Sud) avance que le contenu présent sur la plateforme a
+participé à son apprentissage du français québécois et de l'histoire de la
+province :
+
+> Adriana: [Sur YouTube] je cherchais les sous-titres en français avec un petit
+> dictionnaire à côté de mon cahier (...) J'essayais de comprendre en arrêtant
+> de lire [les sous-titres] et faire des comparaisons avec les apostrophes,
+> essayer de comprendre la dynamique du parler le français québécois (...) Mais
+> quand je suis sortie dans la rue, je n'ai rien compris (...) J'ai beaucoup
+> appris de l'histoire québécoise grâce à une chaîne [YouTube] en particulier
+> (...) comprendre la fondation du Québec, la relation que le pays entretien
+> avec les autochtones.
+
+## H1.3 - Type d'utilisation des réseaux et sentiment d'appartenance
+
+L'écart constaté pour la relation entre le contact interculturel et le sentiment
+d'appartenance en fonction du type d'utilisation des réseaux sociaux pourrait
+s'expliquer en creux par la capacité des réseaux sociaux en ligne à réduire le
+stress acculturatif généré par la migration. En gardant un contact affectif et
+culturel avec leur pays d'origine, les personnes immigrantes seraient plus
+enclines à s'intégrer culturellement au Québec, et partant, à développer un
+sentiment d'appartenance à leur pays d'accueil.
+
+Cette hypothèse spécifique peut être mise en relation avec les résultats de
+l'analyse thématique, qui semblent confirmer le pouvoir stabilisateur du lien
+maintenu par nos répondants avec leur pays d'origine sur les réseaux sociaux en
+ligne. En effet, Charly (un jeune homme originaire d'Amérique du Sud) et Nina
+(une jeune femme originaire de France) affirment que les sites de réseaux
+sociaux comme WhatsApp et Messenger leur permettent de garder un lien vital avec
+la famille et les amis restés au pays :
+
+> Charly: Si j'avais pas pu parlé à ma mère tous les jours, c'est sûr
+> qu'éventuellement, j'aurais pété un plomb, puis j'aurais fait « ciao ». (...)
+> Je dirais que c'est fondamental, je pense, dans mes relations sociales. Quand
+> je dis « fondamental », c'est que je n'imagine pas les choses autrement, pour
+> que ce soit comme c'est aujourd'hui. Peut-être que je serais moins intégré si
+> je n'avais pas eu accès [aux] réseaux sociaux, si je n'avais pas pu, par
+> exemple, à un moment donné, pu entretenir des relations qui étaient très
+> importantes pour moi (...) Ça m'a permis de garder le lien pendant ces 11 ans,
+> toujours avec les mêmes personnes. Ma famille on est toujours en contact, on
+> s'envoi des photos au quotidien, des trucs comme ça (...) malgré la
+> distance,on entretient quand même cette relation.
+>
+> Nina: [exclamation] Ah ! les groupes familiaux, c'est quelque chose de
+> pratique, on n'a pas besoin d'interagir pour voir comment les gens vont. Les
+> gens enrichissent les groupes de ce qui leur arrive. Donc en fait, je n'ai
+> même pas besoin de poser des questions, j'arrive à suivre ce qui se passe dans
+> le groupe.
+>
+> Nina: [exclamation] Ah ! les groupes familiaux, c'est quelque chose de
+> pratique, on n'a pas besoin d'interagir pour voir comment les gens vont. Les
+> gens enrichissent les groupes de ce qui leur arrive. Donc en fait, je n'ai
+> même pas besoin de poser des questions, j'arrive à suivre ce qui se passe dans
+> le groupe.
+
+Néanmoins, la causalité (même indirecte) du rôle joué par le type d'utilisation
+des réseaux sociaux dans la relation étudiée ne peut être confirmée au vu du
+faible nombre de répondants utilisant les réseaux sociaux en ligne uniquement
+pour communiquer au Québec.
+
+De plus, ces résultats entrent en contradiction avec les travaux de Dilshad
+Dayani [-@dayaniRoleSocialMedia2017], qui suggèrent que l'utilisation des
+réseaux sociaux pour garder contact avec le pays d'origine tendent à freiner le
+développement d'un sentiment d'appartenance à la société d'accueil chez les
+personnes immigrantes. Dayani avançait que l'utilisation de Facebook affecte
+positivement le processus d'acculturation, alors que nos résultats suggèrent
+l'effet inverse.
+
+## H2 - Exposition à du contenu lié à l'immigration et sentiment d'appartenance
+
+Malgré sa faible significativité statistique, la relation entre l'exposition à
+du contenu lié à l'immigration en ligne et le sentiment d'appartenance peut être
+partiellement expliquée par les résultats de l'analyse thématique. D'un côté, le
+discours lié à l'immigration au Québec présent sur les réseaux sociaux en ligne
+est ambivalent, comme le démontre Wendy :
+
+> Théa: Que peux-tu me dire des publications liées à l'immigration que tu vois
+> sur les réseaux ?
+>
+> Wendy: Je vois deux choses : d'un côté il y en a une majorité qui disent que
+> c'est bien de s'installer au Canada ; de l'autre, il y a des
+> généralisations\... comme quoi certaines populations ne font rien, ne
+> travaillent pas ou bien s'approprient des emplois qui devraient revenir aux
+> Québécois.
+
+De l'autre côté, les personnes immigrantes semblent prioriser l'utilisation des
+réseaux sociaux en ligne pour collecter des informations concernant leur pays
+d'accueil, comme nous le montrent Mathilde (une jeunes femmes originaires de
+France).
+
+> Antoine: Les nouvelles sur l'immigration plus négatives, tu les entends en
+> dehors des réseaux ?
+>
+> Mathilde: Ouais, quand tu vois les nouvelles dans le métro, dans la rue ou à
+> la radio\... des choses comme ça. C'est des choses qui me parviennent sans que
+> j'aille les chercher (\...) J'ai l'impression que tu n'as pas besoin de
+> chercher de l'information au sujet de l'immigration pour être tenue au courant
+> ici.
+
+# Conclusion
+
+Cette étude cherchait à comprendre la relation entre l'utilisation des réseaux
+sociaux en ligne et l'intégration culturelle des personnes immigrantes établies
+au Québec depuis plus d'un an. Les résultats du volet quantitatif de notre
+enquête indiquent que le contact interculturel sur les réseaux sociaux en ligne
+est faiblement et positivement corrélé au développement d'un sentiment
+d'appartenance au Québec chez nos répondants. Dans le même temps, l'exposition à
+du contenu lié à l'immigration en ligne et le développement d'un sentiment
+d'appartenance au Québec sont également faiblement et positivement corrélés. En
+outre, le volet qualitatif de notre enquête vient pondérer et spécifier ces deux
+conclusions au regard des caractéristiques socio-démographiques de nos
+répondants, notamment à l'endroit des discriminations anti-immigrants, qu'elles
+soient de nature nationales, ethniques ou raciales.
+
+À la lumière de nos résultats, une étude focalisée autour des effets de la
+discrimination envers les personnes immigrantes sur le développement d'un
+sentiment d'appartenance au Québec pourrait éclairer avec précision les
+dynamiques de racialisation en cours sur les réseaux sociaux en ligne. Pour ce
+faire, la création d'un indice de la discrimination et/ou de la catégorisation
+(qu'elle soit nationale, ethnique ou raciale) permettrait de mesurer directement
+la relation que celle-ci entretien avec le développement d'un sentiment
+d'appartenance au Québec.
+
+\newpage
+
+<!--chapter:end:06-discussions.Rmd-->
+
+---
+knit: bookdown::render_book
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+# Références
+
+<!--chapter:end:07-références.Rmd-->
+

@@ -1,60 +1,43 @@
---- 
-title: "A Minimal Book Example"
-author: "John Doe"
-date: "`r Sys.Date()`"
+---
+title: "COVID-19 Disparities in Quebec (Canada)"
+author: "V. Adjiwanou, G. NGalé, S. Lardoux, N. Zahedinameghi"
+date: "`r format(Sys.Date(), '%B %e, %Y')`"
+present_to: "Vissého Adjiwanou"
+type: "Article"
+knit: bookdown::render_book
+subtitle: A Comparative Analysis of Exposure Risks, Consequences, and Access to Resources among Immigrants and Natives
+groupe_cours: "SOC3380, gr. 40"
 site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+bibliography: "library.biblatex"
+csl: apalike-uqam.csl
+editor_options:
+  markdown:
+    wrap: 80
+    fontsize: 12pt
+documentclass: article
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+institute: Université du Québec À Montréal and Université De Montréal
+abstract: "The immigrant population is one of the most vulnerable in Canada, with a relatively high risk of unemployment, a low social support system, and linguistic barriers. However, their experiences with public health interventions during the COVID-19 pandemic have not been adequately explored. The purpose of this article is to analyze Covid-19 exposure risk and its family implications for both natives and immigrants in the province of Quebec. Additionally, we analyze immigrants' access to government aid and compare it to their native-born counterparts. The study consists of survey data collected from 1,000 immigrants and 500 non-immigrants Quebecers between August and November 2020. Our descriptive and exploratory analysis reveals significant differences between the two groups regarding exposure risk, family consequences, and access to resources. We conclude that the current pandemic exacerbates health disparities in the province, with particularly dire repercussions for immigrants' families. We also discuss several socio-cultural strategies to mitigate inequality and recommend policies to address the needs of vulnerable populations."
 ---
 
-# About
+```{r setup, include=FALSE, warning=FALSE}
+# Préférence knitr
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
-
-## Usage 
-
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-## Render book
-
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo=FALSE)
 ```
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
+```{r}
+# Importer package
+library(dplyr)
+library(tidyverse)
+library(summarytools)
+library(readr)
+library(questionr)
+library(rcompanion)
+library(pander)
 ```
 
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+```{r}
+# Set numero graphique
+no_graphic <- -1
 ```
