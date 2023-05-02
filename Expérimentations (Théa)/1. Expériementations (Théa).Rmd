@@ -36,6 +36,32 @@ Base_Trajipaq_Finale_Ok <-
 model1 <- glm(formula = COV12_2 ~ Q14I, family = "binomial", data = Base_Trajipaq_Finale_Ok)
 summary(model1)
 
-#Les résultats indiquent que le risque d'erreur alpha est supérieur à 5%. Conséquemment, la relation étudiée n'est pas significative.
+#les résultats indiquent que le risque d'erreur alpha est supérieur à 5%. Conséquemment, la relation étudiée n'est pas significative.
+```
+
+# Analyse de la variance (ANOVA) entre deux variables numériques (VD = ordinal, VI = ratio)
+
+```{r}
+#création d'un dataframe regroupant les variables COV35 (Votre bien-être émotionnel - humeur s'est beaucoup, un peu ou pas amélioré) et Q14I.
+df_1 <- Base_Trajipaq_Finale_Ok %>%
+  select(COV35, Q14I) %>%
+  drop_na()
+
+#ANOVA entre COV35 (VD) et Q14I (VI)
+model2 <- aov(Q14I ~ COV35, data = df_1)
+summary(model2)
+
+##les résultats indiquent que le risque d'erreur alpha est supérieur à 5%. Conséquemment, la relation étudiée n'est pas significative.
+```
+
+## Code alternatif pour l'analyse de la variance
+
+```{r}
+#l'utilisation de pipes évite de créer un dataframe.
+Base_Trajipaq_Finale_Ok %>%
+  select(COV35, Q14I) %>%
+  drop_na() %>%
+  aov(Q14I ~ COV35, data = .) %>%
+  summary()
 ```
 
