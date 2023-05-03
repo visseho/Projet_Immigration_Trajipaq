@@ -1,0 +1,61 @@
+---
+title: "Analyse descriptive"
+author: "Théa"
+date: "2023-03-17"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+#Chargement des packages
+
+library(dplyr)
+library(tidyverse)
+library(summarytools)
+library(readr)
+library(questionr)
+library(rcompanion)
+```
+
+```{r}
+#Chargement de la base de données scriptée
+
+an_SOC3380 <- read_csv("an_SOC3380")
+```
+
+# Un test de régression logistique appliqué à d'autres données
+
+```{r}
+#VD = rs_commun_online (les personnes parcourant des forums)
+#VI = score_rsContact (l'indice de contact interculturel en ligne)
+model1 <- glm(formula = rs_commun_online ~ score_rsContact, family = "binomial", data = an_SOC3380)
+summary(model1)
+
+ggplot(an_SOC3380 %>% filter(!is.na(rs_commun_online), !is.na(score_rsContact)), aes(x = score_rsContact, y = rs_commun_online)) + 
+  geom_point() +
+  stat_smooth(method = "glm", color = "blue", se = FALSE,
+    method.args = list(family = binomial))
+```
+
+# Une analyse ANOVA appliquée à d'autres données
+
+```{r}
+#VI = rs_blogues_f (utilisation de blogs)
+#VD = score_rsContact
+#VC = year_qc (nombre d'années passées au Québec) & diplome (niveau d'éducation)
+an_SOC3380 %>%
+  filter(diplome != "Je ne souhaite pas répondre") %>%
+  select(rs_blogues_f, score_rsContact, year_qc, diplome) %>%
+  drop_na() %>%
+  aov(score_rsContact ~ rs_blogues_f + year_qc + diplome, data = .) %>%
+  summary()
+
+ggplot(an_SOC3380 %>% filter(!is.na(score_rsContact), diplome != "Je ne souhaite pas répondre"), aes(x = rs_blogues_f, y = score_rsContact, fill = diplome)) + 
+  geom_boxplot(na.rm = TRUE) +
+  labs(x = "Utilisation de blogs", y = "Indice de contact interculturel", fill = "Diplôme")+
+  facet_wrap(~ diplome, scales = "free_x") +
+  scale_fill_brewer(name = "Diplôme", palette = "Set1")
+```
+

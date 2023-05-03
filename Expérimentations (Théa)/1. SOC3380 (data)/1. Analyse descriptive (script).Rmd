@@ -1,0 +1,764 @@
+---
+title: "Expérimentations"
+author: "Théa"
+date: "2023-03-17"
+output: html_document
+---
+
+```{r}
+#Chargement des packages
+
+library(dplyr)
+library(tidyverse)
+library(summarytools)
+library(readr)
+library(questionr)
+library(rcompanion)
+```
+
+```{r}
+#Chargement de la base de données
+
+cr_SOC3380 <- read_csv("cr_SOC3380.csv")
+Pays <- read_csv("Pays.csv")
+```
+
+```{r}
+#Codage des variables
+
+an_SOC3380 <-
+  cr_SOC3380 %>%
+  rename(
+    "age" = "1 - Quel âge avez vous ?",
+    "year_qc" = "2 - Depuis combien d'années habitez vous au Québec ?",
+    "born_country" = "3a - Dans quel pays êtes vous né ?",
+    "country_15" = "3b - Dans quel pays avez vous vécu jusqu'à vos 15 ans ?",
+    "genre" = "4 - A quel genre vous identifiez vous ?",
+    "statut" = "5 - Quel est votre statut actuel au Canada ?",
+    "etat_civil" = "6 - Quel est votre état civil ?",
+    "diplome" = "7 - Quel est votre niveau de diplôme le plus élevé ?",
+    "revenu" = "8 - Dans quelle tranche se situe votre revenu actuel ?",
+    "lang_enf" = "9 - Quelle est la première langue que vous avez apprise à la maison pendant votre enfance et que vous comprenez encore aujourd'hui ?",
+    "lang_home" = "10 - Parmi ces langues, laquelle parlez vous le plus souvent à la maison ? Indiquez plus d'une langue seulement si elles sont parlées aussi souvent l'une que l'autre à la maison.",
+    "lang_home_autre" = "11 - Parlez vous d'autres langues à la maison ?",
+    "lang_trav" = "12 -  Parmi ces langues, laquelle parlez vous le plus souvent au travail ? Indiquez plus d'une langue seulement si elles sont parlées aussi souvent l'une que l'autre au travail.",
+    "lang_trav_autre" = "13 - Parlez vous d'autres langues au travail ?",
+    "rs_util" = "14 - Quel(s) réseaux sociaux utilisez vous régulièrement ?",
+    "rs_time" = "15 - Combien de temps passez vous par jour sur les réseaux sociaux ?",
+    "rs_disc_same" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour discuter avec des personnes qui proviennent de mon pays d'origine]",
+    "rs_disc_diff" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour discuter avec des personnes qui ne proviennent pas de mon pays d'origine]",
+    "rs_hab" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Par habitude]",
+    "rs_div" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour me divertir]",
+    "rs_ptime" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour passer le temps]",
+    "rs_inf" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour m'informer]",
+    "rs_renc_same" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour rencontrer des personnes de mon pays d'origine]",
+    "rs_renc_diff" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour rencontrer des personnes qui ne proviennent pas de mon pays d'origine]",
+    "rs_trav" = "16 - Pour quelles raisons allez-vous sur les réseaux sociaux ? [Pour le travail]",
+    "online_memb_migr" = "17 - Êtes-vous membre de groupes en ligne regroupant des personnes immigrantes ?",
+    "inf_pol_home" = "18 - Au cours du dernier mois, à quelle fréquence avez-vous utilisé les réseaux sociaux pour lire des journaux ou des revues en ligne traitant d'une question politique ou sociale précise en lien avec votre pays d'origine ?",
+    "inf_polqc" = "19 - Au cours du dernier mois, à quelle fréquence avez-vous utilisé les réseaux sociaux pour lire des journaux ou des revues en ligne traitant d'une question politique ou sociale précise en lien avec le Québec ?",
+    "ton_migr" = "20a - Quelle est la tonalité du contenu que vous observez sur les réseaux sociaux sur le thème de l'immigration au Québec ?",
+    "ton_why" = "20b - Pourquoi selon vous ?",
+    "disc_maj_same" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [Des personnes provenant de mon pays d'origine]",
+    "disc_maj_migr" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [D'autres personnes immigrantes]",
+    "disc_maj_qc" = "21 - Sur les réseaux sociaux, les amis avec lesquels je discute le plus souvent sont majoritairement... [Des personnes nées au Québec]",
+    "ton_migr_pk" = "20b - Pourquoi selon vous ?",
+    "act_cult" = "22 - Durant le dernier mois, à quelle fréquence avez-vous participé à des activités (culturelle, sportive, sociale, etc.) avec une personne qui ne provient pas de votre pays d'origine ?",
+    "sentim_app" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [J'ai le sentiment d'appartenir à la société québécoise.]",
+    "chez_moi_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je me sens chez moi au Québec.]",
+    "feel_queb" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je me sens Québécois(e).]",
+    "forget_orig" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Il faut faire oublier ses origines pour se faire accepter au Québec.]",
+    "percep_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [On me voit comme un(e) Québécois(e).]",
+    "dev_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je veux devenir Québécois(e).]",
+    "agir_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [En public, j’essaye d’agir comme un Québécois.]",
+    "import_adapt" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Je crois que c’est important de m’adapter à la culture québécoise.]",
+    "iso_qc" = "23 - Veuillez répondre selon votre niveau d'accord ou de désaccord avec les énoncés suivants: [Vous vous sentez isolé(e) au Québec.]",
+    "future_live" = "24 - Dans le futur, où souhaiteriez vous vivre ?",
+    "valeur_fr" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le français en tant que langue officielle du Québec]",
+    "valeur_dem" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le respect de la démocratie]",
+    "valeur_equal" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [L’égalité entre les sexes*]",
+    "valeur_med14" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La liberté de consentir ou de refuser des interventions en soins de santé dès l’âge de 14 ans]",
+    "valeur_relation" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La liberté de choisir sont statut de relation amoureuse]",
+    "valeur_laic" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [La laïcité au Québec**]",
+    "valeur_droitlib" = "25 - Dans quelle mesure êtes-vous personnellement d’accord avec les valeurs suivantes? [Le respect de la Charte des droits et libertés de la personne]",
+    "qc_val_fr" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le français en tant que langue officielle du Québec]",
+    "qc_val_dem" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le respect de la démocratie]",
+    "qc_val_equal" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [L’égalité entre les sexes*]",
+    "qc_val_med14" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La liberté de consentir ou de refuser des interventions en soins de santé dès l’âge de 14 ans]",
+    "qc_val_relation" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La liberté de choisir sont statut de relation amoureuse]",
+    "qc_val_laic" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [La laïcité au Québec**]",
+    "qc_val_droitlib" = "26 - Selon vous, dans quelles mesures les québécois(es) partagent, en général, les valeurs suivantes? [Le respect de la Charte des droits et libertés de la personne]",
+    "comp_polqc" = "27 - Comment qualifiez vous votre compréhension des enjeux politiques auxquels fait face le Québec?",
+    "disc_polqc" = "28 - Durant le dernier mois, à quelle fréquence avez-vous discuté avec une autre personne d'enjeux politiques québécois ?",
+    "interp_polqc" = "29 - À quel niveau vous sentez vous interpelé(e) par les enjeux politiques au Québec ?",
+    "polqc_CAQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La Coalition Avenir Québec promulgue le communisme]",
+    "polqc_PQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Le Parti Québécois est attaché au fédéralisme]" ,
+    "polqc_PLQ" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Le Parti Libéral du Québec milite pour l'indépendance du Québec]",
+    "polqc_QS" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [Québec Solidaire promulgue le socialisme démocratique]",
+    "polqc_L21" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La loi 21 concerne les droits des personnes LGBTQ+]",
+    "polqc_L96" = "30 - Les questions suivantes concernent les partis politiques québécois et certains évènements récents. [La loi 96 concerne l'utilisation de la langue française]",
+    "pm_qc" = "31 - À quel parti est associé le premier ministre actuel du Québec ?",
+    "maj_AN" = "32 - Quel parti occupe la majorité des sièges de l'Assemblée nationale ?",
+    "vote_age" = "33 - Quel est l'âge légal pour voter au Québec ?",
+    "act_conv" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai essayé de convaincre quelqu'un de changer d'opinion politique]",
+    "act_inf" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai essayé d'influencer le vote d'autres personnes]",
+    "act_opinion_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai émis mon opinion politique en public ou sur les réseaux sociaux]",
+    "act_disc_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai discuté de sujets politiques en public ou sur les réseaux sociaux]",
+    "act_contact_pol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai contacté un politicien ou un membre du gouvernement]",
+    "act_workpol" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai travaillé pour un parti ou un groupe activiste]",
+    "act_symb" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai affiché un symbole politique (sticker, badge, vêtement, etc.)]",
+    "act_pet" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai signé une pétition]",
+    "act_manif" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai pris part à une manifestation publique et licite]",
+    "act_collect_sign" = "34 - Durant les douze derniers mois, avez-vous réalisé l'une des actions suivantes ? [J'ai collecté des signatures pour promouvoir une pétition]",
+    "fr_lire" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je peux lire et comprendre les points principaux d'un article de presse dont le sujet m'est familier]",
+    "fr_conv" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Dans une conversation, je peux parler de sujets familiers et exprimer mon opinion]",
+    "fr_ecrire" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je peux écrire des lettres à propos de mes expériences, de mes sentiments et dévènements]",
+    "fr_radiotele" = "35 - Communiquer en français implique plusieurs dimensions comme la lecture, l'écoute, l'écriture et la parole. Veuillez évaluer votre compétence à employer le français en répondant aux énoncés suivants. [Je comprends les points principaux d'une émission télévisée ou radiodiffusée à propos d'un sujet familier]",
+    "comment" = "Avez-vous des commentaires que vous aimeriez partager avec nous ?",
+    "int_quali" = "Dans la cadre de cette même recherche, avez vous un intérêt à participer à une séance de discussion? Si oui,  veuillez partager votre courriel.",
+    "continuant" = "En continuant :"
+    )
+```
+
+```{r}
+#Exclusion des répondants établis au Québec depuis moins d'un an
+
+an_SOC3380 <- an_SOC3380[an_SOC3380$year_qc != "Moins d'un an", ]
+```
+
+```{r}
+#Exclusion des variables inutiles à l'enquête et transformation des variables utiles en variables factorielles
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate_if(sapply(an_SOC3380, is.character), as.factor)%>%
+    select(!c(Horodateur, continuant, comment, int_quali))
+
+```
+
+```{r}
+
+#Multiplication des observations par tirage d'échantillons aléatoires
+
+set.seed(1234)
+Sample_1 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1235)
+Sample_2 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1236)
+Sample_3 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1237)
+Sample_4 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1238)
+Sample_5 <- slice_sample(an_SOC3380, n = 15)
+set.seed(1239)
+Sample_6 <- slice_sample(an_SOC3380, n = 15)
+
+an_SOC3380 <- bind_rows(an_SOC3380, Sample_1, Sample_2, Sample_3, Sample_4, Sample_5, Sample_6)
+```
+
+```{r}
+#correction de variables
+
+an_SOC3380 <-
+  an_SOC3380 %>% 
+  mutate(born_country = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         country_15 = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         born_country = recode(born_country, `Iran` = "Iran, Islamic Republic of"),
+         country_15 = recode(country_15, `Iran` = "Iran, Islamic Republic of"))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(born_country = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         country_15 = recode(born_country, `Ivory Coast (Cote d'Ivoire)` = "Côte D'Ivoire"),
+         born_country = recode(born_country, `Iran` = "Iran, Islamic Republic of"),
+         country_15 = recode(country_15, `Iran` = "Iran, Islamic Republic of"),
+         genre = recode(genre, Fluide = "Autres"),
+         genre = recode(genre, `Je ne souhaite pas répondre` = "Autres"),
+         lang_enf = case_when(
+           lang_enf == "Français" ~ "Français",
+           lang_enf == "Anglais" ~ "Anglais",
+           TRUE ~ "Autres"),
+         lang_home = case_when(
+           lang_home == "Français" ~ "Français",
+           lang_home == "Anglais" ~ "Anglais",
+           TRUE ~ "Autres"))
+
+an_SOC3380 <- left_join(an_SOC3380,Pays, by = "born_country")
+
+```
+
+```{r}
+#numérisation de variables
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(Facebook = if_else(str_detect(rs_util, "Facebook", negate = FALSE), "Oui", "Non"),
+         Twitter = if_else(str_detect(rs_util, "Twitter", negate = FALSE), "Oui", "Non"),
+         Youtube = if_else(str_detect(rs_util, "Youtube", negate = FALSE), "Oui", "Non"),
+         Instagram = if_else(str_detect(rs_util, "Instagram", negate = FALSE), "Oui", "Non"),
+         Messenger = if_else(str_detect(rs_util, "Messenger", negate = FALSE), "Oui", "Non"),
+         WhatsApp = if_else(str_detect(rs_util, "WhatsApp", negate = FALSE), "Oui", "Non"),
+         WeChat = if_else(str_detect(rs_util, "WeChat", negate = FALSE), "Oui", "Non"),
+         TikTok = if_else(str_detect(rs_util, "TikTok", negate = FALSE), "Oui", "Non"),
+         Douyin = if_else(str_detect(rs_util, "Douyin", negate = FALSE), "Oui", "Non"),
+         Telegram = if_else(str_detect(rs_util, "Telegram", negate = FALSE), "Oui", "Non"),
+         QQ = if_else(str_detect(rs_util, "QQ", negate = FALSE), "Oui", "Non"),
+         Weibo = if_else(str_detect(rs_util, "Weibo", negate = FALSE), "Oui", "Non"),
+         Qzone = if_else(str_detect(rs_util, "Qzone", negate = FALSE), "Oui", "Non"),
+         Snapchat = if_else(str_detect(rs_util, "Snapchat", negate = FALSE), "Oui", "Non"),
+         Kuaishou = if_else(str_detect(rs_util, "Kuaishou", negate = FALSE), "Oui", "Non"),
+         Pinterest = if_else(str_detect(rs_util, "Pinterest", negate = FALSE), "Oui", "Non"),
+         Reddit = if_else(str_detect(rs_util, "Reddit", negate = FALSE), "Oui", "Non"),
+         LinkedIn = if_else(str_detect(rs_util, "LinkedIn", negate = FALSE), "Oui", "Non"),
+         Quora = if_else(str_detect(rs_util, "Quora", negate = FALSE), "Oui", "Non"),
+         Skype = if_else(str_detect(rs_util, "Skype", negate = FALSE), "Oui", "Non"),
+         Tieba = if_else(str_detect(rs_util, "Tieba", negate = FALSE), "Oui", "Non"),
+         Viber = if_else(str_detect(rs_util, "Viber", negate = FALSE), "Oui", "Non"),
+         Teams = if_else(str_detect(rs_util, "Teams", negate = FALSE), "Oui", "Non"),
+         imo = if_else(str_detect(rs_util, "imo", negate = FALSE), "Oui", "Non"),
+         Line = if_else(str_detect(rs_util, "Line", negate = FALSE), "Oui", "Non"),
+         Piscart = if_else(str_detect(rs_util, "Piscart", negate = FALSE), "Oui", "Non"),
+         Likee = if_else(str_detect(rs_util, "Likee", negate = FALSE), "Oui", "Non"),
+         Discord = if_else(str_detect(rs_util, "Discord", negate = FALSE), "Oui", "Non"),
+         Twitch = if_else(str_detect(rs_util, "Twitch", negate = FALSE), "Oui", "Non"),
+         `Stack Exchange` = if_else(str_detect(rs_util, "Stack Exchange", negate = FALSE), "Oui", "Non"),
+         Signal = if_else(str_detect(rs_util, "Signal", negate = FALSE), "Oui", "Non")) %>%
+  mutate_at(
+    vars(one_of("Facebook",
+                "Twitter",
+                "Youtube",
+                "Instagram",
+                "Messenger",
+                "WhatsApp",
+                "WeChat",
+                "TikTok",
+                "Douyin",
+                "Telegram",
+                "QQ",
+                "Weibo",
+                "Qzone",
+                "Snapchat",
+                "Kuaishou",
+                "Pinterest",
+                "Reddit",
+                "Facebook",
+                "LinkedIn",
+                "Quora",
+                "Skype",
+                "Tieba",
+                "Viber",
+                "Teams",
+                "imo",
+                "Line",
+                "Piscart",
+                "Discord",
+                "Piscart",
+                "Likee",
+                "Twitch",
+                "Signal",
+                "Stack Exchange"
+                )),
+    funs(case_when(
+      . == "Oui" ~ 1,
+      . == "Non" ~ 0)
+      )) %>%
+  rowwise()%>%
+  mutate(nbr_rs = sum(Facebook,
+                      Twitter,
+                      Youtube,
+                      Instagram,
+                      Messenger,
+                      WhatsApp,
+                      WeChat,
+                      TikTok,
+                      Douyin,
+                      Telegram,
+                      QQ,
+                      Weibo,
+                      Qzone,
+                      Snapchat, 
+                      Kuaishou,
+                      Kuaishou,
+                      Reddit,
+                      Facebook,
+                      LinkedIn,
+                      Quora,
+                      Skype,
+                      Tieba,
+                      imo,
+                      Line,
+                      Piscart,
+                      Discord,
+                      Piscart,
+                      Twitch,
+                      Signal,
+                      `Stack Exchange`,
+                      na.rm = TRUE))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(region_n = case_when(
+    region == "Europe" ~ 1,
+    region == "South/Latin America" ~ 2,
+    region == "Arab States" ~ 3,
+    region == "North America" ~ 4,
+    region == "Asia & Pacific" ~ 5,
+    region == "Africa" ~ 6,
+    region == "Middle east" ~ 7
+  ))
+```
+
+```{r}
+#préparation des indices
+
+accord_lvl <- c("Pas du tout d'accord", 
+                "Plutôt pas d'accord", 
+                "Plutôt d'accord", 
+                "D'accord", 
+                "Tout à fait d'accord")
+
+INV_accord_LVL <- c("Tout à fait d'accord", 
+                    "D'accord", 
+                    "Plutôt d'accord", 
+                    "Plutôt pas d'accord", 
+                    "Pas du tout d'accord")
+
+mesure_lvl <- c("Pas du tout", 
+                "Dans une certaine mesure", 
+                "Dans une grande mesure")
+
+IND_LVL <- c("Faible", 
+             "Modéré", 
+             "Fort")
+
+#variables indépendantes
+
+##rs_disc_diff
+
+an_SOC3380$rs_disc_diff <- recode(an_SOC3380$rs_disc_diff, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$rs_disc_diff <- factor(an_SOC3380$rs_disc_diff, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$rs_disc_diff <- as.numeric(an_SOC3380$rs_disc_diff, na.rm = TRUE)
+
+##rs_renc_diff
+
+an_SOC3380$rs_renc_diff <- recode(an_SOC3380$rs_renc_diff, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$rs_renc_diff <- factor(an_SOC3380$rs_renc_diff, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$rs_renc_diff <- as.numeric(an_SOC3380$rs_renc_diff, na.rm = TRUE)
+
+##disc_maj_same
+
+an_SOC3380$disc_maj_same <- factor(an_SOC3380$disc_maj_same, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_same <- as.numeric(an_SOC3380$disc_maj_same, na.rm = TRUE)
+
+##disc_maj_migr
+
+an_SOC3380$disc_maj_migr <- factor(an_SOC3380$disc_maj_migr, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_migr <- as.numeric(an_SOC3380$disc_maj_migr, na.rm = TRUE)
+
+##disc_maj_qc
+
+an_SOC3380$disc_maj_qc <- factor(an_SOC3380$disc_maj_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$disc_maj_qc <- as.numeric(an_SOC3380$disc_maj_qc, na.rm = TRUE)
+
+## online_memb_migr
+
+an_SOC3380$online_memb_migr <- factor(an_SOC3380$online_memb_migr, levels = c("Oui", "Non"), ordered = FALSE)
+
+#variables dépendantes
+
+##sentim_app
+
+an_SOC3380$sentim_app <- recode(an_SOC3380$sentim_app, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$sentim_app <- factor(an_SOC3380$sentim_app, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$sentim_app <- as.numeric(an_SOC3380$sentim_app, na.rm = TRUE)
+
+##chez_moi_qc
+
+an_SOC3380$chez_moi_qc <- recode(an_SOC3380$chez_moi_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$chez_moi_qc <- factor(an_SOC3380$chez_moi_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$chez_moi_qc <- as.numeric(an_SOC3380$chez_moi_qc, na.rm = TRUE)
+
+##feel_queb
+
+an_SOC3380$feel_queb <- recode(an_SOC3380$feel_queb, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$feel_queb <- factor(an_SOC3380$feel_queb, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$feel_queb <- as.numeric(an_SOC3380$feel_queb, na.rm = TRUE)
+
+##forget_orig
+
+an_SOC3380$forget_orig <- recode(an_SOC3380$forget_orig, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$forget_orig <- factor(an_SOC3380$forget_orig, levels = INV_accord_LVL, ordered = TRUE)
+an_SOC3380$forget_orig <- as.numeric(an_SOC3380$forget_orig, na.rm = TRUE)
+
+##percep_qc
+
+an_SOC3380$percep_qc <- recode(an_SOC3380$percep_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$percep_qc <- factor(an_SOC3380$percep_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$percep_qc <- as.numeric(an_SOC3380$percep_qc, na.rm = TRUE)
+
+##dev_qc
+
+an_SOC3380$dev_qc <- recode(an_SOC3380$dev_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$dev_qc <- factor(an_SOC3380$dev_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$dev_qc <- as.numeric(an_SOC3380$dev_qc, na.rm = TRUE)
+
+##agir_qc
+
+an_SOC3380$agir_qc <- recode(an_SOC3380$agir_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$agir_qc <- factor(an_SOC3380$agir_qc, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$agir_qc <- as.numeric(an_SOC3380$agir_qc, na.rm = TRUE)
+
+##import_adapt
+
+an_SOC3380$import_adapt <- recode(an_SOC3380$import_adapt, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$import_adapt <- factor(an_SOC3380$import_adapt, levels = accord_lvl, ordered = TRUE)
+an_SOC3380$import_adapt <- as.numeric(an_SOC3380$import_adapt, na.rm = TRUE)
+
+##iso_qc
+
+an_SOC3380$iso_qc <- recode(an_SOC3380$iso_qc, "Pas d'accord" = "Plutôt pas d'accord")
+an_SOC3380$iso_qc <- factor(an_SOC3380$iso_qc, levels = INV_accord_LVL, ordered = TRUE)
+an_SOC3380$iso_qc <- as.numeric(an_SOC3380$iso_qc, na.rm = TRUE)
+
+##valeur_fr
+
+an_SOC3380$valeur_fr <- factor(an_SOC3380$valeur_fr, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_fr <- as.numeric(an_SOC3380$valeur_fr, na.rm = TRUE)
+
+##valeur_dem
+
+an_SOC3380$valeur_dem <- factor(an_SOC3380$valeur_dem, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_dem <- as.numeric(an_SOC3380$valeur_dem, na.rm = TRUE)
+
+##valeur_equal
+
+an_SOC3380$valeur_equal <- factor(an_SOC3380$valeur_equal, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_equal <- as.numeric(an_SOC3380$valeur_equal, na.rm = TRUE)
+
+##valeur_med14
+
+an_SOC3380$valeur_med14 <- factor(an_SOC3380$valeur_med14, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_med14 <- as.numeric(an_SOC3380$valeur_med14, na.rm = TRUE)
+
+##valeur_relation
+
+an_SOC3380$valeur_relation <- factor(an_SOC3380$valeur_relation, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_relation <- as.numeric(an_SOC3380$valeur_relation, na.rm = TRUE)
+
+##valeur_laic
+
+an_SOC3380$valeur_laic <- factor(an_SOC3380$valeur_laic, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_laic <- as.numeric(an_SOC3380$valeur_laic, na.rm = TRUE)
+
+##valeur_droitlib
+
+an_SOC3380$valeur_droitlib <- factor(an_SOC3380$valeur_droitlib, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$valeur_droitlib <- as.numeric(an_SOC3380$valeur_droitlib, na.rm = TRUE)
+
+##comp_polqc
+
+an_SOC3380$comp_polqc <- factor(an_SOC3380$comp_polqc, levels = c("Pas bonne du tout", 
+                                                                  "Pas bonne", 
+                                                                  "Plutôt bonne", 
+                                                                  "Bonne", 
+                                                                  "Très bonne"), ordered = TRUE)
+
+an_SOC3380$comp_polqc <- as.numeric(an_SOC3380$comp_polqc, na.rm = TRUE)
+
+##disc_polqc
+
+an_SOC3380$disc_polqc <- recode(an_SOC3380$disc_polqc, "Rarement" = "Quelques fois")
+
+an_SOC3380$disc_polqc <- factor(an_SOC3380$disc_polqc, levels = c("Jamais", 
+                                                                  "Quelques fois", 
+                                                                  "Plusieurs fois", 
+                                                                  "Très souvent", 
+                                                                  "Tout le temps"), ordered = TRUE)
+
+an_SOC3380$disc_polqc <- as.numeric(an_SOC3380$disc_polqc, na.rm = TRUE)
+
+##interp_polqc
+
+an_SOC3380$interp_polqc <- factor(an_SOC3380$interp_polqc, levels = c("Pas interpelé(e)", 
+                                                                      "Pas vraiment interpelé(e)", 
+                                                                      "Plutôt interpelé(e)", 
+                                                                      "Interpelé(e)", 
+                                                                      "Très interpelé(e)"), ordered = TRUE)
+
+an_SOC3380$interp_polqc <- as.numeric(an_SOC3380$interp_polqc, na.rm = TRUE)
+
+##qc_val_fr
+
+an_SOC3380$qc_val_fr <- factor(an_SOC3380$qc_val_fr, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_fr <- as.numeric(an_SOC3380$qc_val_fr, na.rm = TRUE)
+
+##qc_val_dem
+
+an_SOC3380$qc_val_dem <- factor(an_SOC3380$qc_val_dem, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_dem <- as.numeric(an_SOC3380$qc_val_dem, na.rm = TRUE)
+
+##qc_val_equal
+
+an_SOC3380$qc_val_equal <- factor(an_SOC3380$qc_val_equal, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_equal <- as.numeric(an_SOC3380$qc_val_equal, na.rm = TRUE)
+
+##qc_val_med14
+
+an_SOC3380$qc_val_med14 <- factor(an_SOC3380$qc_val_med14, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_med14 <- as.numeric(an_SOC3380$qc_val_med14, na.rm = TRUE)
+
+##qc_val_relation
+
+an_SOC3380$qc_val_relation <- factor(an_SOC3380$qc_val_relation, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_relation <- as.numeric(an_SOC3380$qc_val_relation, na.rm = TRUE)
+
+##qc_val_laic
+
+an_SOC3380$qc_val_laic <- factor(an_SOC3380$qc_val_laic, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_laic <- as.numeric(an_SOC3380$qc_val_laic, na.rm = TRUE)
+
+##qc_val_droitlib
+
+an_SOC3380$qc_val_droitlib <- factor(an_SOC3380$qc_val_droitlib, levels = mesure_lvl, ordered = TRUE)
+an_SOC3380$qc_val_droitlib <- as.numeric(an_SOC3380$qc_val_droitlib, na.rm = TRUE)
+
+# Contrôle
+
+an_SOC3380$rs_time <- factor(an_SOC3380$rs_time, levels = c("Moins d'une heure", 
+                                                            "Entre une et trois heures", 
+                                                            "Entre trois et cinq heures", 
+                                                            "Entre cinq et sept heures", 
+                                                            "Plus de sept heures"), ordered = TRUE)
+
+an_SOC3380$rs_time_n <- as.numeric(an_SOC3380$rs_time, na.rm = TRUE)
+
+## âge
+
+an_SOC3380$age <- factor(an_SOC3380$age, levels = c("Moins de 18 ans", 
+                                                    "Entre 18 et 25 ans", 
+                                                    "Entre 26 et 35 ans", 
+                                                    "Entre 36 et 50 ans", 
+                                                    "Plus de 50 ans"), ordered = TRUE)
+
+an_SOC3380$age_n <- as.numeric(an_SOC3380$age, na.omit(NA))
+
+v_sentimapp <- c("sentim_app", 
+                 "chez_moi_qc", 
+                 "feel_queb", 
+                 "forget_orig", 
+                 "percep_qc", 
+                 "dev_qc", 
+                 "agir_qc", 
+                 "import_adapt", 
+                 "iso_qc")
+
+v_NV <- c("valeur_fr", 
+          "valeur_dem", 
+          "valeur_equal", 
+          "valeur_med14", 
+          "valeur_relation", 
+          "valeur_laic", 
+          "valeur_droitlib")
+
+v_rsContact <- c("rs_disc_diff", 
+                 "disc_maj_qc", 
+                 "rs_renc_diff")
+
+v_percepQC <- c("qc_val_fr", 
+                "qc_val_dem", 
+                "qc_val_equal", 
+                "qc_val_med14", 
+                "qc_val_relation", 
+                "qc_val_laic", 
+                "qc_val_droitlib")
+
+accord_lvl <- c("Pas du tout d'accord", 
+                "Plutôt pas d'accord", 
+                "Plutôt d'accord", 
+                "D'accord", 
+                "Tout à fait d'accord")
+
+an_SOC3380$rs_inf <- factor(an_SOC3380$rs_inf, levels = accord_lvl, ordered = TRUE)
+
+an_SOC3380$rs_inf_n <- as.numeric(an_SOC3380$rs_inf, na.omit(NA))
+
+an_SOC3380$ton_migr <- recode(an_SOC3380$ton_migr, "Très positive" = "Positive")
+
+an_SOC3380$ton_migr <- recode(an_SOC3380$ton_migr, "Très négative" = "Négsative")
+
+ton_migr_lvl <- c("Négative", 
+                  "Plutôt négative", 
+                  "Neutre", 
+                  "Plutôt positive", 
+                  "Positive")
+
+an_SOC3380$ton_migr <- factor(an_SOC3380$ton_migr, levels = ton_migr_lvl, ordered = TRUE)
+an_SOC3380$ton_migr_n <- as.numeric(an_SOC3380$ton_migr, na.omit(NA))
+
+an_SOC3380$year_qc <- factor(an_SOC3380$year_qc, levels = c("1 an", 
+                                                            "2 ans", 
+                                                            "3 ans", 
+                                                            "4 ans", 
+                                                            "5 ans", 
+                                                            "6 ans", 
+                                                            "7 ans", 
+                                                            "8 ans", 
+                                                            "9 ans", 
+                                                            "10 ans", 
+                                                            "Plus de 10 ans"), ordered = TRUE)
+
+an_SOC3380$year_qc_n <- as.numeric(an_SOC3380$year_qc, na.omit(NA))
+
+v_score_ExpoDisc <- c("rs_time_n", 
+                      "ton_migr_n", 
+                      "rs_inf_n")
+
+v_media_accueil <- c("Youtube", 
+                     "Instagram", 
+                     "TikTok", 
+                     "Snapchat", 
+                     "Pinterest", 
+                     "Piscart", 
+                     "Twitch", 
+                     "Twitter", 
+                     "Reddit", 
+                     "Quora", 
+                     "Teams", 
+                     "Discord", 
+                     "Stack Exchange", 
+                     "Facebook", 
+                     "Messenger", 
+                     "Telegram", 
+                     "LinkedIn", 
+                     "Skype", 
+                     "Viber", 
+                     "imo", 
+                     "Signal")
+
+v_media_diasp <- c("Douyin", 
+                   "Kuaishou", 
+                   "Likee", 
+                   "Tieba", 
+                   "WeChat", 
+                   "QQ", 
+                   "Qzone", 
+                   "Line", 
+                   "WhatsApp")
+```
+
+```{r}
+#création des indices
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_sentimapp = (sum(c_across(all_of(v_sentimapp)), na.rm = TRUE) - length(v_sentimapp)) / (4*length(v_sentimapp))) %>%
+  mutate(score_sentimapp = if (score_sentimapp < 0) NA_real_ else score_sentimapp) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_rsContact = (sum(c_across(all_of(v_rsContact)), na.rm = TRUE) -length(v_rsContact)) / (4*length(v_rsContact))) %>%
+  mutate(score_rsContact = if (score_rsContact < 0)  NA_real_ else score_rsContact) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_NV = (sum(c_across(all_of(v_NV)), na.rm = TRUE) -length(v_NV)) / (2*length(v_NV))) %>%
+  mutate(score_NV = if (score_NV < 0) NA_real_ else score_NV) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_percepQC = (sum(c_across(all_of(v_percepQC)), na.rm = TRUE) -length(v_percepQC)) / (2*length(v_percepQC))) %>%
+  mutate(score_percepQC = if (score_percepQC < 0) NA_real_ else score_percepQC) %>%
+  ungroup()
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_ExpoDisc = (sum(c_across(all_of(v_score_ExpoDisc)), na.rm = TRUE) - length(v_score_ExpoDisc)) / (4*length(v_score_ExpoDisc))) %>%
+  mutate(score_ExpoDisc = if_else(score_ExpoDisc < 0 | score_ExpoDisc == 0, NA_real_, score_ExpoDisc)) %>%
+  ungroup()
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_media_accueil = (sum(c_across(all_of(v_media_accueil)), na.rm = TRUE)) / nbr_rs)
+
+an_SOC3380 <- 
+  an_SOC3380 %>%
+  rowwise() %>%
+  mutate(score_media_diasp = (sum(c_across(all_of(v_media_diasp)), na.rm = TRUE)) / nbr_rs)
+```
+
+```{r}
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_partage_medias = if_else(str_detect(rs_util, "Youtube|Instagram|TikTok|Douyin|Snapchat|Kuaishou|Pinterest|Piscart|Likee|Twitch", negate = FALSE), 1, 0),
+         rs_blogues = if_else(str_detect(rs_util, "Twitter|Weibo", negate = FALSE), 1, 0),
+         rs_commun_online = if_else(str_detect(rs_util, "Reddit|Quora|Tieba|Teams|Discord|Stack Exchange", negate = FALSE), 1, 0),
+         rs_SRS = if_else(str_detect(rs_util, "Facebook|Messenger|WhatsApp|WeChat|Telegram|QQ|Qzone|LinledIn|Skype|Viber|imo|Line|Signal", negate = FALSE), 1, 0))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_blogues_f = case_when(
+    rs_blogues == 0 ~ "Non",
+    rs_blogues == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_commun_online_f = case_when(
+    rs_commun_online == 0 ~ "Non",
+    rs_commun_online == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_SRS_f = case_when(
+    rs_SRS == 0 ~ "Non",
+    rs_SRS == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_partage_medias_f = case_when(
+    rs_partage_medias == 0 ~ "Non",
+    rs_partage_medias == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_home = if_else(str_detect(rs_util,"Youtube|Instagram|TikTok|Snapchat|Pinterest|Piscart|Twitch|Twitter|Reddit|Quora|Teams|Discord|Stack Exchange|Facebook|Messenger|Telegram|LinkedIn|Skype|Viber|imo|Signal", negate = FALSE), 1, 0))
+
+an_SOC3380 <- an_SOC3380 %>%
+  mutate(rs_diasp = if_else(str_detect(rs_util, "Signal|Douyin|Kuaishou|Likee|Tieba|WeChat|QQ|Qzone|Line|WhatsApp|Messenger|Skype", negate = FALSE), 1, 0))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_home_f = case_when(
+    rs_home == 0 ~ "Non",
+    rs_home == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(rs_diasp_f = case_when(
+    rs_diasp == 0 ~ "Non",
+    rs_diasp == 1 ~ "Oui"
+  ))
+
+an_SOC3380 <-
+  an_SOC3380 %>%
+  mutate(year_qc_f = case_when(
+    year_qc_n < 6 ~ "1 à 5 ans",
+    year_qc_n == 6| year_qc_n == 7|year_qc_n == 8|year_qc_n == 9 ~ "6 à 9 ans",
+    year_qc_n > 9 ~ "dix ans et plus"
+  ))
+```
+
+```{r}
+write.csv(an_SOC3380, file = "an_SOC3380")
+```
