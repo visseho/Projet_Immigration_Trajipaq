@@ -58,6 +58,27 @@ ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(COV12_2), !is.na(Q14I)), aes(x 
 #résultat invalide car COV_2 est une variable numérique discrète
 ```
 
+## Un autre test pour la régression logistique
+
+```{r}
+  
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  filter(COV14 < 98) %>%
+  mutate(COV14 = case_when(
+         COV14 == 1 ~ 0,
+         COV14 == 2 ~ 1,
+  ))
+
+model3 <- glm(formula = COV14 ~ Q14I, family = "binomial", data = Base_Trajipaq_Finale_Ok)
+summary(model1)
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(COV14), !is.na(Q14I)), aes(x = Q14I, y = COV14)) + 
+  geom_point() +
+  stat_smooth(method = "glm", color = "blue", se = FALSE,
+    method.args = list(family = binomial))
+```
+
 # Analyse de la variance (ANOVA) entre deux variables numériques (VD = ordinal, VI = ratio)
 
 ```{r}
@@ -83,4 +104,3 @@ Base_Trajipaq_Finale_Ok %>%
   aov(Q14I ~ COV35, data = .) %>%
   summary()
 ```
-
