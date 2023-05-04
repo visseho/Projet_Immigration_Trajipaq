@@ -59,7 +59,9 @@ ggplot(df_scripted %>% filter(!is.na(HLEV2G_2)), aes(x = CFATINC, y = HLEV2G_2))
 # Modèle d'analyse ANOVA
 
 df_scripted %>%
-  select(AGEGP, CFATINC, HLEV2G_2) %>%
+  select(AGEGP, 
+         CFATINC, 
+         HLEV2G_2) %>%
   drop_na() %>%
   aov(CFATINC ~ AGEGP + HLEV2G_2, data = .) %>%
   summary()
