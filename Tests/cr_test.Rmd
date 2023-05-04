@@ -1,0 +1,54 @@
+---
+title: "cr_test"
+author: "Théa Carlier"
+date: "2023-05-04"
+output: html_document
+---
+
+```{r}
+
+# Chargement des librairies
+
+library(readr)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+df_scripted <- read_csv("df_root.csv")
+```
+
+```{r}
+
+# Transformation de la variable indépendante "Niveau d'éducation"
+
+df_scripted <-
+  df_scripted %>%
+  filter(!is.na(CFATINC), !is.na(HLEV2G)) %>%
+  mutate(HLEV2G_2 = case_when(
+    HLEV2G == 1 ~ 0,
+    HLEV2G == 2 ~ 0,
+    HLEV2G == 3 ~ 0,
+    HLEV2G == 4 ~ 1,
+    HLEV2G == 6 ~ NA,
+    HLEV2G == 9 ~ NA
+  ))
+```
+
+```{r}
+
+# Transformation de la variable indépendante "Groupe d'âge"
+
+df_scripted <-
+  df_scripted %>%
+  mutate(AGEGP_2 = case_when(
+         AGEGP < 5 ~ NA,
+         AGEGP >= 5 & AGEGP < 9 ~ 1,
+         AGEGP >= 9 & AGEGP < 14 ~ 2,
+         AGEGP >= 14 ~ 3
+  ))
+```
+
+```{r}
+write.csv(df_scripted, file = "df_scripted")
+```

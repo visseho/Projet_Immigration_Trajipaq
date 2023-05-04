@@ -1,5 +1,5 @@
 ---
-title: "Tests"
+title: "df_scripted"
 author: "Théa Carlier"
 date: "2023-05-03"
 output:
@@ -21,33 +21,16 @@ library(ggthemes)
 
 # Chargement de la base de données
 
-an_test <- read_csv("an_test.csv")
+df_scripted <- read_csv("df_scripted")
 ```
 
 # Analyse par régression logistique de la relation entre le niveau d'éducation et le revenu net
 
 ```{r}
 
-# Transformation de la variable indépendante "Niveau d'éducation"
-
-an_test <-
-  an_test %>%
-  filter(!is.na(CFATINC), !is.na(HLEV2G)) %>%
-  mutate(HLEV2G_2 = case_when(
-    HLEV2G == 1 ~ 0,
-    HLEV2G == 2 ~ 0,
-    HLEV2G == 3 ~ 0,
-    HLEV2G == 4 ~ 1,
-    HLEV2G == 6 ~ NA,
-    HLEV2G == 9 ~ NA
-  ))
-```
-
-```{r}
-
 # Création du modèle de régression logistique
 
-lrm1 <- glm(formula = HLEV2G_2 ~ CFATINC, family = "binomial", data = an_test)
+lrm1 <- glm(formula = HLEV2G_2 ~ CFATINC, family = "binomial", data = df_scripted)
 
 # Affichage du modèle
 
@@ -58,7 +41,7 @@ summary(lrm1)
 
 # Visualisation du modèle
 
-ggplot(an_test %>% filter(!is.na(HLEV2G_2)), aes(x = CFATINC, y = HLEV2G_2)) +
+ggplot(df_scripted %>% filter(!is.na(HLEV2G_2)), aes(x = CFATINC, y = HLEV2G_2)) +
   geom_point() +
   stat_smooth(method = "glm", color = "red", se = FALSE,
               method.args = list(family = binomial)) +
@@ -73,23 +56,9 @@ ggplot(an_test %>% filter(!is.na(HLEV2G_2)), aes(x = CFATINC, y = HLEV2G_2)) +
 
 ```{r}
 
-# Transformation de la variable indépendante "Groupe d'âge"
-
-an_test <-
-  an_test %>%
-  mutate(AGEGP_2 = case_when(
-         AGEGP < 5 ~ NA,
-         AGEGP >= 5 & AGEGP < 9 ~ 1,
-         AGEGP >= 9 & AGEGP < 14 ~ 2,
-         AGEGP >= 14 ~ 3
-  ))
-```
-
-```{r}
-
 # Modèle d'analyse ANOVA
 
-an_test %>%
+df_scripted %>%
   select(AGEGP, CFATINC, HLEV2G_2) %>%
   drop_na() %>%
   aov(CFATINC ~ AGEGP + HLEV2G_2, data = .) %>%
@@ -100,7 +69,7 @@ an_test %>%
 
 # Visualisation du modèle d'analyse ANOVA
 
-ggplot(an_test %>% filter(!is.na(HLEV2G_2), !is.na(AGEGP_2)), aes(x = as.factor(AGEGP_2), y = CFATINC, fill = as.factor(HLEV2G_2))) +
+ggplot(df_scripted %>% filter(!is.na(HLEV2G_2), !is.na(AGEGP_2)), aes(x = as.factor(AGEGP_2), y = CFATINC, fill = as.factor(HLEV2G_2))) +
   geom_boxplot(na.rm = TRUE) +
   labs(
     title = "Salaire net selon le groupe d'âge, contrôlé par le niveau d'éducation", 
@@ -110,3 +79,4 @@ ggplot(an_test %>% filter(!is.na(HLEV2G_2), !is.na(AGEGP_2)), aes(x = as.factor(
   scale_fill_brewer(name = "Diplôme universitaire (0 = non ; 1 = oui)", palette = "Set1") +
   theme_few()
 ```
+
