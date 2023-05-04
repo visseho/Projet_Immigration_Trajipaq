@@ -1,0 +1,71 @@
+---
+title: "exercices"
+author: "Théa Carlier"
+date: "2023-05-04"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+# Exemple
+
+```{r}
+df <- tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10),
+)
+```
+
+```{r}
+output <- vector("double", ncol(df)) # 1. output (création d'un vecteur)
+for (i in seq_along(df)) {           # 2. sequence (dans lequel la boucle va opérer pour chaque élément)
+  output[[i]] <- median(df[[i]])     # 3. body 
+}
+output
+```
+
+# Exercice
+
+## 1 : Calculez la moyenne de chaque colonne dans la base de donnée *mtcars*
+
+```{r}
+mtcars <- read_csv("mtcars.csv")
+```
+
+```{r}
+mtcars_2 <-
+  mtcars %>%
+  select(mpg, disp, hp, drat, wt, qsec)
+
+output_2 <- vector("double", ncol(mtcars_2))
+for (i in seq_along(mtcars_2)) {
+  output_2[[i]] <- mean(mtcars_2[[i]])
+}
+output_2
+```
+
+## 2 : déterminez le type de chaque colonnes
+
+```{r}
+output_3 <- vector("double", ncol(mtcars))
+for (i in seq_along(mtcars)) {
+  output_3[[i]] <- class(mtcars[[i]])
+}
+output_3
+```
+
+## 3 : calculez le nombre de valeurs uniques dans chaque colonnes
+
+```{r}
+output_4 <- vector("double", ncol(mtcars))
+for (i in seq_along(mtcars)) {
+  output_4[[i]] <- n_distinct(mtcars[[i]])
+}
+output_4
+```
+
