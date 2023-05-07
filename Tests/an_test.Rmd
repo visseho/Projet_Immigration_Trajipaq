@@ -82,3 +82,4 @@ ggplot(df_scripted %>% filter(!is.na(HLEV2G_2), !is.na(AGEGP_2)), aes(x = as.fac
   theme_few()
 ```
 
+J'écris cette ligne depuis un système Linux.
