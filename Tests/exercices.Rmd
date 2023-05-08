@@ -71,17 +71,139 @@ output_4
 
 # Exemple (visualisation)
 
-## Graphique en nuage de points
+## open data
 
 ```{r}
 ggplot2::mpg
 ```
 
+## simple scaterplot
 
 ```{r}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy))
 ```
+
+## color
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+```
+
+## size
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+```
+
+## alpha
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+```
+
+## shape
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+# ATTENTION, cette esthétique est limitée à six modalités pour la variable de contrôle !
+```
+
+## multiple aesthetics
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue", size = 2, shape = 3)
+```
+
+## simple facet_wrap()
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2)
+```
+
+## simple facet_grid()
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+
+## double facet_grid()
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
+
+## geom_smooth()
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+
+## multivaried geom_smooth
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
+```
+
+## multivaried geom_smooth with color
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv, color = drv))
+```
+
+## multiple geom_smooth
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+  
+  ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
+  
+  ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv, color = drv), show.legend = FALSE)
+```
+
+## simple geom_smooth and geom point
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+```
+
+## geom_smooth et geom_point multivariés et colorés
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv, color = drv),se = FALSE) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv))
+```
+
+## specific geom_smooth
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class)) +
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE, color = "purple")
+```
+
 
 # Exercices (visualisation)
 
@@ -92,7 +214,7 @@ ggplot(data = mpg)
 ```
 Je vois un rectangle blanc.
 
-## 2 : Combien de lignes et de colonnes contien mtcars ?
+## 2 : combien de lignes et de colonnes contien mtcars ?
 
 234 lignes et 11 colonnes.
 
@@ -113,7 +235,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = hwy, y = cyl))
 ```
 
-## 5 : Réalisez un graphique a nuage de points avec les variables class et drv. Pourquoi cette visualisation n'est-elle pas pertinente ?
+## 5 : réalisez un graphique a nuage de points avec les variables class et drv. Pourquoi cette visualisation n'est-elle pas pertinente ?
 
 ```{r}
 ggplot(data = mpg) +
@@ -121,3 +243,296 @@ ggplot(data = mpg) +
 ```
 
 Parce que les deux variables à étudiées possèdent un niveau de mesure nominal.
+
+## 6 : corrigez le code suivant
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+Source de l'erreur : l'argument "color = "blue"" a été inséré en tant que variable de contrôle.
+Correction :
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+
+## 7 : dans mpg, quelles variables sont catégorielles et quelles variables sont continues ?
+
+```{r}
+ggplot2::mpg
+```
+
+"manufacturer" = character
+"model" = character
+"displ" = numeric
+"year" = integer
+"cyl" = integer
+"trans" = character
+"drv" = character
+"cty" = integer
+"hwy" = integer
+"fi" = character
+
+character = variable catégorielle alphabétique ou alphanumérique
+integer = variable numérique discrète
+numeric = variable numérique continue
+
+## 8 : assignez une taille, une forme et une couleur à un variable continue. Quelle différence observez-vous avec les variables factorielles ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = year))
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, shape = year))
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, size = year))
+```
+
+La couleur donne un gradiant, la forme donne un message d'erreur et la taille donne une échelle.
+
+## 9 : que se passerait-il si l'on appliquait plusieurs esthétiques à une variable de contrôle ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = year, size = year))
+```
+
+Elles se superposent.
+
+## 10 : que fait l'esthétique stroke ? Avec quelles formes fonctionne-t-elle ?
+
+```{r}
+?geom_point
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = year), stroke = 5, shape = 23)
+```
+
+Stroke ressemble à size, mais donne un rendu plus gras.
+
+## 11 : que se passe-t-il lorsque vous appliquez une esthétique à autre chose qu'une variable ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
+```
+
+Cela donne une couleur différente aux observations où displ < 5.
+
+## 12 : que se passe-t-il si vous facet une variable continue ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ displ, nrow = 4)
+```
+
+On obtient un graphique multivarié dans lequel chaque valeur de displ devient un graphique.
+
+## 13 : que signifient les cellules vides and le graphique suivant ?
+
+```{r}
+ggplot2::mpg
+```
+
+
+```{r}
+?mpg
+```
+
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
+
+Elles signifient qu'aucun véhicule à propulsion ne possède de moteur à 4 ou 5 cylindres.
+
+## 14 : expliquez les deux graphiques suivants et le rôle de "."
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+
+Le point permet de produire des grids avec une variable. Sa position dans le code détermine si facet_grid() doit opérer en ligne ou en colonne.
+
+## 15 : quel avantages apporte le facet par rapport à une esthétique de couleur ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2)
+```
+
+Facet permet d'isoler la relation dans des graphiques séparés en fonction d'une variable de contrôle catégorielle. Plus n est grand, plus le facet sera lisible par rapport à l'application d'une esthétique couleur sur la variable de contrôle.
+
+## 16 : lisez ?facet_wrap. Que fait ncol ? Quelles autres options sont possibles ?
+
+```{r}
+?facet_wrap
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2)
+```
+
+Ncol contrôle le nombre de colonnes affichées.
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2, scales = "free_x")
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2, shrink = TRUE)
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2, as.table = FALSE)
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2, drop = TRUE)
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2, dir = "v")
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, ncol = 2, strip.position = "bottom")
+```
+
+## 17 : avec grid, pourquoi assigner la variable avec le plus de modalités en colonnes ?
+
+Pour rendre le graphique plus lisible.
+
+## 18 : quelles fonctions utiliseriez-vous pour produire un graphique en ligne, en boîte, en zones ou encore un histogramme ?
+
+```{r}
+ggplot2::mpg
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_line(mapping = aes(x = displ, y = hwy), color = "red")
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = class, y = displ, fill = drv))
+```
+
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = class)) +
+  geom_area(mapping = NULL, position = "stack")
+```
+
+## 19 : à quoi ressemble ce graphique ?
+
+```{r}
+ggplot(
+  data = mpg,
+  mapping = aes(x = displ, y = hwy, color = drv)
+) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+Ma prédiction se révèle exacte.
+
+## 20 : que fait show.legend = FALSE ? Pourquoi l'utiliser ?
+
+Il retire la légende. On l'utilise pour rendre le graphique plus lisible (dans certains cas).
+
+## 21 : que fait geom_smooth ?
+
+Il créé une courbe similaire (dans l'idée) à une droite de régression linéaire, en mobilisant la moyenne des données brut grâce à des outils mathématiques avancés qui dépassent mes connaissances actuelles.
+
+## 22 : ces deux graphiques auront-ils l'air différent ? Pourquoi ?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+
+ggplot() +
+  geom_point(
+    data = mpg,
+    mapping = aes(x = displ, y = hwy)
+  ) +
+  geom_smooth(
+    data = mpg, mapping = aes(x = displ, y = hwy)
+  )
+```
+
+Ma prédiction était exacte. Le premier code est simplifié.
+
+## 23 : reproduisez les six graphiques.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, linetype = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE, show.legend = FALSE)
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, linetype = drv, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE, show.legend = FALSE)
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE, show.legend = FALSE, data = filter(mpg, drv == "4"))
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, linetype = drv, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE, show.legend = FALSE, color = "blue")
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv))
+```
