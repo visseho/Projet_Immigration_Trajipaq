@@ -204,6 +204,75 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE, color = "purple")
 ```
 
+## geom_bar
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = cut))
+```
+
+## specific geom_bar
+
+```{r}
+demo <- tribble(
+  ~a, ~b,
+  "bar_1", 20,
+  "bar_2", 30,
+  "bar_3", 40
+)
+
+ggplot(data = demo) +
+  geom_bar(
+    mapping = aes(x = a, y = b), stat = "identity"
+  )
+```
+
+## proportion geom_bar
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1))
+```
+
+## goated geom_bar
+
+```{r}
+ggplot(data = diamonds) +
+  stat_summary(mapping = aes(x = cut, y = depth),
+           fun.ymin = min,
+           fun.ymax = max,
+           fun.y = median
+           )
+```
+
+## multivaried barchart
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+## multivaried stacked barchart
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity,), position = "fill")
+```
+
+## multivaried dodged barchart
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity,), position = "dodge")
+```
+
+# jittering scaterplot
+
+```{r}
+ggplot(data = mpg) +
+  geom_jitter(mapping = aes(x = displ, y = hwy))
+```
+
 
 # Exercices (visualisation)
 
@@ -460,6 +529,13 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = class)) +
   geom_area(mapping = NULL, position = "stack")
 ```
 
+```{r}
+ggplot(data = mpg, mapping = aes(x = mpg$displ)) +
+  geom_histogram(fill = "blue") +
+  geom_vline(xintercept = mean(mpg$displ))
+```
+
+
 ## 19 : à quoi ressemble ce graphique ?
 
 ```{r}
@@ -536,3 +612,38 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, linetype = drv, color = drv
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = drv))
 ```
+
+## 24 : écrivez un code avec geom_bar permettant de visualiser le goated geom_bar.
+
+```{r}
+ggplot(data = diamonds) +
+  geom_col(mapping = aes(x = cut, y = depth, fill = cut))
+```
+
+
+## 25 : Quelle est la spécificité de geom_col ?
+
+```{r}
+?geom_col
+```
+
+Geom_col permet de faire des diagrammes en barres représentant deux variables.
+
+## 26 : Quel est le point commun entre les arguments entre stat et geom ?
+
+Je n'ai pas compris la question.
+
+## 27 : Quelles variables stat_smooth mobilise ?
+
+Différents types de moyennes.
+
+## 28 : Quel est le problème de ces deux graphiques ?
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1)) +
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1))
+```
+
+Il faut assigner un groupe à la fonction after_stat, sinon le graphique est illisible.
+
