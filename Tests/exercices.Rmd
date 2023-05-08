@@ -29,9 +29,9 @@ for (i in seq_along(df)) {           # 2. sequence (dans lequel la boucle va op�
 output
 ```
 
-# Exercice
+# Exercices (boucles)
 
-## 1 : Calculez la moyenne de chaque colonne dans la base de donnée *mtcars*
+## 1 : calculez la moyenne de chaque colonne dans la base de donnée *mtcars*
 
 ```{r}
 mtcars <- read_csv("mtcars.csv")
@@ -69,3 +69,55 @@ for (i in seq_along(mtcars)) {
 output_4
 ```
 
+# Exemple (visualisation)
+
+## Graphique en nuage de points
+
+```{r}
+ggplot2::mpg
+```
+
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+# Exercices (visualisation)
+
+## 1 : run ggplot(data = mpg) que voyez-vous ?
+
+```{r}
+ggplot(data = mpg)
+```
+Je vois un rectangle blanc.
+
+## 2 : Combien de lignes et de colonnes contien mtcars ?
+
+234 lignes et 11 colonnes.
+
+## 3 : à quoi correspond la variable drv ?
+
+```{r}
+?mpg
+```
+
+"the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd"
+
+Traduction : drv nous renseigne si le véhicule est de type traction, propulsion ou 4x4.
+
+## 4 : réalisez un graphique en nuage de points à partir des variables hwy et cwy
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = hwy, y = cyl))
+```
+
+## 5 : Réalisez un graphique a nuage de points avec les variables class et drv. Pourquoi cette visualisation n'est-elle pas pertinente ?
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = class, y = drv))
+```
+
+Parce que les deux variables à étudiées possèdent un niveau de mesure nominal.
