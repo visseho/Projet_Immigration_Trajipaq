@@ -273,6 +273,30 @@ ggplot(data = mpg) +
   geom_jitter(mapping = aes(x = displ, y = hwy))
 ```
 
+## coord_flip
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+## coord_polar
+
+```{r}
+bar <- ggplot(data = diamonds) +
+  geom_bar(
+    mapping = aes(x = cut, fill = cut),
+    show.legend = FALSE,
+    width = 1
+  ) +
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y = NULL)
+
+bar + coord_flip()
+bar + coord_polar()
+```
+
 
 # Exercices (visualisation)
 
@@ -354,11 +378,6 @@ numeric = variable numérique continue
 ```{r}
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = year))
-```
-
-```{r}
-ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, shape = year))
 ```
 
 ```{r}
@@ -621,7 +640,7 @@ ggplot(data = diamonds) +
 ```
 
 
-## 25 : Quelle est la spécificité de geom_col ?
+## 25 : quelle est la spécificité de geom_col ?
 
 ```{r}
 ?geom_col
@@ -629,15 +648,15 @@ ggplot(data = diamonds) +
 
 Geom_col permet de faire des diagrammes en barres représentant deux variables.
 
-## 26 : Quel est le point commun entre les arguments entre stat et geom ?
+## 26 : quel est le point commun entre les arguments entre stat et geom ?
 
 Je n'ai pas compris la question.
 
-## 27 : Quelles variables stat_smooth mobilise ?
+## 27 : quelles variables stat_smooth mobilise ?
 
 Différents types de moyennes.
 
-## 28 : Quel est le problème de ces deux graphiques ?
+## 28 : quel est le problème de ces deux graphiques ?
 
 ```{r}
 ggplot(data = diamonds) +
@@ -646,4 +665,69 @@ ggplot(data = diamonds) +
 ```
 
 Il faut assigner un groupe à la fonction after_stat, sinon le graphique est illisible.
+
+## 29 : comment améliorer ce graphique ?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_point()
+```
+
+Code revu :
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter()
+```
+
+## 30 : quels paramètres contrôlent le jittering ?
+
+Widht and height.
+
+## 31 : comparez geom_jitter et geom_count
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter()
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_count()
+```
+
+## 32 : quel est l'ajustement de la position par défaut pour geom_boxplot ? Démontrez-le avec mpg
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = displ)) +
+  geom_boxplot(fill = "pink") +
+  geom_jitter(width = 1)
+```
+
+## 33 : transformez un diagramme de barres en diagramme circulaire
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut, fill = cut)) +
+  geom_bar() +
+  coord_polar()
+```
+
+## 34 : que fait labs ?
+
+```{r}
+?labs
+```
+
+Modify axis, legend, and plot labels
+
+## 35 : que nous dit le graphique suivant sur la relation entre cty et hwy ?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter() +
+  geom_abline() +
+  coord_fixed()
+```
+
+```{r}
+?geom_abline
+```
 
