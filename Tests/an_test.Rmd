@@ -48,7 +48,7 @@ ggplot(df_scripted %>% filter(!is.na(HLEV2G_2)), aes(x = CFATINC, y = HLEV2G_2))
   labs(
     title = "Salaire net selon le niveau d'éducation", 
     x = "Salaire net", 
-    y = "Diplôme universitaire (0 = non ; 1 = oui)") +
+    y = "Diplome universitaire (0 = non ; 1 = oui)") +
   theme_few()
 ```
 
