@@ -1,0 +1,22 @@
+---
+title: "Article:réseaux sociaux et sentiments d'appartenance au Québec"
+author:
+- Vissého Adjiwanou ^[corresponding author - adjiwanou.vissého@uqam.ca]
+- Département de Sociologie, Université du Québec à Montréal (UQAM)
+- Vincent Bertrand-Huneault (Département de démographie, Université de Montréal)
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  word_document:
+    keep_md: yes
+  html_document:
+    toc: yes
+    toc_depth: 3
+  template: svm-latex-ms2.tex
+  pdf_document: default
+  citation_package: natbib
+bibliography:
+- covid_Nima.bib
+- Covid_Canada.bib
+- Covid_Family.bib
+---
+
