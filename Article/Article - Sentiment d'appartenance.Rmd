@@ -5,3 +5,318 @@ date: "2023-05-17"
 output: pdf_document
 ---
 
+```{r}
+library(summarytools)
+library(tidyverse)
+library(ggthemes)
+library(haven)
+```
+
+```{r}
+Base_Trajipaq_Finale_Ok <- read_dta("~/Desktop/Base_Trajipaq_Finale_Ok.dta")
+```
+
+# Question de recherche : de quelles façons les discriminations que subissent les personnes immigrantes influencent leur sentiment d'appartenance au Québec ?
+
+## Variable indépendante = Les discriminations que subissent les personnes immigrantes :
+
+- dans l'emploi
+- dans la recherche de logement
+- dans la santé
+- sur le lieu de formation
+
+Type de variable = factoriel
+Niveau de mesure = ordinal (échelle de Likert)
+
+Réponses possibles :
+
+01. Tout à fait d'accord
+02. Plutôt d'accord
+03. Plutôt pas d'accord
+04. Pas du tout d'accord
+98. Je ne sais pas
+99. Je ne préfère pas répondre
+
+## Variable dépendante = le sentiment d'appartenance au Québec :
+
+- se sentir chez soi au Québec
+- la nécessité d'oublier sa culture d'origine pour s'intégrer au Québec
+- être vu(e) comme un(e) Québécois(e)
+- se sentir Québécois(e)
+- se sentir Canadien(ne)
+- avoir un sentiment d'appartenance avec son pays d'origine
+
+Type de variable = factoriel
+Niveau de mesure = ordinal (échelle de Likert)
+
+Réponses possibles :
+
+01. Tout à fait d'accord
+02. Plutôt d'accord
+03. Plutôt pas d'accord
+04. Pas du tout d'accord
+98. Je ne sais pas
+99. Je ne préfère pas répondre
+
+# Présentation de la variable indépendante
+
+## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39A = case_when(
+    Q39A == 1 ~ 4,
+    Q39A == 2 ~ 3,
+    Q39A == 3 ~ 2,
+    Q39A == 4 ~ 1,
+    Q39A == 98 ~ NA,
+    Q39A == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39A)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 87.01% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent chez elles au Québec. On remarque également que 1.79% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39A)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+
+## Q39B. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : il faut faire oublier ses origines pour se faire accepter au Québec.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39B = case_when(
+    Q39B == 1 ~ 4,
+    Q39B == 2 ~ 3,
+    Q39B == 3 ~ 2,
+    Q39B == 4 ~ 1,
+    Q39B == 98 ~ NA,
+    Q39B == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39B)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite. Autrement dit, 67.88% des personnes interrogées ne sont pas du tout d'accord ou plutôt pas d'accord pour dire qu'il faut faire oublier ses origines pour se faire accepter au Québec. On remarque également que 3.96% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39B)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+
+## Q39C. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : on me voit comme une Québécoise.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39C = case_when(
+    Q39C == 1 ~ 4,
+    Q39C == 2 ~ 3,
+    Q39C == 3 ~ 2,
+    Q39C == 4 ~ 1,
+    Q39C == 98 ~ NA,
+    Q39C == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39C)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est bimodale (1 et 4). Autrement dit, cette question divise nos répondants. On remarque également que 5.63% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39C)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe les deux modes de la distribution décrits précédemment.
+
+## Q39D. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens Québécois(e).
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39D = case_when(
+    Q39D == 1 ~ 4,
+    Q39D == 2 ~ 3,
+    Q39D == 3 ~ 2,
+    Q39D == 4 ~ 1,
+    Q39D == 98 ~ NA,
+    Q39D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39D)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 60.72% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Québécois(e)s. On remarque également que 4.03% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39D)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+
+## Q39E. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens Canadien(ne).
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39E = case_when(
+    Q39E == 1 ~ 4,
+    Q39E == 2 ~ 3,
+    Q39E == 3 ~ 2,
+    Q39E == 4 ~ 1,
+    Q39E == 98 ~ NA,
+    Q39E == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39E)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 79.98% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Canadien(ne). On remarque également que 2.69% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39E)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+
+## Q39F. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : j'ai un sentiment d'appartenance à mon pays d'origine.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39F = case_when(
+    Q39F == 1 ~ 4,
+    Q39F == 2 ~ 3,
+    Q39F == 3 ~ 2,
+    Q39F == 4 ~ 1,
+    Q39F == 98 ~ NA,
+    Q39F == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39F)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 81.42% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles possèdent un sentiment d'appartenance envers leur pays d'origine. On remarque également que 2.69% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_few()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+
+## I1 : L'indice du sentiment d'appartenance au Québec
+
+A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
+
+```{r}
+
+v_I1 <- c("Q39A",
+          "Q39B",
+          "Q39C",
+          "Q39D",
+          "Q39E",
+          "Q39F"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(I1 = (sum(c_across(all_of(v_I1)), na.rm = TRUE) - length(v_I1)) / (3*length(v_I1))) %>%
+  mutate(I1 = if (I1 < 0) NA_real_ else I1) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$I1)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I1)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la gauche.
