@@ -58,6 +58,148 @@ Réponses possibles :
 98. Je ne sais pas
 99. Je ne préfère pas répondre
 
+## Variables de contrôle = caractéristiques sociodémographiques :
+
+- sexe
+- statut matrimonial
+- pays d'origine
+- année d'obtention de la résidence permanente
+- année d'obtention de la citoyenneté canadienne
+- année d'arrivée au Québec
+- année depuis la première installation au Québec
+- statut d'immigration avant l'obtention de la résidence permanente
+- niveau d'éducation
+- religion
+- importance accordée à la religion
+- compétence : lire le français
+- compétence : parler français
+- compétence : rédiger en français
+- compétence : comprendre le français
+- niveau de connaissance en français lors de l'arrivée au Québec
+- compétence : lire l'anglais
+- compétence : parler anglais
+- compétence : rédiger en anglais
+- compétence : comprendre l'anglais
+- niveau de connaissance en anglais lors de l'arrivée au Québec
+- suivi de cours dédiés à la francisation après l'arrivée au Québec
+- état de santé
+- problèmes de santé avant l'installation au Québec
+- problèmes de santé au cours des 12 derniers mois
+- problèmes de santé il y a moins de 5 ans
+- problèmes de santé il y a plus de 10 ans
+- lieu de naissance de la mère
+- niveau d'éducation de la mère
+- lieu de naissance du père
+- niveau d'éducation du père
+
+# Présentation des variables de contrôle
+
+## Q10. Êtes-vous un homme, une femme ou autre ?
+
+01. Homme
+02. Femme
+97. Autre
+
+Type de variable = catégorielle
+Niveau de mesure = nominal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q10_F = case_when(
+    Q10 == 1 ~ "Homme",
+    Q10 == 2 ~ "Femme",
+    Q10 == 97 ~ "Autre"
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q10_F)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q10_F)) +
+  geom_bar(fill = "pink") +
+  theme_bw()
+
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que le sexe modal est "Femme".
+
+## STATUT. Êtes-vous actuellement... ?
+
+01. Célibataire/jamais marié(e) ou conjoint(e) de fait
+02. Marié(e)
+03. Conjoint(e) de fait/en union libre
+04. Séparé(e)
+05. Divorcé(e)
+06. Veuf(ve)
+
+Type de variable = catégorielle
+Niveau de mesure = nominal
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$STATUT)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = STATUT)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que le statut modal est "Marié(e)".
+
+## Q11. Dans quel pays êtes-vous né ?
+
+Pays. (liste déroulante)
+998. Je ne sais pas
+999. Je préfère ne pas répondre
+
+Type de variable = catégorielle
+Niveau de mesure = nominal
+
+## Q12. En quelle année avez-vous obtenu la résidence permanente ?
+
+Année
+9998. Je ne sais pas
+9999. Je préfère ne pas répondre
+
+Type de variable = catégorielle
+Niveau de mesure = nominale
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q11)
+
+```
+
+```{r}
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = as.factor(Q11))) +
+  geom_bar(fill = "pink") +
+  theme_bw()
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessous, on peut observer que les pays d'origine modaux sont la France (26.685%) et l'Algérie (6.649%).
+
+## Q13. En quelle année est-ce que vous êtes devenu citoyen(ne) ?
+
+Année
+9998. Je ne sais pas
+9999. Je préfère ne pas répondre
+
+Type de variable = numérique continue
+Niveau de mesure = ratio
+
 # Présentation de la variable indépendante
 
 ## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
@@ -91,7 +233,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39A)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
@@ -128,7 +270,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39B)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
@@ -165,7 +307,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39C)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
@@ -202,7 +344,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39D)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
@@ -239,7 +381,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39E)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
@@ -276,7 +418,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
   geom_bar(fill = "pink",
            na.rm = TRUE
            ) +
-  theme_few()
+  theme_bw()
 
 ```
 
