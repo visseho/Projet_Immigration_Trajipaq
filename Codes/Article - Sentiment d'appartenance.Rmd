@@ -61,6 +61,7 @@ Réponses possibles :
 ## Variables de contrôle = caractéristiques sociodémographiques :
 
 - sexe
+- groupe d'âge
 - statut matrimonial
 - pays d'origine
 - statut d'immigration au Québec
@@ -113,6 +114,39 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q10_F)) +
 
 La réponse modale est "femme" (56.69%).
 
+## Q8B A quel groupe d'âge appartenez-vous ?
+
+01. 0 – 19 ans
+02. 20 – 24 ans
+03. 25 – 29 ans
+04. 30 – 34 ans
+05. 35 – 39 ans
+06. 40 – 44 ans
+07. 45 – 49 ans
+08. 50 – 60 ans
+09. 61 ans et plus
+99. Je préfère ne pas répondre
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$QAGE)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = QAGE)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+La distribution est symétrique.
+Le groupe d'âge modal est "35-39 ans" (24.63%).
+
 ## STATUT. Êtes-vous actuellement... ?
 
 01. Célibataire/jamais marié(e) ou conjoint(e) de fait
@@ -164,33 +198,20 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = as.factor(Q11))) +
 
 Les réponses modales sont "France" (26.685%) et "Algérie" (6.649%).
 
-## Q14N. Statut migratoire
+## Q4. Êtes-vous né au Canada ?
 
 Type de variable = catégoriel
-Niveau de mesure = Nominal
+Niveau de mesure = nominal
 
 ```{r}
 
-Base_Trajipaq_Finale_Ok <-
-  Base_Trajipaq_Finale_Ok %>%
-  mutate(Q14N = case_when(
-    Q14N < 2017 ~ 1,
-    Q14N == 9996 ~ 2,
-    Q14N == 9998 ~ NA,
-    Q14N == 9999 ~ NA
-  ))
+freq(Base_Trajipaq_Finale_Ok$Q4)
 
 ```
 
 ```{r}
 
-freq(Base_Trajipaq_Finale_Ok$Q14N)
-
-```
-
-```{r}
-
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q14N)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q4)) +
   geom_bar(fill = "pink", na.rm = TRUE) +
   theme_bw()
 
@@ -354,7 +375,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q17)) +
 
 ```
 
-Les réponses modales sont "sans religion" (36.36) et "catholique" (32.21%). 
+Les réponses modales sont "sans religion" (36.36%) et "catholique" (32.21%). 
 On remarque également un nombre significatif de réponses "musulman" (13.83%).
 
 ## Q20. Quand vous étiez enfant, quelles étaient la langue ou les langues que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours? (Plusieurs réponses possibles).
@@ -807,6 +828,26 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q28)) +
 
 La valeur modale est "diplôme universitaire" (34.70%).
 
+## Résumé
+
+L'échantillon possède les caractéristiques socio-démographiques suivantes :
+
+- faible prépondérance de femmes (56.69%)
+- faible prépondérance de personnes âgées de 35 à 39 ans (24.63%)
+- forte prépondérance de personnes mariées (47.53%)
+- prépondérance de français (26.685) et d'algériens (6.649%)
+- forte prépondérance de personnes nées au Canada (71.21%)
+- forte prépondérance d'anciens travailleurs temporaires parmi les immigrés de première génération (57.79%)
+- forte prépondérance de personnes possédant un diplôme universitaire (67.31%)
+- prépondérance de personnes athées (36.36%), catholiques (32.21%) et musulmanes (13.83%)
+- prépondérance de personnes ayant pour langue maternelle le français (63.84%)
+- forte maîtrise moyenne du français (0.87)
+- forte maîtrise moyenne de l'anglais (0.73)
+- très forte prépondérance de personnes actuellement en bonne ou moyenne santé (98.47%)
+- bon état de santé moyen durant les 12 derniers mois (0.78)
+- prépondérance d'un diplôme universitaire chez la mère (28.62%)
+- prépondérance d'un diplôme universitaire chez la mère (34.70%)
+
 # Présentation de la variable indépendante
 
 ## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
@@ -1243,5 +1284,251 @@ L'indice moyen de discrimination subie est 0.28.
 ```{r}
 
 # Lorsque l'on regarde la distribution de chaque question composant l'indice, le mode correspond à l'absence de discrimination (1). Or, l'indice présente une moyenne non nulle (0.28 > 0), suggérant que peu de répondants ne subissent aucune discrimination.
+
+```
+
+# Analyse
+
+## Modèle de régression
+
+```{r}
+
+reg_1 <- lm(Base_Trajipaq_Finale_Ok$I2 ~ Base_Trajipaq_Finale_Ok$I1 +
+              Base_Trajipaq_Finale_Ok$Q10 +
+              Base_Trajipaq_Finale_Ok$Q8B +
+              Base_Trajipaq_Finale_Ok$Q4 +
+              Base_Trajipaq_Finale_Ok$Q16 +
+              Base_Trajipaq_Finale_Ok$Q17 +
+              Base_Trajipaq_Finale_Ok$Q20 +
+              Base_Trajipaq_Finale_Ok$Q23
+            )
+summary(reg_1)
+
+```
+
+## Coefficient de corrélation
+
+```{r}
+
+cor.test(Base_Trajipaq_Finale_Ok$I2, Base_Trajipaq_Finale_Ok$I1)
+
+```
+
+## Visualisation
+
+```{r}
+
+vis <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2)), aes(x = I2, y = I1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(color = "purple",se = FALSE) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis)
+
+```
+
+## Visualisation contrôlée : sexe
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q10)), aes(x = I2, y = I1, color = as.factor(Q10))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE) +
+  scale_color_brewer(name = "Sexe", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+## Visualisation contrôlée : âge
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q8A_F = case_when(
+    Q8A <= 1963 ~ ">=60",
+    Q8A >= 1963 & Q8A < 1968 ~ "[59;55]",
+    Q8A >= 1968 & Q8A < 1973 ~ "[54;50]",
+    Q8A >= 1973 & Q8A < 1978 ~ "[49;45]",
+    Q8A >= 1978 & Q8A < 1983 ~ "[44;35]",
+    Q8A >= 1983 & Q8A < 1988 ~ "[34;30]",
+    Q8A >= 1988 & Q8A < 1993 ~ "[29;25]",
+    Q8A >= 1993 & Q8A < 1998 ~ "[24;20]",
+    Q8A >= 1998 & Q8A < 2023 ~ "<19"
+  ))
+
+```
+
+```{r}
+
+vis_age <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q8A_F)), aes(x = I2, y = I1, color = Q8A_F)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 0.9) +
+  scale_color_brewer(name = "Age", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec",
+       ) +
+  theme_bw()
+print(vis_age)
+
+```
+
+## Visualisation contrôlée : statut matrimonial
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(STATUT_F = case_when(
+    STATUT == 1 ~ "Celibataire",
+    STATUT == 2 ~ "Marie(e)",
+    STATUT == 3 ~ "Conjoint(e) de fait",
+    STATUT == 4 ~ "Separe(e)",
+    STATUT == 5 ~ "Divorce(e)",
+    STATUT == 6 ~ NA
+  ))
+
+```
+
+
+
+```{r}
+
+vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(STATUT_F)), aes(x = I2, y = I1, color = STATUT_F)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 0.9) +
+  scale_color_brewer(name = "Statut matrimonial", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_born)
+
+```
+
+
+## Visualisation contrôlée : statut migratoire
+
+
+```{r}
+
+vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q4)), aes(x = I2, y = I1, color = as.factor(Q4))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 0.9) +
+  scale_color_brewer(name = "Ne au Canada", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_born)
+
+```
+
+## Visualisation contrôlée : niveau d'éducation
+
+
+```{r}
+
+vis_educ <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q16)), aes(x = I2, y = I1, color = as.factor(Q16))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 1) +
+  scale_color_brewer(name = "Niveau d'education", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_educ)
+
+```
+
+## Visualisation contrôlée : religion
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q17_F = case_when(
+    Q17 == 0 ~ "Sans religion",
+    Q17 == 1 ~ "Catholique",
+    Q17 == 8 ~ "Musulman",
+    Q17 != 0 & Q17 != 1 & Q17 != 8 ~ "Autre"
+  ))
+
+```
+
+
+```{r}
+
+vis_relig <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q17_F)), aes(x = I2, y = I1, color = Q17_F)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 0.9) +
+  scale_color_brewer(name = "Religion", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_relig)
+
+```
+
+## Visualisation contrôlée : langue maternelle
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q20_F = case_when(
+    Q20M1 == 1 ~ "Francais",
+    Q20M1 == 2 ~ "Anglais",
+    Q20M1 == 3 ~ "Autre"
+  ))
+
+```
+
+
+```{r}
+
+vis_lang <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q20_F)), aes(x = I2, y = I1, color = Q20_F)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 0.8) +
+  scale_color_brewer(name = "Langue maternelle", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_lang)
+
+```
+
+## Visualisation contrôlée : état de santé
+
+
+```{r}
+
+vis_health <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(I1), !is.na(I2), !is.na(Q23)), aes(x = I2, y = I1, color = as.factor(Q23))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(se = FALSE, span = 1.1) +
+  scale_color_brewer(name = "Etat de sante", palette = 3) +
+  labs(title = "Discrimination et sentiment d'appartenance", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_health)
 
 ```
