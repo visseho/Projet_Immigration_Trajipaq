@@ -333,6 +333,218 @@ Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe qu
 98. Je ne sais pas
 99. Je préfère ne pas répondre
 
+Type de variable = catégorielle
+Niveau de mesure = nominal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q17 = case_when(
+    Q17 == 0 ~ 0,
+    Q17 == 1 ~ 1,
+    Q17 == 2 ~ 2,
+    Q17 == 3 ~ 3,
+    Q17 == 4 ~ 4,
+    Q17 == 5 ~ 5,
+    Q17 == 6 ~ 6,
+    Q17 == 7 ~ 7,
+    Q17 == 8 ~ 8,
+    Q17 == 9 ~ 9,
+    Q17 == 10 ~ 10,
+    Q17 == 11 ~ 11,
+    Q17 == 12 ~ 12,
+    Q17 == 97 ~ 13,
+    Q17 == 98 ~ NA,
+    Q17 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q17)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q17)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Le tableau de fréquence et le diagramme de barres ci-dessus nous montrent que les réponses modales sont "sans religion" et "catholique". On remarque également un nombre remarquable de réponses "orthodoxe" et "musulman".
+
+## Q18. Quelle importance accordez-vous aujourd’hui à la religion dans votre vie ?
+
+01. Pas du tout d’importance
+02. Un peu d’importance
+03. Assez d’importance
+04. Beaucoup d’importance
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q18 = case_when(
+    Q18 == 1 ~ 1,
+    Q18 == 2 ~ 2,
+    Q18 == 3 ~ 3,
+    Q18 == 4 ~ 4,
+    Q18 == 98 ~ NA,
+    Q18 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q18)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q18)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Sur le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la distribution est asymétrique sur la droite. Autrement dit, 51.7% des répondants disent que la religion occupe une place dans leur vie. Néanmoins, le nombre élevé de réponse "je ne sais pas" (39.8%) réduit la validité de cette question.
+
+## Q20. Quand vous étiez enfant, quelles étaient la langue ou les langues que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours? (Plusieurs réponses possibles).
+
+01. Français
+02. Anglais
+97. Autre : préciser, possibilité d’en déclarer deux
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = catégoriel
+Niveau de mesure = nominal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q20M1 = case_when(
+    Q20M1 == 1 ~ 1,
+    Q20M1 == 2 ~ 2,
+    Q20M1 == 97 ~ 3,
+    Q20M1 == 98 ~ NA,
+    Q20M1 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+freq(Base_Trajipaq_Finale_Ok$Q20M1)
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q20M1)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la réponse modale est "français". Autrement dit, le français constitue la langue maternelle de 63.84% des répondants.
+
+## I3. Score de compétence linguistique (français)
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q21A = case_when(
+    Q21A == 1 ~ 1,
+    Q21A == 2 ~ 2,
+    Q21A == 3 ~ 3,
+    Q21A == 4 ~ 4,
+    Q21A == 98 ~ NA,
+    Q21A == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q21B = case_when(
+    Q21B == 1 ~ 1,
+    Q21B == 2 ~ 2,
+    Q21B == 3 ~ 3,
+    Q21B == 4 ~ 4,
+    Q21B == 98 ~ NA,
+    Q21B == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q21C = case_when(
+    Q21C == 1 ~ 1,
+    Q21C == 2 ~ 2,
+    Q21C == 3 ~ 3,
+    Q21C == 4 ~ 4,
+    Q21C == 98 ~ NA,
+    Q21C == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q21D = case_when(
+    Q21D == 1 ~ 1,
+    Q21D == 2 ~ 2,
+    Q21D == 3 ~ 3,
+    Q21D == 4 ~ 4,
+    Q21D == 98 ~ NA,
+    Q21D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+v_I3 <- c("Q21A",
+          "Q21B",
+          "Q21C",
+          "Q21D"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(I3 = (sum(c_across(all_of(v_I3)), na.rm = TRUE) - length(v_I3)) / (3*length(v_I3))) %>%
+  mutate(I3 = if (I3 < 0) NA_real_ else I3) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$I3)
+
+```
+
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I3)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+
 # Présentation de la variable indépendante
 
 ## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
