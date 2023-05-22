@@ -1,0 +1,103 @@
+---
+title: "Sentiment d'appartenance des immigrants"
+author:
+- Vissého Adjiwanou ^[corresponding author - adjiwanou.vissého@uqam.ca]
+- Département de Sociologie, Université du Québec à Montréal (UQAM)
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  word_document:
+    keep_md: yes
+  html_document:
+    toc: yes
+    toc_depth: 3
+  template: svm-latex-ms2.tex
+  pdf_document: default
+  citation_package: natbib
+bibliography:
+- covid_Nima.bib
+- Covid_Canada.bib
+- Covid_Family.bib
+---
+<!--
+# Journal: family issues - SAGE
+https://journals-sagepub-com.proxy.bibliotheques.uqam.ca/author-instructions/JFI
+
+https://fishandwhistle.net/post/2020/getting-started-zotero-better-bibtex-rmarkdown/
+https://www.zotero.org/styles?fields=sociology
+-->
+
+\newpage
+
+# Résumé
+
+Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leur pays d'origine et celles de leur nouveau pays de résidence. Cet article essaie de comprendre comment ces sentiments sont associés à leur pays d'origine et aux éventuelles situations de discriminations vécues qu'ils vivent dans leur pays d'accueil
+
+## Variables à utiliser
+
+**Variables dépendantes**
+
+- Crée la variable Sentiment d'appartenance qui prend les valeurs suivantes (selon les terminologies utilisées par Berry et Hou, 2017)
+
+  - Exclusivement au pays de naissance (separated, 5%)
+  - Exclusivement au pays d'accueil (assimilated, 15%)
+  - Aux deux  (integrated, 75%)
+  - Ni l'un ni l'autre (marginalised, 6%)
+
+**Quelle est la distribution de cette nouvelle variable?**
+
+Cette variable est crée par combinaison des deux variables suivantes:
+
+  - Sentiment d'appartenance au Canada
+  - Sentiment d'appartenance à leur pays d'origine
+
+**Variables indépendantes**
+
+- Origine de l'immigrant
+  - Régions d'origine
+  - Proximité du pays d'accueil par rapport au pays d'origine 
+  - Niveau de stabilité dans le pays d'accueil ou d'origine au moment de l'enquête
+  
+- Discrimination perçue  
+
+
+# références
+
+<!--La recherche montre que l’identification au pays d’origine et l’identification au pays d’accueil ne sont pas nécessairement et mutuellement exclusives (Berry, 1997; Zimmermann et al., 2007) et que les immigrants et leurs descendants se débattent sur la question de la combinaison de l’identification ethnique et nationale (Leszczensky, 2013; Phinney et al., 2006; Portes et Rumbaut, 2001; Verkuyten et Yildiz, 2007). Les immigrants qui arrivent dans un nouveau pays prennent une décision non seulement sur l’adaptation à la culture et à la société d’accueil, mais aussi sur le niveau d’attachement à la culture et à la société d’origine qu’ils veulent conserver. De ce fait, le modèle bipolaire unidimensionnel (Eisenstadt, 1954), suggère que les immigrants arrivent dans le pays d’accueil avec une seule identité, celle associée à leur pays d’origine, mais cette identité s’affaiblit et qu’au fil du temps, les immigrants acquièrent progressivement l’identité associée au pays d’accueil (Ngo et Li, 2016; Tartakovsky, 2013). On s’attend donc à ce que les immigrants libèrent progressivement les attachements antérieurs envers leur pays d’origine, et développent un sentiment d’appartenance au pays d’accueil (Amit et Bar-Lev, 2015). Cependant, des études indiquent que les immigrants n’abandonnent pas simplement leurs affinités culturelles avec leur pays d’origine mais les utilisent comme outils d’interprétation dans la construction de leur identité individuelle et collective dans la nouvelle société (Amit et Bar-Lev, 2015). À tout moment après leur arrivée dans le pays d’accueil, les immigrants peuvent également avoir une combinaison d’engagements envers la société d’accueil et envers la société d’origine ou adopter une identité biculturelle (Berry, 1997, 1994; Phinney et al., 2006; Verkuyten et Martinovic, 2012). Dès lors, les immigrants parviennent rarement à une identité nationale ou biculturelle et adoptent plus fréquemment une stratégie de séparation, c’est-à-dire, une grande valeur accordée au désir de conserver leur propre patrimoine culturel et, simultanément, peu d’intérêt à adopter la culture de la société d’accueil (Giuliani et al., 2018; Verkuyten et Martinovic, 2012).-->
+
+
+- Leszczensky, L. (2013). Do national identification and interethnic friendships affect one another? A longitudinal test with adolescents of Turkish origin in Germany. Social Science Research, 42(3), 775‑788. https://doi.org/10.1016/j.ssresearch.2012.12.019
+
+- Amit, K. et Bar-Lev, S. (2015). Immigrants’ Sense of Belonging to the Host Country: The Role of Life Satisfaction, Language Proficiency, and Religious Motives. Social Indicators Research, 124(3), 947‑961. https://doi.org/10.1007/s11205-014-0823-3
+
+- Phinney, J. S., Berry, J. W., Vedder, P. et Liebkind, K. (2006). The Acculturation Experience: Attitudes, Identities and Behaviors of Immigrant Youth. Dans Immigrant youth in cultural transition: Acculturation, identity, and adaptation across national contexts (p. 71‑116). Lawrence Erlbaum Associates Publishers. https://doi.org/10.4324/9780415963619-4
+
+- Verkuyten, M. et Yildiz, A. A. (2007). National (Dis)identification and Ethnic and Religious Identity: A Study Among Turkish-Dutch Muslims. Personality and Social Psychology Bulletin, 33(10), 1448‑1462. https://doi.org/10.1177/0146167207304276
+
+- Ngo, H. et Li, H. (2016). Cultural Identity and Adaptation of Mainland Chinese Immigrants in Hong Kong. American Behavioral Scientist, 60(5), 730‑749. https://doi.org/10.1177/0002764216632837
+
+- Giuliani, C., Tagliabue, S. et Regalia, C. (2018). Psychological Well-Being, Multiple Identities, and Discrimination Among First and Second Generation Immigrant Muslims. Europe’s Journal of Psychology, 14(1), 66‑87. https://doi.org/10.5964/ejop.v14i1.1434
+
+- Phinney, J. S., Horenczyk, G., Liebkind, K. et Vedder, P. (2001). Ethnic Identity, Immigration, and Well-Being: An Interactional Perspective. Journal of Social Issues, 57(3), 493‑510. https://doi.org/10.1111/0022-4537.00225
+
+- Phinney, J. S. et Ong, A. D. (2007). Conceptualization and measurement of ethnic identity: Current status and future directions. Journal of Counseling Psychology, 54, 271‑281. https://doi.org/10.1037/0022-0167.54.3.271
+
+- Verkuyten, M. (2016). The Integration Paradox: Empiric Evidence From the Netherlands. American Behavioral Scientist, 60(5), 583‑596. https://doi.org/10.1177/0002764216632838
+
+- Verkuyten, M. et Martinovic, B. (2012). Immigrants’ National Identification: Meanings, Determinants, and Consequences. Social Issues and Policy Review, 6(1), 82‑112. https://doi.org/10.1111/j.1751-2409.2011.01036.x
+
+- Tartakovsky, E. (2013). Cultural identities of immigrants: Their formation in the pre-migration period and their transformation during adjustment to the host country. Immigration: Policies, Challenges and Impact, 231‑254.
+
+- Zimmermann, L., Zimmermann, K. F. et Constant, A. (2007). Ethnic Self-Identification of First-Generation Immigrants. International Migration Review, 41(3), 769‑781. https://doi.org/10.1111/j.1747-7379.2007.00093.x
+
+- Berry, J. W. (2006). Mutual attitudes among immigrants and ethnocultural groups in Canada. International Journal of Intercultural Relations, 30(6), 719‑734. https://doi.org/10.1016/j.ijintrel.2006.06.004
+
+- Berry, J. W. (1997). Immigration, Acculturation, and Adaptation. Applied Psychology, 46(1), 5‑34. https://doi.org/10.1111/j.1464-0597.1997.tb01087.x
+
+- Berry, J. W. (1994). Acculturation and Psychological Adaptation: An Overview. Dans Journeys into Cross-Cultural Psychology. (p. 129‑141). Swets & Zeitlinger Publishers.
+
+- Berry, J. W. et Hou, F. (2017). Acculturation, discrimination and wellbeing among second generation of immigrants in Canada. International Journal of Intercultural Relations, 61, 29‑39. https://doi.org/10.1016/j.ijintrel.2017.08.003
+
+- Berry, J. W. et Hou, F. (2021). Immigrant acculturation and wellbeing across generations and settlement contexts in Canada. International Review of Psychiatry, 33(1), 140‑153. https://doi.org/10.1080/09540261.2020.1750801
+
+- Berry, J. W. et Sabatier, C. (2010). Acculturation, discrimination, and adaptation among second generation immigrant youth in Montreal and Paris. International Journal of Intercultural Relations, 34(3), 191‑207. https://doi.org/10.1016/j.ijintrel.2009.11.007
+
