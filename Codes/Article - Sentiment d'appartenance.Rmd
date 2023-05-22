@@ -461,4 +461,183 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I1)) +
 
 ```
 
-Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la gauche.
+Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la gauche. Autrement dit, les répondants estiment en moyenne entretenir un sentiment d'appartenance relativement développé (0.59).
+
+# Présentation de la variable dépendante
+
+## Q40A. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans l'emploi ?
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40A = case_when(
+    Q40A == 1 ~ 3,
+    Q40A == 2 ~ 2,
+    Q40A == 3 ~ 1,
+    Q40A == 96 ~ NA,
+    Q40A == 98 ~ NA,
+    Q40A == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q40A)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 65.44% des personnes interrogées disent ne jamais avoir subit de discrimination dans l'emploi au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 9.47% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40A)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+
+## Q40B. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans la recherche de logement ?
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40B = case_when(
+    Q40B == 1 ~ 3,
+    Q40B == 2 ~ 2,
+    Q40B == 3 ~ 1,
+    Q40B == 96 ~ NA,
+    Q40B == 98 ~ NA,
+    Q40B == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q40B)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 79.64% des personnes interrogées disent ne jamais avoir subit de discrimination dans la recherche de logement au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 17.34% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40B)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+
+## Q40C. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans la santé ?
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40C = case_when(
+    Q40C == 1 ~ 3,
+    Q40C == 2 ~ 2,
+    Q40C == 3 ~ 1,
+    Q40C == 96 ~ NA,
+    Q40C == 98 ~ NA,
+    Q40C == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q40C)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 82.26% des personnes interrogées disent ne jamais avoir subit de discrimination dans la santé au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 10.17% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40C)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+
+## Q40D. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : sur le lieu de formation ?
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40D = case_when(
+    Q40D == 1 ~ 3,
+    Q40D == 2 ~ 2,
+    Q40D == 3 ~ 1,
+    Q40D == 96 ~ NA,
+    Q40D == 98 ~ NA,
+    Q40D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q40D)
+
+```
+
+Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 81.40% des personnes interrogées disent ne jamais avoir subit de discrimination sur le lieu de formation au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 15.74% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40D)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+
+## I2 : L'indice de discrimination lors des 12 derniers mois précédent la crise du covid 19
+
+A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
+
+```{r}
+
+v_I2 <- c("Q40A",
+          "Q40B",
+          "Q40C",
+          "Q39D"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(I2 = (sum(c_across(all_of(v_I2)), na.rm = TRUE) - length(v_I2)) / (2.25*length(v_I2))) %>%
+  mutate(I2 = if (I2 < 0) NA_real_ else I2) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$I2)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la droite. Autrement dit, les répondants estiment en moyenne avoir subit une faible discrimination (0.28).
