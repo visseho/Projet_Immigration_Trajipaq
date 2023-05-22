@@ -168,15 +168,6 @@ Pays. (liste déroulante)
 Type de variable = catégorielle
 Niveau de mesure = nominal
 
-## Q12. En quelle année avez-vous obtenu la résidence permanente ?
-
-Année
-9998. Je ne sais pas
-9999. Je préfère ne pas répondre
-
-Type de variable = catégorielle
-Niveau de mesure = nominale
-
 ```{r}
 
 freq(Base_Trajipaq_Finale_Ok$Q11)
@@ -191,6 +182,15 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = as.factor(Q11))) +
 
 Dans le tableau de fréquence et le diagramme de barres ci-dessous, on peut observer que les pays d'origine modaux sont la France (26.685%) et l'Algérie (6.649%).
 
+## Q12. En quelle année avez-vous obtenu la résidence permanente ?
+
+Année
+9998. Je ne sais pas
+9999. Je préfère ne pas répondre
+
+Type de variable = catégorielle
+Niveau de mesure = nominale
+
 ## Q13. En quelle année est-ce que vous êtes devenu citoyen(ne) ?
 
 Année
@@ -199,6 +199,139 @@ Année
 
 Type de variable = numérique continue
 Niveau de mesure = ratio
+
+
+## Q14I. Depuis quelle année vivez-vous au Québec ?
+
+Année
+9996. La même année que la résidence permanente
+9998. Je ne sais pas
+9999. Je préfère ne pas répondre
+
+Type de variable = numérique continue
+Niveau de mesure = ratio
+
+## Q14N. En quelle année avez-vous commencé à vivre au Québec pendant au moins un an ?
+
+Année
+9996. Depuis la naissance
+9998. Je ne sais pas
+9999. Je préfère ne pas répondre
+
+Type de variable = numérique continue
+Niveau de mesure = ratio
+
+## Q15I. Avant l’obtention de la résidence permanente, quel était votre statut d’immigration ?
+
+1. Travailleur temporaire
+02. Demandeur d’asile
+03. Étudiant étranger
+04. Touriste
+97. Autre, préciser
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = catégorielle
+Niveau de mesure = nominal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q15M1 = case_when(
+    Q15M1 == 1 ~ 1,
+    Q15M1 == 2 ~ 2,
+    Q15M1 == 3 ~ 3,
+    Q15M1 == 4 ~ 4,
+    Q15M1 == 97 ~ 5,
+    Q15M1 == 98 ~ NA,
+    Q15M1 == 99 ~ NA
+  ))
+
+```
+
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q15M1)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q15M1)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la réponse modale est "travailleur temporaire".
+
+## Q16. Quel est votre plus haut diplôme d’études obtenu ?
+
+01. Moins que le secondaire
+02. Secondaire ou équivalent
+03. Collégial
+04. Formation professionnelle ou post-secondaire
+05. Université 1er cycle
+06. Université 2ème cycle et plus
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = factorielle
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q16 = case_when(
+    Q16 == 1 ~ 1,
+    Q16 == 2 ~ 2,
+    Q16 == 3 ~ 3,
+    Q16 == 4 ~ 4,
+    Q16 == 5 ~ 5,
+    Q16 == 6 ~ 6,
+    Q16 == 98 ~ NA,
+    Q16 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q16)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q16)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la distribution du niveau d'éducation est asymétrique vers la gauche. Autrement dit, l'échantillon est composé à 67.31% de personnes titulaires d'un diplôme universitaire.
+
+## Q17. Actuellement, avez-vous une religion ?
+
+00. Sans religion
+01. Catholique
+02. Protestante
+03. Évangéliste
+04. Mormone
+05. Témoins de Jéhovah
+06. Orthodoxe
+07. Autres Chrétiens
+08. Musulmans
+09. Juif
+10. Bouddhiste
+11. Hindou
+12. Animiste
+97. Autre
+98. Je ne sais pas
+99. Je préfère ne pas répondre
 
 # Présentation de la variable indépendante
 
@@ -640,4 +773,4 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2)) +
 
 ```
 
-Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la droite. Autrement dit, les répondants estiment en moyenne avoir subit une faible discrimination (0.28).
+Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la droite. Autrement dit, les répondants estiment en moyenne avoir subit une faible discrimination (0.28). Lorsque l'on regarde la distribution de chaque question composant l'indice, le mode correspond à l'absence de discrimination (1). Or, l'indice présente une moyenne non nulle (0.28 > 0), suggérant que peu de répondants ne subissent aucune discrimination.
