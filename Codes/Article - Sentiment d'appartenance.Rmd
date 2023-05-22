@@ -63,33 +63,15 @@ Réponses possibles :
 - sexe
 - statut matrimonial
 - pays d'origine
-- année d'obtention de la résidence permanente
-- année d'obtention de la citoyenneté canadienne
-- année d'arrivée au Québec
-- année depuis la première installation au Québec
-- statut d'immigration avant l'obtention de la résidence permanente
+- statut d'immigration au Québec
+- statut d'immigration pré-résidence
 - niveau d'éducation
 - religion
-- importance accordée à la religion
-- compétence : lire le français
-- compétence : parler français
-- compétence : rédiger en français
-- compétence : comprendre le français
-- niveau de connaissance en français lors de l'arrivée au Québec
-- compétence : lire l'anglais
-- compétence : parler anglais
-- compétence : rédiger en anglais
-- compétence : comprendre l'anglais
-- niveau de connaissance en anglais lors de l'arrivée au Québec
-- suivi de cours dédiés à la francisation après l'arrivée au Québec
-- état de santé
-- problèmes de santé avant l'installation au Québec
-- problèmes de santé au cours des 12 derniers mois
-- problèmes de santé il y a moins de 5 ans
-- problèmes de santé il y a plus de 10 ans
-- lieu de naissance de la mère
+- compétence linguistique (français)
+- compétence linguistique (anglais)
+- état de santé actuel
+- état de santé depuis 12 mois
 - niveau d'éducation de la mère
-- lieu de naissance du père
 - niveau d'éducation du père
 
 # Présentation des variables de contrôle
@@ -129,7 +111,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q10_F)) +
 
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que le sexe modal est "Femme".
+La réponse modale est "femme" (56.69%).
 
 ## STATUT. Êtes-vous actuellement... ?
 
@@ -157,7 +139,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = STATUT)) +
 
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que le statut modal est "Marié(e)".
+La réponse modale est "Marié(e)" (47.53%)
 
 ## Q11. Dans quel pays êtes-vous né ?
 
@@ -180,58 +162,54 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = as.factor(Q11))) +
   theme_bw()
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessous, on peut observer que les pays d'origine modaux sont la France (26.685%) et l'Algérie (6.649%).
+Les réponses modales sont "France" (26.685%) et "Algérie" (6.649%).
 
-## Q12. En quelle année avez-vous obtenu la résidence permanente ?
+## Q14N. Statut migratoire
 
-Année
-9998. Je ne sais pas
-9999. Je préfère ne pas répondre
+Type de variable = catégoriel
+Niveau de mesure = Nominal
 
-Type de variable = catégorielle
-Niveau de mesure = nominale
+```{r}
 
-## Q13. En quelle année est-ce que vous êtes devenu citoyen(ne) ?
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q14N = case_when(
+    Q14N < 2017 ~ 1,
+    Q14N == 9996 ~ 2,
+    Q14N == 9998 ~ NA,
+    Q14N == 9999 ~ NA
+  ))
 
-Année
-9998. Je ne sais pas
-9999. Je préfère ne pas répondre
+```
 
-Type de variable = numérique continue
-Niveau de mesure = ratio
+```{r}
 
+freq(Base_Trajipaq_Finale_Ok$Q14N)
 
-## Q14I. Depuis quelle année vivez-vous au Québec ?
+```
 
-Année
-9996. La même année que la résidence permanente
-9998. Je ne sais pas
-9999. Je préfère ne pas répondre
+```{r}
 
-Type de variable = numérique continue
-Niveau de mesure = ratio
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q14N)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
 
-## Q14N. En quelle année avez-vous commencé à vivre au Québec pendant au moins un an ?
+```
 
-Année
-9996. Depuis la naissance
-9998. Je ne sais pas
-9999. Je préfère ne pas répondre
+La réponse modale est "deuxième génération" (92.87%).
 
-Type de variable = numérique continue
-Niveau de mesure = ratio
+## Q15I. Statut migratoire avant d'obtenir la résidence permanente
 
-## Q15I. Avant l’obtention de la résidence permanente, quel était votre statut d’immigration ?
-
-1. Travailleur temporaire
+01. Travailleur temporaire (visa de travail ou permis de
+travail)
 02. Demandeur d’asile
-03. Étudiant étranger
+03. Étudiant étranger (visa d’études)
 04. Touriste
-97. Autre, préciser
+97. Autre
 98. Je ne sais pas
 99. Je préfère ne pas répondre
 
-Type de variable = catégorielle
+Type de variable = catégoriel
 Niveau de mesure = nominal
 
 ```{r}
@@ -265,7 +243,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q15M1)) +
 
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la réponse modale est "travailleur temporaire".
+La réponse modale est "travailleur temporaire" (57.78%).
 
 ## Q16. Quel est votre plus haut diplôme d’études obtenu ?
 
@@ -312,7 +290,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q16)) +
 
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la distribution du niveau d'éducation est asymétrique vers la gauche. Autrement dit, l'échantillon est composé à 67.31% de personnes titulaires d'un diplôme universitaire.
+La distribution du niveau d'éducation est asymétrique vers la gauche. 
+L'échantillon est composé à 67.31% de personnes titulaires d'un diplôme universitaire.
 
 ## Q17. Actuellement, avez-vous une religion ?
 
@@ -375,50 +354,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q17)) +
 
 ```
 
-Le tableau de fréquence et le diagramme de barres ci-dessus nous montrent que les réponses modales sont "sans religion" et "catholique". On remarque également un nombre remarquable de réponses "orthodoxe" et "musulman".
-
-## Q18. Quelle importance accordez-vous aujourd’hui à la religion dans votre vie ?
-
-01. Pas du tout d’importance
-02. Un peu d’importance
-03. Assez d’importance
-04. Beaucoup d’importance
-98. Je ne sais pas
-99. Je préfère ne pas répondre
-
-Type de variable = factoriel
-Niveau de mesure = ordinal
-
-```{r}
-
-Base_Trajipaq_Finale_Ok <-
-  Base_Trajipaq_Finale_Ok %>%
-  mutate(Q18 = case_when(
-    Q18 == 1 ~ 1,
-    Q18 == 2 ~ 2,
-    Q18 == 3 ~ 3,
-    Q18 == 4 ~ 4,
-    Q18 == 98 ~ NA,
-    Q18 == 99 ~ NA
-  ))
-
-```
-
-```{r}
-
-freq(Base_Trajipaq_Finale_Ok$Q18)
-
-```
-
-```{r}
-
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q18)) +
-  geom_bar(fill = "pink", na.rm = TRUE) +
-  theme_bw()
-
-```
-
-Sur le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la distribution est asymétrique sur la droite. Autrement dit, 51.7% des répondants disent que la religion occupe une place dans leur vie. Néanmoins, le nombre élevé de réponse "je ne sais pas" (39.8%) réduit la validité de cette question.
+Les réponses modales sont "sans religion" (36.36) et "catholique" (32.21%). 
+On remarque également un nombre significatif de réponses "musulman" (13.83%).
 
 ## Q20. Quand vous étiez enfant, quelles étaient la langue ou les langues que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours? (Plusieurs réponses possibles).
 
@@ -457,12 +394,12 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q20M1)) +
 
 ```
 
-Dans le tableau de fréquence et le diagramme de barres ci-dessus, on observe que la réponse modale est "français". Autrement dit, le français constitue la langue maternelle de 63.84% des répondants.
+La réponse modale est "français" (63.84%).
 
-## I3. Score de compétence linguistique (français)
+## I3. Indice de la compétence linguistique (français)
 
-Type de variable = factoriel
-Niveau de mesure = ordinal
+Type de variable = numeric
+Niveau de mesure = ratio
 
 ```{r}
 
@@ -544,6 +481,331 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I3)) +
 
 ```
 
+La distribution est asymétrique vers la gauche.
+L'indice moyen de maîtrise du français est 0.87.
+
+## I4. Indice de la compétence linguistique (anglais).
+
+Type de variable = numeric
+Niveau de mesure = ratio
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q22A = case_when(
+    Q22A == 1 ~ 1,
+    Q22A == 2 ~ 2,
+    Q22A == 3 ~ 3,
+    Q22A == 4 ~ 4,
+    Q22A == 98 ~ NA,
+    Q22A == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q22B = case_when(
+    Q22B == 1 ~ 1,
+    Q22B == 2 ~ 2,
+    Q22B == 3 ~ 3,
+    Q22B == 4 ~ 4,
+    Q22B == 98 ~ NA,
+    Q22B == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q22C = case_when(
+    Q22C == 1 ~ 1,
+    Q22C == 2 ~ 2,
+    Q22C == 3 ~ 3,
+    Q22C == 4 ~ 4,
+    Q22C == 98 ~ NA,
+    Q22C == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q22D = case_when(
+    Q22D == 1 ~ 1,
+    Q22D == 2 ~ 2,
+    Q22D == 3 ~ 3,
+    Q22D == 4 ~ 4,
+    Q22D == 98 ~ NA,
+    Q22D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+v_I4 <- c("Q22A",
+          "Q22B",
+          "Q22C",
+          "Q22D"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(I4 = (sum(c_across(all_of(v_I4)), na.rm = TRUE) - length(v_I4)) / (3*length(v_I4))) %>%
+  mutate(I4 = if (I4 < 0) NA_real_ else I4) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$I4)
+
+```
+
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I4)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche.
+L'indice moyen de maîtrise du français est 0.73.
+
+## Q23. Comment est votre état de santé en général ?
+
+01. Très bon
+02. Bon
+03. Moyen
+04. Mauvais
+05. Très mauvais
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q23 = case_when(
+    Q23 == 1 ~ 5,
+    Q23 == 2 ~ 4,
+    Q23 == 3 ~ 3,
+    Q23 == 4 ~ 2,
+    Q23 == 5 ~ 1,
+    Q23 == 98 ~ NA,
+    Q23 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q23)
+
+```
+
+```{r}
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q23)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+```
+
+La distribution est asymétrique vers la gauche. 
+98.47% des répondants ont un état de santé moyen ou bon.
+
+## I5. Indice de l'état de santé au cours des 12 derniers mois
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q24A = case_when(
+    Q24A == 1 ~ 1,
+    Q24A == 2 ~ 2,
+    Q24A == 96 ~ NA,
+    Q24A == 97 ~ NA,
+    Q24A == 98 ~ NA,
+    Q24A == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q24B = case_when(
+    Q24B == 1 ~ 1,
+    Q24B == 2 ~ 2,
+    Q24B == 96 ~ NA,
+    Q24B == 97 ~ NA,
+    Q24B == 98 ~ NA,
+    Q24B == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q24C = case_when(
+    Q24C == 1 ~ 1,
+    Q24C == 2 ~ 2,
+    Q24C == 96 ~ NA,
+    Q24C == 97 ~ NA,
+    Q24C == 98 ~ NA,
+    Q24C == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q24D = case_when(
+    Q24D == 1 ~ 1,
+    Q24D == 2 ~ 2,
+    Q24D == 96 ~ NA,
+    Q24D == 97 ~ NA,
+    Q24D == 98 ~ NA,
+    Q24D == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q24E = case_when(
+    Q24E == 1 ~ 1,
+    Q24E == 2 ~ 2,
+    Q24E == 96 ~ NA,
+    Q24E == 97 ~ NA,
+    Q24E == 98 ~ NA,
+    Q24E == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+v_I5 <- c("Q24A",
+          "Q24B",
+          "Q24C",
+          "Q24D",
+          "Q24E"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(I5 = (sum(c_across(all_of(v_I5)), na.rm = TRUE) - length(v_I5)) / (1*length(v_I5))) %>%
+  mutate(I5 = if (I5 < 0) NA_real_ else I5) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$I5)
+
+```
+
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I5)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche. 
+L'indice moyen de l'état de santé au cours des 12 derniers mois est de 0.78.
+
+## Q26. Quel était le plus haut diplôme d’études obtenu par votre mère ?
+
+01. Moins que le secondaire
+02. Secondaire ou équivalent
+03. Collégial
+04. Formation professionnelle ou post-secondaire
+05. Université
+06. Inconnu
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q26 = case_when(
+    Q26 == 1 ~ 1,
+    Q26 == 2 ~ 2,
+    Q26 == 3 ~ 3,
+    Q26 == 4 ~ 4,
+    Q26 == 5 ~ 5,
+    Q26 == 6 ~ NA,
+    Q26 == 98 ~ NA,
+    Q26 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q26)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q26)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+La valeur modale est "diplôme universitaire" (28.62%).
+
+## Q28. Quel était le plus haut diplôme d’études obtenu par votre père ?
+
+01. Moins que le secondaire
+02. Secondaire ou équivalent
+03. Collégial
+04. Formation professionnelle ou post-secondaire
+05. Université
+06. Inconnu
+98. Je ne sais pas
+99. Je préfère ne pas répondre
+
+Type de variable = factoriel
+Niveau de mesure = ordinal
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q28 = case_when(
+    Q28 == 1 ~ 1,
+    Q28 == 2 ~ 2,
+    Q28 == 3 ~ 3,
+    Q28 == 4 ~ 4,
+    Q28 == 5 ~ 5,
+    Q28 == 6 ~ NA,
+    Q28 == 98 ~ NA,
+    Q28 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q28)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q28)) +
+  geom_bar(fill = "pink", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+La valeur modale est "diplôme universitaire" (34.70%).
 
 # Présentation de la variable indépendante
 
@@ -570,8 +832,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39A)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 87.01% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent chez elles au Québec. On remarque également que 1.79% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39A)) +
@@ -582,7 +842,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39A)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+La distribution est asymétrique vers la gauche. 
+87.01% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent chez elles au Québec.
 
 ## Q39B. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : il faut faire oublier ses origines pour se faire accepter au Québec.
 
@@ -607,8 +868,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39B)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite. Autrement dit, 67.88% des personnes interrogées ne sont pas du tout d'accord ou plutôt pas d'accord pour dire qu'il faut faire oublier ses origines pour se faire accepter au Québec. On remarque également que 3.96% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39B)) +
@@ -619,7 +878,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39B)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+La distribution est asymétrique vers la droite.
+67.88% des personnes interrogées ne sont pas du tout d'accord ou plutôt pas d'accord pour dire qu'il faut faire oublier ses origines pour se faire accepter au Québec.
 
 ## Q39C. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : on me voit comme une Québécoise.
 
@@ -644,8 +904,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39C)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est bimodale (1 et 4). Autrement dit, cette question divise nos répondants. On remarque également que 5.63% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39C)) +
@@ -656,7 +914,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39C)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe les deux modes de la distribution décrits précédemment.
+Les réponses modales sont "tout à fait d'accord" (29.36%) et "pas du tout d'accord" (29.97%).
 
 ## Q39D. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens Québécois(e).
 
@@ -681,8 +939,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39D)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 60.72% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Québécois(e)s. On remarque également que 4.03% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39D)) +
@@ -693,7 +949,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39D)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+La distribution est asymétrique vers la gauche. 
+60.72% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Québécois(e)s.
 
 ## Q39E. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens Canadien(ne).
 
@@ -718,8 +975,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39E)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 79.98% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Canadien(ne). On remarque également que 2.69% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39E)) +
@@ -730,7 +985,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39E)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+La distribution est asymétrique vers la gauche. 
+79.98% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Canadien(ne).
 
 ## Q39F. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : j'ai un sentiment d'appartenance à mon pays d'origine.
 
@@ -755,8 +1011,6 @@ freq(Base_Trajipaq_Finale_Ok$Q39F)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la gauche. Autrement dit, 81.42% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles possèdent un sentiment d'appartenance envers leur pays d'origine. On remarque également que 2.69% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
@@ -767,7 +1021,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la gauche mentionnée précédemment.
+La distribution est asymétrique vers la gauche. 
+81.42% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles possèdent un sentiment d'appartenance envers leur pays d'origine.
 
 ## I1 : L'indice du sentiment d'appartenance au Québec
 
@@ -806,7 +1061,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I1)) +
 
 ```
 
-Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la gauche. Autrement dit, les répondants estiment en moyenne entretenir un sentiment d'appartenance relativement développé (0.59).
+La distribution est asymétrique vers la gauche. 
+L'indice moyen du sentiment d'appartenance au Québec est 0.59.
 
 # Présentation de la variable dépendante
 
@@ -833,8 +1089,6 @@ freq(Base_Trajipaq_Finale_Ok$Q40A)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 65.44% des personnes interrogées disent ne jamais avoir subit de discrimination dans l'emploi au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 9.47% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40A)) +
@@ -843,7 +1097,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40A)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+La distribution est asymétrique vers la droite.
+65.44% des personnes interrogées disent ne jamais avoir subit de discrimination dans l'emploi au cours des 12 derniers mois précédent la crise du covid 19.
 
 ## Q40B. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans la recherche de logement ?
 
@@ -868,8 +1123,6 @@ freq(Base_Trajipaq_Finale_Ok$Q40B)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 79.64% des personnes interrogées disent ne jamais avoir subit de discrimination dans la recherche de logement au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 17.34% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40B)) +
@@ -878,7 +1131,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40B)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+La distribution est asymétrique vers la droite.
+79.64% des personnes interrogées disent ne jamais avoir subit de discrimination dans la recherche de logement au cours des 12 derniers mois précédent la crise du covid 19.
 
 ## Q40C. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans la santé ?
 
@@ -903,8 +1157,6 @@ freq(Base_Trajipaq_Finale_Ok$Q40C)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 82.26% des personnes interrogées disent ne jamais avoir subit de discrimination dans la santé au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 10.17% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40C)) +
@@ -913,7 +1165,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40C)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+La distribution est asymétrique vers la droite.
+82.26% des personnes interrogées disent ne jamais avoir subit de discrimination dans la santé au cours des 12 derniers mois précédent la crise du covid 19.
 
 ## Q40D. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : sur le lieu de formation ?
 
@@ -938,8 +1191,6 @@ freq(Base_Trajipaq_Finale_Ok$Q40D)
 
 ```
 
-Dans le tableau de fréquence ci-dessus, on observe que la distribution est asymétrique vers la droite Autrement dit, 81.40% des personnes interrogées disent ne jamais avoir subit de discrimination sur le lieu de formation au cours des 12 derniers mois précédent la crise du covid 19. On remarque également que 15.74% des personnes interrogées ne savaient pas ou n'ont pas souhaité répondre à la question. Etant donné la faible proportion de ces réponses, celles-ci seront retirées de l'analyse.
-
 ```{r}
 
 ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40D)) +
@@ -948,7 +1199,8 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40D)) +
 
 ```
 
-Dans le diagramme de barres ci-dessus, on observe l'asymétrie vers la droite mentionnée précédemment.
+La distribution est asymétrique vers la droite.
+81.40% des personnes interrogées disent ne jamais avoir subit de discrimination sur le lieu de formation au cours des 12 derniers mois précédent la crise du covid 19.
 
 ## I2 : L'indice de discrimination lors des 12 derniers mois précédent la crise du covid 19
 
@@ -985,4 +1237,11 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2)) +
 
 ```
 
-Le tableau descriptif et l'histogramme ci-dessous nous indiquent que la distribution est asymétrique vers la droite. Autrement dit, les répondants estiment en moyenne avoir subit une faible discrimination (0.28). Lorsque l'on regarde la distribution de chaque question composant l'indice, le mode correspond à l'absence de discrimination (1). Or, l'indice présente une moyenne non nulle (0.28 > 0), suggérant que peu de répondants ne subissent aucune discrimination.
+La distribution est asymétrique vers la droite. 
+L'indice moyen de discrimination subie est 0.28.
+
+```{r}
+
+# Lorsque l'on regarde la distribution de chaque question composant l'indice, le mode correspond à l'absence de discrimination (1). Or, l'indice présente une moyenne non nulle (0.28 > 0), suggérant que peu de répondants ne subissent aucune discrimination.
+
+```
