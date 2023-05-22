@@ -1,0 +1,2719 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Article - Sentiment d'appartenance},
+  pdfauthor={Thea},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Article - Sentiment d'appartenance}
+\author{Thea}
+\date{2023-05-17}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(summarytools)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.2     v tibble    3.2.1
+## v lubridate 1.9.2     v tidyr     1.3.0
+## v purrr     1.0.1     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x tibble::view()  masks summarytools::view()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggthemes)}
+\FunctionTok{library}\NormalTok{(haven)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}} \FunctionTok{read\_dta}\NormalTok{(}\StringTok{"\textasciitilde{}/Desktop/Base\_Trajipaq\_Finale\_Ok.dta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{question-de-recherche-de-quelles-fauxe7ons-les-discriminations-que-subissent-les-personnes-immigrantes-influencent-leur-sentiment-dappartenance-au-quuxe9bec}{%
+\section{Question de recherche : de quelles façons les discriminations
+que subissent les personnes immigrantes influencent leur sentiment
+d'appartenance au Québec
+?}\label{question-de-recherche-de-quelles-fauxe7ons-les-discriminations-que-subissent-les-personnes-immigrantes-influencent-leur-sentiment-dappartenance-au-quuxe9bec}}
+
+\hypertarget{variable-induxe9pendante-les-discriminations-que-subissent-les-personnes-immigrantes}{%
+\subsection{Variable indépendante = Les discriminations que subissent
+les personnes immigrantes
+:}\label{variable-induxe9pendante-les-discriminations-que-subissent-les-personnes-immigrantes}}
+
+\begin{itemize}
+\tightlist
+\item
+  dans l'emploi
+\item
+  dans la recherche de logement
+\item
+  dans la santé
+\item
+  sur le lieu de formation
+\end{itemize}
+
+Type de variable = factoriel Niveau de mesure = ordinal (échelle de
+Likert)
+
+Réponses possibles :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Tout à fait d'accord
+\item
+  Plutôt d'accord
+\item
+  Plutôt pas d'accord
+\item
+  Pas du tout d'accord
+\item
+  Je ne sais pas
+\item
+  Je ne préfère pas répondre
+\end{enumerate}
+
+\hypertarget{variable-duxe9pendante-le-sentiment-dappartenance-au-quuxe9bec}{%
+\subsection{Variable dépendante = le sentiment d'appartenance au Québec
+:}\label{variable-duxe9pendante-le-sentiment-dappartenance-au-quuxe9bec}}
+
+\begin{itemize}
+\tightlist
+\item
+  se sentir chez soi au Québec
+\item
+  la nécessité d'oublier sa culture d'origine pour s'intégrer au Québec
+\item
+  être vu(e) comme un(e) Québécois(e)
+\item
+  se sentir Québécois(e)
+\item
+  se sentir Canadien(ne)
+\item
+  avoir un sentiment d'appartenance avec son pays d'origine
+\end{itemize}
+
+Type de variable = factoriel Niveau de mesure = ordinal (échelle de
+Likert)
+
+Réponses possibles :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Tout à fait d'accord
+\item
+  Plutôt d'accord
+\item
+  Plutôt pas d'accord
+\item
+  Pas du tout d'accord
+\item
+  Je ne sais pas
+\item
+  Je ne préfère pas répondre
+\end{enumerate}
+
+\hypertarget{variables-de-contruxf4le-caractuxe9ristiques-socioduxe9mographiques}{%
+\subsection{Variables de contrôle = caractéristiques sociodémographiques
+:}\label{variables-de-contruxf4le-caractuxe9ristiques-socioduxe9mographiques}}
+
+\begin{itemize}
+\tightlist
+\item
+  sexe
+\item
+  groupe d'âge
+\item
+  statut matrimonial
+\item
+  pays d'origine
+\item
+  statut d'immigration au Québec
+\item
+  statut d'immigration pré-résidence
+\item
+  niveau d'éducation
+\item
+  religion
+\item
+  compétence linguistique (français)
+\item
+  compétence linguistique (anglais)
+\item
+  état de santé actuel
+\item
+  état de santé depuis 12 mois
+\item
+  niveau d'éducation de la mère
+\item
+  niveau d'éducation du père
+\end{itemize}
+
+\hypertarget{pruxe9sentation-des-variables-de-contruxf4le}{%
+\section{Présentation des variables de
+contrôle}\label{pruxe9sentation-des-variables-de-contruxf4le}}
+
+\hypertarget{q10.-uxeates-vous-un-homme-une-femme-ou-autre}{%
+\subsection{Q10. Êtes-vous un homme, une femme ou autre
+?}\label{q10.-uxeates-vous-un-homme-une-femme-ou-autre}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Homme
+\item
+  Femme
+\item
+  Autre
+\end{enumerate}
+
+Type de variable = catégorielle Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q10\_F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q10 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{"Homme"}\NormalTok{,}
+\NormalTok{    Q10 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \StringTok{"Femme"}\NormalTok{,}
+\NormalTok{    Q10 }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \StringTok{"Autre"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q10\_F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q10_F  
+## Type: Character  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##       Femme    886     56.69          56.69     56.69          56.69
+##       Homme    677     43.31         100.00     43.31         100.00
+##        <NA>      0                               0.00         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q10\_F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+La réponse modale est ``femme'' (56.69\%).
+
+\hypertarget{q8b-a-quel-groupe-duxe2ge-appartenez-vous}{%
+\subsection{Q8B A quel groupe d'âge appartenez-vous
+?}\label{q8b-a-quel-groupe-duxe2ge-appartenez-vous}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  0 -- 19 ans
+\item
+  20 -- 24 ans
+\item
+  25 -- 29 ans
+\item
+  30 -- 34 ans
+\item
+  35 -- 39 ans
+\item
+  40 -- 44 ans
+\item
+  45 -- 49 ans
+\item
+  50 -- 60 ans
+\item
+  61 ans et plus
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = factoriel Niveau de mesure = ordinal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{QAGE)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$QAGE  
+## Label: Vous appartenez <U+00E0> quel groupe d<U+2019><U+00E2>ge?  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           2     76      4.86           4.86      4.86           4.86
+##           3    136      8.70          13.56      8.70          13.56
+##           4    259     16.57          30.13     16.57          30.13
+##           5    385     24.63          54.77     24.63          54.77
+##           6    328     20.99          75.75     20.99          75.75
+##           7    182     11.64          87.40     11.64          87.40
+##           8    125      8.00          95.39      8.00          95.39
+##           9     72      4.61         100.00      4.61         100.00
+##        <NA>      0                               0.00         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ QAGE)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+La distribution est symétrique. Le groupe d'âge modal est ``35-39 ans''
+(24.63\%).
+
+\hypertarget{statut.-uxeates-vous-actuellement}{%
+\subsection{STATUT. Êtes-vous actuellement\ldots{}
+?}\label{statut.-uxeates-vous-actuellement}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Célibataire/jamais marié(e) ou conjoint(e) de fait
+\item
+  Marié(e)
+\item
+  Conjoint(e) de fait/en union libre
+\item
+  Séparé(e)
+\item
+  Divorcé(e)
+\item
+  Veuf(ve)
+\end{enumerate}
+
+Type de variable = catégorielle Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{STATUT)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$STATUT  
+## Label: <U+00CA>tes-vous actuellement...?  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    363     24.26          24.26     23.22          23.22
+##           2    711     47.53          71.79     45.49          68.71
+##           3    331     22.13          93.92     21.18          89.89
+##           4     39      2.61          96.52      2.50          92.39
+##           5     46      3.07          99.60      2.94          95.33
+##           6      6      0.40         100.00      0.38          95.71
+##        <NA>     67                               4.29         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ STATUT)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+La réponse modale est ``Marié(e)'' (47.53\%)
+
+\hypertarget{q11.-dans-quel-pays-uxeates-vous-nuxe9}{%
+\subsection{Q11. Dans quel pays êtes-vous né
+?}\label{q11.-dans-quel-pays-uxeates-vous-nuxe9}}
+
+Pays. (liste déroulante) 998. Je ne sais pas 999. Je préfère ne pas
+répondre
+
+Type de variable = catégorielle Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q11)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q11  
+## Label: Dans quel pays <U+00EA>tes-vous n<U+00E9>(e) ?Si vous ne vous en souvenez pas, inscrire : <U+00AB> Je  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           2      1     0.090          0.090     0.064          0.064
+##           4      1     0.090          0.180     0.064          0.128
+##           5     74     6.649          6.828     4.734          4.862
+##           6      6     0.539          7.367     0.384          5.246
+##          12      2     0.180          7.547     0.128          5.374
+##          13      8     0.719          8.266     0.512          5.886
+##          14      1     0.090          8.356     0.064          5.950
+##          16      2     0.180          8.535     0.128          6.078
+##          18      1     0.090          8.625     0.064          6.142
+##          21      3     0.270          8.895     0.192          6.334
+##          23      3     0.270          9.164     0.192          6.526
+##          24     18     1.617         10.782     1.152          7.678
+##          26      4     0.359         11.141     0.256          7.933
+##          35     24     2.156         13.297     1.536          9.469
+##          37     12     1.078         14.376     0.768         10.237
+##          38      4     0.359         14.735     0.256         10.493
+##          39      3     0.270         15.004     0.192         10.685
+##          40      1     0.090         15.094     0.064         10.749
+##          42      1     0.090         15.184     0.064         10.813
+##          43     30     2.695         17.880     1.919         12.732
+##          45      1     0.090         17.969     0.064         12.796
+##          46      1     0.090         18.059     0.064         12.860
+##          47     35     3.145         21.204     2.239         15.099
+##          50      1     0.090         21.294     0.064         15.163
+##          52     36     3.235         24.528     2.303         17.466
+##          54      6     0.539         25.067     0.384         17.850
+##          55      1     0.090         25.157     0.064         17.914
+##          58      1     0.090         25.247     0.064         17.978
+##          59      1     0.090         25.337     0.064         18.042
+##          60     12     1.078         26.415     0.768         18.810
+##          62     15     1.348         27.763     0.960         19.770
+##          65      1     0.090         27.853     0.064         19.834
+##          66      3     0.270         28.122     0.192         20.026
+##          68      6     0.539         28.661     0.384         20.409
+##          69      3     0.270         28.931     0.192         20.601
+##          70      1     0.090         29.021     0.064         20.665
+##          73      4     0.359         29.380     0.256         20.921
+##          75     17     1.527         30.907     1.088         22.009
+##          79      1     0.090         30.997     0.064         22.073
+##          81    297    26.685         57.682    19.002         41.075
+##          82      1     0.090         57.772     0.064         41.139
+##          86      1     0.090         57.862     0.064         41.203
+##          88      1     0.090         57.951     0.064         41.267
+##          89      1     0.090         58.041     0.064         41.331
+##          91      1     0.090         58.131     0.064         41.395
+##          95      4     0.359         58.491     0.256         41.651
+##         100     28     2.516         61.006     1.791         43.442
+##         103     10     0.898         61.905     0.640         44.082
+##         106      1     0.090         61.995     0.064         44.146
+##         107     13     1.168         63.163     0.832         44.978
+##         109      8     0.719         63.881     0.512         45.489
+##         113      6     0.539         64.420     0.384         45.873
+##         114      6     0.539         64.960     0.384         46.257
+##         115      2     0.180         65.139     0.128         46.385
+##         116      6     0.539         65.678     0.384         46.769
+##         119      3     0.270         65.948     0.192         46.961
+##         121      1     0.090         66.038     0.064         47.025
+##         127      1     0.090         66.128     0.064         47.089
+##         128     35     3.145         69.272     2.239         49.328
+##         136      1     0.090         69.362     0.064         49.392
+##         140      4     0.359         69.721     0.256         49.648
+##         143     57     5.121         74.843     3.647         53.295
+##         146      8     0.719         75.562     0.512         53.807
+##         149     14     1.258         76.819     0.896         54.702
+##         151     16     1.438         78.257     1.024         55.726
+##         152      1     0.090         78.347     0.064         55.790
+##         161      1     0.090         78.437     0.064         55.854
+##         162      2     0.180         78.616     0.128         55.982
+##         167      1     0.090         78.706     0.064         56.046
+##         169      1     0.090         78.796     0.064         56.110
+##         170      1     0.090         78.886     0.064         56.174
+##         171      3     0.270         79.155     0.192         56.366
+##         174      2     0.180         79.335     0.128         56.494
+##         176      1     0.090         79.425     0.064         56.558
+##         177     12     1.078         80.503     0.768         57.326
+##         178      8     0.719         81.222     0.512         57.837
+##         180      2     0.180         81.402     0.128         57.965
+##         181      1     0.090         81.491     0.064         58.029
+##         183      2     0.180         81.671     0.128         58.157
+##         185      2     0.180         81.851     0.128         58.285
+##         186     32     2.875         84.726     2.047         60.333
+##         187      7     0.629         85.355     0.448         60.781
+##         188     11     0.988         86.343     0.704         61.484
+##         189      1     0.090         86.433     0.064         61.548
+##         200      1     0.090         86.523     0.064         61.612
+##         205      6     0.539         87.062     0.384         61.996
+##         210      1     0.090         87.152     0.064         62.060
+##         211      1     0.090         87.242     0.064         62.124
+##         216      2     0.180         87.421     0.128         62.252
+##         217      1     0.090         87.511     0.064         62.316
+##         218      8     0.719         88.230     0.512         62.828
+##         222     12     1.078         89.308     0.768         63.596
+##         224      3     0.270         89.578     0.192         63.788
+##         226      3     0.270         89.847     0.192         63.980
+##         232      4     0.359         90.207     0.256         64.235
+##         234      1     0.090         90.296     0.064         64.299
+##         236     27     2.426         92.722     1.727         66.027
+##         239      4     0.359         93.082     0.256         66.283
+##         241     12     1.078         94.160     0.768         67.051
+##         242      7     0.629         94.789     0.448         67.498
+##         244     14     1.258         96.047     0.896         68.394
+##         247     10     0.898         96.945     0.640         69.034
+##         249      1     0.090         97.035     0.064         69.098
+##         998      9     0.809         97.844     0.576         69.674
+##         999     24     2.156        100.000     1.536         71.209
+##        <NA>    450                             28.791        100.000
+##       Total   1563   100.000        100.000   100.000        100.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.factor}\NormalTok{(Q11))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+Les réponses modales sont ``France'' (26.685\%) et ``Algérie''
+(6.649\%).
+
+\hypertarget{q4.-uxeates-vous-nuxe9-au-canada}{%
+\subsection{Q4. Êtes-vous né au Canada
+?}\label{q4.-uxeates-vous-nuxe9-au-canada}}
+
+Type de variable = catégoriel Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q4  
+## Label: <U+00CA>tes-vous n<U+00E9>(e) au Canada ?  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1   1113     71.21          71.21     71.21          71.21
+##           2    450     28.79         100.00     28.79         100.00
+##        <NA>      0                               0.00         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q4)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+La réponse modale est ``deuxième génération'' (92.87\%).
+
+\hypertarget{q15i.-statut-migratoire-avant-dobtenir-la-ruxe9sidence-permanente}{%
+\subsection{Q15I. Statut migratoire avant d'obtenir la résidence
+permanente}\label{q15i.-statut-migratoire-avant-dobtenir-la-ruxe9sidence-permanente}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Travailleur temporaire (visa de travail ou permis de travail)
+\item
+  Demandeur d'asile
+\item
+  Étudiant étranger (visa d'études)
+\item
+  Touriste
+\item
+  Autre
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = catégoriel Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q15M1 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q15M1 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q15M1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q15M1  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    241     57.79          57.79     15.42          15.42
+##           2     14      3.36          61.15      0.90          16.31
+##           3     82     19.66          80.82      5.25          21.56
+##           4     35      8.39          89.21      2.24          23.80
+##           5     45     10.79         100.00      2.88          26.68
+##        <NA>   1146                              73.32         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q15M1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+La réponse modale est ``travailleur temporaire'' (57.78\%).
+
+\hypertarget{q16.-quel-est-votre-plus-haut-dipluxf4me-duxe9tudes-obtenu}{%
+\subsection{Q16. Quel est votre plus haut diplôme d'études obtenu
+?}\label{q16.-quel-est-votre-plus-haut-dipluxf4me-duxe9tudes-obtenu}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Moins que le secondaire
+\item
+  Secondaire ou équivalent
+\item
+  Collégial
+\item
+  Formation professionnelle ou post-secondaire
+\item
+  Université 1er cycle
+\item
+  Université 2ème cycle et plus
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = factorielle Niveau de mesure = ordinal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q16 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}} \DecValTok{6}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q16 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q16)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q16  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1     11      0.71           0.71      0.70           0.70
+##           2    101      6.51           7.22      6.46           7.17
+##           3    254     16.38          23.60     16.25          23.42
+##           4    141      9.09          32.69      9.02          32.44
+##           5    520     33.53          66.22     33.27          65.71
+##           6    524     33.78         100.00     33.53          99.23
+##        <NA>     12                               0.77         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q16)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+La distribution du niveau d'éducation est asymétrique vers la gauche.
+L'échantillon est composé à 67.31\% de personnes titulaires d'un diplôme
+universitaire.
+
+\hypertarget{q17.-actuellement-avez-vous-une-religion}{%
+\subsection{Q17. Actuellement, avez-vous une religion
+?}\label{q17.-actuellement-avez-vous-une-religion}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Sans religion
+\item
+  Catholique
+\item
+  Protestante
+\item
+  Évangéliste
+\item
+  Mormone
+\item
+  Témoins de Jéhovah
+\item
+  Orthodoxe
+\item
+  Autres Chrétiens
+\item
+  Musulmans
+\item
+  Juif
+\item
+  Bouddhiste
+\item
+  Hindou
+\item
+  Animiste
+\item
+  Autre
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = catégorielle Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q17 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\textasciitilde{}} \DecValTok{0}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}} \DecValTok{6}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{7} \SpecialCharTok{\textasciitilde{}} \DecValTok{7}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{8} \SpecialCharTok{\textasciitilde{}} \DecValTok{8}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{9} \SpecialCharTok{\textasciitilde{}} \DecValTok{9}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{10} \SpecialCharTok{\textasciitilde{}} \DecValTok{10}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{11} \SpecialCharTok{\textasciitilde{}} \DecValTok{11}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{12} \SpecialCharTok{\textasciitilde{}} \DecValTok{12}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \DecValTok{13}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q17)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q17  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           0    552     36.36          36.36     35.32          35.32
+##           1    489     32.21          68.58     31.29          66.60
+##           2     42      2.77          71.34      2.69          69.29
+##           3     23      1.52          72.86      1.47          70.76
+##           4      2      0.13          72.99      0.13          70.89
+##           5      5      0.33          73.32      0.32          71.21
+##           6     89      5.86          79.18      5.69          76.90
+##           7     17      1.12          80.30      1.09          77.99
+##           8    210     13.83          94.14     13.44          91.43
+##           9     18      1.19          95.32      1.15          92.58
+##          10     22      1.45          96.77      1.41          93.99
+##          11     11      0.72          97.50      0.70          94.69
+##          12      2      0.13          97.63      0.13          94.82
+##          13     36      2.37         100.00      2.30          97.12
+##        <NA>     45                               2.88         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q17)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+Les réponses modales sont ``sans religion'' (36.36\%) et ``catholique''
+(32.21\%). On remarque également un nombre significatif de réponses
+``musulman'' (13.83\%).
+
+\hypertarget{q20.-quand-vous-uxe9tiez-enfant-quelles-uxe9taient-la-langue-ou-les-langues-que-vous-parliez-le-plus-souvent-uxe0-luxe2ge-de-5-ans-et-que-vous-comprenez-toujours-plusieurs-ruxe9ponses-possibles.}{%
+\subsection{Q20. Quand vous étiez enfant, quelles étaient la langue ou
+les langues que vous parliez le plus souvent, à l'âge de 5 ans et que
+vous comprenez toujours? (Plusieurs réponses
+possibles).}\label{q20.-quand-vous-uxe9tiez-enfant-quelles-uxe9taient-la-langue-ou-les-langues-que-vous-parliez-le-plus-souvent-uxe0-luxe2ge-de-5-ans-et-que-vous-comprenez-toujours-plusieurs-ruxe9ponses-possibles.}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Français
+\item
+  Anglais
+\item
+  Autre : préciser, possibilité d'en déclarer deux
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = catégoriel Niveau de mesure = nominal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q20M1 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q20M1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q20M1  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    987     63.84          63.84     63.15          63.15
+##           2    129      8.34          72.19      8.25          71.40
+##           3    430     27.81         100.00     27.51          98.91
+##        <NA>     17                               1.09         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q20M1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+La réponse modale est ``français'' (63.84\%).
+
+\hypertarget{i3.-indice-de-la-compuxe9tence-linguistique-franuxe7ais}{%
+\subsection{I3. Indice de la compétence linguistique
+(français)}\label{i3.-indice-de-la-compuxe9tence-linguistique-franuxe7ais}}
+
+Type de variable = numeric Niveau de mesure = ratio
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q21A =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q21A }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q21B =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q21B }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q21C =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q21C }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q21D =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q21D }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_I3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Q21A"}\NormalTok{,}
+          \StringTok{"Q21B"}\NormalTok{,}
+          \StringTok{"Q21C"}\NormalTok{,}
+          \StringTok{"Q21D"}
+\NormalTok{          )}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I3 =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(v\_I3)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{length}\NormalTok{(v\_I3)) }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(v\_I3))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I3 =} \ControlFlowTok{if}\NormalTok{ (I3 }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\ConstantTok{NA\_real\_} \ControlFlowTok{else}\NormalTok{ I3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{descr}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Descriptive Statistics  
+## Base_Trajipaq_Finale_Ok$I3  
+## N: 1563  
+## 
+##                          I3
+## ----------------- ---------
+##              Mean      0.87
+##           Std.Dev      0.24
+##               Min      0.00
+##                Q1      0.83
+##            Median      1.00
+##                Q3      1.00
+##               Max      1.00
+##               MAD      0.00
+##               IQR      0.17
+##                CV      0.28
+##          Skewness     -1.98
+##       SE.Skewness      0.07
+##          Kurtosis      3.23
+##           N.Valid   1117.00
+##         Pct.Valid     71.47
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I3)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+La distribution est asymétrique vers la gauche. L'indice moyen de
+maîtrise du français est 0.87.
+
+\hypertarget{i4.-indice-de-la-compuxe9tence-linguistique-anglais.}{%
+\subsection{I4. Indice de la compétence linguistique
+(anglais).}\label{i4.-indice-de-la-compuxe9tence-linguistique-anglais.}}
+
+Type de variable = numeric Niveau de mesure = ratio
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q22A =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q22A }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q22B =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q22B }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q22C =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q22C }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q22D =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q22D }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_I4 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Q22A"}\NormalTok{,}
+          \StringTok{"Q22B"}\NormalTok{,}
+          \StringTok{"Q22C"}\NormalTok{,}
+          \StringTok{"Q22D"}
+\NormalTok{          )}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I4 =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(v\_I4)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{length}\NormalTok{(v\_I4)) }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(v\_I4))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I4 =} \ControlFlowTok{if}\NormalTok{ (I4 }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\ConstantTok{NA\_real\_} \ControlFlowTok{else}\NormalTok{ I4) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{descr}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Descriptive Statistics  
+## Base_Trajipaq_Finale_Ok$I4  
+## N: 1563  
+## 
+##                          I4
+## ----------------- ---------
+##              Mean      0.73
+##           Std.Dev      0.29
+##               Min      0.00
+##                Q1      0.58
+##            Median      0.75
+##                Q3      1.00
+##               Max      1.00
+##               MAD      0.37
+##               IQR      0.42
+##                CV      0.39
+##          Skewness     -0.83
+##       SE.Skewness      0.07
+##          Kurtosis     -0.21
+##           N.Valid   1106.00
+##         Pct.Valid     70.76
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I4)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+La distribution est asymétrique vers la gauche. L'indice moyen de
+maîtrise du français est 0.73.
+
+\hypertarget{q23.-comment-est-votre-uxe9tat-de-santuxe9-en-guxe9nuxe9ral}{%
+\subsection{Q23. Comment est votre état de santé en général
+?}\label{q23.-comment-est-votre-uxe9tat-de-santuxe9-en-guxe9nuxe9ral}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Très bon
+\item
+  Bon
+\item
+  Moyen
+\item
+  Mauvais
+\item
+  Très mauvais
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = factoriel Niveau de mesure = ordinal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q23 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q23 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q23)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q23  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           2      4      0.28           0.28      0.26           0.26
+##           3     18      1.24           1.52      1.15           1.41
+##           4    578     39.94          41.47     36.98          38.39
+##           5    847     58.53         100.00     54.19          92.58
+##        <NA>    116                               7.42         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q23)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+La distribution est asymétrique vers la gauche. 98.47\% des répondants
+ont un état de santé moyen ou bon.
+
+\hypertarget{i5.-indice-de-luxe9tat-de-santuxe9-au-cours-des-12-derniers-mois}{%
+\subsection{I5. Indice de l'état de santé au cours des 12 derniers
+mois}\label{i5.-indice-de-luxe9tat-de-santuxe9-au-cours-des-12-derniers-mois}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q24A =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24A }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q24B =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24B }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q24C =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24C }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q24D =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24D }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q24E =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{97} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q24E }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_I5 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Q24A"}\NormalTok{,}
+          \StringTok{"Q24B"}\NormalTok{,}
+          \StringTok{"Q24C"}\NormalTok{,}
+          \StringTok{"Q24D"}\NormalTok{,}
+          \StringTok{"Q24E"}
+\NormalTok{          )}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I5 =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(v\_I5)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{length}\NormalTok{(v\_I5)) }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(v\_I5))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I5 =} \ControlFlowTok{if}\NormalTok{ (I5 }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\ConstantTok{NA\_real\_} \ControlFlowTok{else}\NormalTok{ I5) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{descr}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Descriptive Statistics  
+## Base_Trajipaq_Finale_Ok$I5  
+## N: 1563  
+## 
+##                          I5
+## ----------------- ---------
+##              Mean      0.78
+##           Std.Dev      0.29
+##               Min      0.00
+##                Q1      0.60
+##            Median      1.00
+##                Q3      1.00
+##               Max      1.00
+##               MAD      0.00
+##               IQR      0.40
+##                CV      0.37
+##          Skewness     -1.05
+##       SE.Skewness      0.06
+##          Kurtosis      0.12
+##           N.Valid   1430.00
+##         Pct.Valid     91.49
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I5)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+La distribution est asymétrique vers la gauche. L'indice moyen de l'état
+de santé au cours des 12 derniers mois est de 0.78.
+
+\hypertarget{q26.-quel-uxe9tait-le-plus-haut-dipluxf4me-duxe9tudes-obtenu-par-votre-muxe8re}{%
+\subsection{Q26. Quel était le plus haut diplôme d'études obtenu par
+votre mère
+?}\label{q26.-quel-uxe9tait-le-plus-haut-dipluxf4me-duxe9tudes-obtenu-par-votre-muxe8re}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Moins que le secondaire
+\item
+  Secondaire ou équivalent
+\item
+  Collégial
+\item
+  Formation professionnelle ou post-secondaire
+\item
+  Université
+\item
+  Inconnu
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = factoriel Niveau de mesure = ordinal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q26 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q26 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q26)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q26  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    238     16.49          16.49     15.23          15.23
+##           2    355     24.60          41.09     22.71          37.94
+##           3    241     16.70          57.80     15.42          53.36
+##           4    196     13.58          71.38     12.54          65.90
+##           5    413     28.62         100.00     26.42          92.32
+##        <NA>    120                               7.68         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q26)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-43-1.pdf}
+
+La valeur modale est ``diplôme universitaire'' (28.62\%).
+
+\hypertarget{q28.-quel-uxe9tait-le-plus-haut-dipluxf4me-duxe9tudes-obtenu-par-votre-puxe8re}{%
+\subsection{Q28. Quel était le plus haut diplôme d'études obtenu par
+votre père
+?}\label{q28.-quel-uxe9tait-le-plus-haut-dipluxf4me-duxe9tudes-obtenu-par-votre-puxe8re}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Moins que le secondaire
+\item
+  Secondaire ou équivalent
+\item
+  Collégial
+\item
+  Formation professionnelle ou post-secondaire
+\item
+  Université
+\item
+  Inconnu
+\item
+  Je ne sais pas
+\item
+  Je préfère ne pas répondre
+\end{enumerate}
+
+Type de variable = factoriel Niveau de mesure = ordinal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q28 =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \DecValTok{5}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q28 }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q28)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q28  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    206     14.56          14.56     13.18          13.18
+##           2    288     20.35          34.91     18.43          31.61
+##           3    201     14.20          49.12     12.86          44.47
+##           4    229     16.18          65.30     14.65          59.12
+##           5    491     34.70         100.00     31.41          90.53
+##        <NA>    148                               9.47         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q28)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-46-1.pdf}
+
+La valeur modale est ``diplôme universitaire'' (34.70\%).
+
+\hypertarget{ruxe9sumuxe9}{%
+\subsection{Résumé}\label{ruxe9sumuxe9}}
+
+L'échantillon possède les caractéristiques socio-démographiques
+suivantes :
+
+\begin{itemize}
+\tightlist
+\item
+  faible prépondérance de femmes (56.69\%)
+\item
+  faible prépondérance de personnes âgées de 35 à 39 ans (24.63\%)
+\item
+  forte prépondérance de personnes mariées (47.53\%)
+\item
+  prépondérance de français (26.685) et d'algériens (6.649\%)
+\item
+  forte prépondérance de personnes nées au Canada (71.21\%)
+\item
+  forte prépondérance d'anciens travailleurs temporaires parmi les
+  immigrés de première génération (57.79\%)
+\item
+  forte prépondérance de personnes possédant un diplôme universitaire
+  (67.31\%)
+\item
+  prépondérance de personnes athées (36.36\%), catholiques (32.21\%) et
+  musulmanes (13.83\%)
+\item
+  prépondérance de personnes ayant pour langue maternelle le français
+  (63.84\%)
+\item
+  forte maîtrise moyenne du français (0.87)
+\item
+  forte maîtrise moyenne de l'anglais (0.73)
+\item
+  très forte prépondérance de personnes actuellement en bonne ou moyenne
+  santé (98.47\%)
+\item
+  bon état de santé moyen durant les 12 derniers mois (0.78)
+\item
+  prépondérance d'un diplôme universitaire chez la mère (28.62\%)
+\item
+  prépondérance d'un diplôme universitaire chez la mère (34.70\%)
+\end{itemize}
+
+\hypertarget{pruxe9sentation-de-la-variable-induxe9pendante}{%
+\section{Présentation de la variable
+indépendante}\label{pruxe9sentation-de-la-variable-induxe9pendante}}
+
+\hypertarget{q39a.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-chez-moi-au-quuxe9bec.}{%
+\subsection{Q39A. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : je me sens chez moi au
+Québec.}\label{q39a.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-chez-moi-au-quuxe9bec.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39A =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39A }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39A  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1     59      3.84           3.84      3.77           3.77
+##           2    116      7.56          11.40      7.42          11.20
+##           3    513     33.42          44.82     32.82          44.02
+##           4    847     55.18         100.00     54.19          98.21
+##        <NA>     28                               1.79         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39A)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-49-1.pdf}
+
+La distribution est asymétrique vers la gauche. 87.01\% des personnes
+interrogées sont tout à fait d'accord ou plutôt d'accord pour dire
+qu'elles se sentent chez elles au Québec.
+
+\hypertarget{q39b.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-il-faut-faire-oublier-ses-origines-pour-se-faire-accepter-au-quuxe9bec.}{%
+\subsection{Q39B. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : il faut faire oublier ses origines pour se faire
+accepter au
+Québec.}\label{q39b.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-il-faut-faire-oublier-ses-origines-pour-se-faire-accepter-au-quuxe9bec.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39B =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39B }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39B)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39B  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    671     44.70          44.70     42.93          42.93
+##           2    390     25.98          70.69     24.95          67.88
+##           3    298     19.85          90.54     19.07          86.95
+##           4    142      9.46         100.00      9.09          96.03
+##        <NA>     62                               3.97         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39B)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-52-1.pdf}
+
+La distribution est asymétrique vers la droite. 67.88\% des personnes
+interrogées ne sont pas du tout d'accord ou plutôt pas d'accord pour
+dire qu'il faut faire oublier ses origines pour se faire accepter au
+Québec.
+
+\hypertarget{q39c.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-on-me-voit-comme-une-quuxe9buxe9coise.}{%
+\subsection{Q39C. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : on me voit comme une
+Québécoise.}\label{q39c.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-on-me-voit-comme-une-quuxe9buxe9coise.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39C =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39C }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39C)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39C  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    442     29.97          29.97     28.28          28.28
+##           2    341     23.12          53.08     21.82          50.10
+##           3    259     17.56          70.64     16.57          66.67
+##           4    433     29.36         100.00     27.70          94.37
+##        <NA>     88                               5.63         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39C)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-55-1.pdf}
+
+Les réponses modales sont ``tout à fait d'accord'' (29.36\%) et ``pas du
+tout d'accord'' (29.97\%).
+
+\hypertarget{q39d.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-quuxe9buxe9coise.}{%
+\subsection{Q39D. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : je me sens
+Québécois(e).}\label{q39d.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-quuxe9buxe9coise.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39D =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39D }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39D  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    259     17.27          17.27     16.57          16.57
+##           2    292     19.47          36.73     18.68          35.25
+##           3    406     27.07          63.80     25.98          61.23
+##           4    543     36.20         100.00     34.74          95.97
+##        <NA>     63                               4.03         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39D)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-58-1.pdf}
+
+La distribution est asymétrique vers la gauche. 60.72\% des personnes
+interrogées sont tout à fait d'accord ou plutôt d'accord pour dire
+qu'elles se sentent Québécois(e)s.
+
+\hypertarget{q39e.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-canadienne.}{%
+\subsection{Q39E. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : je me sens
+Canadien(ne).}\label{q39e.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-je-me-sens-canadienne.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39E =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39E }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39E)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39E  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    100      6.57           6.57      6.40           6.40
+##           2    171     11.24          17.82     10.94          17.34
+##           3    550     36.16          53.98     35.19          52.53
+##           4    700     46.02         100.00     44.79          97.31
+##        <NA>     42                               2.69         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39E)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-61-1.pdf}
+
+La distribution est asymétrique vers la gauche. 79.98\% des personnes
+interrogées sont tout à fait d'accord ou plutôt d'accord pour dire
+qu'elles se sentent Canadien(ne).
+
+\hypertarget{q39f.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-jai-un-sentiment-dappartenance-uxe0-mon-pays-dorigine.}{%
+\subsection{Q39F. Dites si vous êtes tout à fait d'accord, plutôt
+d'accord, plutôt pas d'accord ou pas du tout d'accord avec les
+propositions suivantes (participation identitaire et sentiment
+d'appartenance) : j'ai un sentiment d'appartenance à mon pays
+d'origine.}\label{q39f.-dites-si-vous-uxeates-tout-uxe0-fait-daccord-plutuxf4t-daccord-plutuxf4t-pas-daccord-ou-pas-du-tout-daccord-avec-les-propositions-suivantes-participation-identitaire-et-sentiment-dappartenance-jai-un-sentiment-dappartenance-uxe0-mon-pays-dorigine.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q39F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{4}\NormalTok{,}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q39F }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q39F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q39F  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1     82      5.44           5.44      5.25           5.25
+##           2    198     13.14          18.58     12.67          17.91
+##           3    550     36.50          55.08     35.19          53.10
+##           4    677     44.92         100.00     43.31          96.42
+##        <NA>     56                               3.58         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q39F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{,}
+           \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{           ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-64-1.pdf}
+
+La distribution est asymétrique vers la gauche. 81.42\% des personnes
+interrogées sont tout à fait d'accord ou plutôt d'accord pour dire
+qu'elles possèdent un sentiment d'appartenance envers leur pays
+d'origine.
+
+\hypertarget{i1-lindice-du-sentiment-dappartenance-au-quuxe9bec}{%
+\subsection{I1 : L'indice du sentiment d'appartenance au
+Québec}\label{i1-lindice-du-sentiment-dappartenance-au-quuxe9bec}}
+
+A la différence des variables précédentes, l'indice du sentiment
+d'appartenance est une variable numérique continue dont le niveau de
+mesure est ratio.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_I1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Q39A"}\NormalTok{,}
+          \StringTok{"Q39B"}\NormalTok{,}
+          \StringTok{"Q39C"}\NormalTok{,}
+          \StringTok{"Q39D"}\NormalTok{,}
+          \StringTok{"Q39E"}\NormalTok{,}
+          \StringTok{"Q39F"}
+\NormalTok{          )}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I1 =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(v\_I1)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{length}\NormalTok{(v\_I1)) }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(v\_I1))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I1 =} \ControlFlowTok{if}\NormalTok{ (I1 }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\ConstantTok{NA\_real\_} \ControlFlowTok{else}\NormalTok{ I1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{descr}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Descriptive Statistics  
+## Base_Trajipaq_Finale_Ok$I1  
+## N: 1563  
+## 
+##                          I1
+## ----------------- ---------
+##              Mean      0.59
+##           Std.Dev      0.21
+##               Min      0.00
+##                Q1      0.44
+##            Median      0.61
+##                Q3      0.72
+##               Max      1.00
+##               MAD      0.25
+##               IQR      0.28
+##                CV      0.35
+##          Skewness     -0.30
+##       SE.Skewness      0.06
+##          Kurtosis     -0.41
+##           N.Valid   1550.00
+##         Pct.Valid     99.17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-67-1.pdf}
+
+La distribution est asymétrique vers la gauche. L'indice moyen du
+sentiment d'appartenance au Québec est 0.59.
+
+\hypertarget{pruxe9sentation-de-la-variable-duxe9pendante}{%
+\section{Présentation de la variable
+dépendante}\label{pruxe9sentation-de-la-variable-duxe9pendante}}
+
+\hypertarget{q40a.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-lemploi}{%
+\subsection{Q40A. Au cours des 12 mois (avant la crise de la COVID-19),
+pensez-vous avoir subi des traitements inégalitaires ou des
+discriminations ? Un traitement inégalitaire ou une discrimination se
+repère si « vous avez été moins bien traité que les autres, sans raison
+valable » : dans l'emploi
+?}\label{q40a.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-lemploi}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q40A =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40A }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q40A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q40A  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1    926     65.44          65.44     59.25          59.25
+##           2    383     27.07          92.51     24.50          83.75
+##           3    106      7.49         100.00      6.78          90.53
+##        <NA>    148                               9.47         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q40A)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-70-1.pdf}
+
+La distribution est asymétrique vers la droite. 65.44\% des personnes
+interrogées disent ne jamais avoir subit de discrimination dans l'emploi
+au cours des 12 derniers mois précédent la crise du covid 19.
+
+\hypertarget{q40b.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-la-recherche-de-logement}{%
+\subsection{Q40B. Au cours des 12 mois (avant la crise de la COVID-19),
+pensez-vous avoir subi des traitements inégalitaires ou des
+discriminations ? Un traitement inégalitaire ou une discrimination se
+repère si « vous avez été moins bien traité que les autres, sans raison
+valable » : dans la recherche de logement
+?}\label{q40b.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-la-recherche-de-logement}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q40B =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40B }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q40B)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q40B  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1   1029     79.64          79.64     65.83          65.83
+##           2    195     15.09          94.74     12.48          78.31
+##           3     68      5.26         100.00      4.35          82.66
+##        <NA>    271                              17.34         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q40B)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-73-1.pdf}
+
+La distribution est asymétrique vers la droite. 79.64\% des personnes
+interrogées disent ne jamais avoir subit de discrimination dans la
+recherche de logement au cours des 12 derniers mois précédent la crise
+du covid 19.
+
+\hypertarget{q40c.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-la-santuxe9}{%
+\subsection{Q40C. Au cours des 12 mois (avant la crise de la COVID-19),
+pensez-vous avoir subi des traitements inégalitaires ou des
+discriminations ? Un traitement inégalitaire ou une discrimination se
+repère si « vous avez été moins bien traité que les autres, sans raison
+valable » : dans la santé
+?}\label{q40c.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-dans-la-santuxe9}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q40C =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40C }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q40C)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q40C  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1   1155     82.26          82.26     73.90          73.90
+##           2    184     13.11          95.37     11.77          85.67
+##           3     65      4.63         100.00      4.16          89.83
+##        <NA>    159                              10.17         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q40C)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-76-1.pdf}
+
+La distribution est asymétrique vers la droite. 82.26\% des personnes
+interrogées disent ne jamais avoir subit de discrimination dans la santé
+au cours des 12 derniers mois précédent la crise du covid 19.
+
+\hypertarget{q40d.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-sur-le-lieu-de-formation}{%
+\subsection{Q40D. Au cours des 12 mois (avant la crise de la COVID-19),
+pensez-vous avoir subi des traitements inégalitaires ou des
+discriminations ? Un traitement inégalitaire ou une discrimination se
+repère si « vous avez été moins bien traité que les autres, sans raison
+valable » : sur le lieu de formation
+?}\label{q40d.-au-cours-des-12-mois-avant-la-crise-de-la-covid-19-pensez-vous-avoir-subi-des-traitements-inuxe9galitaires-ou-des-discriminations-un-traitement-inuxe9galitaire-ou-une-discrimination-se-repuxe8re-si-vous-avez-uxe9tuxe9-moins-bien-traituxe9-que-les-autres-sans-raison-valable-sur-le-lieu-de-formation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q40D =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \DecValTok{3}\NormalTok{,}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \DecValTok{2}\NormalTok{,}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{,}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{96} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{98} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}\NormalTok{,}
+\NormalTok{    Q40D }\SpecialCharTok{==} \DecValTok{99} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{freq}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q40D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Frequencies  
+## Base_Trajipaq_Finale_Ok$Q40D  
+## Type: Numeric  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1   1072     81.40          81.40     68.59          68.59
+##           2    194     14.73          96.13     12.41          81.00
+##           3     51      3.87         100.00      3.26          84.26
+##        <NA>    246                              15.74         100.00
+##       Total   1563    100.00         100.00    100.00         100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Q40D)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-79-1.pdf}
+
+La distribution est asymétrique vers la droite. 81.40\% des personnes
+interrogées disent ne jamais avoir subit de discrimination sur le lieu
+de formation au cours des 12 derniers mois précédent la crise du covid
+19.
+
+\hypertarget{i2-lindice-de-discrimination-lors-des-12-derniers-mois-pruxe9cuxe9dent-la-crise-du-covid-19}{%
+\subsection{I2 : L'indice de discrimination lors des 12 derniers mois
+précédent la crise du covid
+19}\label{i2-lindice-de-discrimination-lors-des-12-derniers-mois-pruxe9cuxe9dent-la-crise-du-covid-19}}
+
+A la différence des variables précédentes, l'indice du sentiment
+d'appartenance est une variable numérique continue dont le niveau de
+mesure est ratio.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v\_I2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Q40A"}\NormalTok{,}
+          \StringTok{"Q40B"}\NormalTok{,}
+          \StringTok{"Q40C"}\NormalTok{,}
+          \StringTok{"Q39D"}
+\NormalTok{          )}
+
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I2 =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(v\_I2)), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{length}\NormalTok{(v\_I2)) }\SpecialCharTok{/}\NormalTok{ (}\FloatTok{2.25}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(v\_I2))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{I2 =} \ControlFlowTok{if}\NormalTok{ (I2 }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\ConstantTok{NA\_real\_} \ControlFlowTok{else}\NormalTok{ I2) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{descr}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Descriptive Statistics  
+## Base_Trajipaq_Finale_Ok$I2  
+## N: 1563  
+## 
+##                          I2
+## ----------------- ---------
+##              Mean      0.27
+##           Std.Dev      0.17
+##               Min      0.00
+##                Q1      0.11
+##            Median      0.22
+##                Q3      0.33
+##               Max      1.00
+##               MAD      0.16
+##               IQR      0.22
+##                CV      0.64
+##          Skewness      0.94
+##       SE.Skewness      0.06
+##          Kurtosis      2.17
+##           N.Valid   1440.00
+##         Pct.Valid     92.13
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Base\_Trajipaq\_Finale\_Ok, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{, }\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-82-1.pdf}
+
+La distribution est asymétrique vers la droite. L'indice moyen de
+discrimination subie est 0.28.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Lorsque l\textquotesingle{}on regarde la distribution de chaque question composant l\textquotesingle{}indice, le mode correspond à l\textquotesingle{}absence de discrimination (1). Or, l\textquotesingle{}indice présente une moyenne non nulle (0.28 \textgreater{} 0), suggérant que peu de répondants ne subissent aucune discrimination.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analyse}{%
+\section{Analyse}\label{analyse}}
+
+\hypertarget{moduxe8le-de-ruxe9gression}{%
+\subsection{Modèle de régression}\label{moduxe8le-de-ruxe9gression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reg\_1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I2 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I1 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q10 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q8B }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q4 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q16 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q17 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q20 }\SpecialCharTok{+}
+\NormalTok{              Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{Q23}
+\NormalTok{            )}
+\FunctionTok{summary}\NormalTok{(reg\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Base_Trajipaq_Finale_Ok$I2 ~ Base_Trajipaq_Finale_Ok$I1 + 
+##     Base_Trajipaq_Finale_Ok$Q10 + Base_Trajipaq_Finale_Ok$Q8B + 
+##     Base_Trajipaq_Finale_Ok$Q4 + Base_Trajipaq_Finale_Ok$Q16 + 
+##     Base_Trajipaq_Finale_Ok$Q17 + Base_Trajipaq_Finale_Ok$Q20 + 
+##     Base_Trajipaq_Finale_Ok$Q23)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.26036 -0.10944  0.00757  0.06785  0.62439 
+## 
+## Coefficients:
+##                                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                       0.112370   0.290556   0.387    0.701    
+## Base_Trajipaq_Finale_Ok$I1        0.665029   0.129454   5.137 6.81e-06 ***
+## Base_Trajipaq_Finale_Ok$Q10       0.044990   0.058790   0.765    0.448    
+## Base_Trajipaq_Finale_Ok$Q8B      -0.006314   0.015015  -0.421    0.676    
+## Base_Trajipaq_Finale_Ok$Q4       -0.073409   0.075565  -0.971    0.337    
+## Base_Trajipaq_Finale_Ok$Q16       0.020841   0.021606   0.965    0.340    
+## Base_Trajipaq_Finale_Ok$Q17      -0.004538   0.007530  -0.603    0.550    
+## Base_Trajipaq_Finale_Ok$Q2001 02  0.021275   0.089699   0.237    0.814    
+## Base_Trajipaq_Finale_Ok$Q2001 97  0.042064   0.143345   0.293    0.771    
+## Base_Trajipaq_Finale_Ok$Q2002     0.098238   0.090287   1.088    0.283    
+## Base_Trajipaq_Finale_Ok$Q2002 97  0.010253   0.132639   0.077    0.939    
+## Base_Trajipaq_Finale_Ok$Q2097    -0.017889   0.058807  -0.304    0.762    
+## Base_Trajipaq_Finale_Ok$Q2099     0.112975   0.106832   1.057    0.296    
+## Base_Trajipaq_Finale_Ok$Q23      -0.052585   0.044384  -1.185    0.243    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1709 on 42 degrees of freedom
+##   (1507 observations deleted due to missingness)
+## Multiple R-squared:  0.4171, Adjusted R-squared:  0.2367 
+## F-statistic: 2.312 on 13 and 42 DF,  p-value: 0.02026
+\end{verbatim}
+
+\hypertarget{coefficient-de-corruxe9lation}{%
+\subsection{Coefficient de
+corrélation}\label{coefficient-de-corruxe9lation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I2, Base\_Trajipaq\_Finale\_Ok}\SpecialCharTok{$}\NormalTok{I1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  Base_Trajipaq_Finale_Ok$I2 and Base_Trajipaq_Finale_Ok$I1
+## t = 17.57, df = 1436, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3771562 0.4622894
+## sample estimates:
+##       cor 
+## 0.4206484
+\end{verbatim}
+
+\hypertarget{visualisation}{%
+\subsection{Visualisation}\label{visualisation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{color =} \StringTok{"purple"}\NormalTok{,}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-86-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-sexe}{%
+\subsection{Visualisation contrôlée :
+sexe}\label{visualisation-contruxf4luxe9e-sexe}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_sex }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q10)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(Q10))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Sexe"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-87-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-uxe2ge}{%
+\subsection{Visualisation contrôlée :
+âge}\label{visualisation-contruxf4luxe9e-uxe2ge}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q8A\_F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q8A }\SpecialCharTok{\textless{}=} \DecValTok{1963} \SpecialCharTok{\textasciitilde{}} \StringTok{"\textgreater{}=60"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1963} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1968} \SpecialCharTok{\textasciitilde{}} \StringTok{"[59;55]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1968} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1973} \SpecialCharTok{\textasciitilde{}} \StringTok{"[54;50]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1973} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1978} \SpecialCharTok{\textasciitilde{}} \StringTok{"[49;45]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1978} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1983} \SpecialCharTok{\textasciitilde{}} \StringTok{"[44;35]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1983} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1988} \SpecialCharTok{\textasciitilde{}} \StringTok{"[34;30]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1988} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1993} \SpecialCharTok{\textasciitilde{}} \StringTok{"[29;25]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1993} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{1998} \SpecialCharTok{\textasciitilde{}} \StringTok{"[24;20]"}\NormalTok{,}
+\NormalTok{    Q8A }\SpecialCharTok{\textgreater{}=} \DecValTok{1998} \SpecialCharTok{\&}\NormalTok{ Q8A }\SpecialCharTok{\textless{}} \DecValTok{2023} \SpecialCharTok{\textasciitilde{}} \StringTok{"\textless{}19"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_age }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q8A\_F)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =}\NormalTok{ Q8A\_F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Age"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{,}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-89-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-statut-matrimonial}{%
+\subsection{Visualisation contrôlée : statut
+matrimonial}\label{visualisation-contruxf4luxe9e-statut-matrimonial}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{STATUT\_F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{"Celibataire"}\NormalTok{,}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \StringTok{"Marie(e)"}\NormalTok{,}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \StringTok{"Conjoint(e) de fait"}\NormalTok{,}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \StringTok{"Separe(e)"}\NormalTok{,}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \StringTok{"Divorce(e)"}\NormalTok{,}
+\NormalTok{    STATUT }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_born }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(STATUT\_F)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =}\NormalTok{ STATUT\_F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Statut matrimonial"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_born)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-statut-migratoire}{%
+\subsection{Visualisation contrôlée : statut
+migratoire}\label{visualisation-contruxf4luxe9e-statut-migratoire}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_born }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q4)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(Q4))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Ne au Canada"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_born)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-92-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-niveau-duxe9ducation}{%
+\subsection{Visualisation contrôlée : niveau
+d'éducation}\label{visualisation-contruxf4luxe9e-niveau-duxe9ducation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_educ }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q16)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(Q16))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Niveau d\textquotesingle{}education"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_educ)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-93-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-religion}{%
+\subsection{Visualisation contrôlée :
+religion}\label{visualisation-contruxf4luxe9e-religion}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q17\_F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\textasciitilde{}} \StringTok{"Sans religion"}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{"Catholique"}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{==} \DecValTok{8} \SpecialCharTok{\textasciitilde{}} \StringTok{"Musulman"}\NormalTok{,}
+\NormalTok{    Q17 }\SpecialCharTok{!=} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ Q17 }\SpecialCharTok{!=} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ Q17 }\SpecialCharTok{!=} \DecValTok{8} \SpecialCharTok{\textasciitilde{}} \StringTok{"Autre"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_relig }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q17\_F)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =}\NormalTok{ Q17\_F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Religion"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_relig)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-95-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-langue-maternelle}{%
+\subsection{Visualisation contrôlée : langue
+maternelle}\label{visualisation-contruxf4luxe9e-langue-maternelle}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Base\_Trajipaq\_Finale\_Ok }\OtherTok{\textless{}{-}}
+\NormalTok{  Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Q20\_F =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{"Francais"}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \StringTok{"Anglais"}\NormalTok{,}
+\NormalTok{    Q20M1 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \StringTok{"Autre"}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_lang }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q20\_F)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =}\NormalTok{ Q20\_F)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Langue maternelle"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_lang)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-97-1.pdf}
+
+\hypertarget{visualisation-contruxf4luxe9e-uxe9tat-de-santuxe9}{%
+\subsection{Visualisation contrôlée : état de
+santé}\label{visualisation-contruxf4luxe9e-uxe9tat-de-santuxe9}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vis\_health }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(Base\_Trajipaq\_Finale\_Ok }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I1), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(I2), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Q23)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ I2, }\AttributeTok{y =}\NormalTok{ I1, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(Q23))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{span =} \FloatTok{1.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{name =} \StringTok{"Etat de sante"}\NormalTok{, }\AttributeTok{palette =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Discrimination et sentiment d\textquotesingle{}appartenance"}\NormalTok{, }
+       \AttributeTok{x =} \StringTok{"Discrimination subie au cours des 12 derniers mois"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Sentiment d\textquotesingle{}appartenance au Quebec"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{print}\NormalTok{(vis\_health)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Article---Sentiment-d-appartenance_files/figure-latex/unnamed-chunk-98-1.pdf}
+
+\end{document}
