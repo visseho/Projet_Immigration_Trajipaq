@@ -2,7 +2,9 @@
 title: "Article - Sentiment d'appartenance"
 author: "Thea"
 date: "2023-05-17"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r}
@@ -13,7 +15,7 @@ library(haven)
 ```
 
 ```{r}
-Base_Trajipaq_Finale_Ok <- read_dta("~/Desktop/Base_Trajipaq_Finale_Ok.dta")
+Base_Trajipaq_Finale_Ok <- read_dta("C:/Users/Théo CARLIER/OneDrive/Bureau/Base_Trajipaq_Finale_Ok.dta")
 ```
 
 # Question de recherche : de quelles façons les discriminations que subissent les personnes immigrantes influencent leur sentiment d'appartenance au Québec ?
