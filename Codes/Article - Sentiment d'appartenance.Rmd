@@ -1289,6 +1289,65 @@ L'indice moyen de discrimination subie est 0.28.
 
 # Analyse
 
+## Tableau croisé
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(I1_F = case_when(
+    I1 < 0.25 ~ "Faible",
+    I1 >= 0.25 & I1 < 0.5 ~ "Moyen",
+    I1 >= 0.5 & I1 < 0.75 ~ "Fort",
+    I1 >= 0.75 & I1 <= 1 ~ "Tres fort",
+  ))
+
+Base_Trajipaq_Finale_Ok$I1_F <- factor(Base_Trajipaq_Finale_Ok$I1_F, levels = c("Tres fort",
+                                                                                "Fort",
+                                                                                "Moyen",
+                                                                                "Faible"
+                                                                                ), ordered = TRUE)
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(I2_F = case_when(
+    I2 < 0.25 ~ "Faible",
+    I2 >= 0.25 & I2 < 0.5 ~ "Moyen",
+    I2 >= 0.5 & I2 < 0.75 ~ "Fort",
+    I2 >= 0.75 & I2 <= 1 ~ "Tres fort",
+  ))
+
+Base_Trajipaq_Finale_Ok$I2_F <- factor(Base_Trajipaq_Finale_Ok$I2_F, levels = c("Tres fort",
+                                                                                "Fort",
+                                                                                "Moyen",
+                                                                                "Faible"
+                                                                                ), ordered = TRUE)
+
+```
+
+```{r}
+
+ctable(x = Base_Trajipaq_Finale_Ok$I2_F, y = Base_Trajipaq_Finale_Ok$I1_F)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2_F, fill = I1_F)) +
+  geom_bar(position = "dodge", na.rm = TRUE) +
+  theme_bw()
+
+```
+
+## Test d'association
+
+```{r}
+
+chisq.test(x = Base_Trajipaq_Finale_Ok$I2_F, y = Base_Trajipaq_Finale_Ok$I1_F)
+
+```
+
+
 ## Modèle de régression
 
 ```{r}
@@ -1321,7 +1380,7 @@ cor.test(Base_Trajipaq_Finale_Ok$I2, Base_Trajipaq_Finale_Ok$I1)
 vis <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2)), aes(x = I2, y = I1)) +
   geom_jitter(color = "pink") +
-  stat_smooth(color = "purple",se = FALSE) +
+  stat_smooth(method = "lm", formula = "y ~ x", color = "purple",se = FALSE) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
        y = "Sentiment d'appartenance au Quebec") +
@@ -1337,7 +1396,7 @@ print(vis)
 vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q10)), aes(x = I2, y = I1, color = as.factor(Q10))) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Sexe", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1372,7 +1431,7 @@ Base_Trajipaq_Finale_Ok <-
 vis_age <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q8A_F)), aes(x = I2, y = I1, color = Q8A_F)) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 0.9) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Age", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1395,7 +1454,7 @@ Base_Trajipaq_Finale_Ok <-
     STATUT == 3 ~ "Conjoint(e) de fait",
     STATUT == 4 ~ "Separe(e)",
     STATUT == 5 ~ "Divorce(e)",
-    STATUT == 6 ~ NA
+    STATUT == 6 ~ "Veuf(ve)"
   ))
 
 ```
@@ -1407,7 +1466,7 @@ Base_Trajipaq_Finale_Ok <-
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(STATUT_F)), aes(x = I2, y = I1, color = STATUT_F)) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 0.9) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Statut matrimonial", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1426,7 +1485,7 @@ print(vis_born)
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q4)), aes(x = I2, y = I1, color = as.factor(Q4))) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 0.9) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Ne au Canada", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1444,7 +1503,7 @@ print(vis_born)
 vis_educ <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q16)), aes(x = I2, y = I1, color = as.factor(Q16))) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 1) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Niveau d'education", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1475,7 +1534,7 @@ Base_Trajipaq_Finale_Ok <-
 vis_relig <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q17_F)), aes(x = I2, y = I1, color = Q17_F)) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 0.9) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Religion", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1505,7 +1564,7 @@ Base_Trajipaq_Finale_Ok <-
 vis_lang <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q20_F)), aes(x = I2, y = I1, color = Q20_F)) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 0.8) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Langue maternelle", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
@@ -1523,7 +1582,7 @@ print(vis_lang)
 vis_health <- ggplot(Base_Trajipaq_Finale_Ok %>%
                 filter(!is.na(I1), !is.na(I2), !is.na(Q23)), aes(x = I2, y = I1, color = as.factor(Q23))) +
   geom_jitter(color = "pink") +
-  stat_smooth(se = FALSE, span = 1.1) +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Etat de sante", palette = 3) +
   labs(title = "Discrimination et sentiment d'appartenance", 
        x = "Discrimination subie au cours des 12 derniers mois", 
