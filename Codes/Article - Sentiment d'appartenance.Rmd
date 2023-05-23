@@ -15,7 +15,7 @@ library(haven)
 ```
 
 ```{r}
-Base_Trajipaq_Finale_Ok <- read_dta("C:/Users/Théo CARLIER/OneDrive/Bureau/Base_Trajipaq_Finale_Ok.dta")
+Base_Trajipaq_Finale_Ok <- read_dta("~/Desktop/Base_Trajipaq_Finale_Ok.dta")
 ```
 
 # Question de recherche : de quelles façons les discriminations que subissent les personnes immigrantes influencent leur sentiment d'appartenance au Québec ?
@@ -850,7 +850,7 @@ L'échantillon possède les caractéristiques socio-démographiques suivantes :
 - prépondérance d'un diplôme universitaire chez la mère (28.62%)
 - prépondérance d'un diplôme universitaire chez la mère (34.70%)
 
-# Présentation de la variable indépendante
+# VD1 : sentiment d'appartenance au Québec
 
 ## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
 
@@ -1067,13 +1067,13 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
 La distribution est asymétrique vers la gauche. 
 81.42% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles possèdent un sentiment d'appartenance envers leur pays d'origine.
 
-## I1 : L'indice du sentiment d'appartenance au Québec
+## VD1 : L'indice du sentiment d'appartenance au Québec
 
 A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
 
 ```{r}
 
-v_I1 <- c("Q39A",
+v_VD1 <- c("Q39A",
           "Q39B",
           "Q39C",
           "Q39D",
@@ -1084,21 +1084,21 @@ v_I1 <- c("Q39A",
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
   rowwise() %>%
-  mutate(I1 = (sum(c_across(all_of(v_I1)), na.rm = TRUE) - length(v_I1)) / (3*length(v_I1))) %>%
-  mutate(I1 = if (I1 < 0) NA_real_ else I1) %>%
+  mutate(VD1 = (sum(c_across(all_of(v_VD1)), na.rm = TRUE) - length(v_VD1)) / (3*length(v_VD1))) %>%
+  mutate(VD1 = if (VD1 < 0) NA_real_ else VD1) %>%
   ungroup()
 
 ```
 
 ```{r}
 
-descr(Base_Trajipaq_Finale_Ok$I1)
+descr(Base_Trajipaq_Finale_Ok$VD1)
 
 ```
 
 ```{r}
 
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I1)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD1)) +
   geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
   theme_bw()
 
@@ -1107,7 +1107,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I1)) +
 La distribution est asymétrique vers la gauche. 
 L'indice moyen du sentiment d'appartenance au Québec est 0.59.
 
-# Présentation de la variable dépendante
+# VI1 : discrimination subie au cours des 12 derniers mois
 
 ## Q40A. Au cours des 12 mois (avant la crise de la COVID-19), pensez-vous avoir subi des traitements inégalitaires ou des discriminations ? Un traitement inégalitaire ou une discrimination se repère si « vous avez été moins bien traité que les autres, sans raison valable » : dans l'emploi ?
 
@@ -1245,13 +1245,13 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q40D)) +
 La distribution est asymétrique vers la droite.
 81.40% des personnes interrogées disent ne jamais avoir subit de discrimination sur le lieu de formation au cours des 12 derniers mois précédent la crise du covid 19.
 
-## I2 : L'indice de discrimination lors des 12 derniers mois précédent la crise du covid 19
+## VI1 : L'indice de discrimination lors des 12 derniers mois précédent la crise du covid 19
 
 A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
 
 ```{r}
 
-v_I2 <- c("Q40A",
+v_VI1 <- c("Q40A",
           "Q40B",
           "Q40C",
           "Q39D"
@@ -1260,21 +1260,21 @@ v_I2 <- c("Q40A",
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
   rowwise() %>%
-  mutate(I2 = (sum(c_across(all_of(v_I2)), na.rm = TRUE) - length(v_I2)) / (2.25*length(v_I2))) %>%
-  mutate(I2 = if (I2 < 0) NA_real_ else I2) %>%
+  mutate(VI1 = (sum(c_across(all_of(v_VI1)), na.rm = TRUE) - length(v_VI1)) / (2.25*length(v_VI1))) %>%
+  mutate(VI1 = if (VI1 < 0) NA_real_ else VI1) %>%
   ungroup()
 
 ```
 
 ```{r}
 
-descr(Base_Trajipaq_Finale_Ok$I2)
+descr(Base_Trajipaq_Finale_Ok$VI1)
 
 ```
 
 ```{r}
 
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI1)) +
   geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
   theme_bw()
 
@@ -1291,20 +1291,22 @@ L'indice moyen de discrimination subie est 0.28.
 
 # Analyse
 
-## Tableau croisé
+## VI1 + VD1
+
+### Tableau croisé
 
 ```{r}
 
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
-  mutate(I1_F = case_when(
-    I1 < 0.25 ~ "Faible",
-    I1 >= 0.25 & I1 < 0.5 ~ "Moyen",
-    I1 >= 0.5 & I1 < 0.75 ~ "Fort",
-    I1 >= 0.75 & I1 <= 1 ~ "Tres fort",
+  mutate(VD1_F = case_when(
+    VD1 < 0.25 ~ "Faible",
+    VD1 >= 0.25 & VD1 < 0.5 ~ "Moyen",
+    VD1 >= 0.5 & VD1 < 0.75 ~ "Fort",
+    VD1 >= 0.75 & VD1 <= 1 ~ "Tres fort",
   ))
 
-Base_Trajipaq_Finale_Ok$I1_F <- factor(Base_Trajipaq_Finale_Ok$I1_F, levels = c("Tres fort",
+Base_Trajipaq_Finale_Ok$VD1_F <- factor(Base_Trajipaq_Finale_Ok$VD1_F, levels = c("Tres fort",
                                                                                 "Fort",
                                                                                 "Moyen",
                                                                                 "Faible"
@@ -1312,14 +1314,14 @@ Base_Trajipaq_Finale_Ok$I1_F <- factor(Base_Trajipaq_Finale_Ok$I1_F, levels = c(
 
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
-  mutate(I2_F = case_when(
-    I2 < 0.25 ~ "Faible",
-    I2 >= 0.25 & I2 < 0.5 ~ "Moyen",
-    I2 >= 0.5 & I2 < 0.75 ~ "Fort",
-    I2 >= 0.75 & I2 <= 1 ~ "Tres fort",
+  mutate(VI1_F = case_when(
+    VI1 < 0.25 ~ "Faible",
+    VI1 >= 0.25 & VI1 < 0.5 ~ "Moyen",
+    VI1 >= 0.5 & VI1 < 0.75 ~ "Fort",
+    VI1 >= 0.75 & VI1 <= 1 ~ "Tres fort",
   ))
 
-Base_Trajipaq_Finale_Ok$I2_F <- factor(Base_Trajipaq_Finale_Ok$I2_F, levels = c("Tres fort",
+Base_Trajipaq_Finale_Ok$VI1_F <- factor(Base_Trajipaq_Finale_Ok$VI1_F, levels = c("Tres fort",
                                                                                 "Fort",
                                                                                 "Moyen",
                                                                                 "Faible"
@@ -1329,58 +1331,59 @@ Base_Trajipaq_Finale_Ok$I2_F <- factor(Base_Trajipaq_Finale_Ok$I2_F, levels = c(
 
 ```{r}
 
-ctable(x = Base_Trajipaq_Finale_Ok$I2_F, y = Base_Trajipaq_Finale_Ok$I1_F)
+ctable(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD1_F)
 
 ```
 
 ```{r}
 
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I2_F, fill = I1_F)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI1_F, fill = VD1_F)) +
   geom_bar(position = "dodge", na.rm = TRUE) +
   theme_bw()
 
 ```
 
-## Test d'association
+### Test d'association
 
 ```{r}
 
-chisq.test(x = Base_Trajipaq_Finale_Ok$I2_F, y = Base_Trajipaq_Finale_Ok$I1_F)
+chisq.test(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD1_F)
 
 ```
 
 
-## Modèle de régression
+### Modèle de régression
 
 ```{r}
 
-reg_1 <- lm(Base_Trajipaq_Finale_Ok$I2 ~ Base_Trajipaq_Finale_Ok$I1 +
-              Base_Trajipaq_Finale_Ok$Q10 +
-              Base_Trajipaq_Finale_Ok$Q8B +
-              Base_Trajipaq_Finale_Ok$Q4 +
-              Base_Trajipaq_Finale_Ok$Q16 +
-              Base_Trajipaq_Finale_Ok$Q17 +
-              Base_Trajipaq_Finale_Ok$Q20 +
-              Base_Trajipaq_Finale_Ok$Q23
+reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI1 ~ Base_Trajipaq_Finale_Ok$VD1 +
+              Base_Trajipaq_Finale_Ok$Q10 +     # Sexe
+              Base_Trajipaq_Finale_Ok$Q8B +     # Âge
+              Base_Trajipaq_Finale_Ok$STATUT +  # Statut matrimonial
+              Base_Trajipaq_Finale_Ok$Q4 +      # Lieu de naissance
+              Base_Trajipaq_Finale_Ok$Q16 +     # Niveau d'éducation
+              Base_Trajipaq_Finale_Ok$Q17 +     # Religion
+              Base_Trajipaq_Finale_Ok$Q20 +     # Langue maternelle
+              Base_Trajipaq_Finale_Ok$Q23       # Etat de santé
             )
 summary(reg_1)
 
 ```
 
-## Coefficient de corrélation
+### Coefficient de corrélation
 
 ```{r}
 
-cor.test(Base_Trajipaq_Finale_Ok$I2, Base_Trajipaq_Finale_Ok$I1)
+cor.test(Base_Trajipaq_Finale_Ok$VI1, Base_Trajipaq_Finale_Ok$VD1)
 
 ```
 
-## Visualisation
+### Visualisation
 
 ```{r}
 
 vis <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2)), aes(x = I2, y = I1)) +
+                filter(!is.na(VD1), !is.na(VI1)), aes(x = VI1, y = VD1)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", color = "purple",se = FALSE) +
   labs(title = "Discrimination et sentiment d'appartenance", 
@@ -1391,12 +1394,12 @@ print(vis)
 
 ```
 
-## Visualisation contrôlée : sexe
+#### Sexe
 
 ```{r}
 
 vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q10)), aes(x = I2, y = I1, color = as.factor(Q10))) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q10)), aes(x = VI1, y = VD1, color = as.factor(Q10))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Sexe", palette = 3) +
@@ -1408,7 +1411,7 @@ print(vis_sex)
 
 ```
 
-## Visualisation contrôlée : âge
+#### Âge
 
 ```{r}
 
@@ -1431,7 +1434,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_age <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q8A_F)), aes(x = I2, y = I1, color = Q8A_F)) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q8A_F)), aes(x = VI1, y = VD1, color = Q8A_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Age", palette = 3) +
@@ -1444,7 +1447,7 @@ print(vis_age)
 
 ```
 
-## Visualisation contrôlée : statut matrimonial
+#### Statut matrimonial
 
 ```{r}
 
@@ -1466,7 +1469,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(STATUT_F)), aes(x = I2, y = I1, color = STATUT_F)) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(STATUT_F)), aes(x = VI1, y = VD1, color = STATUT_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Statut matrimonial", palette = 3) +
@@ -1479,13 +1482,13 @@ print(vis_born)
 ```
 
 
-## Visualisation contrôlée : statut migratoire
+#### Lieu de naissance
 
 
 ```{r}
 
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q4)), aes(x = I2, y = I1, color = as.factor(Q4))) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q4)), aes(x = VI1, y = VD1, color = as.factor(Q4))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Ne au Canada", palette = 3) +
@@ -1497,13 +1500,13 @@ print(vis_born)
 
 ```
 
-## Visualisation contrôlée : niveau d'éducation
+#### Niveau d'éducation
 
 
 ```{r}
 
 vis_educ <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q16)), aes(x = I2, y = I1, color = as.factor(Q16))) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q16)), aes(x = VI1, y = VD1, color = as.factor(Q16))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Niveau d'education", palette = 3) +
@@ -1515,7 +1518,7 @@ print(vis_educ)
 
 ```
 
-## Visualisation contrôlée : religion
+#### Religion
 
 ```{r}
 
@@ -1534,7 +1537,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_relig <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q17_F)), aes(x = I2, y = I1, color = Q17_F)) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q17_F)), aes(x = VI1, y = VD1, color = Q17_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Religion", palette = 3) +
@@ -1546,7 +1549,7 @@ print(vis_relig)
 
 ```
 
-## Visualisation contrôlée : langue maternelle
+#### Langue maternelle
 
 ```{r}
 
@@ -1564,7 +1567,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_lang <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q20_F)), aes(x = I2, y = I1, color = Q20_F)) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q20_F)), aes(x = VI1, y = VD1, color = Q20_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Langue maternelle", palette = 3) +
@@ -1576,13 +1579,13 @@ print(vis_lang)
 
 ```
 
-## Visualisation contrôlée : état de santé
+#### Etat de santé
 
 
 ```{r}
 
 vis_health <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(I1), !is.na(I2), !is.na(Q23)), aes(x = I2, y = I1, color = as.factor(Q23))) +
+                filter(!is.na(VD1), !is.na(VI1), !is.na(Q23)), aes(x = VI1, y = VD1, color = as.factor(Q23))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Etat de sante", palette = 3) +
