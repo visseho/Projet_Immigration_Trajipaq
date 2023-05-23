@@ -36,6 +36,10 @@ Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leu
 
 **Variables dépendantes**
 
+1. Sentiment d'appartenance au Québec (VD1) (indice)
+
+2. Double sentiment d'appartenance (pays origine/accueil) VD2
+
 - Crée la variable Sentiment d'appartenance qui prend les valeurs suivantes (selon les terminologies utilisées par Berry et Hou, 2017)
 
   - Exclusivement au pays de naissance (separated, 5%)
@@ -47,17 +51,85 @@ Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leu
 
 Cette variable est crée par combinaison des deux variables suivantes:
 
-  - Sentiment d'appartenance au Canada
-  - Sentiment d'appartenance à leur pays d'origine
+  - Sentiment d'appartenance au Canada Q39E (recodé à oui/non)
+  - Sentiment d'appartenance à leur pays d'origine Q39F (recodé à oui/non)
+  
+                    Q39E
+  Q39F              Oui       non
+            Oui     intégré   assimilé
+            non     séparé    marginal
+  
+3. double appartenance (Québec/Canada) VD3
+
+  - Exclusivement au Canada
+  - Exclusivement au Québec
+  - Aux deux 
+  - Ni l'un ni l'autre 
+  
+Utilisé les variables 
+  - Q39D: Je me sens Québécois
+  - Q39E: Je me sens Canadien
+
 
 **Variables indépendantes**
 
-- Origine de l'immigrant
-  - Régions d'origine
-  - Proximité du pays d'accueil par rapport au pays d'origine 
-  - Niveau de stabilité dans le pays d'accueil ou d'origine au moment de l'enquête
+**- Origine de l'immigrant**
+
+1.  - Régions d'origine VI1
+    - Tableau croisé entre region d'origine et nouvelle variable 
+
+2.  - Proximité du pays d'accueil par rapport au pays d'origine  VI2
+    Comment on mesure cette proximité: 
+      - region d'origine en deux catégories (Europe-Amerique/Autres)
+      - minorité visible / non minorité visible
+
+3.  - Niveau de stabilité dans le pays d'accueil ou d'origine au moment de l'enquête VI3
   
-- Discrimination perçue  
+**- Discrimination perçue** VI4
+
+
+**Statistiques à sortir**
+
+1. Statistique univarié (fréquences) de 
+  - VD1 (moyenne et écart type)
+  - VD2
+  - VD3
+
+2. Statistique univariés (fréquence) de
+- VI1
+- VI2
+- VI3
+- VI4 (moyenne et écart-type)
+
+3. tableau croisé entre
+
+  - VD1 (recodé) et (VI1 à VI3)
+  - VD2 et (VI1 à VI3)
+  - VD3 et (VI1 à VI3)
+
+4. Avec discrimation (le transformer en en ordinal)  
+  - jamais, parfois, souvent 
+  - faible, modéré, fort 
+  
+  refaire les tableaux croisés entre les VD avec VI4-recodé
+  
+5. Entre VD1 et VI4, on peut avoir 
+    - régression linéraire
+  
+## Question de causalité
+
+
+               
+               
+Discrimination ----------> Sentiment d'appartenance
+
+
+ceux qui disent avoir subi une discrimination ont un plus faible sentiment d'appartenance
+
+
+nombre de pompiers ------> dommage à la propriété
+
+
 
 
 # références
