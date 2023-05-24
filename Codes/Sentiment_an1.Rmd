@@ -5,3 +5,1048 @@ date: "2023-05-24"
 output: html_document
 ---
 
+```{r}
+library(summarytools)
+library(tidyverse)
+library(ggthemes)
+library(haven)
+```
+
+```{r}
+Base_Trajipaq_Finale_Ok <- read_dta("~/Desktop/Base_Trajipaq_Finale_Ok.dta")
+```
+
+# Présentation des variables
+
+## Variables de contrôle
+
+### Sexe
+
+```{r}
+
+# Q10 = êtes-vous un homme, une femme ou autre (précisez) ?
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(SEXE = case_when(
+    Q10 == 1 ~ "Homme",
+    Q10 == 2 ~ "Femme",
+    Q10 == 97 ~ "Autre"
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$SEXE)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = SEXE)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du sexe",
+    x = "Sexe"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Âge
+
+```{r}
+
+# QAGE = à quel groupe d'âge appartenez-vous ?
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(AGE = case_when(
+    QAGE == 1 ~ "[0;19] ans",
+    QAGE == 2 ~ "[20;24] ans",
+    QAGE == 3 ~ "[25;29] ans",
+    QAGE == 4 ~ "[30;34] ans",
+    QAGE == 5 ~ "[35;39] ans",
+    QAGE == 6 ~ "[40;44] ans",
+    QAGE == 7 ~ "[45;49] ans",
+    QAGE == 8 ~ "[50;60] ans",
+    QAGE == 9 ~ "[61;99] ans",
+    QAGE == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok$AGE <- factor(Base_Trajipaq_Finale_Ok$AGE,levels = c(
+  "[0;19] ans",
+  "[20;24] ans",
+  "[25;29] ans",
+  "[30;34] ans",
+  "[35;39] ans",
+  "[40;44] ans",
+  "[45;49] ans",
+  "[50;60] ans",
+  "[61;99] ans",
+  NA
+), ordered = TRUE)
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$AGE)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = AGE)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution de l'age par groupes",
+    x = "Age"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Education
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(EDUCATION = case_when(
+    Q26 == 1 ~ "Elementaire",
+    Q26 == 2 ~ "Secondaire",
+    Q26 == 3 ~ "Collegial",
+    Q26 == 4 ~ "Post secondaire",
+    Q26 == 5 ~ "Universitaire",
+    Q26 == 6 ~ NA,
+    Q26 == 98 ~ NA,
+    Q26 == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok$EDUCATION <- factor(Base_Trajipaq_Finale_Ok$EDUCATION,levels = c(
+  "Elementaire",
+  "Secondaire",
+  "Post secondaire",
+  "Collegial",
+  "Universitaire",
+  NA
+), ordered = TRUE)
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$EDUCATION)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(EDUCATION)), aes(x = EDUCATION)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du niveau d'education",
+    x = "Niveau d'education"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Origine
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(ORIGINE = case_when(
+    region_naissance == "ANMO" ~ "Afrique du Nord et Moyen Orient",
+    region_naissance == "ACAS" ~ "Amerique centrale et Amerique su Sud",
+    region_naissance == "Afrique subsaharienne" ~ "Afrique subsaharienne",
+    region_naissance == "Asie" ~ "Asie",
+    region_naissance == "Autres" ~ "Autres",
+    region_naissance == "Canada" ~ "Canada",
+    region_naissance == "Caraibes" ~ "Caraibes",
+    region_naissance == "Europe" ~ "Europe",
+    region_naissance == "France" ~ "France",
+    region_naissance == "NSP" ~ NA,
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$ORIGINE)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(ORIGINE)), aes(x = ORIGINE)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution de l'origine par region",
+    x = "Region"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Revenu
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(REVENU = case_when(
+    Q100 == 1 ~ "[0 ; 19 999]",
+    Q100 == 2 ~ "[0 ; 19 999]",
+    Q100 == 3 ~ "[20 000 ; 39 999]",
+    Q100 == 4 ~ "[20 000 ; 39 999]",
+    Q100 == 5 ~ "[40 000 ; 59 999]",
+    Q100 == 6 ~ "[40 000 ; 59 999]",
+    Q100 == 7 ~ "[60 000 ; 79 999]",
+    Q100 == 8 ~ "[60 000 ; 79 999]",
+    Q100 == 9 ~ "[80 000 ; 99 999]",
+    Q100 == 10 ~ "[90 000 ; 99 999]",
+    Q100 == 11 ~ "[100 000 ; 149 999]",
+    Q100 == 12 ~ "[150 000 et plus]",
+    Q100 == 98 ~ NA,
+    Q100 == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok$REVENU <- factor(Base_Trajipaq_Finale_Ok$REVENU,levels = c(
+  "[0 ; 19 999]",
+  "[20 000 ; 39 999]",
+  "[40 000 ; 59 999]",
+  "[60 000 ; 79 999]",
+  "[80 000 ; 99 999]",
+  "[100 000 ; 149 999]",
+  "[150 000 et plus]",
+  NA
+), ordered = TRUE)
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$REVENU)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(REVENU)), aes(x = REVENU)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du revenu par groupes",
+    x = "Revenu"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Langue maternelle
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(LANGUE = case_when(
+    Q20M1 == 1 ~ "Francais",
+    Q20M1 == 2 ~ "Anglais",
+    Q20M1 == 97 ~ "Autre",
+    Q20M1 == 98 ~ NA,
+    Q20M1 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$LANGUE)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(LANGUE)), aes(x = LANGUE)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution de la langue maternelle",
+    x = "Langue maternelle"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Religion
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(RELIGION = case_when(
+    Q17 == 0 ~ "Sans religion",
+    Q17 == 1 ~ "Catholique",
+    Q17 == 2 ~ "Protestante",
+    Q17 == 3 ~ "Autres Chretiens",
+    Q17 == 4 ~ "Autres Chretiens",
+    Q17 == 5 ~ "Autres Chretiens",
+    Q17 == 6 ~ "Orthodoxe",
+    Q17 == 7 ~ "Autres Chretiens",
+    Q17 == 8 ~ "Musulmans",
+    Q17 == 9 ~ "Autre",
+    Q17 == 10 ~ "Autre",
+    Q17 == 11 ~ "Autre",
+    Q17 == 12 ~ "Autre",
+    Q17 == 97 ~ "Autre",
+    Q17 == 98 ~ NA,
+    Q17 == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$RELIGION)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(RELIGION)), aes(x = RELIGION)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution de la religion",
+    x = "Religion"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### Statut matrimonial
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(MATRIMONIAL = case_when(
+    STATUT == 1 ~ "Celibataire",
+    STATUT == 2 ~ "Marie(e)",
+    STATUT == 3 ~ "Conjoint(e) de fait",
+    STATUT == 4 ~ "Separe(e)",
+    STATUT == 5 ~ "Divorce(e)",
+    STATUT == 6 ~ "Veuf(ve)"
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$MATRIMONIAL)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(MATRIMONIAL)), aes(x = MATRIMONIAL)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du statut matrimonial",
+    x = "Statut matrimonial"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+## Variables dépendantes
+
+### VD1 : sentiment d'appartenance au Québec
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39A = case_when(
+    Q39A == 1 ~ 4,
+    Q39A == 2 ~ 3,
+    Q39A == 3 ~ 2,
+    Q39A == 4 ~ 1,
+    Q39A == 98 ~ NA,
+    Q39A == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39B = case_when(
+    Q39B == 1 ~ 4,
+    Q39B == 2 ~ 3,
+    Q39B == 3 ~ 2,
+    Q39B == 4 ~ 1,
+    Q39B == 98 ~ NA,
+    Q39B == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39C = case_when(
+    Q39C == 1 ~ 4,
+    Q39C == 2 ~ 3,
+    Q39C == 3 ~ 2,
+    Q39C == 4 ~ 1,
+    Q39C == 98 ~ NA,
+    Q39C == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39D = case_when(
+    Q39D == 1 ~ 4,
+    Q39D == 2 ~ 3,
+    Q39D == 3 ~ 2,
+    Q39D == 4 ~ 1,
+    Q39D == 98 ~ NA,
+    Q39D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+v_VD1 <- c(
+  "Q39A",
+  "Q39B",
+  "Q39C",
+  "Q39D"
+)
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(VD1 = (sum(c_across(all_of(v_VD1)), na.rm = TRUE) - length(v_VD1)) / (3*length(v_VD1))) %>%
+  mutate(VD1 = if (VD1 < 0) NA_real_ else VD1) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$VD1)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD1)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  labs(
+    title = "Distribution du sentiment d'appartenance au Quebec",
+    x = "Indice du sentiment d'appartenance au Quebec"
+       ) +
+  theme_bw()
+
+```
+
+### VD2 : sentiment d'appartenance (Canada)
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(VD2 = case_when(
+    Q39E == 1 ~ "Oui",
+    Q39E == 2 ~ "Oui",
+    Q39E == 3 ~ "Non",
+    Q39E == 4 ~ "Non",
+    Q39E == 98 ~ NA,
+    Q39E == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$VD2)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(VD2)), aes(x = VD2)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du sentiment d'appartenance au Canada",
+    x = "Sentiment d'appartenance au Canada"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+### VD3 : sentiment d'appartenance au pays d'origine
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(VD3 = case_when(
+    Q39F == 1 ~ "Oui",
+    Q39F == 2 ~ "Oui",
+    Q39F == 3 ~ "Non",
+    Q39F == 4 ~ "Non",
+    Q39F == 98 ~ NA,
+    Q39F == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$VD3)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(VD3)), aes(x = VD3)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution du sentiment d'appartenance au pays d'origine",
+    x = "Sentiment d'appartenance au pays d'origine"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+## Variables indépendantes
+
+### VI4 : discrimination subie au cours des 12 derniers mois
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40A = case_when(
+    Q40A == 1 ~ 3,
+    Q40A == 2 ~ 2,
+    Q40A == 3 ~ 1,
+    Q40A == 96 ~ NA,
+    Q40A == 98 ~ NA,
+    Q40A == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40B = case_when(
+    Q40B == 1 ~ 3,
+    Q40B == 2 ~ 2,
+    Q40B == 3 ~ 1,
+    Q40B == 96 ~ NA,
+    Q40B == 98 ~ NA,
+    Q40B == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40C = case_when(
+    Q40C == 1 ~ 3,
+    Q40C == 2 ~ 2,
+    Q40C == 3 ~ 1,
+    Q40C == 96 ~ NA,
+    Q40C == 98 ~ NA,
+    Q40C == 99 ~ NA
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q40D = case_when(
+    Q40D == 1 ~ 3,
+    Q40D == 2 ~ 2,
+    Q40D == 3 ~ 1,
+    Q40D == 96 ~ NA,
+    Q40D == 98 ~ NA,
+    Q40D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+v_VI4 <- c(
+  "Q40A",
+  "Q40B",
+  "Q40C",
+  "Q39D"
+  )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(VI4 = (sum(c_across(all_of(v_VI4)), na.rm = TRUE) - length(v_VI4)) / (2.25*length(v_VI4))) %>%
+  mutate(VI4 = if (VI4 < 0) NA_real_ else VI4) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$VI4)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI4)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  labs(
+    title = "Distribution de la discrimination subie au cours des 12 derniers mois",
+    x = "Indice de la discrimination subie au cours des 12 derniers mois"
+       ) +
+  theme_bw()
+
+```
+
+# Analyse
+
+## H1 : VD1 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI4 ~ Base_Trajipaq_Finale_Ok$VD1 +
+              Base_Trajipaq_Finale_Ok$SEXE +
+              Base_Trajipaq_Finale_Ok$AGE +
+              Base_Trajipaq_Finale_Ok$EDUCATION +
+              Base_Trajipaq_Finale_Ok$ORIGINE +
+              Base_Trajipaq_Finale_Ok$REVENU +
+              Base_Trajipaq_Finale_Ok$LANGUE +
+              Base_Trajipaq_Finale_Ok$RELIGION +
+              Base_Trajipaq_Finale_Ok$MATRIMONIAL
+            )
+summary(reg_1)
+
+```
+
+### Coefficient de corrélation
+
+```{r}
+
+cor.test(Base_Trajipaq_Finale_Ok$VI4, Base_Trajipaq_Finale_Ok$VD1)
+
+```
+
+### Visualisation
+
+```{r}
+
+vis_H1 <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(SEXE)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_H1)
+
+```
+
+#### Sexe
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(SEXE)), aes(x = VI4, y = VD1, color = SEXE)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Sexe", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du sexe", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+#### Age
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(AGE)), aes(x = VI4, y = VD1, color = as.factor(AGE))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Age", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'age", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+#### Education
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(EDUCATION)), aes(x = VI4, y = VD1, color = as.factor(EDUCATION))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Niveau d'education", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'education", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+#### Origine
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(ORIGINE)), aes(x = VI4, y = VD1, color = as.factor(ORIGINE))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Region d'origine", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'origine", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+#### Revenu
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(REVENU)), aes(x = VI4, y = VD1, color = as.factor(REVENU))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Revenu", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+#### Langue maternelle
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(LANGUE)), aes(x = VI4, y = VD1, color = as.factor(LANGUE))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Langue maternelle", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la langue maternelle", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+### Religion
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(RELIGION)), aes(x = VI4, y = VD1, color = as.factor(RELIGION))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Religion", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la religion", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+### Statut matrimonial
+
+```{r}
+
+vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(MATRIMONIAL)), aes(x = VI4, y = VD1, color = as.factor(MATRIMONIAL))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Statut matrimonial", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du statut matrimonial", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sex)
+
+```
+
+## H2 : VD2 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(VD2_N = case_when(
+    VD2 == "Non" ~ 0,
+    VD2 == "Oui" ~ 1
+  ))
+
+```
+
+```{r}
+
+reg_2 <- glm(formula = VD2_N ~ VI4, family = "binomial", data = Base_Trajipaq_Finale_Ok)
+
+summary(reg_2)
+
+```
+
+### Coefficient de corrélation
+
+```{r}
+
+cor.test(Base_Trajipaq_Finale_Ok$VD2_N, Base_Trajipaq_Finale_Ok$VI4)
+
+```
+
+### Visualisation
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+```
+
+#### Sexe
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du sexe", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ SEXE, nrow = 2) +
+  theme_bw()
+
+```
+
+#### Age
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'age", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ AGE, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Education
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(EDUCATION)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'education", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ EDUCATION, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Origine
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(ORIGINE)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'origine", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ ORIGINE, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Revenu
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(REVENU)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ REVENU, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Langue maternelle
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(LANGUE)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ LANGUE, nrow = 2) +
+  theme_bw()
+
+```
+
+#### Religion
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(RELIGION)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de la religion", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ RELIGION, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Statut matrimonial
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(MATRIMONIAL)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du statut matrimonial", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ MATRIMONIAL, nrow = 3) +
+  theme_bw()
+
+```
+
+## H3 : VD3 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(VD3_N = case_when(
+    VD3 == "Non" ~ 0,
+    VD3 == "Oui" ~ 1
+  ))
+
+```
+
+```{r}
+
+reg_3 <- glm(formula = VD3_N ~ VI4, family = "binomial", data = Base_Trajipaq_Finale_Ok)
+
+summary(reg_3)
+
+```
+
+## H4 : VD1 entretien une relation avec VD3 (en tant que variable indépendante)
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(VD1_F = case_when(
+    VD1 < 0.5 ~ "Non",
+    VD1 >= 0.5 ~ "Oui"
+  ))
+
+```
+
+```{r}
+
+ctable(Base_Trajipaq_Finale_Ok$VD3, Base_Trajipaq_Finale_Ok$VD1_F)
+
+```
+
+```{r}
+
+chisq.test(Base_Trajipaq_Finale_Ok$VD3, Base_Trajipaq_Finale_Ok$VD1_F)
+
+```
