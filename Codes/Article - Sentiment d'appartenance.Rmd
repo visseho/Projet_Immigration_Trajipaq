@@ -79,7 +79,9 @@ Réponses possibles :
 
 # Présentation des variables de contrôle
 
-## Q10. Êtes-vous un homme, une femme ou autre ?
+## Sexe
+
+### Q10. Êtes-vous un homme, une femme ou autre ?
 
 01. Homme
 02. Femme
@@ -116,7 +118,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q10_F)) +
 
 La réponse modale est "femme" (56.69%).
 
-## Q8B A quel groupe d'âge appartenez-vous ?
+## Âge
+
+### Q8B A quel groupe d'âge appartenez-vous ?
 
 01. 0 – 19 ans
 02. 20 – 24 ans
@@ -149,7 +153,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = QAGE)) +
 La distribution est symétrique.
 Le groupe d'âge modal est "35-39 ans" (24.63%).
 
-## STATUT. Êtes-vous actuellement... ?
+## Statut matrimonial
+
+### STATUT. Êtes-vous actuellement... ?
 
 01. Célibataire/jamais marié(e) ou conjoint(e) de fait
 02. Marié(e)
@@ -177,7 +183,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = STATUT)) +
 
 La réponse modale est "Marié(e)" (47.53%)
 
-## Q11. Dans quel pays êtes-vous né ?
+## Pays d'origine
+
+### Q11. Dans quel pays êtes-vous né ?
 
 Pays. (liste déroulante)
 998. Je ne sais pas
@@ -200,7 +208,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = as.factor(Q11))) +
 
 Les réponses modales sont "France" (26.685%) et "Algérie" (6.649%).
 
-## Q4. Êtes-vous né au Canada ?
+## Lieu de naissance
+
+### Q4. Êtes-vous né au Canada ?
 
 Type de variable = catégoriel
 Niveau de mesure = nominal
@@ -221,7 +231,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q4)) +
 
 La réponse modale est "deuxième génération" (92.87%).
 
-## Q15I. Statut migratoire avant d'obtenir la résidence permanente
+## Statut migratoire
+
+### Q15I. Statut migratoire avant d'obtenir la résidence permanente
 
 01. Travailleur temporaire (visa de travail ou permis de
 travail)
@@ -268,7 +280,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q15M1)) +
 
 La réponse modale est "travailleur temporaire" (57.78%).
 
-## Q16. Quel est votre plus haut diplôme d’études obtenu ?
+## Niveau d'éducation
+
+### Q16. Quel est votre plus haut diplôme d’études obtenu ?
 
 01. Moins que le secondaire
 02. Secondaire ou équivalent
@@ -316,7 +330,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q16)) +
 La distribution du niveau d'éducation est asymétrique vers la gauche. 
 L'échantillon est composé à 67.31% de personnes titulaires d'un diplôme universitaire.
 
-## Q17. Actuellement, avez-vous une religion ?
+## Religion
+
+### Q17. Actuellement, avez-vous une religion ?
 
 00. Sans religion
 01. Catholique
@@ -380,7 +396,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q17)) +
 Les réponses modales sont "sans religion" (36.36%) et "catholique" (32.21%). 
 On remarque également un nombre significatif de réponses "musulman" (13.83%).
 
-## Q20. Quand vous étiez enfant, quelles étaient la langue ou les langues que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours? (Plusieurs réponses possibles).
+## Langue maternelle
+
+### Q20. Quand vous étiez enfant, quelles étaient la langue ou les langues que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours? (Plusieurs réponses possibles).
 
 01. Français
 02. Anglais
@@ -419,7 +437,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q20M1)) +
 
 La réponse modale est "français" (63.84%).
 
-## I3. Indice de la compétence linguistique (français)
+## Français
+
+### I3. Indice de la compétence linguistique (français)
 
 Type de variable = numeric
 Niveau de mesure = ratio
@@ -507,7 +527,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I3)) +
 La distribution est asymétrique vers la gauche.
 L'indice moyen de maîtrise du français est 0.87.
 
-## I4. Indice de la compétence linguistique (anglais).
+## Anglais
+
+### I4. Indice de la compétence linguistique (anglais).
 
 Type de variable = numeric
 Niveau de mesure = ratio
@@ -595,7 +617,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I4)) +
 La distribution est asymétrique vers la gauche.
 L'indice moyen de maîtrise du français est 0.73.
 
-## Q23. Comment est votre état de santé en général ?
+## Etat de santé
+
+### Q23. Comment est votre état de santé en général ?
 
 01. Très bon
 02. Bon
@@ -639,7 +663,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q23)) +
 La distribution est asymétrique vers la gauche. 
 98.47% des répondants ont un état de santé moyen ou bon.
 
-## I5. Indice de l'état de santé au cours des 12 derniers mois
+## Santé (12 derniers mois)
+
+### I5. Indice de l'état de santé au cours des 12 derniers mois
 
 ```{r}
 
@@ -736,7 +762,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = I5)) +
 La distribution est asymétrique vers la gauche. 
 L'indice moyen de l'état de santé au cours des 12 derniers mois est de 0.78.
 
-## Q26. Quel était le plus haut diplôme d’études obtenu par votre mère ?
+## Niveau d'éducation (mère)
+
+### Q26. Quel était le plus haut diplôme d’études obtenu par votre mère ?
 
 01. Moins que le secondaire
 02. Secondaire ou équivalent
@@ -783,7 +811,9 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q26)) +
 
 La valeur modale est "diplôme universitaire" (28.62%).
 
-## Q28. Quel était le plus haut diplôme d’études obtenu par votre père ?
+## Niveau d'éducation (père)
+
+### Q28. Quel était le plus haut diplôme d’études obtenu par votre père ?
 
 01. Moins que le secondaire
 02. Secondaire ou équivalent
@@ -850,7 +880,184 @@ L'échantillon possède les caractéristiques socio-démographiques suivantes :
 - prépondérance d'un diplôme universitaire chez la mère (28.62%)
 - prépondérance d'un diplôme universitaire chez la mère (34.70%)
 
-# VD1 : sentiment d'appartenance au Québec
+# VD1 : sentiment d'appartenance (Québec)
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39A = case_when(
+    Q39A == 1 ~ 4,
+    Q39A == 2 ~ 3,
+    Q39A == 3 ~ 2,
+    Q39A == 4 ~ 1,
+    Q39A == 98 ~ NA,
+    Q39A == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39A)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39A)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche. 
+87.01% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent chez elles au Québec.
+
+## Q39B. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : il faut faire oublier ses origines pour se faire accepter au Québec.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39B = case_when(
+    Q39B == 1 ~ 4,
+    Q39B == 2 ~ 3,
+    Q39B == 3 ~ 2,
+    Q39B == 4 ~ 1,
+    Q39B == 98 ~ NA,
+    Q39B == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39B)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39B)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la droite.
+67.88% des personnes interrogées ne sont pas du tout d'accord ou plutôt pas d'accord pour dire qu'il faut faire oublier ses origines pour se faire accepter au Québec.
+
+## Q39C. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : on me voit comme une Québécoise.
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39C = case_when(
+    Q39C == 1 ~ 4,
+    Q39C == 2 ~ 3,
+    Q39C == 3 ~ 2,
+    Q39C == 4 ~ 1,
+    Q39C == 98 ~ NA,
+    Q39C == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39C)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39C)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_bw()
+
+```
+
+Les réponses modales sont "tout à fait d'accord" (29.36%) et "pas du tout d'accord" (29.97%).
+
+## Q39D. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens Québécois(e).
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39D = case_when(
+    Q39D == 1 ~ 4,
+    Q39D == 2 ~ 3,
+    Q39D == 3 ~ 2,
+    Q39D == 4 ~ 1,
+    Q39D == 98 ~ NA,
+    Q39D == 99 ~ NA
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$Q39D)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39D)) +
+  geom_bar(fill = "pink",
+           na.rm = TRUE
+           ) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche. 
+60.72% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles se sentent Québécois(e)s.
+
+```{r}
+
+v_VD1 <- c("Q39A",
+          "Q39B",
+          "Q39C",
+          "Q39D"
+)
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(VD1 = (sum(c_across(all_of(v_VD1)), na.rm = TRUE) - length(v_VD1)) / (3*length(v_VD1))) %>%
+  mutate(VD1 = if (VD1 < 0) NA_real_ else VD1) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$VD1)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD1)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche. 
+L'indice moyen du sentiment d'appartenance au Québec est 0.53.
+
+# VD2 : sentiment d'appartenance (Québec, Canada et pays d'origine)
 
 ## Q39A. Dites si vous êtes tout à fait d’accord, plutôt d’accord, plutôt pas d’accord ou pas du tout d’accord avec les propositions suivantes (participation identitaire et sentiment d’appartenance) : je me sens chez moi au Québec.
 
@@ -1067,13 +1274,11 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = Q39F)) +
 La distribution est asymétrique vers la gauche. 
 81.42% des personnes interrogées sont tout à fait d'accord ou plutôt d'accord pour dire qu'elles possèdent un sentiment d'appartenance envers leur pays d'origine.
 
-## VD1 : L'indice du sentiment d'appartenance au Québec
-
 A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
 
 ```{r}
 
-v_VD1 <- c("Q39A",
+v_VD2 <- c("Q39A",
           "Q39B",
           "Q39C",
           "Q39D",
@@ -1084,21 +1289,59 @@ v_VD1 <- c("Q39A",
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
   rowwise() %>%
-  mutate(VD1 = (sum(c_across(all_of(v_VD1)), na.rm = TRUE) - length(v_VD1)) / (3*length(v_VD1))) %>%
-  mutate(VD1 = if (VD1 < 0) NA_real_ else VD1) %>%
+  mutate(VD2 = (sum(c_across(all_of(v_VD2)), na.rm = TRUE) - length(v_VD2)) / (3*length(v_VD2))) %>%
+  mutate(VD2 = if (VD2 < 0) NA_real_ else VD2) %>%
   ungroup()
 
 ```
 
 ```{r}
 
-descr(Base_Trajipaq_Finale_Ok$VD1)
+descr(Base_Trajipaq_Finale_Ok$VD2)
 
 ```
 
 ```{r}
 
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD1)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD2)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  theme_bw()
+
+```
+
+La distribution est asymétrique vers la gauche. 
+L'indice moyen du sentiment d'appartenance au Québec est 0.59.
+A la différence des variables précédentes, l'indice du sentiment d'appartenance est une variable numérique continue dont le niveau de mesure est ratio.
+
+
+
+```{r}
+
+v_VD2 <- c("Q39A",
+          "Q39B",
+          "Q39C",
+          "Q39D",
+          "Q39E"
+          )
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  rowwise() %>%
+  mutate(VD2 = (sum(c_across(all_of(v_VD2)), na.rm = TRUE) - length(v_VD2)) / (3*length(v_VD2))) %>%
+  mutate(VD2 = if (VD2 < 0) NA_real_ else VD2) %>%
+  ungroup()
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$VD2)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VD2)) +
   geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
   theme_bw()
 
@@ -1291,7 +1534,35 @@ L'indice moyen de discrimination subie est 0.28.
 
 # Analyse
 
-## VI1 + VD1
+## Q39E + Q39F
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39E_N = case_when(
+    Q39E == 1 | Q39E == 2 ~ "Non",
+    Q39E == 3 | Q39E == 4 ~ "Oui"
+  ))
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q39F_N = case_when(
+    Q39E == 1 | Q39E == 2 ~ "Non",
+    Q39E == 3 | Q39E == 4 ~ "Oui"
+  ))
+
+```
+
+```{r}
+
+ctable(x = Base_Trajipaq_Finale_Ok$Q39E_N, # Sentiment d'appartenance au Canada
+       y =  Base_Trajipaq_Finale_Ok$Q39F_N # Sentiment d’appartenance au pays d'origine
+       )
+
+```
+
+## VI2 + VD2
 
 ### Tableau croisé
 
@@ -1299,14 +1570,14 @@ L'indice moyen de discrimination subie est 0.28.
 
 Base_Trajipaq_Finale_Ok <-
   Base_Trajipaq_Finale_Ok %>%
-  mutate(VD1_F = case_when(
-    VD1 < 0.25 ~ "Faible",
-    VD1 >= 0.25 & VD1 < 0.5 ~ "Moyen",
-    VD1 >= 0.5 & VD1 < 0.75 ~ "Fort",
-    VD1 >= 0.75 & VD1 <= 1 ~ "Tres fort",
+  mutate(VD2_F = case_when(
+    VD2 < 0.25 ~ "Faible",
+    VD2 >= 0.25 & VD2 < 0.5 ~ "Moyen",
+    VD2 >= 0.5 & VD2 < 0.75 ~ "Fort",
+    VD2 >= 0.75 & VD2 <= 1 ~ "Tres fort",
   ))
 
-Base_Trajipaq_Finale_Ok$VD1_F <- factor(Base_Trajipaq_Finale_Ok$VD1_F, levels = c("Tres fort",
+Base_Trajipaq_Finale_Ok$VD2_F <- factor(Base_Trajipaq_Finale_Ok$VD2_F, levels = c("Tres fort",
                                                                                 "Fort",
                                                                                 "Moyen",
                                                                                 "Faible"
@@ -1331,13 +1602,13 @@ Base_Trajipaq_Finale_Ok$VI1_F <- factor(Base_Trajipaq_Finale_Ok$VI1_F, levels = 
 
 ```{r}
 
-ctable(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD1_F)
+ctable(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD2_F)
 
 ```
 
 ```{r}
 
-ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI1_F, fill = VD1_F)) +
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI1_F, fill = VD2_F)) +
   geom_bar(position = "dodge", na.rm = TRUE) +
   theme_bw()
 
@@ -1347,7 +1618,7 @@ ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = VI1_F, fill = VD1_F)) +
 
 ```{r}
 
-chisq.test(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD1_F)
+chisq.test(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD2_F)
 
 ```
 
@@ -1356,7 +1627,7 @@ chisq.test(x = Base_Trajipaq_Finale_Ok$VI1_F, y = Base_Trajipaq_Finale_Ok$VD1_F)
 
 ```{r}
 
-reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI1 ~ Base_Trajipaq_Finale_Ok$VD1 +
+reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI1 ~ Base_Trajipaq_Finale_Ok$VD2 +
               Base_Trajipaq_Finale_Ok$Q10 +     # Sexe
               Base_Trajipaq_Finale_Ok$Q8B +     # Âge
               Base_Trajipaq_Finale_Ok$STATUT +  # Statut matrimonial
@@ -1374,7 +1645,7 @@ summary(reg_1)
 
 ```{r}
 
-cor.test(Base_Trajipaq_Finale_Ok$VI1, Base_Trajipaq_Finale_Ok$VD1)
+cor.test(Base_Trajipaq_Finale_Ok$VI1, Base_Trajipaq_Finale_Ok$VD2)
 
 ```
 
@@ -1383,7 +1654,7 @@ cor.test(Base_Trajipaq_Finale_Ok$VI1, Base_Trajipaq_Finale_Ok$VD1)
 ```{r}
 
 vis <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1)), aes(x = VI1, y = VD1)) +
+                filter(!is.na(VD2), !is.na(VI1)), aes(x = VI1, y = VD2)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", color = "purple",se = FALSE) +
   labs(title = "Discrimination et sentiment d'appartenance", 
@@ -1399,7 +1670,7 @@ print(vis)
 ```{r}
 
 vis_sex <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q10)), aes(x = VI1, y = VD1, color = as.factor(Q10))) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q10)), aes(x = VI1, y = VD2, color = as.factor(Q10))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Sexe", palette = 3) +
@@ -1434,7 +1705,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_age <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q8A_F)), aes(x = VI1, y = VD1, color = Q8A_F)) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q8A_F)), aes(x = VI1, y = VD2, color = Q8A_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Age", palette = 3) +
@@ -1469,7 +1740,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(STATUT_F)), aes(x = VI1, y = VD1, color = STATUT_F)) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(STATUT_F)), aes(x = VI1, y = VD2, color = STATUT_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Statut matrimonial", palette = 3) +
@@ -1488,7 +1759,7 @@ print(vis_born)
 ```{r}
 
 vis_born <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q4)), aes(x = VI1, y = VD1, color = as.factor(Q4))) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q4)), aes(x = VI1, y = VD2, color = as.factor(Q4))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Ne au Canada", palette = 3) +
@@ -1506,7 +1777,7 @@ print(vis_born)
 ```{r}
 
 vis_educ <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q16)), aes(x = VI1, y = VD1, color = as.factor(Q16))) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q16)), aes(x = VI1, y = VD2, color = as.factor(Q16))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Niveau d'education", palette = 3) +
@@ -1537,7 +1808,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_relig <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q17_F)), aes(x = VI1, y = VD1, color = Q17_F)) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q17_F)), aes(x = VI1, y = VD2, color = Q17_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Religion", palette = 3) +
@@ -1567,7 +1838,7 @@ Base_Trajipaq_Finale_Ok <-
 ```{r}
 
 vis_lang <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q20_F)), aes(x = VI1, y = VD1, color = Q20_F)) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q20_F)), aes(x = VI1, y = VD2, color = Q20_F)) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Langue maternelle", palette = 3) +
@@ -1585,7 +1856,7 @@ print(vis_lang)
 ```{r}
 
 vis_health <- ggplot(Base_Trajipaq_Finale_Ok %>%
-                filter(!is.na(VD1), !is.na(VI1), !is.na(Q23)), aes(x = VI1, y = VD1, color = as.factor(Q23))) +
+                filter(!is.na(VD2), !is.na(VI1), !is.na(Q23)), aes(x = VI1, y = VD2, color = as.factor(Q23))) +
   geom_jitter(color = "pink") +
   stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(name = "Etat de sante", palette = 3) +

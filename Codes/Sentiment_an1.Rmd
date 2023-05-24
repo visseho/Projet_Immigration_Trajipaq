@@ -1,0 +1,7 @@
+---
+title: "Sentiment_an1"
+author: "Thea"
+date: "2023-05-24"
+output: html_document
+---
+
