@@ -1252,3 +1252,10 @@ chisq.test(Base_Trajipaq_Finale_Ok$VD3, Base_Trajipaq_Finale_Ok$VD1_F)
 # La relation n'est pas significative avec une chance d'erreur alpha égale à 5%.
 
 ```
+
+## Q14I
+
+```{r}
+
+```
+
