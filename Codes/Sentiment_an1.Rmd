@@ -1256,6 +1256,15 @@ chisq.test(Base_Trajipaq_Finale_Ok$VD3, Base_Trajipaq_Finale_Ok$VD1_F)
 ## Q14I
 
 ```{r}
+Base_Trajipaq_Finale_Ok <- Base_Trajipaq_Finale_Ok %>%
+  mutate(Q14I = case_when(
+    as.numeric(Q14I) == 9996 ~ as.numeric(Q12),
+    as.numeric(Q14I) == 9998 ~ NA_real_,
+    as.numeric(Q14I) == 9999 ~ NA_real_,
+    TRUE ~ as.numeric(Q14I)
+  ))
+
+freq(Base_Trajipaq_Finale_Ok$Q14I)
 
 ```
 
