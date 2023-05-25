@@ -157,6 +157,46 @@ ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(EDUCATION)), aes(x = EDUCATION)) +
 
 ```
 
+### Année d'arrivée au Québec
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(Q12 = case_when(
+    Q12 == 9998 ~ NA_real_,
+    Q12 == 9999 ~ NA_real_,
+    TRUE ~ as.numeric(Q12)
+  ))
+
+Base_Trajipaq_Finale_Ok <- 
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(ARRIVEE = case_when(
+    as.numeric(Q14I) == 9996 ~ as.numeric(Q12),
+    as.numeric(Q14I) == 9998 ~ NA_real_,
+    as.numeric(Q14I) == 9999 ~ NA_real_,
+    TRUE ~ as.numeric(Q14I)
+  ))
+
+```
+
+```{r}
+
+descr(Base_Trajipaq_Finale_Ok$ARRIVEE)
+
+```
+
+```{r}
+
+ggplot(data = Base_Trajipaq_Finale_Ok, mapping = aes(x = ARRIVEE)) +
+  geom_boxplot(na.rm = TRUE,
+               fill = "pink") +
+  labs(title = "Distribution de l'annee d'arrivee au Quebec",
+       x = "Annee d'arrivee au Quebec") +
+  theme_bw()
+
+```
+
 ### Origine
 
 ```{r}
@@ -629,6 +669,7 @@ reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI4 ~ Base_Trajipaq_Finale_Ok$VD1 +
               Base_Trajipaq_Finale_Ok$SEXE +
               Base_Trajipaq_Finale_Ok$AGE +
               Base_Trajipaq_Finale_Ok$EDUCATION +
+              Base_Trajipaq_Finale_Ok$ARRIVEE +
               Base_Trajipaq_Finale_Ok$ORIGINE +
               Base_Trajipaq_Finale_Ok$REVENU +
               Base_Trajipaq_Finale_Ok$LANGUE +
@@ -786,6 +827,59 @@ print(vis_EDUCATION_2)
 
 ```
 
+#### Année d'arrivée au Québec
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(ARRIVEE_C = case_when(
+    ARRIVEE >= 1990 & ARRIVEE < 2000 ~ "[1990;1999]",
+    ARRIVEE >= 2000 & ARRIVEE < 2005 ~ "[2000;2004]",
+    ARRIVEE >= 2005 & ARRIVEE < 2010 ~ "[2005;2009]",
+    ARRIVEE >= 2010 & ARRIVEE < 2015 ~ "[2010;2014]",
+    ARRIVEE >= 2015 & ARRIVEE < 2020 ~ "[2015;2020]",
+  ))
+
+```
+
+
+```{r}
+
+vis_ARRIVEE <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(ARRIVEE_C)), aes(x = VI4, y = VD1, color = as.factor(ARRIVEE_C))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Annee d'arrivee au Quebec", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'arrivee", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_ARRIVEE)
+
+# La relation semble être affectée par l'année d'arrivée au Québec avec cette méthode de visualisation.
+
+```
+
+```{r}
+
+vis_ARRIVEE_2 <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(ARRIVEE_C)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'arrivee", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ ARRIVEE_C, nrow = 3) +
+  theme_bw()
+print(vis_ARRIVEE_2)
+
+# La relation semble également affectée par l'année d'arrivée au Québec avec cette méthode de visualisation.
+
+```
 
 #### Origine
 
@@ -1096,6 +1190,27 @@ ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(EDU
 
 ```
 
+#### Année d'arrivée au Québec
+
+```{r}
+
+ggplot(Base_Trajipaq_Finale_Ok %>% filter(!is.na(VD2_N), !is.na(VI4), !is.na(ARRIVEE_C)), aes(x = VI4, y = VD2_N)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'arivee", 
+    x = "Discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ ARRIVEE_C, nrow = 3) +
+  theme_bw()
+
+# La relation semble être affectée par le niveau d'éducation.
+
+```
+
 #### Origine
 
 ```{r}
@@ -1252,19 +1367,3 @@ chisq.test(Base_Trajipaq_Finale_Ok$VD3, Base_Trajipaq_Finale_Ok$VD1_F)
 # La relation n'est pas significative avec une chance d'erreur alpha égale à 5%.
 
 ```
-
-## Q14I
-
-```{r}
-Base_Trajipaq_Finale_Ok <- Base_Trajipaq_Finale_Ok %>%
-  mutate(Q14I = case_when(
-    as.numeric(Q14I) == 9996 ~ as.numeric(Q12),
-    as.numeric(Q14I) == 9998 ~ NA_real_,
-    as.numeric(Q14I) == 9999 ~ NA_real_,
-    TRUE ~ as.numeric(Q14I)
-  ))
-
-freq(Base_Trajipaq_Finale_Ok$Q14I)
-
-```
-
