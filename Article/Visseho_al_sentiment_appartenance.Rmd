@@ -50,13 +50,9 @@ Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leu
 
 -   VD1 (numérique/ratio)
 
-#### VD2. Double sentiment d'appartenance (Canada/Pays d'origine)
+#### VD2. Sentiment d'appartenance au Canada
 
 -   Q39E (facteur/nominal)
-
--   Q39F (facteur/nominal)
-
--   VD2 (facteur/nominal)
 
     |                    | **Canada** | **Oui**  | **Non**     |
     |--------------------|------------|----------|-------------|
@@ -64,11 +60,9 @@ Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leu
     | **Oui**            |            | Intégré  | Séparé      |
     | **Non**            |            | Assimilé | Marginalisé |
 
-#### VD3. Double sentiment d'appartenance (Canada/Québec)
+#### VD3. Sentiment d'appartenance au pays d'origine
 
--   Q39D (facteur/nominal)
-
--   Q39E (facteur/nominal)
+-   Q39F (facteur/nominal)
 
 -   VD3 (facteur/nominal)
 
