@@ -20,3 +20,168 @@ bibliography:
 - Covid_Family.bib
 ---
 
+# Résumé
+
+```{r}
+
+# Partie à rédiger en dernier.
+
+```
+
+# Introduction
+
+```{r}
+
+# Partie à rédiger après la discussion des résultats.
+
+# Question de recherche = comment les sentiments d'appartenances sont ils associés au pays d'origine et aux situations de discriminations vécues par les immigrants établis au Québec.
+
+```
+
+# Revue de littérature
+
+```{r}
+
+# Partie à rédiger en priorité.
+
+```
+
+## Intégration culturelle
+
+## Sentiments d'appartenance
+
+## Situations de discriminations vécues par les immigrants
+
+## Sentiments d'appartenance et discriminations
+
+# Méthodologie
+
+```{r}
+
+# Partie à rédiger en priorité.
+
+```
+
+## Présentation de l'échantillon
+
+## Présentation des variables
+
+```{r}
+
+# VD1 = indice du sentiment d'appartenance au Québec
+
+# VD2 = sentiment d'appartenance au Canada
+
+# VI1 = région d'origine
+
+# VI2 = indice de la distance culturelle du pays d'origine avec le Canada
+
+# VI3 = indice de la stabilité politique du pays d'origine par rapport à celle du Canada
+
+# VI4 = indice des situations de discriminations subies
+
+```
+
+## Hypothèses de recherche
+
+```{r}
+
+# H1 = la région d'origine des immigrants (VI1) joue un rôle dans le développement du sentiment d'appartenance au Québec (VD1)
+
+# H2 = la région d'origine des immigrants (VI1) joue un rôle dans le développement du sentiment d'appartenance au Canada (VD2)
+
+# H3 = la distance culturelle du pays d'origine des immigrants avec le Canada (VI2) joue un rôle dans le développement du sentiment d'appartenance au Québec (VD1)
+
+# H4 = la distance culturelle du pays d'origine des immigrants avec le Canada (VI2) joue un rôle dans le développement du sentiment d'appartenance au Canada (VD2)
+
+# H5 = la stabilité politique du pays d'origine des immigrants par rapport à celle du Canada (VI3) joue un rôle dans le développement du sentiment d'appartenance au Québec (VD1)
+
+# H6 = la stabilité politique du pays d'origine des immigrants par rapport à celle du Canada (VI3) joue un rôle dans le développement du sentiment d'appartenance au Canada (VD2)
+
+# H7 = les situations de discriminations vécues par les immigrants (VI4) réduisent le développement du sentiment d'appartenance au Québec (VD1)
+
+# H8 = les situations de discriminations vécues par les immigrants (VI4) réduisent le développement du sentiment d'appartenance au Canada (VD2)
+
+```
+
+# Résultats
+
+```{r}
+
+# Partie à rédiger après la revue de littérature et la méthodologie.
+
+```
+
+## Présentation des résultats liés à la première hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+## Présentation des résultats liés à la deuxième hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+## Présentation des résultats liés à la troisième hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+# Discussion
+
+```{r}
+
+# Partie à rédiger après la présentation des résultats.
+
+```
+
+## Discussion des résultats liés à la première hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+## Discussion des résultats liés à la deuxième hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+## Discussion des résultats liés à la troisième hypothèse
+
+```{r}
+
+# Trouver un titre évocateur après la rédaction.
+
+```
+
+## Discussion des limites de l'étude
+
+# Conclusion
+
+```{r}
+
+# Partie à réaliser après la discussion des résultats
+
+```
+
+# Bibliographie
+
+```{r}
+
+# Partie générée automatiquement, mais qui doit tout de même être relue à la fin du travail de rédaction.
+
+```
