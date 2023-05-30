@@ -529,9 +529,6 @@ trajipaq <-
     Q39F == 99 ~ NA
   ))
 
-```
-
-```{r}
 
 freq(trajipaq$VD3)
 
@@ -551,7 +548,63 @@ ggplot(subset(trajipaq, !is.na(VD3)), aes(x = VD3)) +
 ```
 
 
-### VD4 
+### VD4 : sentiment d'appartenance au Canada comparativement au pays d'origine
+
+```{r}
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(VD4= case_when(
+    VD2 == "Oui" & VD3 == "Oui" ~ "Intégré",
+    VD2 == "Oui" & VD3 == "Non" ~ "Assimilé",
+    VD2 == "Non" & VD3 == "Oui" ~ "Séparé",
+    VD2 == "Non" & VD3 == "Non" ~ "Marginalisé"
+  ))
+
+freq(trajipaq$VD4)
+
+```
+
+
+### VD5 : sentiment d'appartenance au Canada comparativement au Québec
+
+Q39E: Je me sens Canadien et 
+Q39D: Je me sens Québecois 
+
+```{r}
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(Q39Douinon = case_when(
+         Q39D <= 2 ~ "Oui", 
+         Q39D == 3 | Q39D == 4 ~ "Non", 
+         Q39D >= 97 ~ NA_character_)) 
+
+ctable(trajipaq$Q39D, trajipaq$Q39Douinon, "no")
+
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(VD5= factor(case_when(
+    VD2 == "Oui" & Q39Douinon == "Oui" ~ 1,
+    VD2 == "Oui" & Q39Douinon == "Non" ~ 2,
+    VD2 == "Non" & Q39Douinon == "Oui" ~ 3,
+    VD2 == "Non" & Q39Douinon == "Non" ~ 4
+  ),
+  labels = c("Canada et Québec", "Canada seule", "Québec seule", "Aucun"),
+  levels = c(1, 2, 3, 4)))
+
+freq(trajipaq$VD5)
+
+```
+
+
+
+## Graphiques
+
+```{r}
+
+```
 
 
 
