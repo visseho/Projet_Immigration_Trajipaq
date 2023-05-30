@@ -550,6 +550,11 @@ ggplot(subset(trajipaq, !is.na(VD3)), aes(x = VD3)) +
 
 ```
 
+
+### VD4 
+
+
+
 ## Variables indépendantes
 
 ### VI4 : discrimination subie au cours des 12 derniers mois
