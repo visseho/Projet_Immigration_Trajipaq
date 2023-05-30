@@ -34,7 +34,7 @@ bibliography:
 
 # Partie à rédiger après la discussion des résultats.
 
-# Question de recherche = comment les sentiments d'appartenances sont ils associés au pays d'origine et aux situations de discriminations vécues par les immigrants établis au Québec ?
+# Question de recherche = comment les sentiments d'appartenances sont ils associés au pays d'origine et aux situations de discriminations vécues par les immigrants établis au Québec.
 
 ```
 
@@ -46,13 +46,15 @@ bibliography:
 
 ```
 
-## Intégration culturelle
+# Intégration culturelle
+
+# Sentiments d'appartenance et discriminations
 
 ## Sentiments d'appartenance
 
 ## Situations de discriminations vécues par les immigrants
 
-## Sentiments d'appartenance et discriminations
+
 
 # Méthodologie
 
