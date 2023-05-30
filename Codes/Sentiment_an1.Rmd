@@ -6,14 +6,18 @@ output: html_document
 ---
 
 ```{r}
+
 library(summarytools)
 library(tidyverse)
 library(ggthemes)
 library(haven)
+
 ```
 
 ```{r}
+
 Base_Trajipaq_Finale_Ok <- read_dta("~/Desktop/Base_Trajipaq_Finale_Ok.dta")
+
 ```
 
 # Présentation des variables
@@ -409,6 +413,41 @@ ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(MATRIMONIAL)), aes(x = MATRIMONIAL
 
 ```
 
+### Type d'intégration culturelle
+
+```{r}
+
+Base_Trajipaq_Finale_Ok <-
+  Base_Trajipaq_Finale_Ok %>%
+  mutate(INTEGRATION = case_when(
+    VD1_F == "Non" & VD3 == "Non" ~ "Marginal",
+    VD1_F == "Oui" & VD3 == "Non" ~ "Assimile",
+    VD1_F == "Non" & VD3 == "Oui" ~ "Separe",
+    VD1_F == "Oui" & VD3 == "Oui" ~ "Integre"
+  ))
+
+```
+
+```{r}
+
+freq(Base_Trajipaq_Finale_Ok$INTEGRATION)
+
+```
+
+```{r}
+
+ggplot(subset(Base_Trajipaq_Finale_Ok, !is.na(INTEGRATION)), aes(x = INTEGRATION)) +
+  geom_bar(fill = "pink") +
+  labs(
+    title = "Distribution des types d'intégration",
+    x = "Types d'intégration au Quebec"
+       ) +
+  coord_flip() +
+  theme_bw()
+
+```
+
+
 ## Variables dépendantes
 
 ### VD1 : sentiment d'appartenance au Québec
@@ -674,7 +713,8 @@ reg_1 <- lm(Base_Trajipaq_Finale_Ok$VI4 ~ Base_Trajipaq_Finale_Ok$VD1 +
               Base_Trajipaq_Finale_Ok$REVENU +
               Base_Trajipaq_Finale_Ok$LANGUE +
               Base_Trajipaq_Finale_Ok$RELIGION +
-              Base_Trajipaq_Finale_Ok$MATRIMONIAL
+              Base_Trajipaq_Finale_Ok$MATRIMONIAL +
+              Base_Trajipaq_Finale_Ok$INTEGRATION
             )
 summary(reg_1)
 
@@ -1037,6 +1077,45 @@ print(vis_RELIGION_2)
 
 ```
 
+### Type d'intégration
+
+```{r}
+
+vis_INTEGRATION <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(INTEGRATION)), aes(x = VI4, y = VD1, color = INTEGRATION)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Type d'integration", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du statut matrimonial", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_INTEGRATION)
+
+# La relation semble être affectée par le type d'intégration avec cette méthode de visualisation.
+
+```
+
+```{r}
+
+vis_INTEGRATION_2 <- ggplot(Base_Trajipaq_Finale_Ok %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(INTEGRATION)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du type d'integration", 
+       x = "Discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ INTEGRATION, nrow = 3) +
+  theme_bw()
+print(vis_INTEGRATION_2)
+
+# La relation semble être également affectée par le type d'intégration avec cette méthode de visualisation.
+
+```
+
 ### Statut matrimonial
 
 ```{r}
@@ -1075,6 +1154,7 @@ print(vis_MATRIMONIAL_2)
 # La relation semble être également affectée par le statut matrimonial avec cette méthode de visualisation.
 
 ```
+
 
 ## H2 : VD2 entretient une relation négative avec VI4
 
