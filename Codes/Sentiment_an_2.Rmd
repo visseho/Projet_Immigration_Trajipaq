@@ -13,6 +13,7 @@ Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leu
 # Création des variables
 
 ```{r}
+
 library(summarytools)
 library(tidyverse)
 library(ggthemes)
@@ -22,7 +23,7 @@ trajipaq <- read_dta("../Data/Base_Trajipaq_Finale_Ok.dta")
 
 ```
 
-- Sexe
+### Sexe
 
 ```{r}
 
@@ -41,7 +42,7 @@ freq(trajipaq$sexe)
 ```
 
 
-- Âge
+### Âge
 
 ```{r}
 
@@ -83,7 +84,7 @@ freq(trajipaq$age)
 ```
 
 
-- Education
+### Education
 
 ```{r}
 
@@ -597,8 +598,6 @@ trajipaq <-
 freq(trajipaq$VD5)
 
 ```
-
-
 
 ## Graphiques
 
