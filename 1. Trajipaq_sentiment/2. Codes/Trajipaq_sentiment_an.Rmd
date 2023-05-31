@@ -129,6 +129,7 @@ vis_age_2 <- ggplot(trajipaq %>%
 print(vis_age_2)
 
 ```
+
 #### education
 
 ```{r}

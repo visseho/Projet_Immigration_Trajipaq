@@ -5,7 +5,6 @@ date: "2023-05-24"
 output: html_document
 ---
 
-
 # Résumé
 
 Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leur pays d'origine et celles de leur nouveau pays de résidence. Cet article essaie de comprendre comment ces sentiments sont associés à leur pays d'origine et aux éventuelles situations de discriminations qu'ils vivent dans leur pays d'accueil.
@@ -43,7 +42,6 @@ freq(trajipaq$sexe)
 
 ```
 
-
 ### VC1 : groupe d'âge
 
 ```{r}
@@ -79,7 +77,6 @@ freq(trajipaq$age)
 
 ```
 
-
 ### VC2 : niveau d'éducation
 
 ```{r}
@@ -103,7 +100,6 @@ trajipaq <-
 freq(trajipaq$education)
 
 ```
-
 
 ### VC3 : année d'arrivée au Québec
 
@@ -385,7 +381,6 @@ trajipaq <-
 freq(trajipaq$VD4)
 
 ```
-
 
 ### VD5 : sentiment d'appartenance au Canada comparativement au Québec
 
