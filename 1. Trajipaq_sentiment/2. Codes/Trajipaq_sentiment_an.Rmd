@@ -1,0 +1,613 @@
+---
+title: "Trajipaq_sentiment_an"
+author: "Thea"
+date: "2023-05-31"
+output: html_document
+---
+
+```{r}
+
+library(summarytools)
+library(tidyverse)
+library(ggthemes)
+library(haven)
+
+trajipaq <- read_csv("../3. Data/Trajipaq_sentiment_cr.csv")
+
+```
+
+# Analyse
+
+## H1 : VD1 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+reg_1 <- lm(trajipaq$VI4 ~ trajipaq$VD1 +
+              trajipaq$sexe +
+              trajipaq$age +
+              trajipaq$education +
+              trajipaq$annee_qc +
+              trajipaq$origine +
+              trajipaq$revenu +
+              trajipaq$langue_mat +
+              trajipaq$religion +
+              trajipaq$statut_mat
+            )
+summary(reg_1)
+
+# Le modèle de régression traite les variables d'une manière inattendue.
+
+```
+
+### Coefficient de corrélation
+
+```{r}
+
+cor.test(trajipaq$VI4, trajipaq$VD1)
+
+```
+
+### Visualisation
+
+```{r}
+
+vis_H1 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(sexe)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination", 
+       x = "Perception de la Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_H1)
+
+```
+
+#### Sexe
+
+```{r}
+
+vis_sexe <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(sexe)), aes(x = VI4, y = VD1, color = sexe)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Sexe", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du sexe", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_sexe)
+
+vis_sexe_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(sexe)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du sexe", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ sexe, nrow = 2) +
+  theme_bw()
+print(vis_sexe_2)
+
+```
+
+#### Age
+
+```{r}
+
+vis_age <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(age)), aes(x = VI4, y = VD1, color = age)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Age", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'age", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_age)
+
+vis_age_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(age)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'age", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ age, nrow = 3) +
+  theme_bw()
+print(vis_age_2)
+
+```
+#### education
+
+```{r}
+
+vis_education <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(education)), aes(x = VI4, y = VD1, color = education)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Niveau d'education", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'education", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_education)
+
+vis_education_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(education)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'education", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ education, nrow = 3) +
+  theme_bw()
+print(vis_education_2)
+
+```
+
+#### Année d'arrivée au Québec
+
+```{r}
+
+trajipaq <-
+  trajipaq %>%
+  mutate(annee_qc_f = case_when(
+    annee_qc >= 1990 & annee_qc < 2000 ~ "[1990;1999]",
+    annee_qc >= 2000 & annee_qc < 2005 ~ "[2000;2004]",
+    annee_qc >= 2005 & annee_qc < 2010 ~ "[2005;2009]",
+    annee_qc >= 2010 & annee_qc < 2015 ~ "[2010;2014]",
+    annee_qc >= 2015 & annee_qc < 2020 ~ "[2015;2020]",
+  ))
+
+vis_annee_qc <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(annee_qc_f)), aes(x = VI4, y = VD1, color = as.factor(annee_qc_f))) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Annee d'annee_qc au Quebec", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'annee_qc", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_annee_qc)
+
+vis_annee_qc_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(annee_qc_f)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'annee_qc", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ annee_qc_f, nrow = 3) +
+  theme_bw()
+print(vis_annee_qc_2)
+
+```
+
+#### origine
+
+```{r}
+
+vis_origine <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(origine)), aes(x = VI4, y = VD1, color = origine)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Region d'origine", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'origine", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_origine)
+
+vis_origine_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(origine)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de l'origine", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ origine, nrow = 3) +
+  theme_bw()
+print(vis_origine_2)
+
+```
+
+#### revenu
+
+```{r}
+
+vis_revenu <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(revenu)), aes(x = VI4, y = VD1, color = revenu)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "revenu", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_revenu)
+
+vis_revenu_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(revenu)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ revenu, nrow = 3) +
+  theme_bw()
+print(vis_revenu_2)
+
+```
+
+#### langue_mat maternelle
+
+```{r}
+
+vis_langue_mat <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(langue_mat)), aes(x = VI4, y = VD1, color = langue_mat)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "langue_mat maternelle", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la langue maternelle", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_langue_mat)
+
+vis_langue_mat_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(langue_mat)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la langue maternelle", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ langue_mat, nrow = 2) +
+  theme_bw()
+print(vis_langue_mat_2)
+
+```
+
+### religion
+
+```{r}
+
+vis_religion <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(religion)), aes(x = VI4, y = VD1, color = religion)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "religion", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la religion", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_religion)
+
+vis_religion_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(religion)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction de la religion", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ religion, nrow = 3) +
+  theme_bw()
+print(vis_religion_2)
+
+```
+
+### Statut statut_mat
+
+```{r}
+
+vis_statut_mat <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(statut_mat)), aes(x = VI4, y = VD1, color = statut_mat)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(name = "Statut statut_mat", palette = 1) +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du statut statut_mat", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  theme_bw()
+print(vis_statut_mat)
+
+vis_statut_mat_2 <- ggplot(trajipaq %>%
+                filter(!is.na(VD1), !is.na(VI4), !is.na(statut_mat)), aes(x = VI4, y = VD1)) +
+  geom_jitter(color = "pink") +
+  stat_smooth(method = "lm", 
+              formula = "y ~ x", 
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Sentiment d'appartenance et discrimination en fonction du statut statut_mat", 
+       x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+       y = "Sentiment d'appartenance au Quebec") +
+  facet_wrap(~ statut_mat, nrow = 3) +
+  theme_bw()
+print(vis_statut_mat_2)
+
+```
+
+## H2 : VD2 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+trajipaq <-
+  trajipaq %>%
+  mutate(VD2_n = case_when(
+    VD2 == "Non" ~ 0,
+    VD2 == "Oui" ~ 1
+  ))
+
+reg_2 <- glm(formula = VD2_n ~ VI4, family = "binomial", data = trajipaq)
+
+summary(reg_2)
+
+```
+
+### Coefficient de corrélation
+
+```{r}
+
+cor.test(trajipaq$VD2_n, trajipaq$VI4)
+
+```
+
+### Visualisation
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+```
+
+#### Sexe
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du sexe", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ sexe, nrow = 2) +
+  theme_bw()
+
+```
+
+#### Age
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'age", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ age, nrow = 3) +
+  theme_bw()
+
+```
+
+#### education
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(education)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'education", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ education, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Année d'arrivée au Québec
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(annee_qc_f)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'annee d'arivee", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ annee_qc_f, nrow = 3) +
+  theme_bw()
+
+```
+
+#### origine
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(origine)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de l'origine", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ origine, nrow = 3) +
+  theme_bw()
+
+```
+
+#### revenu
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(revenu)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ revenu, nrow = 3) +
+  theme_bw()
+
+```
+
+#### langue_mat maternelle
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(langue_mat)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du revenu", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ langue_mat, nrow = 2) +
+  theme_bw()
+
+```
+
+#### religion
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(religion)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction de la religion", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ religion, nrow = 3) +
+  theme_bw()
+
+```
+
+#### Statut statut_mat
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(VD2_n), !is.na(VI4), !is.na(statut_mat)), aes(x = VI4, y = VD2_n)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance et discrimination en fonction du statut statut_mat", 
+    x = "Perception de la discrimination subie au cours des 12 derniers mois", 
+    y = "Sentiment d'appartenance au Canada") +
+  facet_wrap(~ statut_mat, nrow = 3) +
+  theme_bw()
+
+```
+
+## H3 : VD3 entretient une relation négative avec VI4
+
+### Modèle de régression
+
+```{r}
+
+trajipaq <-
+  trajipaq %>%
+  mutate(VD3_n = case_when(
+    VD3 == "Non" ~ 0,
+    VD3 == "Oui" ~ 1
+  ))
+
+reg_3 <- glm(formula = VD3_n ~ VI4, family = "binomial", data = trajipaq)
+
+summary(reg_3)
+
+```
+
+## H4 : VD1 entretien une relation avec VD3 (en tant que variable indépendante)
+
+```{r}
+
+trajipaq <-
+  trajipaq %>%
+  mutate(VD1_f = case_when(
+    VD1 < 0.5 ~ "Non",
+    VD1 >= 0.5 ~ "Oui"
+  ))
+
+ctable(trajipaq$VD3, trajipaq$VD1_f)
+
+```
+
+```{r}
+
+chisq.test(trajipaq$VD3, trajipaq$VD1_f)
+
+```

@@ -1,0 +1,274 @@
+---
+title: "Familial consequences of the Covid-19 in Québec: Comparison between immigrants and natives"
+subtitle: "Conséquences familiales de la Covid-19 au Québec: comparaison immigrants - natifs"
+author:
+- Vissého Adjiwanou ^[corresponding author - adjiwanou.vissého@uqam.ca]
+- Département de Sociologie, Université du Québec à Montréal (UQAM)
+- Solène Lardoux (Département de démographie, Université de Montréal)
+- Nima Zahedinameghi (Département de Sociologie, UQAM)
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document: 
+    toc: true
+    toc_depth: 3
+  word_document: default
+  template: svm-latex-ms2.tex 
+  pdf_document: default
+  citation_package: natbib
+bibliography: Covid_Canada.bib
+---
+
+<!--
+Ce fichier est pour les modèles de régression
+
+-->
+
+
+```{r, echo=FALSE, warning=FALSE}
+
+rm(list = ls())
+
+library(tidyverse)
+library(summarytools)
+library(srvyr)
+library(survey)
+library(ggpubr)
+library(writexl)
+library(stargazer)
+library(modelsummary)
+
+trajipaq_covid <- read_rds("../Data/trajipaq_covid.RData")
+
+```
+
+## Recodage des variables
+
+
+## Pondération
+
+```{r}
+
+
+#trajipaq_nm <- na.omit(trajipaq_covid)
+#trajipaq.design <- svydesign(id = ~ CaseId, weights = ~ Poidstot1, data = trajipaq_nm)
+trajipaq.design <- svydesign(id = ~ CaseId, weights = ~ Poidstot1, data = trajipaq_covid)
+
+```
+
+## Modèle de régression logistique
+
+### Exposition
+
+```{r}
+
+
+#var_ind <- c("statut_imm + duree_res + minorite_vis + sexe + gpage + niv_etude + statut_mat + statut_emploi")
+#var_ind
+
+#e_hors_dom + e_four_soin + e_quarantaine + e_expose + e_symptome + e_hospitalise + e_intensif + e_decede
+
+#freq(trajipaq_covid$e_four_soin)
+
+#expo_reg1 <- glm(formula = e_hors_dom ~ statut_imm, data = trajipaq_covid, family = "binomial")
+#summary(expo_reg1)
+
+#expo_reg2 <- glm(formula = e_hors_dom ~ statut_imm + duree_res + minorite_vis + 
+#                   sexe + gpage + niv_etude + statut_mat + statut_emploi, 
+#                 data = trajipaq_covid, family = "binomial")
+#summary(expo_reg2)
+
+
+#exp(cbind(OR = coef(expo_reg2), confint(expo_reg2)))
+
+#stargazer(expo_reg1, expo_reg2, apply.coef = exp, apply.se = exp, align = TRUE, type = "text")
+
+expo <-
+  trajipaq_covid %>% 
+  dplyr::select(e_hors_dom, e_four_soin, e_quarantaine, e_expose, e_symptome, e_hospitalise, e_intensif, e_decede)
+
+dfSummary(expo, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+
+dep1 <- list("e_hors_dom~", "e_four_soin~", "e_quarantaine~", "e_expose~",
+            "e_symptome~", "e_hospitalise~", "e_intensif~", "e_decede~") # list of unique dependent variables with ~ 
+indep1 <- list("relevel(statut_imm, 2)")  # list of first unique independent variables 
+#indep2<-list("statut_imm", "sexe", "gpage", "niv_etude", "statut_mat", "statut_emploi") # list of second unique independent variables
+indep2<-list("relevel(statut_imm, 2) + relevel(sexe, 2) + gpage + niv_etude + statut_mat + statut_emploi") #Map(function(x,y,z) lm(as.formula(paste(x,paste(list(y,z),collapse="+"))),data=trajipaq_covid),dep,indep1,indep2)
+#indep3<-list("gpage")
+
+model1 <- Map(function(x,y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep1, indep1) 
+
+model2 <- Map(function(x, y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep1, indep2) 
+
+
+stargazer(model1, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+stargazer(model2, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+#apply.se
+#table_model1 <- modelsummary(model1, statistic = "conf.int")
+#table_model1
+
+
+
+```
+
+
+### Consequences 1
+
+
+```{r}
+
+
+consequences <-
+  trajipaq_covid %>% 
+  dplyr::select(f_separe, f_emmenage, f_quitte_dom, f_nourriture, f_medicaments, f_sante, f_revenu, f_assurance, f_evenement, f_essentiel)
+
+dfSummary(consequences, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+
+dep2 <- list("f_separe~", "f_emmenage~", "f_quitte_dom~", "f_nourriture~", "f_medicaments~", "f_sante~", "f_revenu~", "f_assurance~", "f_evenement~", "f_essentiel~")
+
+model3 <- Map(function(x,y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep2, indep1) 
+stargazer(model3, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+model4 <- Map(function(x, y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep2, indep2) 
+stargazer(model4, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+```
+
+
+### Emploi
+
+```{r}
+
+emploi <-
+  trajipaq_covid %>% 
+  dplyr::select(f_reduire, f_cesser, f_perdu)
+
+dfSummary(emploi, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+dep3 <- list("f_reduire~", "f_cesser~", "f_perdu~")
+
+model5 <- Map(function(x,y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep3, indep1) 
+stargazer(model5, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+model6 <- Map(function(x, y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep3, indep2) 
+stargazer(model6, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+
+
+```
+
+### Entente dans la famille
+
+
+```{r}
+
+library(MASS)
+
+entente <-
+  trajipaq_covid %>% 
+  dplyr::select(f_role_parent, f_entende, f_enfant_maladie, f_autre_enfant, f_pers_agees)
+
+dfSummary(entente, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+dep4 <- list("f_role_parent~", "f_entende~", "f_enfant_maladie~", "f_autre_enfant~", "f_pers_agees~")
+
+model7 <- Map(function(x,y) polr(as.formula(paste(x,paste(list(y),collapse="+"))), method = c("logistic"), Hess = TRUE, data=trajipaq_covid), dep4, indep1) 
+stargazer(model7, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+model8 <- Map(function(x, y) polr(as.formula(paste(x,paste(list(y),collapse="+"))), method = c("logistic"), Hess = TRUE, data=trajipaq_covid), dep4, indep2) 
+stargazer(model8, ci = TRUE, apply.coef = exp, apply.ci = exp, type = "text")
+
+
+```
+
+### Bien-être
+
+```{r}
+
+
+bienetre <-
+  trajipaq_covid %>% 
+  dplyr::select(be_exercice, be_manger, be_dormir, be_anxiete, be_humeur)
+
+dfSummary(bienetre, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+
+freq(trajipaq_covid$be_exercice)
+
+dep5 <- list("be_exercice~", "be_manger~", "be_dormir~", "be_anxiete~", "be_humeur~")
+
+model9 <- Map(function(x,y) polr(as.formula(paste(x,paste(list(y),collapse="+"))), method = c("logistic"), Hess = TRUE, data=trajipaq_covid), dep5, indep1) 
+stargazer(model9, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+model10 <- Map(function(x, y) polr(as.formula(paste(x,paste(list(y),collapse="+"))), method = c("logistic"), Hess = TRUE, data=trajipaq_covid), dep5, indep2) 
+stargazer(model10, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+```
+
+
+### Aide reçue
+
+
+```{r}
+
+aide <-
+  trajipaq_covid %>% 
+  dplyr::select(patt, pcu)
+
+dfSummary(aide, 
+          plain.ascii  = FALSE, 
+          style        = "grid", 
+          graph.magnif = 0.75, 
+          valid.col    = FALSE,
+          tmp.img.dir  = "/tmp")
+
+
+
+dep6 <- list("patt~", "pcu~")
+
+model11 <- Map(function(x,y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep6, indep1) 
+stargazer(model11, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+
+model12 <- Map(function(x, y) glm(as.formula(paste(x,paste(list(y),collapse="+"))),data=trajipaq_covid, family="binomial"), dep6, indep2) 
+stargazer(model12, ci = TRUE, apply.coef = exp, apply.ci = exp, align = TRUE, type = "text")
+
+```
+
+
+
+
+
+

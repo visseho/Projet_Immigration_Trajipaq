@@ -1,0 +1,510 @@
+---
+title: "Trajipaq_sentiment_cr"
+author: "Thea"
+date: "2023-05-24"
+output: html_document
+---
+
+
+# Résumé
+
+Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leur pays d'origine et celles de leur nouveau pays de résidence. Cet article essaie de comprendre comment ces sentiments sont associés à leur pays d'origine et aux éventuelles situations de discriminations qu'ils vivent dans leur pays d'accueil.
+
+# Création des variables
+
+## Variables de contrôle
+
+```{r}
+
+library(summarytools)
+library(tidyverse)
+library(ggthemes)
+library(haven)
+
+trajipaq <- read_dta("../3. Data/Base_Trajipaq_Finale_Ok.dta")
+
+```
+
+### Sexe
+
+```{r}
+
+# Q10 = êtes-vous un homme, une femme ou autre (précisez) ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(sexe = case_when( # Création de la variable "sexe".
+    Q10 == 1 ~ "Homme",
+    Q10 == 2 ~ "Femme",
+    Q10 == 97 ~ "Autre"
+  ))
+
+freq(trajipaq$sexe)
+
+```
+
+
+### VC1 : groupe d'âge
+
+```{r}
+
+# Qage = à quel groupe d'âge appartenez-vous ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(age = factor(case_when( # création de la variable "age".
+    QAGE == 1 ~ "[0;19]",
+    QAGE == 2 ~ "[20;24]",
+    QAGE == 3 ~ "[25;29]",
+    QAGE == 4 ~ "[30;34]",
+    QAGE == 5 ~ "[35;39]",
+    QAGE == 6 ~ "[40;44]",
+    QAGE == 7 ~ "[45;49]",
+    QAGE == 8 ~ "[50;60]",
+    QAGE == 9 ~ "[61;99]",
+    QAGE == 99 ~ NA
+  ), levels = c( # Ordonnancement de la variable "age".
+  "[0;19]",
+  "[20;24]",
+  "[25;29]",
+  "[30;34]",
+  "[35;39]",
+  "[40;44]",
+  "[45;49]",
+  "[50;60]",
+  "[61;99]",
+  NA)))
+
+freq(trajipaq$age)
+
+```
+
+
+### VC2 : niveau d'éducation
+
+```{r}
+
+trajipaq <-
+  trajipaq %>%
+  mutate(education = factor(case_when( # Création de la variable "education".
+    Q16 == 1 ~ "Elementaire",
+    Q16 == 2 ~ "Secondaire",
+    Q16 == 3 ~ "Collegial",
+    Q16 == 4 ~ "Post secondaire",
+    Q16 == 5 ~ "Universitaire",
+    Q26 >= 6 ~ NA
+  ), levels = c( # Ordonnancement de la variable "education".
+    "Elementaire", 
+    "Secondaire", 
+    "Post secondaire", 
+    "Collegial", 
+    "Universitaire")))
+
+freq(trajipaq$education)
+
+```
+
+
+### VC3 : année d'arrivée au Québec
+
+```{r}
+
+# Q12 et Q14I = en quelle année êtes-vous arrivé au Québec ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(Q12 = case_when( # Élimination des données manquantes pour Q12.
+    Q12 == 9998 ~ NA_real_,
+    Q12 == 9999 ~ NA_real_,
+    TRUE ~ as.numeric(Q12)
+  )) %>%
+  mutate(annee_qc = case_when( # Création de la variable "annee_qc".
+    as.numeric(Q14I) == 9996 ~ as.numeric(Q12), # Fusion des questions Q12 et Q14I.
+    as.numeric(Q14I) == 9998 ~ NA_real_,
+    as.numeric(Q14I) == 9999 ~ NA_real_,
+    TRUE ~ as.numeric(Q14I)
+  ))
+
+descr(trajipaq$annee_qc)
+
+```
+
+### VC4 : région d'origine
+
+```{r}
+
+# region_naissance = de quelle région du monde êtes-vous originaire ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(origine = case_when( # Création de la variable "region".
+    region_naissance == "ANMO" ~ "Afrique du Nord et Moyen Orient",
+    region_naissance == "ACAS" ~ "Amerique centrale et Amerique su Sud",
+    region_naissance == "Afrique subsaharienne" ~ "Afrique subsaharienne",
+    region_naissance == "Asie" ~ "Asie",
+    region_naissance == "Autres" ~ "Autres",
+    region_naissance == "Canada" ~ "Canada",
+    region_naissance == "Caraibes" ~ "Caraibes",
+    region_naissance == "Europe" ~ "Europe",
+    region_naissance == "France" ~ "France",
+    region_naissance == "NSP" ~ NA,
+  ))
+
+freq(trajipaq$origine)
+
+```
+
+### VC5 : revenu annuel brut sur l'année 2019
+
+```{r}
+
+# Q100 = Au meilleur de votre connaissance, à combien estimez–vous le revenu total que vous gagnez (aviez gagné), provenant de toutes les sources, avant impôts et autres déductions, au cours de l’année se terminant le 31 décembre 2019 ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(revenu = factor(case_when( # Création de la variable "revenu".
+    Q100 == 1 ~ "[0 ; 19 999]",
+    Q100 == 2 ~ "[0 ; 19 999]",
+    Q100 == 3 ~ "[20 000 ; 39 999]",
+    Q100 == 4 ~ "[20 000 ; 39 999]",
+    Q100 == 5 ~ "[40 000 ; 59 999]",
+    Q100 == 6 ~ "[40 000 ; 59 999]",
+    Q100 == 7 ~ "[60 000 ; 79 999]",
+    Q100 == 8 ~ "[60 000 ; 79 999]",
+    Q100 == 9 ~ "[80 000 ; 99 999]",
+    Q100 == 10 ~ "[90 000 ; 99 999]",
+    Q100 == 11 ~ "[100 000 ; 149 999]",
+    Q100 == 12 ~ "[150 000 et plus]",
+    Q100 == 98 ~ NA,
+    Q100 == 99 ~ NA
+  ), levels = c(
+  "[0 ; 19 999]",
+  "[20 000 ; 39 999]",
+  "[40 000 ; 59 999]",
+  "[60 000 ; 79 999]",
+  "[80 000 ; 99 999]",
+  "[100 000 ; 149 999]",
+  "[150 000 et plus]",
+  NA)))
+
+freq(trajipaq$revenu)
+
+```
+
+### VC6 : langue maternelle
+
+```{r}
+
+# Q20 = Quand vous étiez enfant, quelles étaient la langue_mat ou les langue_mats que vous parliez le plus souvent, à l’âge de 5 ans et que vous comprenez toujours ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(langue_mat = case_when( # Création de la variable "langue_mat_mat".
+    Q20M1 == 1 ~ "Francais",
+    Q20M1 == 2 ~ "Anglais",
+    Q20M1 == 97 ~ "Autre",
+    Q20M1 >= 98 ~ NA
+  ))
+
+freq(trajipaq$langue_mat)
+
+```
+
+### VC7 : confession religieuse
+
+```{r}
+
+# Q17 = Actuellement, avez-vous une religion ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(religion = case_when( # Création de la variable "religion".
+    Q17 == 0 ~ "Sans religion",
+    Q17 == 1 ~ "Catholique",
+    Q17 == 2 ~ "Protestante",
+    Q17 == 3 ~ "Autres Chretiens",
+    Q17 == 4 ~ "Autres Chretiens",
+    Q17 == 5 ~ "Autres Chretiens",
+    Q17 == 6 ~ "Orthodoxe",
+    Q17 == 7 ~ "Autres Chretiens",
+    Q17 == 8 ~ "Musulmans",
+    Q17 == 9 ~ "Autre",
+    Q17 == 10 ~ "Autre",
+    Q17 == 11 ~ "Autre",
+    Q17 == 12 ~ "Autre",
+    Q17 == 97 ~ "Autre",
+    Q17 >= 98 ~ NA
+  ))
+
+freq(trajipaq$religion)
+
+```
+
+### VC8 : statut matrimonial
+
+```{r}
+
+# STATUT = actuellement, vous êtes... ?
+
+trajipaq <-
+  trajipaq %>%
+  mutate(statut_mat = case_when( # Création de la variable "statut_mat".
+    STATUT == 1 ~ "Celibataire",
+    STATUT == 2 ~ "Marie(e)",
+    STATUT == 3 ~ "Conjoint(e) de fait",
+    STATUT == 4 ~ "Separe(e)",
+    STATUT == 5 ~ "Divorce(e)",
+    STATUT == 6 ~ "Veuf(ve)"
+  ))
+
+freq(trajipaq$statut_mat)
+
+```
+
+## Variables dépendantes
+
+### VD1 : sentiment d'appartenance au Québec
+
+```{r}
+
+# Préparation des variables en vue de créer le premier indice.
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(Q39_new_A = Q39A, # Création de nouvelles variables.
+         Q39_new_B = Q39B,
+         Q39_new_C = Q39C,
+         Q39_new_D = Q39D) %>% 
+  mutate_at(
+    vars(starts_with("Q39_new")),
+    funs(case_when( # Ordonnancement des nouvelles variables.
+      . == 1 ~ 4,
+      . == 2 ~ 3,
+      . == 3 ~ 2,
+      . == 4 ~ 1,
+      . == 98 ~ NA,
+      . == 99 ~ NA
+    ))
+  )
+
+v_VD1 <- c( # Création d'un vecteur regroupant les nouvelles variables.
+  "Q39_new_A",
+  "Q39_new_B",
+  "Q39_new_C",
+  "Q39_new_D"
+)
+
+nbre_lvl <- 4 # Création d'un vecteur regroupant le nombre de choix possibles dans les questions posées.
+
+trajipaq <-
+  trajipaq %>% 
+  rowwise() %>% 
+  mutate (nbre_rep_rep = sum(!is.na(across(starts_with("Q39_new"))))) # Création d'un vecteur comptant les données invalides.
+
+# Création de l'indice du sentiment d'appartenance au Québec.
+
+trajipaq <-
+  trajipaq %>%
+  rowwise() %>%
+  mutate(sumVD1 = sum(c_across(all_of(v_VD1)), na.rm = TRUE)) %>%
+  mutate(VD1 = (sumVD1 - nbre_rep_rep) / ((nbre_lvl - 1)*nbre_rep_rep)) %>%
+  mutate(VD1 = if (nbre_rep_rep == 0) NA_real_ else VD1) %>%
+  ungroup()
+
+descr(trajipaq$VD1)
+
+```
+
+```{r}
+
+ggplot(data = trajipaq, mapping = aes(x = VD1)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  labs(
+    title = "Distribution du sentiment d'appartenance au Quebec",
+    x = "Indice du sentiment d'appartenance au Quebec"
+       ) +
+  theme_bw()
+
+```
+
+### VD2 : sentiment d'appartenance (Canada)
+
+```{r}
+
+# Q39E = Je me sens canadienne.
+
+trajipaq <-
+  trajipaq %>%
+  mutate(VD2 = case_when( # Création de la variable "VD2".
+    Q39E == 1 ~ "Oui",
+    Q39E == 2 ~ "Oui",
+    Q39E == 3 ~ "Non",
+    Q39E == 4 ~ "Non",
+    Q39E == 98 ~ NA,
+    Q39E == 99 ~ NA
+  ))
+
+freq(trajipaq$VD2)
+
+```
+
+### VD3 : sentiment d'appartenance au pays d'origine
+
+```{r}
+
+# Q39F = ’ai un sentiment d’appartenance à mon pays de naissance.
+
+trajipaq <-
+  trajipaq %>%
+  mutate(VD3 = case_when( # Création de la variable "VD3".
+    Q39F == 1 ~ "Oui",
+    Q39F == 2 ~ "Oui",
+    Q39F == 3 ~ "Non",
+    Q39F == 4 ~ "Non",
+    Q39F >= 98 ~ NA
+  ))
+
+
+freq(trajipaq$VD3)
+
+```
+
+### VD4 : sentiment d'appartenance au Canada comparativement au pays d'origine
+
+```{r}
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(VD4 = case_when( # Création de la variable "VD4".
+    VD2 == "Oui" & VD3 == "Oui" ~ "Integre",
+    VD2 == "Oui" & VD3 == "Non" ~ "Assimile",
+    VD2 == "Non" & VD3 == "Oui" ~ "Separe",
+    VD2 == "Non" & VD3 == "Non" ~ "Marginalise"
+  ))
+
+freq(trajipaq$VD4)
+
+```
+
+
+### VD5 : sentiment d'appartenance au Canada comparativement au Québec
+
+```{r}
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(Q39D_new_2 = case_when( # Création d'une nouvelle variable.
+         Q39D <= 2 ~ "Oui", 
+         Q39D == 3 | Q39D == 4 ~ "Non", 
+         Q39D >= 97 ~ NA_character_)) %>% 
+  mutate(VD5 = factor(case_when( # Création de la variable "VD5".
+    VD2 == "Oui" & Q39D_new_2 == "Oui" ~ 1,
+    VD2 == "Oui" & Q39D_new_2 == "Non" ~ 2,
+    VD2 == "Non" & Q39D_new_2 == "Oui" ~ 3,
+    VD2 == "Non" & Q39D_new_2 == "Non" ~ 4
+  ),
+  labels = c( # Création du nom des catégories.
+    "Canada et Quebec", 
+    "Canada seule", 
+    "Quebec seule", 
+    "Aucun"),
+  levels = c( # Ordonnancement des catégories.
+    1, 
+    2, 
+    3, 
+    4)))
+
+freq(trajipaq$VD5)
+
+```
+
+## Variables indépendantes
+
+### VI4 : perception des discriminations subies au cours des 12 derniers mois
+
+```{r}
+
+# Préparation des variables en vue de créer le deuxième indice.
+
+trajipaq <-
+  trajipaq %>% 
+  mutate(Q40_new_A = Q40A, # Création de nouvelles variables.
+         Q40_new_B = Q40B,
+         Q40_new_C = Q40C,
+         Q40_new_D = Q40D) %>% 
+  mutate_at(
+    vars(starts_with("Q40_new")),
+    funs(case_when( # Ordonnancement des nouvelles variables.
+      . == 1 ~ 3,
+      . == 2 ~ 2,
+      . == 3 ~ 1,
+      . == 4 ~ 1,
+      . >= 96 ~ NA
+    ))
+  )
+
+v_VI4 <- c( # Création d'un vecteur regroupant les nouvelles variables.
+  "Q40_new_A",
+  "Q40_new_B",
+  "Q40_new_C",
+  "Q40_new_D"
+)
+
+nbre_lvl_2 <- 3 # Création d'un vecteur regroupant le nombre de choix possibles dans les questions posées.
+
+trajipaq <-
+  trajipaq %>% 
+  rowwise() %>% 
+  mutate (nbre_rep_rep_2 = sum(!is.na(across(starts_with("Q40_new"))))) # Création d'un vecteur comptant les données invalides.
+
+# Création de l'indice de la perception des discriminations subies au cours des 12 derniers mois.
+
+trajipaq <-
+  trajipaq %>%
+  rowwise() %>%
+  mutate(sumVI4 = sum(c_across(all_of(v_VI4)), na.rm = TRUE)) %>%
+  mutate(VI4 = (sumVI4 - nbre_rep_rep_2) / ((nbre_lvl_2 - 1)*nbre_rep_rep_2)) %>%
+  mutate(VI4 = if (nbre_rep_rep_2 == 0) NA_real_ else VI4) %>%
+  ungroup()
+
+descr(trajipaq$VI4)
+
+```
+
+```{r}
+
+ggplot(data = trajipaq, mapping = aes(x = VI4)) +
+  geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
+  labs(
+    title = "Distribution de la discrimination subie au cours des 12 derniers mois",
+    x = "Indice de la discrimination subie au cours des 12 derniers mois"
+       ) +
+  theme_bw()
+
+```
+
+# Création de la nouvelle base de données
+
+```{r}
+
+Trajipaq_sentiment_cr <-
+  trajipaq %>%
+  select("age", # Création de la base de données dédiée à l'analyse.
+         "education",
+         "sexe",
+         "annee_qc",
+         "origine",
+         "revenu",
+         "langue_mat",
+         "religion",
+         "statut_mat",
+         "VD1",
+         "VD2",
+         "VD3",
+         "VD4",
+         "VD5",
+         "VI4")
+
+write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
+
+```
