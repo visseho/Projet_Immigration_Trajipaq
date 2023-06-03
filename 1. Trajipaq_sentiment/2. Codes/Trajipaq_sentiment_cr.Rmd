@@ -21,6 +21,7 @@ library(ggthemes)
 library(haven)
 
 trajipaq <- read_dta("../3. Data/Base_Trajipaq_Finale_Ok.dta")
+wgidataset <- read_dta("../3. Data/wgidataset.dta")
 
 ```
 
@@ -476,7 +477,95 @@ ggplot(data = trajipaq, mapping = aes(x = VI4)) +
        ) +
   theme_bw()
 
+
+
 ```
+
+# WGI
+
+```{r}
+
+trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
+
+wgidataset <-
+  wgidataset %>%
+  mutate(countryname = recode(countryname, 
+                              "South Africa" = "Afrique du Sud, République d'",
+                              "Albania" = "Albanie",
+                              "Algeria" = "Algérie",
+                              "Germany" = "Allemagne",
+                              "Saudi Arabia" = "Arabie saoudite",
+                              "Argentina" = "Argentine",
+                              "Armenia" = "Arménie",
+                              "Australia" = "Australie",
+                              "Belarus" = "Bélarus",
+                              "Belgium" = "Belgique",
+                              "Benin" = "Bénin",
+                              "Brazil" = "Brésil",
+                              "Bulgaria" = "Bulgarie",
+                              "Cape Verde" = "Cabo Verde",
+                              "Cambodia" = "Cambodge",
+                              "Cameroon" = "Cameroun",
+                              "Central African Republic" = "Centrafricaine, République",
+                              "Chile" = "Chili",
+                              "China" = "Chine",
+                              "Jordan" = "Cisjordanie et bande de Gaza (Palestine)",
+                              "Colombia" = "Colombie",
+                              "Congo, Dem. Rep." = "Congo, République démocratique du", # ajouter modif sur trajipaq CR 1 wrong
+                              "Korea, Rep." = "Corée du sud",
+                              "Dominica" = "Dominicaine, République",
+                              "Egypt, Arab Rep." = "Égypte",
+                              "United Arab Emirates" = "Émirats arabes unis",
+                              "Spain" = "Espagne",
+                              "United States" = "États-Unis",
+                              "Fiji" = "Fidji",
+                              "Greece" = "Grèce",
+                              "Grenada" = "Grenade",
+                              "Haiti" = "Haïti",
+                              "Hong Kong SAR, China" = "Hong Kong",
+                              "India" = "Inde",
+                              "Iran, Islamic Rep." = "Iran",
+                              "Israel" = "Israël",
+                              "Italy" = "Italie",
+                              "Jamaica" = "Jamaïque",
+                              "Japan" = "Japon",
+                              "Latvia" = "Lettonie",
+                              "Lebanon" = "Liban",
+                              "Moroco" = "Maroc",
+                              "Mauritius" = "Maurice",
+                              "Mexico" = "Mexique",
+                              "Nigeria" = "Nigéria",
+                              "New Zealand" = "Nouvelle-Zélande",
+                              "Uganda" = "Ouganda",
+                              "Uzbekistan" = "Ouzbékistan",
+                              "Papua New Guinea" = "Papouasie-Nouvelle-Guinée",
+                              "Netherlands" = "Pays-Bas",
+                              "Peru" = "Pérou",
+                              "Poland" = "Pologne",
+                              "Romania" = "Roumanie",
+                              "United Kingdom" = "Royaume-Uni",
+                              "Russian Federation" = "Russie, Fédération de",
+                              "St. Vincent and the Grenadines" = "Saint-Vincent-et-les Grenadines",
+                              "Senegal" = "Sénégal",
+                              "Singapore" = "Singapour",
+                              "Slovak Republic" = "Slovaquie",
+                              "Sweden" = "Suède",
+                              "Switzerland" = "Suisse",
+                              "Syria" = "Syrie",
+                              "Taiwan, China" = "Taïwan",
+                              "Chad" = "Tchad",
+                              "Tunisia" = "Tunisie",
+                              "Venezuela, RB" = "Venezuela",
+                              "Vietnam" = "Viet Nam",
+                              "Yemen, Rep." = "Yémen"
+                              ))
+
+trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
+                by.y = c("year", "countryname"), all.x = TRUE)
+
+
+```
+
 
 # Création de la nouvelle base de données
 
@@ -493,12 +582,49 @@ Trajipaq_sentiment_cr <-
          "langue_mat",
          "religion",
          "statut_mat",
+         "Q11",
          "VD1",
          "VD2",
          "VD3",
          "VD4",
          "VD5",
-         "VI4")
+         "VI4",
+         "vae",
+         "vas",
+         "van",
+         "var",
+         "val",
+         "vau",
+         "pve",
+         "pvs",
+         "pvn",
+         "pvr",
+         "pvl",
+         "pvu",
+         "gee",
+         "ges",
+         "gen",
+         "ger",
+         "gel",
+         "geu",
+         "rqe",
+         "rqs",
+         "rqn",
+         "rqr",
+         "rql",
+         "rqu",
+         "rle",
+         "rls",
+         "rln",
+         "rlr",
+         "rll",
+         "rlu",
+         "cce",
+         "ccs",
+         "ccn",
+         "ccr",
+         "ccl",
+         "ccu")
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
