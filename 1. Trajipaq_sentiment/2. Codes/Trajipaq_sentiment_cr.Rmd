@@ -493,7 +493,6 @@ wgidataset <-
                               "South Africa" = "Afrique du Sud, République d'",
                               "Albania" = "Albanie",
                               "Algeria" = "Algérie",
-                              
                               "Germany" = "Allemagne",
                               "Saudi Arabia" = "Arabie saoudite",
                               "Argentina" = "Argentine",
@@ -564,6 +563,21 @@ wgidataset <-
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
+WGI_V <- c("vae", "pve", "gee", "rqe", "rle", "cce")
+
+trajipaq <-
+  trajipaq %>%
+  mutate(n_vae = vae,
+         n_pve = pve,
+         n_gee = gee,
+         n_rqe = rqe,
+         n_rle = rle,
+         n_cce = cce)
+
+trajipaq <-
+  trajipaq %>% 
+  rowwise() %>% 
+  mutate (nbre_rep_WGI = sum(!is.na(across(starts_with("n_")))))
 
 ```
 
