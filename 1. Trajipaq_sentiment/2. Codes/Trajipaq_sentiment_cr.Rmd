@@ -493,6 +493,7 @@ wgidataset <-
                               "South Africa" = "Afrique du Sud, République d'",
                               "Albania" = "Albanie",
                               "Algeria" = "Algérie",
+                              
                               "Germany" = "Allemagne",
                               "Saudi Arabia" = "Arabie saoudite",
                               "Argentina" = "Argentine",
