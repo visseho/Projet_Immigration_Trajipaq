@@ -574,10 +574,20 @@ trajipaq <-
          n_rle = rle,
          n_cce = cce)
 
+WGI_n <- c("n_vae", "n_pve", "n_gee", "n_rqe", "n_rle", "n_cce")
+
 trajipaq <-
   trajipaq %>% 
   rowwise() %>% 
   mutate (nbre_rep_WGI = sum(!is.na(across(starts_with("n_")))))
+
+trajipaq <-
+  trajipaq %>%
+  rowwise() %>%
+  mutate(sumWGI = sum(c_across(all_of(WGI_n)), na.rm = TRUE))%>%
+  mutate(WGI = (sumWGI / (nbre_rep_WGI))) %>%
+  mutate(WGI = if (nbre_rep_WGI == 0) NA_real_ else WGI) %>%
+  ungroup()
 
 ```
 
@@ -639,7 +649,8 @@ Trajipaq_sentiment_cr <-
          "ccn",
          "ccr",
          "ccl",
-         "ccu")
+         "ccu",
+         "WGI")
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
