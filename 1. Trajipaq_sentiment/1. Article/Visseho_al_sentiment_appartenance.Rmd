@@ -68,7 +68,17 @@ https://www.zotero.org/styles?fields=sociology
 
 ## Discrimination perçue par les immigrants
 
-La discrimination perçue par les immigrants constitue un prédicteur de la stratégie d'acculturation adoptée.
+Dans une étude sur l'acculturation, la discrimination et l'adaptation des jeunes immigrants de deuxième génération, John W. Berry et al. observent que la discrimination perçue entretient une relation positive avec la diversité ethnoculturelle présente dans le pays d'accueil [-@berryImmigrantYouthCultural2006]. Selon eux, la discrimination perçue constitue un prédicteur de la stratégie d'acculturation adoptée par les jeunes immigrants, ainsi qu'un indicateur de leur capacité à s'adapter dans leur pays d'accueil [@berryImmigrantYouthCultural2006]. Leurs travaux révèlent notamment que les jeunes immigrants qui adoptent une stratégie d'intégration sont ceux qui déclarent subir le moins de discrimination, suivi en ordre croissant par ceux qui adoptent une stratégie d'assimilation, de séparation et de marginalisation [-@berryImmigrantYouthCultural2006]. Ils montrent également que la discrimination perçue entretient une relation négative avec l'adaptation socioculturelle des jeunes immigrants [-@berryImmigrantYouthCultural2006].
+
+Dans une étude similaire comparant les contextes parisien et montréalais, Berry et Collette Sabatier remarquent que la discrimination collective perçue par les jeunes immigrants de deuxième génération varie en fonction de l'origine nationale, ethnique et culturelle du groupe étudié [-@berryAcculturationDiscriminationAdaptation2010, p. 200]. Ainsi, ils révèlent que ce sont les minorités les plus visibles (i.e, celles qui ont été historiquement racialisées) qui déclarent subir le plus de discrimination [-@berryAcculturationDiscriminationAdaptation2010]. Dans le même temps, ils observent que la distance culturelle entre le pays d'origine des jeunes immigrants de deuxième génération et le pays d'accueil entretient une relation positive avec la discrimination perçue [-@berryAcculturationDiscriminationAdaptation2010].
+
+Selon Berry et Sabatier, la discrimination perçue par les jeunes immigrants de deuxième génération varie en fonction du pays d'accueil. À Montréal, ils observent que le fait d'entretenir une appartenance avec le pays d'origine tout en s'ouvrant à la culture du pays d'accueil (i.e, adopter une stratégie acculturative d'intégration) n'est pas associé positivement à la discrimination perçue [-@berryAcculturationDiscriminationAdaptation2010]. Ils expliquent cette spécificité par l'influence du modèle multiculturaliste au Canada (et interculturaliste au Québec) depuis le début des années 1970. Selon eux, le sentiment d'appartenance au Québec des jeunes immigrants de deuxième génération entretient une relation négative avec la discrimination perçue. En outre, selon une étude antérieure réalisée par Berry et située elle aussi au Canada : lorsqu'un immigrant possède un lien durable et positif avec son pays d'origine, il tend à s'ouvrir plus facilement à la culture de la société d'accueil [-@berryMutualAttitudesImmigrants2006].
+
+Dans une étude sur l'identité, le bien-être et la discrimination des immigrants musulmans de seconde génération établis en Italie, Giuliani Cristina et al. observent que la discrimination perçue par ces derniers entretient une relation positive avec la montée en puissance de l'islamophobie en Occident depuis le début des années 2000 [-@giulianiPsychologicalWellbeingMultiple2018]. Selon elle, l'identification religieuse des immigrants musulmans établis dans des sociétés historiquement chrétiennes constitue un point saillant de leur vie quotidienne [-@giulianiPsychologicalWellbeingMultiple2018]. Conséquemment, en contexte islamophobe, ils observent que la discrimination perçue par les immigrants de seconde génération entretient une relation positive avec le sentiment d'appartenance religieux, ainsi qu'une relation négative avec le sentiment d'appartenance au pays d'accueil [-@giulianiPsychologicalWellbeingMultiple2018].
+
+Leur travail met en lumière la variation de la discrimination perçue par les immigrants de première et deuxième génération. Selon Giuliani et al. les immigrants de deuxième génération sont plus sensibles que leur parent face à la discrimination pour plusieurs raisons. Premièrement, les immigrants musulmans de deuxième génération grandissent dans leur pays d'accueil en tant que membres d'une minorité visible. Conséquemment, ils sont plus exposés que leurs parents à la discrimination [-@giulianiPsychologicalWellbeingMultiple2018]. Deuxièmement, leur langue maternelle est celle du pays d'accueil. Ainsi, contrairement à leurs parents, ils interagissent plus fréquemment avec d'autres membres de la société d'accueil et sont plus à même de détecter la discrimination dans les paroles d'autrui [-@giulianiPsychologicalWellbeingMultiple2018]. Enfin troisièmement, les immigrants musulmans de première génération conservent un lien émotionnel, social et culturel avec leur pays d'origine. Celui-ci leur permet de tamponner l'exposition à la discrimination dans le pays d'accueil. Au contraire, leurs enfants réalisent un arbitrage permanent entre la culture du pays d'origine et celle du pays d'accueil, ce qui les rend plus vulnérables face à la discrimination [-@giulianiPsychologicalWellbeingMultiple2018].
+
+Enfin, le travail de Giuliani et al. révèle également que les immigrants musulmans de première génération associent la discrimination qu'ils subissent à leur statut d'immigrant, tandis que les immigrants musulmans de deuxième génération associent cette même discrimination à leur identité ethnique et religieuse. Ainsi, les immigrants de deuxième génération tendent à être plus désenchantés que leurs parents vis-à-vis de leurs perspectives d'avenir dans le pays d'accueil [-@giulianiPsychologicalWellbeingMultiple2018].
 
 # Méthodologie
 
@@ -238,7 +248,7 @@ La discrimination perçue par les immigrants constitue un prédicteur de la stra
 
 -   Berry, J. W. et Sabatier, C. (2010). Acculturation, discrimination, and adaptation among second generation immigrant youth in Montreal and Paris. International Journal of Intercultural Relations, 34(3), 191‑207. <https://doi.org/10.1016/j.ijintrel.2009.11.007>
 
-
+```{=html}
 <!-- ## Variables
 
 ### Variables dépendantes
@@ -334,3 +344,4 @@ La discrimination perçue par les immigrants constitue un prédicteur de la stra
 ## Causalité éventuelle
 
 Discrimination --\> Sentiment d'appartenance -->
+```
