@@ -1,0 +1,531 @@
+---
+title: "Familial consequences of the Covid-19 in Québec: Comparison between immigrants and natives"
+subtitle: "Conséquences familiales de la Covid-19 au Québec: comparaison immigrants - natifs"
+author:
+- Vissého Adjiwanou ^[corresponding author - adjiwanou.vissého@uqam.ca]
+- Département de Sociologie, Université du Québec à Montréal (UQAM)
+- Solène Lardoux (Département de démographie, Université de Montréal)
+- Nima Zahedinameghi (Département de Sociologie, UQAM)
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  word_document: default
+  html_document: 
+    toc: true
+    toc_depth: 3
+  template: svm-latex-ms2.tex 
+  pdf_document: default
+  citation_package: natbib
+bibliography: Covid_Canada.bib
+---
+
+<!--
+Ce fichier est pour les statistiques descriptives. 
+La base de données provient de Trajipaq_covid_cr1
+
+-->
+
+```{r}
+
+rm(list = ls())
+
+library(tidyverse)
+library(summarytools)
+library(srvyr)
+library(survey)
+library(ggpubr)
+library(writexl)
+
+trajipaq_covid <- read_rds("../Data/trajipaq_covid.RData")
+
+```
+
+## Recodage des variables
+
+
+
+
+
+
+
+## Pondération
+
+```{r}
+
+#trajipaq_nm <- na.omit(trajipaq_covid)
+#trajipaq.design <- svydesign(id = ~ CaseId, weights = ~ Poidstot1, data = trajipaq_nm)
+trajipaq.design <- svydesign(id = ~ CaseId, weights = ~ Poidstot1, data = trajipaq_covid)
+
+```
+
+## Analyse descriptive
+
+### Distribution des fréquences des variables 
+
+```{r}
+
+freq(trajipaq_covid$statut_imm, weights = trajipaq_covid$Poidstot1)
+
+
+distribution <- svymean(~statut_imm + minorite_vis + duree_res + sexe + gpage + niv_etude + statut_mat + statut_emploi, trajipaq.design, na.rm = TRUE)
+distribution
+
+length(distribution)
+
+# Distribution de l'échantillon selon le statut migratoire
+distribution_statut <- svyby(~ minorite_vis + duree_res + sexe + gpage + niv_etude + statut_mat + statut_emploi, ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+distribution_statut
+
+# Distribution immigrants
+distribution_statut_immigrant_mean <-
+  distribution_statut %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(!str_detect(statut_imm, "Non") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables, statut_imm)
+distribution_statut_immigrant_mean 
+
+distribution_statut_immigrant_se <-
+  distribution_statut %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "SE") %>% 
+  filter(!str_detect(statut_imm, "Non") & str_starts(Variables, "se")) %>% 
+  mutate(Variables = str_remove(Variables, "se.")) %>% 
+  arrange(Variables, statut_imm)
+distribution_statut_immigrant_se 
+
+
+distribution_statut_immigrant <- left_join(distribution_statut_immigrant_mean, distribution_statut_immigrant_se, by = c("statut_imm", "Variables"))
+
+distribution_statut_immigrant
+
+
+# Distribution majoritaire
+
+distribution_statut_majoritaire_mean <-
+  distribution_statut %>% 
+#  select(statut_imm)
+  pivot_longer(col=!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_starts(statut_imm, "Non") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables, statut_imm)
+distribution_statut_majoritaire_mean 
+
+distribution_statut_majoritaire_se <-
+  distribution_statut %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "SE") %>% 
+  filter(str_starts(statut_imm, "Non") & str_starts(Variables, "se")) %>% 
+  mutate(Variables = str_remove(Variables, "se.")) %>% 
+  arrange(Variables, statut_imm)
+distribution_statut_majoritaire_se 
+
+distribution_statut_majoritaire <- left_join(distribution_statut_majoritaire_mean, distribution_statut_majoritaire_se, by = c("statut_imm", "Variables")) 
+
+distribution_statut_majoritaire
+distribution_statut_immigrant
+
+# Total
+
+distribution_sample <- left_join(distribution_statut_immigrant, distribution_statut_majoritaire, by = "Variables")
+distribution_sample
+
+write_xlsx(distribution_sample, "distribution_sample.xlsx")
+
+# Il reste à ajouter le total
+
+```
+
+
+- Même chose avec utilisation imm_minorité qui tient compte des deux variables de minorité et d'immigrant en même temps
+
+```{r}
+
+freq(trajipaq_covid$statut_imm, weights = trajipaq_covid$Poidstot1)
+
+
+distribution1 <- svymean(~imm_minorite + minorite_vis + duree_res + sexe + gpage + niv_etude + statut_mat + statut_emploi, trajipaq.design, na.rm = TRUE)
+distribution1
+
+length(distribution)
+
+# Distribution de l'échantillon selon le statut migratoire
+distribution_statut1 <- svyby(~ minorite_vis + duree_res + sexe + gpage + niv_etude + statut_mat + statut_emploi, ~ imm_minorite, trajipaq.design, svymean, na.rm = TRUE)
+distribution_statut1
+
+# Distribution immigrants
+distribution_statut_immigrant_mean1 <-
+  distribution_statut1 %>% 
+  pivot_longer(!imm_minorite, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(!str_detect(imm_minorite, "Non") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables, imm_minorite)
+distribution_statut_immigrant_mean1 
+
+distribution_statut_immigrant_se1 <-
+  distribution_statut1 %>% 
+  pivot_longer(!imm_minorite, names_to = "Variables", values_to = "SE") %>% 
+  filter(!str_detect(imm_minorite, "Non") & str_starts(Variables, "se")) %>% 
+  mutate(Variables = str_remove(Variables, "se.")) %>% 
+  arrange(Variables, imm_minorite)
+distribution_statut_immigrant_se1 
+
+
+distribution_statut_immigrant1 <- left_join(distribution_statut_immigrant_mean1, distribution_statut_immigrant_se1, by = c("imm_minorite", "Variables"))
+
+distribution_statut_immigrant1
+
+
+# Distribution majoritaire
+
+distribution_statut_majoritaire_mean1 <-
+  distribution_statut1 %>% 
+#  select(imm_minorite)
+  pivot_longer(col=!imm_minorite, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_starts(imm_minorite, "Non") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables, imm_minorite)
+distribution_statut_majoritaire_mean1 
+
+distribution_statut_majoritaire_se1 <-
+  distribution_statut1 %>% 
+  pivot_longer(!imm_minorite, names_to = "Variables", values_to = "SE") %>% 
+  filter(str_starts(imm_minorite, "Non") & str_starts(Variables, "se")) %>% 
+  mutate(Variables = str_remove(Variables, "se.")) %>% 
+  arrange(Variables, imm_minorite)
+distribution_statut_majoritaire_se1 
+
+distribution_statut_majoritaire1 <- left_join(distribution_statut_majoritaire_mean1, distribution_statut_majoritaire_se1, by = c("imm_minorite", "Variables")) 
+
+distribution_statut_majoritaire1
+distribution_statut_immigrant1
+
+# Total
+
+distribution_sample1 <- left_join(distribution_statut_immigrant1, distribution_statut_majoritaire1, by = "Variables")
+distribution_sample1
+
+write_xlsx(distribution_sample1, "distribution_sample1.xlsx")
+
+# Il reste à ajouter le total
+
+```
+
+
+## Tableau croisé entre la situation d'immigrants et les variables de covid
+
+
+#### Graphique
+
+#### Fonction graphique
+
+```{r}
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Fonction
+graph_traj <- function(resultat){
+  ggplot(resultat) +
+  geom_col(aes(x = reorder(Variables, desc(Proportion)), y = Proportion, fill = statut_imm), position = "dodge") +
+  #geom_errorbar(aes(ymin=len-sd, ymax=len+sd), width=.2, position=position_dodge(.9))
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  coord_flip() +
+    labs(x = "", fill = "") +
+  scale_fill_manual(values = cbPalette)
+}
+
+
+graph_traj2 <- function(resultat){
+  ggplot(resultat) +
+    geom_col(aes(x = Variables, y = Proportion, 
+                 fill = fct_relevel(Modalités, "Much degraded",  "A little degraded",
+                                    "No change", "A little improved", "Much improved"),
+                 position = "fill")) +
+    facet_wrap(~statut_imm) +
+#    scale_x_discrete("Modalités", limits = c("Much improved", "A little improved",
+#    "No change", "A little degraded", "Much degraded")) +
+    theme_bw() +
+    theme(legend.position = "bottom", legend.box="vertical", legend.margin=margin()) +
+#    theme(strip.background = element_rect(colour = "black", fill = "blue")) +
+    coord_flip() +
+    labs(x = "", fill = "") +
+    #scale_fill_manual(values = cbPalette) + 
+    scale_fill_brewer(palette="PRGn")
+}  
+
+
+```
+
+
+### Exposition à la maladie
+
+<!--
+freq(trajipaq_covid$statut_imm, weights = trajipaq_covid$Poidstot1)
+
+with(trajipaq_covid,
+     ctable(statut_imm, e_hors_dom, weights = Poidstot1, useNA = "no"))
+
+with(trajipaq_covid,
+     ctable(statut_imm, e_four_soin, weights = Poidstot1))
+
+
+with(trajipaq_covid,
+     ctable(statut_imm, e_four_soin, weights = Poidstot1))
+
+
+
+freq(trajipaq_covid$statut_imm)
+freq(trajipaq_covid$e_hors_dom)
+
+#struc_ssa <- svyby(~structure, ~childgpage, dhs.design5, svymean)#, keep.names = FALSE, verbose = FALSE)
+
+freq(trajipaq_covid$e_hors_dom)
+ctable(trajipaq_covid$statut_imm, trajipaq_covid$e_hors_dom)
+-->
+
+
+
+```{r}
+
+
+exposition <- "e_hors_dom + e_four_soin + e_quarantaine + e_expose + e_symptome + e_hospitalise + e_intensif + e_decede"
+exposition
+exposition[1]
+noquote(exposition)[1]
+class(exposition)
+
+summary(trajipaq_covid$Poidstot1)
+
+
+
+traj_exposition <- svyby(~ e_hors_dom + e_four_soin + e_quarantaine + e_expose + e_symptome + e_hospitalise + e_intensif + e_decede, ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_exposition
+
+
+
+traj_exposition <-
+  traj_exposition %>% 
+  pivot_longer(col=!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_detect(Variables, "oui") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables)
+
+traj_exposition
+
+traj_exposition <-
+  traj_exposition %>% 
+  mutate(Variables = case_when(
+    Variables == "e_decedeoui" ~ "A family member has dead",
+    Variables == "e_four_soinoui" ~ "Work in health facility",
+    Variables == "e_hors_domoui" ~ "Work outside",
+    Variables == "e_intensifoui" ~ "In intensive care",
+    Variables == "e_quarantaineoui" ~ "Put in quarantine",
+    Variables == "e_symptomeoui" ~ "Has symptoms"))
+
+traj_exposition
+
+graph_traj_exposition <- graph_traj(traj_exposition)
+graph_traj_exposition
+
+ggsave(graph_traj_exposition, file = "Figures/Exposition.png")
+
+
+```
+
+
+### Conséquence sur la famille
+
+
+
+```{r}
+
+
+cons_famille <- "f_separe + f_emmenage + f_quitte_dom + f_nourriture + f_medicaments + f_sante + f_revenu + f_assurance + f_evenement + f_essentiel"
+
+traj_famille <- svyby(~ f_separe + f_emmenage + f_quitte_dom + f_nourriture + f_medicaments + f_sante + f_revenu + f_assurance + f_evenement + f_essentiel, ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_famille
+
+
+traj_famille <-
+  traj_famille %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_detect(Variables, "oui") & !str_detect(Variables, "se")) %>% 
+  arrange(Variables)
+traj_famille
+
+
+traj_famille <-
+  traj_famille %>% 
+  mutate(Variables = case_when(
+    Variables == "f_separeoui" ~ "Live separed",
+    Variables == "f_emmenageoui" ~ "Someone moved to our home",
+    Variables == "f_quitte_domoui" ~ "Leave our home",
+    Variables == "f_nourritureoui" ~ "Difficulty obtaining food",
+    Variables == "f_medicamentsoui" ~ "Difficulty getting medicine",
+    Variables == "f_santeoui" ~ "Difficulty getting health care",
+    Variables == "f_revenuoui" ~ "Family income has decreased",
+    Variables == "f_assuranceoui" ~ "Lost family insurrance",
+    Variables == "f_evenementoui" ~ "Missed important family event",
+    Variables == "f_essentieloui" ~ "difficulty obtaining other essentials"))
+
+traj_exposition
+# Représentation
+
+graph_traj_famille <- graph_traj(traj_famille)
+graph_traj_famille
+
+ggsave(graph_traj_famille, file = "Figures/Famille.png")
+
+```
+
+
+### Conséquences emploi
+
+
+```{r}
+
+freq(trajipaq_covid$f_cesser)
+
+traj_emploi <- svyby(~ f_reduire + f_cesser + f_perdu, ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_emploi
+
+
+traj_emploi <-
+  traj_emploi %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_detect(Variables, "oui") & !str_starts(Variables, "se")) %>% 
+#  replace(Variables, values = c("f_cesseroui", "f_perdreoui", "f_reduireoui"), list = c("Cesser de travailler", "Perdre son emploi", "Réduire le temps de travail"))
+  arrange(Variables)
+
+traj_emploi
+
+traj_emploi <-
+  traj_emploi %>% 
+  mutate(Variables = case_when(
+    Variables == "f_reduireoui" ~ "Has reduced working hours",
+    Variables == "f_cesseroui" ~ "Has to stop working",
+    Variables == "f_perduoui" ~ "Has lost their job permanently"))
+#A family member 
+
+# Représentation
+
+graph_traj_emploi <- graph_traj(traj_emploi)
+graph_traj_emploi
+
+ggsave(graph_traj_emploi, file = "Figures/Emploi.png")
+
+
+```
+
+
+### Entente dans la famille
+
+
+```{r}
+
+traj_entente <- svyby(~ f_role_parent + f_entende + f_enfant_maladie + f_autre_enfant + f_pers_agees, ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_entente
+
+
+traj_entente <-
+  traj_entente %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(!str_starts(Variables, "se")) %>% 
+#  separate(Variables, into = c("Variables", "Modalités"), sep = "[[:upper:]]") %>% 
+  separate(Variables, into = c("Variables", "Modalités"), sep = "(?=[A-Z])") %>% 
+  arrange(Variables)
+traj_entente
+
+freq(traj_entente$Modalités)
+
+traj_entente <-
+  traj_entente %>% 
+  filter(Modalités != "Not applicable") %>% 
+  mutate(Variables = case_when(
+    Variables == "f_role_parent" ~ "Parenting",
+    Variables == "f_entende" ~ "How family members get along",
+    Variables == "f_enfant_maladie" ~ "Ability to care for your child with an illness",
+    Variables == "f_autre_enfant" ~ "Ability to take care of other children",
+    Variables == "f_pers_agees" ~ "Ability to care for the elderly or disabled"))
+
+
+#Modalités == factor(Modalités, levels = c("Much improved", "A little improved",
+#                                              "No change", "A little degraded", 
+#                                              "Much degraded")))
+
+
+# Représentation
+
+graph_traj_entente <- graph_traj2(traj_entente)
+graph_traj_entente
+
+ggsave(graph_traj_entente, file = "Figures/Entente.png")
+
+
+
+```
+
+
+### Bien-être
+
+```{r}
+
+traj_bienetre <- svyby(~ be_exercice + be_manger + be_dormir + be_anxiete + be_humeur, 
+                       ~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_bienetre
+
+traj_bienetre <-
+  traj_bienetre %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(!str_starts(Variables, "se")) %>% 
+#  separate(Variables, into = c("Variables", "Modalités"), sep = "[[:upper:]]") %>% 
+  separate(Variables, into = c("Variables", "Modalités"), sep = "(?=[A-Z])") %>% 
+  arrange(Variables)
+traj_bienetre
+
+
+traj_bienetre <-
+  traj_bienetre %>% 
+  filter(Modalités != "Not applicable") %>% 
+  mutate(Variables = case_when(
+    Variables == "be_exercice" ~ "Your physical well-being - exercise",
+    Variables == "be_manger" ~ "Your physical well-being - eat",
+    Variables == "be_dormir" ~ "Your physical well-being - sleep",
+    Variables == "be_anxiete" ~ "Your emotional well-being - anxiety",
+    Variables == "be_humeur" ~ "Your emotional well-being - mood"))
+
+graph_traj_bienetre <- graph_traj2(traj_bienetre)
+graph_traj_bienetre
+
+ggsave(graph_traj_bienetre, file = "Figures/Bien-être.png")
+
+
+```
+
+
+### Aide reçu
+
+
+```{r}
+
+traj_aide <- svyby(~ patt + pcu,~ statut_imm, trajipaq.design, svymean, na.rm = TRUE)
+traj_aide
+
+
+traj_aide <-
+  traj_aide %>% 
+  pivot_longer(!statut_imm, names_to = "Variables", values_to = "Proportion") %>% 
+  filter(str_detect(Variables, "Oui") & !str_starts(Variables, "se")) %>% 
+#  replace(Variables, values = c("f_cesseroui", "f_perdreoui", "f_reduireoui"), list = c("Cesser de travailler", "Perdre son emploi", "Réduire le temps de travail"))
+  arrange(Variables)
+traj_aide
+
+traj_aide <-
+  traj_aide %>% 
+  mutate(Variables = case_when(
+    Variables == "pattOui" ~ "Temporary Aid for Workers Program",
+    Variables == "pcuOui" ~ "Canada Emergency Response Benefit"))
+#A family member 
+  
+graph_traj_aide <- graph_traj(traj_aide)
+graph_traj_aide
+
+ggsave(graph_traj_aide, file = "Figures/Aide.png")
+  
+```
+
+
+## Modèle de régressions
+
