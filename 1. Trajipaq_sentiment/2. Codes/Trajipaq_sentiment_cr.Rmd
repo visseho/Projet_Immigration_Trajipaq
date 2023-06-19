@@ -484,7 +484,6 @@ ggplot(data = trajipaq, mapping = aes(x = VI4)) +
 # WGI
 
 ```{r}
-
 trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
 
 wgidataset <-
@@ -563,6 +562,14 @@ wgidataset <-
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
+trajipaq$WGI_2021 <- merge(trajipaq, wgidataset[wgidataset$year == 2021, ],
+                           by.x = c("Q11"),
+                           by.y = c("countryname"),
+                           all.x = TRUE)
+```
+
+
+```{r}
 WGI_V <- c("vae", "pve", "gee", "rqe", "rle", "cce")
 
 trajipaq <-
@@ -650,7 +657,8 @@ Trajipaq_sentiment_cr <-
          "ccr",
          "ccl",
          "ccu",
-         "WGI")
+         "WGI",
+         "WGI_2021")
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
