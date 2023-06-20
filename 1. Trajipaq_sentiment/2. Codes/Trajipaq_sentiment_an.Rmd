@@ -610,11 +610,21 @@ ctable(trajipaq$VD3, trajipaq$VD1_f)
 # WGI X Sentimapp
 
 ```{r}
-reg_4 <- glm(formula = vae_arrival ~ VD1, data = trajipaq)
+reg_4 <- glm(formula = vae_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # voice and acountability
+reg_5 <- glm(formula = pve_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Political stability No Violence
+reg_6 <- glm(formula = gee_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Government Effectiveness
+reg_7 <- glm(formula = rqe_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Regulatory quality
+reg_8 <- glm(formula = rle_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Rule fo law
+reg_9 <- glm(formula = cce_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Control of corruption
 
 summary(reg_4)
+summary(reg_5)
+summary(reg_6)
+summary(reg_7)
+summary(reg_8)
+summary(reg_9)
 
-cor.test(trajipaq$vae_arrival, trajipaq$VD1)
+cor.test(trajipaq$vae_arrival, trajipaq$VD2)
 
 ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD1)), aes(x = vae_arrival, y = VD1)) +
   stat_smooth(method = "glm",

@@ -563,14 +563,19 @@ trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
 wgidataset_2021 <- filter(wgidataset, year == 2021)
+wgidataset_canada <- filter(wgidataset, countryname == "Canada")
 
 trajipaq <- trajipaq %>%
-  left_join(wgidataset_2021, by = c("Q11" = "countryname"))
+  left_join(wgidataset_2021, by = c("Q11" = "countryname"))%>%
+  left_join(wgidataset_canada, by = c("annee_qc" = "year"))
 
+trajipaq <- trajipaq %>%
+  
 
 trajipaq <- trajipaq %>%
   rename_with(~sub("\\.y$", "_2021", .), ends_with(".y"))%>%
-   rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
+  rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
+
 
 ```
 
