@@ -610,17 +610,18 @@ ctable(trajipaq$VD3, trajipaq$VD1_f)
 # WGI X Sentimapp
 
 ```{r}
-reg_4 <- glm(formula = WGI ~ VD1, data = trajipaq)
+reg_4 <- glm(formula = vae_arrival ~ VD1, data = trajipaq)
 
 summary(reg_4)
 
-cor.test(trajipaq$WGI, trajipaq$VD1)
+cor.test(trajipaq$vae_arrival, trajipaq$VD1)
 
-ggplot(trajipaq %>% filter(!is.na(WGI), !is.na(VD1)), aes(x = WGI, y = VD1)) +
+ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD1)), aes(x = vae_arrival, y = VD1)) +
   stat_smooth(method = "glm",
               formula = "y ~ x",
               color = "pink", 
               se = FALSE) +
+  
   labs(
     title = "Sentiment d'appartenance et indice de gouvernementalité du pays d'origine", 
     x = "indice de gouvernementalité du pays d'origine au moment de l'immigration", 

@@ -562,41 +562,18 @@ wgidataset <-
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
-trajipaq$WGI_2021 <- merge(trajipaq, wgidataset[wgidataset$year == 2021, ],
-                           by.x = c("Q11"),
-                           by.y = c("countryname"),
-                           all.x = TRUE)
-```
+wgidataset_2021 <- filter(wgidataset, year == 2021)
+
+trajipaq <- trajipaq %>%
+  left_join(wgidataset_2021, by = c("Q11" = "countryname"))
 
 
-```{r}
-WGI_V <- c("vae", "pve", "gee", "rqe", "rle", "cce")
-
-trajipaq <-
-  trajipaq %>%
-  mutate(n_vae = vae,
-         n_pve = pve,
-         n_gee = gee,
-         n_rqe = rqe,
-         n_rle = rle,
-         n_cce = cce)
-
-WGI_n <- c("n_vae", "n_pve", "n_gee", "n_rqe", "n_rle", "n_cce")
-
-trajipaq <-
-  trajipaq %>% 
-  rowwise() %>% 
-  mutate (nbre_rep_WGI = sum(!is.na(across(starts_with("n_")))))
-
-trajipaq <-
-  trajipaq %>%
-  rowwise() %>%
-  mutate(sumWGI = sum(c_across(all_of(WGI_n)), na.rm = TRUE))%>%
-  mutate(WGI = (sumWGI / (nbre_rep_WGI))) %>%
-  mutate(WGI = if (nbre_rep_WGI == 0) NA_real_ else WGI) %>%
-  ungroup()
+trajipaq <- trajipaq %>%
+  rename_with(~sub("\\.y$", "_2021", .), ends_with(".y"))%>%
+   rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
 
 ```
+
 
 
 # Création de la nouvelle base de données
@@ -621,44 +598,78 @@ Trajipaq_sentiment_cr <-
          "VD4",
          "VD5",
          "VI4",
-         "vae",
-         "vas",
-         "van",
-         "var",
-         "val",
-         "vau",
-         "pve",
-         "pvs",
-         "pvn",
-         "pvr",
-         "pvl",
-         "pvu",
-         "gee",
-         "ges",
-         "gen",
-         "ger",
-         "gel",
-         "geu",
-         "rqe",
-         "rqs",
-         "rqn",
-         "rqr",
-         "rql",
-         "rqu",
-         "rle",
-         "rls",
-         "rln",
-         "rlr",
-         "rll",
-         "rlu",
-         "cce",
-         "ccs",
-         "ccn",
-         "ccr",
-         "ccl",
-         "ccu",
-         "WGI",
-         "WGI_2021")
+         "vae_arrival",
+         "vas_arrival",
+         "van_arrival",
+         "var_arrival",
+         "val_arrival",
+         "vau_arrival",
+         "pve_arrival",
+         "pvs_arrival",
+         "pvn_arrival",
+         "pvr_arrival",
+         "pvl_arrival",
+         "pvu_arrival",
+         "gee_arrival",
+         "ges_arrival",
+         "gen_arrival",
+         "ger_arrival",
+         "gel_arrival",
+         "geu_arrival",
+         "rqe_arrival",
+         "rqs_arrival",
+         "rqn_arrival",
+         "rqr_arrival",
+         "rql_arrival",
+         "rqu_arrival",
+         "rle_arrival",
+         "rls_arrival",
+         "rln_arrival",
+         "rlr_arrival",
+         "rll_arrival",
+         "rlu_arrival",
+         "cce_arrival",
+         "ccs_arrival",
+         "ccn_arrival",
+         "ccr_arrival",
+         "ccl_arrival",
+         "ccu_arrival",
+         "vae_2021",
+         "vas_2021",
+         "van_2021",
+         "var_2021",
+         "val_2021",
+         "vau_2021",
+         "pve_2021",
+         "pvs_2021",
+         "pvn_2021",
+         "pvr_2021",
+         "pvl_2021",
+         "pvu_2021",
+         "gee_2021",
+         "ges_2021",
+         "gen_2021",
+         "ger_2021",
+         "gel_2021",
+         "geu_2021",
+         "rqe_2021",
+         "rqs_2021",
+         "rqn_2021",
+         "rqr_2021",
+         "rql_2021",
+         "rqu_2021",
+         "rle_2021",
+         "rls_2021",
+         "rln_2021",
+         "rlr_2021",
+         "rll_2021",
+         "rlu_2021",
+         "cce_2021",
+         "ccs_2021",
+         "ccn_2021",
+         "ccr_2021",
+         "ccl_2021",
+         "ccu_2021")
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
