@@ -629,13 +629,23 @@ summary(reg_4.1)
 cor.test(trajipaq$vae_arrival, trajipaq$VD2)
 
 ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD1)), aes(x = vae_arrival, y = VD1)) +
+  geom_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Québec et indice de gouvernementalité du pays d'origine, au moment de l'immigration", 
+    x = "indice de gouvernementalité du pays d'origine au moment de l'immigration", 
+    y = "Sentiment d'appartenance au Québec") +
+  theme_bw()
+
+ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD2)), aes(x = vae_arrival, y = VD1)) +
   stat_smooth(method = "glm",
               formula = "y ~ x",
               color = "pink", 
               se = FALSE) +
-  
   labs(
-    title = "Sentiment d'appartenance et indice de gouvernementalité du pays d'origine", 
+    title = "Sentiment d'appartenance au Canada et indice de gouvernementalité du pays d'origine, au moment de l'immigration", 
     x = "indice de gouvernementalité du pays d'origine au moment de l'immigration", 
     y = "Sentiment d'appartenance au Canada") +
   theme_bw()
