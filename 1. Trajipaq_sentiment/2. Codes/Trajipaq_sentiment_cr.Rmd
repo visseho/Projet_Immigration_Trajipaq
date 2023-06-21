@@ -349,7 +349,7 @@ freq(trajipaq$VD2)
 
 ```{r}
 
-# Q39F = ’ai un sentiment d’appartenance à mon pays de naissance.
+# Q39F = j’ai un sentiment d’appartenance à mon pays de naissance.
 
 trajipaq <-
   trajipaq %>%
@@ -559,6 +559,7 @@ wgidataset <-
                               "Yemen, Rep." = "Yémen"
                               ))
 
+
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
@@ -570,13 +571,14 @@ trajipaq <- trajipaq %>%
   left_join(wgidataset_canada, by = c("annee_qc" = "year"))
 
 trajipaq <- trajipaq %>%
-  
-
-trajipaq <- trajipaq %>%
   rename_with(~sub("\\.y$", "_2021", .), ends_with(".y"))%>%
   rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
 
+trajipaq <- rename(trajipaq, "vae_can" = "vae")
 
+trajipaq <- trajipaq %>%
+  rowwise()%>%
+  mutate(vae_arrival_diff = vae_can - vae_arrival)
 ```
 
 
@@ -604,77 +606,19 @@ Trajipaq_sentiment_cr <-
          "VD5",
          "VI4",
          "vae_arrival",
-         "vas_arrival",
-         "van_arrival",
-         "var_arrival",
-         "val_arrival",
-         "vau_arrival",
          "pve_arrival",
-         "pvs_arrival",
-         "pvn_arrival",
-         "pvr_arrival",
-         "pvl_arrival",
-         "pvu_arrival",
          "gee_arrival",
-         "ges_arrival",
-         "gen_arrival",
-         "ger_arrival",
-         "gel_arrival",
-         "geu_arrival",
          "rqe_arrival",
-         "rqs_arrival",
-         "rqn_arrival",
-         "rqr_arrival",
-         "rql_arrival",
-         "rqu_arrival",
          "rle_arrival",
-         "rls_arrival",
-         "rln_arrival",
-         "rlr_arrival",
-         "rll_arrival",
-         "rlu_arrival",
          "cce_arrival",
-         "ccs_arrival",
-         "ccn_arrival",
-         "ccr_arrival",
-         "ccl_arrival",
-         "ccu_arrival",
          "vae_2021",
-         "vas_2021",
-         "van_2021",
-         "var_2021",
-         "val_2021",
-         "vau_2021",
          "pve_2021",
-         "pvs_2021",
-         "pvn_2021",
-         "pvr_2021",
-         "pvl_2021",
-         "pvu_2021",
          "gee_2021",
-         "ges_2021",
-         "gen_2021",
-         "ger_2021",
-         "gel_2021",
-         "geu_2021",
          "rqe_2021",
-         "rqs_2021",
-         "rqn_2021",
-         "rqr_2021",
-         "rql_2021",
-         "rqu_2021",
          "rle_2021",
-         "rls_2021",
-         "rln_2021",
-         "rlr_2021",
-         "rll_2021",
-         "rlu_2021",
          "cce_2021",
-         "ccs_2021",
-         "ccn_2021",
-         "ccr_2021",
-         "ccl_2021",
-         "ccu_2021")
+         "vae_can",
+         "vae_arrival_diff")
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 

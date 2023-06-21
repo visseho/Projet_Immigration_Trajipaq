@@ -611,6 +611,7 @@ ctable(trajipaq$VD3, trajipaq$VD1_f)
 
 ```{r}
 reg_4 <- glm(formula = vae_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # voice and acountability
+  reg_4.1 <- glm(formula = vae_arrival_diff ~ VD1 + VD2 + VD3 + VD4, data = trajipaq)
 reg_5 <- glm(formula = pve_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Political stability No Violence
 reg_6 <- glm(formula = gee_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Government Effectiveness
 reg_7 <- glm(formula = rqe_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Regulatory quality
@@ -623,6 +624,7 @@ summary(reg_6)
 summary(reg_7)
 summary(reg_8)
 summary(reg_9)
+summary(reg_4.1)
 
 cor.test(trajipaq$vae_arrival, trajipaq$VD2)
 
