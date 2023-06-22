@@ -36,7 +36,7 @@ https://www.zotero.org/styles?fields=sociology
 
 # Partie à rédiger en dernier.
 
-# Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leur pays d'origine et celles de leur nouveau pays de résidence. Cet article essaie de comprendre comment ces sentiments sont associés à leur pays d'origine et aux éventuelles situations de discriminations qu'ils vivent dans leur pays d'accueil.
+# Les immigrants sont souvent pris entre deux ou plusieurs cultures, celles de leur pays d'origine et celles de leur pays d’accueil. Alors que plusieurs études ont regardé la manière dont les conditions dans le pays d’accueil (notamment la discrimination) affectent leur sentiment d’appartenance, très peu ont analysé l’influence de la situation du pays d’origine. Cet article éssaie de rémedier à cela en combinant les données issues de l’enquêtes biographique sur les Trajectoires de participation individuelles des immigrants, des minorités ethnoculturelles, et le reste de la population québécoise (TrajIPaQ) menée en 2020 (Lardoux et al., 2022) avec les données sur la situation politique des pays d’origine des immigrants obtenues au moment de la collecte. L’enquête TrajIPaQ a touché 1000 immigrants au Québec et a collecté des informations sur leur situation familiale, sociale, éducative et professionnelle au cours des 15 dernières années depuis leur installation. .
 
 ```
 
