@@ -269,7 +269,6 @@ freq(trajipaq$statut_mat)
 trajipaq <-
   trajipaq %>% 
   mutate(Q39_new_A = Q39A, # Création de nouvelles variables.
-         Q39_new_B = Q39B,
          Q39_new_C = Q39C,
          Q39_new_D = Q39D) %>% 
   mutate_at(
@@ -286,7 +285,6 @@ trajipaq <-
 
 v_VD1 <- c( # Création d'un vecteur regroupant les nouvelles variables.
   "Q39_new_A",
-  "Q39_new_B",
   "Q39_new_C",
   "Q39_new_D"
 )
