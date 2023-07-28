@@ -76,6 +76,28 @@ trajipaq <-
 
 freq(trajipaq$age)
 
+trajipaq <-
+  trajipaq %>%
+  mutate(age_small = factor(case_when( # création de la variable "age".
+    QAGE == 1 ~ "[0;29]",
+    QAGE == 2 ~ "[0;29]",
+    QAGE == 3 ~ "[0;29]",
+    QAGE == 4 ~ "[30;34]",
+    QAGE == 5 ~ "[35;39]",
+    QAGE == 6 ~ "[40;44]",
+    QAGE == 7 ~ "[45;49]",
+    QAGE == 8 ~ "[50;99]",
+    QAGE == 9 ~ "[50;99]",
+    QAGE == 99 ~ NA
+  ), levels = c( # Ordonnancement de la variable "age".
+  "[0;29]",
+  "[30;34]",
+  "[35;39]",
+  "[40;44]",
+  "[45;49]",
+  "[50;99]",
+  NA)))
+
 ```
 
 ### VC2 : niveau d'éducation
@@ -330,16 +352,28 @@ ggplot(data = trajipaq, mapping = aes(x = VD1)) +
 
 trajipaq <-
   trajipaq %>%
-  mutate(VD2 = case_when( # Création de la variable "VD2".
-    Q39E == 1 ~ "Oui",
-    Q39E == 2 ~ "Oui",
-    Q39E == 3 ~ "Non",
-    Q39E == 4 ~ "Non",
+  mutate(VD2_long = case_when( # Création de la variable "VD2".
+    Q39E == 1 ~ 1,
+    Q39E == 2 ~ 2,
+    Q39E == 3 ~ 3,
+    Q39E == 4 ~ 4,
     Q39E == 98 ~ NA,
     Q39E == 99 ~ NA
   ))
 
-freq(trajipaq$VD2)
+trajipaq <-
+  trajipaq %>%
+  mutate(VD2_dico = case_when( # Création de la variable "VD2".
+    Q39E == 1 ~ 1,
+    Q39E == 2 ~ 1,
+    Q39E == 3 ~ 0,
+    Q39E == 4 ~ 0,
+    Q39E == 98 ~ NA_real_,
+    Q39E == 99 ~ NA_real_
+  ))
+
+freq(trajipaq$VD2_long)
+freq(trajipaq$VD2_dico)
 
 ```
 
@@ -371,10 +405,10 @@ freq(trajipaq$VD3)
 trajipaq <-
   trajipaq %>% 
   mutate(VD4 = case_when( # Création de la variable "VD4".
-    VD2 == "Oui" & VD3 == "Oui" ~ "Integre",
-    VD2 == "Oui" & VD3 == "Non" ~ "Assimile",
-    VD2 == "Non" & VD3 == "Oui" ~ "Separe",
-    VD2 == "Non" & VD3 == "Non" ~ "Marginalise"
+    VD2_dico == "Oui" & VD3 == "Oui" ~ "Integre",
+    VD2_dico == "Oui" & VD3 == "Non" ~ "Assimile",
+    VD2_dico == "Non" & VD3 == "Oui" ~ "Separe",
+    VD2_dico == "Non" & VD3 == "Non" ~ "Marginalise"
   ))
 
 freq(trajipaq$VD4)
@@ -392,10 +426,10 @@ trajipaq <-
          Q39D == 3 | Q39D == 4 ~ "Non", 
          Q39D >= 97 ~ NA_character_)) %>% 
   mutate(VD5 = factor(case_when( # Création de la variable "VD5".
-    VD2 == "Oui" & Q39D_new_2 == "Oui" ~ 1,
-    VD2 == "Oui" & Q39D_new_2 == "Non" ~ 2,
-    VD2 == "Non" & Q39D_new_2 == "Oui" ~ 3,
-    VD2 == "Non" & Q39D_new_2 == "Non" ~ 4
+    VD2_dico == "Oui" & Q39D_new_2 == "Oui" ~ 1,
+    VD2_dico == "Oui" & Q39D_new_2 == "Non" ~ 2,
+    VD2_dico == "Non" & Q39D_new_2 == "Oui" ~ 3,
+    VD2_dico == "Non" & Q39D_new_2 == "Non" ~ 4
   ),
   labels = c( # Création du nom des catégories.
     "Canada et Quebec", 
@@ -614,7 +648,8 @@ Trajipaq_sentiment_cr <-
          "statut_mat",
          "Q11",
          "VD1",
-         "VD2",
+         "VD2_dico",
+         "VD2_long",
          "VD3",
          "VD4",
          "VD5",

@@ -11,6 +11,8 @@ library(summarytools)
 library(tidyverse)
 library(ggthemes)
 library(haven)
+library(stargazer)
+library(gtsumamry)
 
 trajipaq <- read_csv("../3. Data/Trajipaq_sentiment_cr.csv")
 view(trajipaq)
@@ -607,25 +609,76 @@ trajipaq <-
 ctable(trajipaq$VD3, trajipaq$VD1_f)
 
 ```
-# WGI X Sentimapp
+# WGI X Canada
 
 ```{r}
-reg_4 <- glm(formula = vae_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # voice and acountability
-  reg_4.1 <- glm(formula = vae_arrival_diff ~ VD1 + VD2 + VD3 + VD4, data = trajipaq)
-reg_5 <- glm(formula = pve_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Political stability No Violence
-reg_6 <- glm(formula = gee_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Government Effectiveness
-reg_7 <- glm(formula = rqe_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Regulatory quality
-reg_8 <- glm(formula = rle_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Rule fo law
-reg_9 <- glm(formula = cce_arrival ~ VD1 + VD2 + VD4 + VD5, data = trajipaq) # Control of corruption
+#Au moment de l'immigration
 
-summary(reg_4)
-summary(reg_5)
-summary(reg_6)
-summary(reg_7)
-summary(reg_8)
-summary(reg_9)
-summary(reg_4.1)
+reg_WGI_can1 <- glm(formula = VD2_dico ~ vae_arrival, data = trajipaq, family = "binomial") # VD2 dichotomique
+reg_WGI_can1_ctrl <- glm(formula = VD2_dico ~ vae_arrival  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
 
+summary(reg_WGI_can1)
+summary(reg_WGI_can1_ctrl)
+
+# Au moment de l'enquête (like)
+
+reg_WGI_can2 <- glm(formula = VD2_dico ~ vae_2021 , data = trajipaq, family = "binomial") # VD2 non regroupée
+reg_WGI_can2_ctrl <- glm(formula = VD2_dico ~ vae_2021  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
+
+
+summary(reg_WGI_can2)
+summary(reg_WGI_can2_ctrl)
+
+# À l'arrivée et au moment de l'enquête
+
+reg_WGI_can3 <- glm(formula = VD2_dico ~ vae_2021 + vae_arrival , data = trajipaq, family = "binomial") # VD2 non regroupée
+reg_WGI_can3_ctrl <- glm(formula = VD2_dico ~ vae_2021 + vae_arrival + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")# VD2 contrôlée par CSD
+
+
+summary(reg_WGI_can3)
+summary(reg_WGI_can3_ctrl)
+
+freq(trajipaq$VD2_long)
+
+```
+
+# WGI X Québec
+
+```{r}
+# Au moment de l'immigration
+
+reg_WGI_qc1 <- lm(formula = VD1  ~ vae_arrival, data = trajipaq) # VD1
+reg_WGI_qc1_ctrl <- lm(formula = VD1 ~ vae_arrival  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD1 contrôlée par CSD
+
+summary(reg_WGI_qc1)
+summary(reg_WGI_qc1_ctrl)
+
+# Au moment de l'enquête
+
+reg_WGI_qc2 <- lm(formula = VD1 ~ vae_2021 , data = trajipaq) # VD1
+reg_WGI_qc2_ctrl <- lm(formula = VD1 ~ vae_2021  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) # VD1 contrôlée par CSD
+
+
+summary(reg_WGI_qc2)
+summary(reg_WGI_qc2_ctrl)
+
+# À l'arrivée et au moment de l'enquête
+
+reg_WGI_qc3 <- lm(formula = VD1 ~ vae_2021 + vae_arrival , data = trajipaq) # VD1
+reg_WGI_qc3_ctrl <- lm(formula = VD1 ~ vae_2021 + vae_arrival + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq)# VD1 contrôlée par CSD
+
+
+summary(reg_WGI_qc3)
+summary(reg_WGI_qc3_ctrl)
+```
+Résumé des résultats Can + QC
+```{r}
+stargazer(reg_WGI_can2, reg_WGI_qc2, reg_WGI_can2_ctrl, reg_WGI_qc2_ctrl, title="Results",align=TRUE, type = "text")
+
+
+```
+
+```{r}
 cor.test(trajipaq$vae_arrival, trajipaq$VD2)
 
 ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD1)), aes(x = vae_arrival, y = VD1)) +
