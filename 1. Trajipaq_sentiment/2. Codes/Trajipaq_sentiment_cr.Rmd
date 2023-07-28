@@ -573,10 +573,26 @@ trajipaq <- trajipaq %>%
   rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
 
 trajipaq <- rename(trajipaq, "vae_can" = "vae")
+trajipaq <- rename(trajipaq, "pve_can" = "pve")
+trajipaq <- rename(trajipaq, "gee_can" = "gee")
+trajipaq <- rename(trajipaq, "rqe_can" = "rqe")
+trajipaq <- rename(trajipaq, "rle_can" = "rle")
+trajipaq <- rename(trajipaq, "cce_can" = "cce")
 
-trajipaq <- trajipaq %>%
-  rowwise()%>%
-  mutate(vae_arrival_diff = vae_can - vae_arrival)
+trajipaq <- trajipaq %>% # création des WGI diff (can-home)
+  rowwise() %>%
+  mutate(vae_arrival_diff = vae_can - vae_arrival) %>%
+  mutate(pve_arrival_diff = pve_can - pve_arrival) %>%
+  mutate(gee_arrival_diff = gee_can - gee_arrival) %>%
+  mutate(rqe_arrival_diff = rqe_can - rqe_arrival) %>%
+  mutate(rle_arrival_diff = rle_can - rle_arrival) %>%
+  mutate(cce_arrival_diff = cce_can - cce_arrival)
+
+trajipaq <- trajipaq %>% #enlever les répondants d'origine canadienne (977 restants)
+  filter(origine != "Canada")
+
+freq(trajipaq$origine)
+
 ```
 
 
@@ -616,7 +632,19 @@ Trajipaq_sentiment_cr <-
          "rle_2021",
          "cce_2021",
          "vae_can",
-         "vae_arrival_diff")
+         "pve_can",
+         "gee_can",
+         "rqe_can",
+         "rle_can",
+         "cce_can",
+         "vae_arrival_diff",
+         "pve_arrival_diff",
+         "gee_arrival_diff",
+         "rqe_arrival_diff",
+         "rle_arrival_diff",
+         "cce_arrival_diff"
+         
+         )
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
