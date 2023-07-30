@@ -51,7 +51,7 @@ freq(trajipaq$sexe)
 
 trajipaq <-
   trajipaq %>%
-  mutate(age = factor(case_when( # création de la variable "age".
+  mutate(age_full = factor(case_when( # création de la variable "age".
     QAGE == 1 ~ "[0;19]",
     QAGE == 2 ~ "[20;24]",
     QAGE == 3 ~ "[25;29]",
@@ -74,11 +74,11 @@ trajipaq <-
   "[61;99]",
   NA)))
 
-freq(trajipaq$age)
+freq(trajipaq$age_full)
 
 trajipaq <-
   trajipaq %>%
-  mutate(age_small = factor(case_when( # création de la variable "age".
+  mutate(age = factor(case_when( # création de la variable "age".
     QAGE == 1 ~ "[0;29]",
     QAGE == 2 ~ "[0;29]",
     QAGE == 3 ~ "[0;29]",
@@ -107,17 +107,15 @@ trajipaq <-
 trajipaq <-
   trajipaq %>%
   mutate(education = factor(case_when( # Création de la variable "education".
-    Q16 == 1 ~ "Elementaire",
-    Q16 == 2 ~ "Secondaire",
-    Q16 == 3 ~ "Collegial",
+    Q16 == 1 ~ "Secondaire et moins",
+    Q16 == 2 ~ "Secondaire et moins",
+    Q16 == 3 ~ "Post secondaire",
     Q16 == 4 ~ "Post secondaire",
     Q16 == 5 ~ "Universitaire",
     Q26 >= 6 ~ NA
   ), levels = c( # Ordonnancement de la variable "education".
-    "Elementaire", 
-    "Secondaire", 
-    "Post secondaire", 
-    "Collegial", 
+    "Secondaire et moins", 
+    "Post secondaire",
     "Universitaire")))
 
 freq(trajipaq$education)
@@ -163,7 +161,7 @@ trajipaq <-
     region_naissance == "Asie" ~ "Asie",
     region_naissance == "Autres" ~ "Autres",
     region_naissance == "Canada" ~ "Canada",
-    region_naissance == "Caraibes" ~ "Caraibes",
+    region_naissance == "Caraibes" ~ "Autres",
     region_naissance == "Europe" ~ "Europe",
     region_naissance == "France" ~ "France",
     region_naissance == "NSP" ~ NA,
@@ -182,28 +180,25 @@ freq(trajipaq$origine)
 trajipaq <-
   trajipaq %>%
   mutate(revenu = factor(case_when( # Création de la variable "revenu".
-    Q100 == 1 ~ "[0 ; 19 999]",
-    Q100 == 2 ~ "[0 ; 19 999]",
-    Q100 == 3 ~ "[20 000 ; 39 999]",
-    Q100 == 4 ~ "[20 000 ; 39 999]",
-    Q100 == 5 ~ "[40 000 ; 59 999]",
-    Q100 == 6 ~ "[40 000 ; 59 999]",
-    Q100 == 7 ~ "[60 000 ; 79 999]",
-    Q100 == 8 ~ "[60 000 ; 79 999]",
+    Q100 == 1 ~ "[0 ; 39 999]",
+    Q100 == 2 ~ "[0 ; 39 999]",
+    Q100 == 3 ~ "[0 ; 39 999]",
+    Q100 == 4 ~ "[0 ; 39 999]",
+    Q100 == 5 ~ "[40 000 ; 99 999]",
+    Q100 == 6 ~ "[40 000 ; 99 999]",
+    Q100 == 7 ~ "[60 000 ; 99 999]",
+    Q100 == 8 ~ "[60 000 ; 99 999]",
     Q100 == 9 ~ "[80 000 ; 99 999]",
-    Q100 == 10 ~ "[90 000 ; 99 999]",
-    Q100 == 11 ~ "[100 000 ; 149 999]",
-    Q100 == 12 ~ "[150 000 et plus]",
+    Q100 == 10 ~ "[100 000 et plus]",
+    Q100 == 11 ~ "[100 000 et plus]",
+    Q100 == 12 ~ "[100 000 et plus]",
     Q100 == 98 ~ NA,
     Q100 == 99 ~ NA
   ), levels = c(
-  "[0 ; 19 999]",
-  "[20 000 ; 39 999]",
-  "[40 000 ; 59 999]",
-  "[60 000 ; 79 999]",
-  "[80 000 ; 99 999]",
-  "[100 000 ; 149 999]",
-  "[150 000 et plus]",
+  "[0 ; 39 999]",
+  "[40 000 ; 39 999]",
+  "[60 000 ; 99 999]",
+  "[100 000 et plus]",
   NA)))
 
 freq(trajipaq$revenu)
@@ -240,18 +235,18 @@ trajipaq <-
   mutate(religion = case_when( # Création de la variable "religion".
     Q17 == 0 ~ "Sans religion",
     Q17 == 1 ~ "Catholique",
-    Q17 == 2 ~ "Protestante",
-    Q17 == 3 ~ "Autres Chretiens",
-    Q17 == 4 ~ "Autres Chretiens",
-    Q17 == 5 ~ "Autres Chretiens",
-    Q17 == 6 ~ "Orthodoxe",
-    Q17 == 7 ~ "Autres Chretiens",
+    Q17 == 2 ~ "Autres",
+    Q17 == 3 ~ "Autres",
+    Q17 == 4 ~ "Autres",
+    Q17 == 5 ~ "Autres",
+    Q17 == 6 ~ "Autres",
+    Q17 == 7 ~ "Autres",
     Q17 == 8 ~ "Musulmans",
-    Q17 == 9 ~ "Autre",
-    Q17 == 10 ~ "Autre",
-    Q17 == 11 ~ "Autre",
-    Q17 == 12 ~ "Autre",
-    Q17 == 97 ~ "Autre",
+    Q17 == 9 ~ "Autres",
+    Q17 == 10 ~ "Autres",
+    Q17 == 11 ~ "Autres",
+    Q17 == 12 ~ "Autres",
+    Q17 == 97 ~ "Autres",
     Q17 >= 98 ~ NA
   ))
 

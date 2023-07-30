@@ -12,7 +12,7 @@ library(tidyverse)
 library(ggthemes)
 library(haven)
 library(stargazer)
-library(gtsumamry)
+library(gtsummary)
 
 trajipaq <- read_csv("../3. Data/Trajipaq_sentiment_cr.csv")
 view(trajipaq)
