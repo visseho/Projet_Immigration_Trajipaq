@@ -109,14 +109,16 @@ trajipaq <-
   mutate(education = factor(case_when( # Création de la variable "education".
     Q16 == 1 ~ "Secondaire et moins",
     Q16 == 2 ~ "Secondaire et moins",
-    Q16 == 3 ~ "Post secondaire",
-    Q16 == 4 ~ "Post secondaire",
-    Q16 == 5 ~ "Universitaire",
-    Q26 >= 6 ~ NA
+    Q16 == 3 ~ "Collegial",
+    Q16 == 4 ~ "Formation professionnelle ou postsecondaire",
+    Q16 == 5 ~ "Universitaire 1er cycle",
+    Q16 == 6 ~ "Universitaire 2e cycle et plus"
   ), levels = c( # Ordonnancement de la variable "education".
-    "Secondaire et moins", 
-    "Post secondaire",
-    "Universitaire")))
+    "Secondaire et moins",
+    "Collegial",
+    "Formation professionnelle ou postsecondaire",
+    "Universitaire 1er cycle",
+    "Universitaire 2e cycle et plus")))
 
 freq(trajipaq$education)
 
@@ -269,9 +271,9 @@ trajipaq <-
     STATUT == 1 ~ "Celibataire",
     STATUT == 2 ~ "Marie(e)",
     STATUT == 3 ~ "Conjoint(e) de fait",
-    STATUT == 4 ~ "Separe(e)",
-    STATUT == 5 ~ "Divorce(e)",
-    STATUT == 6 ~ "Veuf(ve)"
+    STATUT == 4 ~ "Separe(e)/divorce(e)/veuf(ve)",
+    STATUT == 5 ~ "Separe(e)/divorce(e)/veuf(ve)",
+    STATUT == 6 ~ "Separe(e)/divorce(e)/veuf(ve)"
   ))
 
 freq(trajipaq$statut_mat)
@@ -619,6 +621,16 @@ trajipaq <- trajipaq %>% # création des WGI diff (can-home)
   mutate(rqe_arrival_diff = rqe_can - rqe_arrival) %>%
   mutate(rle_arrival_diff = rle_can - rle_arrival) %>%
   mutate(cce_arrival_diff = cce_can - cce_arrival)
+
+V_WGI_origine_arrival <- c("vae_arrival", "pve_arrival", "gee_arrival", "rqe_arrival", "rle_arrival", "cce_arrival")
+
+trajipaq <- trajipaq %>%
+  rowwise()%>%
+  mutate(WGI_origine_arrival = sum(c_across(all_of(V_WGI_origine_arrival)), na.rm = TRUE)/length(V_WGI_origine_arrival))
+
+trajipaq <- trajipaq %>%
+  rowwise()%>%
+  mutate(WGI_origine_arrival = sum(c_across(all_of(V_WGI_origine_arrival)), na.rm = TRUE)/length(V_WGI_origine_arrival))
 
 trajipaq <- trajipaq %>% #enlever les répondants d'origine canadienne (977 restants)
   filter(origine != "Canada")
