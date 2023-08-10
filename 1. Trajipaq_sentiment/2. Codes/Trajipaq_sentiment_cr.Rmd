@@ -687,7 +687,6 @@ Trajipaq_sentiment_cr <-
          "rqe_arrival_diff",
          "rle_arrival_diff",
          "cce_arrival_diff"
-         
          )
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
