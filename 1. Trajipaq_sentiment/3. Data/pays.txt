@@ -1,4 +1,4 @@
-Country Name,Region,Subregion
+Country,Region,Subregion
 Algérie,Afrique,Afrique du Nord
 Égypte,Afrique,Afrique du Nord
 Libye,Afrique,Afrique du Nord
@@ -53,6 +53,7 @@ Togo,Afrique,Afrique subsaharienne
 Ouganda,Afrique,Afrique subsaharienne
 Zambie,Afrique,Afrique subsaharienne
 Zimbabwe,Afrique,Afrique subsaharienne
+Swaziland (Eswatini),Afrique,Afrique subsaharienne
 Argentine,Amériques,Amérique latine et Caraïbes
 Belize,Amériques,Amérique latine et Caraïbes
 Bolivie,Amériques,Amérique latine et Caraïbes
@@ -63,7 +64,7 @@ Costa Rica,Amériques,Amérique latine et Caraïbes
 Cuba,Amériques,Amérique latine et Caraïbes
 République dominicaine,Amériques,Amérique latine et Caraïbes
 Équateur,Amériques,Amérique latine et Caraïbes
-Salvador,Amériques,Amérique latine et Caraïbes
+El Salvador,Amériques,Amérique latine et Caraïbes
 Haïti,Amériques,Amérique latine et Caraïbes
 Honduras,Amériques,Amérique latine et Caraïbes
 Jamaïque,Amériques,Amérique latine et Caraïbes
@@ -106,7 +107,7 @@ Philippines,Asie,Asie du Sud-Est
 Singapour,Asie,Asie du Sud-Est
 Thaïlande,Asie,Asie du Sud-Est
 Timor oriental,Asie,Asie du Sud-Est
-Viêt Nam,Asie,Asie du Sud-Est
+Viet Nam,Asie,Asie du Sud-Est
 Arménie,Asie,Asie de l'Ouest
 Azerbaïdjan,Asie,Asie de l'Ouest
 Bahreïn,Asie,Asie de l'Ouest
@@ -118,19 +119,18 @@ Jordanie,Asie,Asie de l'Ouest
 Koweït,Asie,Asie de l'Ouest
 Liban,Asie,Asie de l'Ouest
 Oman,Asie,Asie de l'Ouest
-Palestine,Asie,Asie de l'Ouest
+Cisjordanie et bande de Gaza (Palestine),Asie,Asie de l'Ouest
 Qatar,Asie,Asie de l'Ouest
 Arabie saoudite,Asie,Asie de l'Ouest
 Syrie,Asie,Asie de l'Ouest
 Turquie,Asie,Asie de l'Ouest
 Émirats arabes unis,Asie,Asie de l'Ouest
 Yémen,Asie,Asie de l'Ouest
-Biélorussie,Europe,Europe de l'Est
 Bulgarie,Europe,Europe de l'Est
 République tchèque,Europe,Europe de l'Est
 Hongrie,Europe,Europe de l'Est
 Pologne,Europe,Europe de l'Est
-Moldavie,Europe,Europe de l'Est
+Moldova,Europe,Europe de l'Est
 Roumanie,Europe,Europe de l'Est
 Russie,Europe,Europe de l'Est
 Slovaquie,Europe,Europe de l'Est
@@ -187,3 +187,12 @@ Samoa,Océanie,Polynésie
 Tonga,Océanie,Polynésie
 Tuvalu,Océanie,Polynésie
 Wallis et Futuna,Océanie,Polynésie
+Hong Kong,Asie,Asie de l'Est
+Bélarus,Europe,Europe de l'Est
+Grenade,Amériques,Amérique latine et Caraïbes
+Îles mineures éloignées des États-Unis,Océanie,Îles mineures éloignées des États-Unis
+Réunion,Afrique,Afrique subsaharienne
+Saint-Vincent-et-les Grenadines,Amériques,Amérique latine et Caraïbes
+Guadeloupe,Amériques,Amérique latine et Caraïbes
+Cabo Verde,Afrique,Afrique subsaharienne
+

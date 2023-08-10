@@ -497,8 +497,15 @@ ggplot(data = trajipaq, mapping = aes(x = discrim_score)) +
 # region_naissance = de quelle région du monde êtes-vous originaire ?
 trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
 
+pays <-
+  pays %>%
+  mutate(`Country Name` = recode(`Country Name`,
+                                 ""
+  ))
+
 trajipaq <- merge(trajipaq, pays, by.x = "Q11",
                 by.y = "Country Name", all.x = TRUE)
+
 
 trajipaq <-
   trajipaq %>%
