@@ -604,19 +604,20 @@ wgidataset <-
                               "Yemen, Rep." = "Yémen"
                               ))
 
-trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
+trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"), # Origine à l'arrivée
                 by.y = c("year", "countryname"), all.x = TRUE)
 
-wgidataset_2021 <- filter(wgidataset, year == 2021)
-wgidataset_canada <- filter(wgidataset, countryname == "Canada")
+wgidataset_origin_2021 <- filter(wgidataset, year == 2021) # Origine en 2021
+wgidataset_canada <- filter(wgidataset, countryname == "Canada") #Canada à l'arrivée
+wgidataset_canada_2021 <- filter(wgidataset, countryname == "Canada" & year == 2021)
 
 trajipaq <- trajipaq %>%
-  left_join(wgidataset_2021, by = c("Q11" = "countryname"))%>%
+  left_join(wgidataset_origin_2021, by = c("Q11" = "countryname"))%>%
   left_join(wgidataset_canada, by = c("annee_qc" = "year"))
 
 trajipaq <- trajipaq %>%
-  rename_with(~sub("\\.y$", "_2021", .), ends_with(".y"))%>%
-  rename_with(~sub("\\.x$", "_arrival", .), ends_with(".x"))
+  rename_with(~sub("\\.y$", "_2021_origin", .), ends_with(".y"))%>%
+  rename_with(~sub("\\.x$", "_arrival_canada", .), ends_with(".x"))
 
 trajipaq <- rename(trajipaq, "vae_can" = "vae")
 trajipaq <- rename(trajipaq, "pve_can" = "pve")
