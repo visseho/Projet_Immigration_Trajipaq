@@ -499,14 +499,17 @@ trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
 
 pays <-
   pays %>%
-  mutate(`Country Name` = recode(`Country Name`,
-                                 ""
+    mutate(Country = recode(Country,
+                            "Russie" = "Russie, Fédération de",
+                            "Congo (Kinshasa)" = "Congo, République démocratique du",
+                            "Congo (Brazzaville)" = "Congo, République du",
+                            "République dominicaine" = "Dominicaine, République",
+                            "République centrafricaine" = "Centrafricaine, République",
+                            "Afrique du Sud" = "Afrique du Sud, République d'"
   ))
 
 trajipaq <- merge(trajipaq, pays, by.x = "Q11",
-                by.y = "Country Name", all.x = TRUE)
-
-
+                by.y = "Country", all.x = TRUE)
 trajipaq <-
   trajipaq %>%
   mutate(origine = Region)
