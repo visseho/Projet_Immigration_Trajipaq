@@ -22,8 +22,10 @@ library(haven)
 
 trajipaq <- read_dta("../3. Data/Base_Trajipaq_Finale_Ok.dta")
 wgidataset <- read_dta("../3. Data/wgidataset.dta")
+pays <- read_csv("../3. Data/pays.txt")
 
 ```
+
 
 ### Sexe
 
@@ -148,30 +150,7 @@ descr(trajipaq$annee_qc)
 
 ```
 
-### VC4 : région d'origine
 
-```{r}
-
-# region_naissance = de quelle région du monde êtes-vous originaire ?
-
-trajipaq <-
-  trajipaq %>%
-  mutate(origine = case_when( # Création de la variable "region".
-    region_naissance == "ANMO" ~ "Afrique du Nord et Moyen Orient",
-    region_naissance == "ACAS" ~ "Amerique centrale et Amerique su Sud",
-    region_naissance == "Afrique subsaharienne" ~ "Afrique subsaharienne",
-    region_naissance == "Asie" ~ "Asie",
-    region_naissance == "Autres" ~ "Autres",
-    region_naissance == "Canada" ~ "Canada",
-    region_naissance == "Caraibes" ~ "Autres",
-    region_naissance == "Europe" ~ "Europe",
-    region_naissance == "France" ~ "France",
-    region_naissance == "NSP" ~ NA,
-  ))
-
-freq(trajipaq$origine)
-
-```
 
 ### VC5 : revenu annuel brut sur l'année 2019
 
@@ -280,12 +259,44 @@ freq(trajipaq$statut_mat)
 
 ```
 
+
+
 ## Variables dépendantes
 
-### VD1 : sentiment d'appartenance au Québec
+### VD1 : sentiment d'appartenance (Canada)
 
 ```{r}
+# Q39E = Je me sens canadienne.
 
+trajipaq <-
+  trajipaq %>%
+  mutate(sentimapp_can_long = case_when( # Création de la variable "VD2".
+    Q39E == 1 ~ 1,
+    Q39E == 2 ~ 2,
+    Q39E == 3 ~ 3,
+    Q39E == 4 ~ 4,
+    Q39E == 98 ~ NA,
+    Q39E == 99 ~ NA
+  ))
+
+trajipaq <-
+  trajipaq %>%
+  mutate(sentimapp_can_dico = case_when( # Création de la variable "VD2".
+    Q39E == 1 ~ 1,
+    Q39E == 2 ~ 1,
+    Q39E == 3 ~ 0,
+    Q39E == 4 ~ 0,
+    Q39E == 98 ~ NA_real_,
+    Q39E == 99 ~ NA_real_
+  ))
+
+freq(trajipaq$sentimapp_can_long)
+freq(trajipaq$sentimapp_can_dico)
+```
+
+### VD2 : sentiment d'appartenance au Québec
+
+```{r}
 # Préparation des variables en vue de créer le premier indice.
 
 trajipaq <-
@@ -305,7 +316,7 @@ trajipaq <-
     ))
   )
 
-v_VD1 <- c( # Création d'un vecteur regroupant les nouvelles variables.
+v_sentimapp_QC <- c( # Création d'un vecteur regroupant les nouvelles variables.
   "Q39_new_A",
   "Q39_new_C",
   "Q39_new_D"
@@ -323,57 +334,24 @@ trajipaq <-
 trajipaq <-
   trajipaq %>%
   rowwise() %>%
-  mutate(sumVD1 = sum(c_across(all_of(v_VD1)), na.rm = TRUE)) %>%
-  mutate(VD1 = (sumVD1 - nbre_rep_rep) / ((nbre_lvl - 1)*nbre_rep_rep)) %>%
-  mutate(VD1 = if (nbre_rep_rep == 0) NA_real_ else VD1) %>%
+  mutate(sumVD1 = sum(c_across(all_of(v_sentimapp_QC)), na.rm = TRUE)) %>%
+  mutate(sentimapp_QC = (sumVD1 - nbre_rep_rep) / ((nbre_lvl - 1)*nbre_rep_rep)) %>%
+  mutate(sentimapp_QC = if (nbre_rep_rep == 0) NA_real_ else sentimapp_QC) %>%
   ungroup()
 
-descr(trajipaq$VD1)
+descr(trajipaq$sentimapp_QC)
 
 ```
 
 ```{r}
 
-ggplot(data = trajipaq, mapping = aes(x = VD1)) +
+ggplot(data = trajipaq, mapping = aes(x = sentimapp_QC)) +
   geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
   labs(
     title = "Distribution du sentiment d'appartenance au Quebec",
     x = "Indice du sentiment d'appartenance au Quebec"
        ) +
   theme_bw()
-
-```
-
-### VD2 : sentiment d'appartenance (Canada)
-
-```{r}
-
-# Q39E = Je me sens canadienne.
-
-trajipaq <-
-  trajipaq %>%
-  mutate(VD2_long = case_when( # Création de la variable "VD2".
-    Q39E == 1 ~ 1,
-    Q39E == 2 ~ 2,
-    Q39E == 3 ~ 3,
-    Q39E == 4 ~ 4,
-    Q39E == 98 ~ NA,
-    Q39E == 99 ~ NA
-  ))
-
-trajipaq <-
-  trajipaq %>%
-  mutate(VD2_dico = case_when( # Création de la variable "VD2".
-    Q39E == 1 ~ 1,
-    Q39E == 2 ~ 1,
-    Q39E == 3 ~ 0,
-    Q39E == 4 ~ 0,
-    Q39E == 98 ~ NA_real_,
-    Q39E == 99 ~ NA_real_
-  ))
-
-freq(trajipaq$VD2_long)
-freq(trajipaq$VD2_dico)
 
 ```
 
@@ -385,16 +363,16 @@ freq(trajipaq$VD2_dico)
 
 trajipaq <-
   trajipaq %>%
-  mutate(VD3 = case_when( # Création de la variable "VD3".
-    Q39F == 1 ~ "Oui",
-    Q39F == 2 ~ "Oui",
-    Q39F == 3 ~ "Non",
-    Q39F == 4 ~ "Non",
+  mutate(sentimapp_origine_dico = case_when( # Création de la variable "VD3".
+    Q39F == 1 ~ 1,
+    Q39F == 2 ~ 1,
+    Q39F == 3 ~ 0,
+    Q39F == 4 ~ 0,
     Q39F >= 98 ~ NA
   ))
 
 
-freq(trajipaq$VD3)
+freq(trajipaq$sentimapp_origine_dico)
 
 ```
 
@@ -404,14 +382,14 @@ freq(trajipaq$VD3)
 
 trajipaq <-
   trajipaq %>% 
-  mutate(VD4 = case_when( # Création de la variable "VD4".
-    VD2_dico == "Oui" & VD3 == "Oui" ~ "Integre",
-    VD2_dico == "Oui" & VD3 == "Non" ~ "Assimile",
-    VD2_dico == "Non" & VD3 == "Oui" ~ "Separe",
-    VD2_dico == "Non" & VD3 == "Non" ~ "Marginalise"
+  mutate(sentimapp_can_origine = case_when( # Création de la variable "VD4".
+    sentimapp_can_dico == 1 & sentimapp_origine_dico == 1 ~ "Integre",
+    sentimapp_can_dico == 1 & sentimapp_origine_dico == 0 ~ "Assimile",
+    sentimapp_can_dico == 0 & sentimapp_origine_dico == 1 ~ "Separe",
+    sentimapp_can_dico == 0 & sentimapp_origine_dico == 0 ~ "Marginalise"
   ))
 
-freq(trajipaq$VD4)
+freq(trajipaq$sentimapp_can_origine)
 
 ```
 
@@ -419,30 +397,30 @@ freq(trajipaq$VD4)
 
 ```{r}
 
-trajipaq <-
-  trajipaq %>% 
-  mutate(Q39D_new_2 = case_when( # Création d'une nouvelle variable.
-         Q39D <= 2 ~ "Oui", 
-         Q39D == 3 | Q39D == 4 ~ "Non", 
-         Q39D >= 97 ~ NA_character_)) %>% 
-  mutate(VD5 = factor(case_when( # Création de la variable "VD5".
-    VD2_dico == "Oui" & Q39D_new_2 == "Oui" ~ 1,
-    VD2_dico == "Oui" & Q39D_new_2 == "Non" ~ 2,
-    VD2_dico == "Non" & Q39D_new_2 == "Oui" ~ 3,
-    VD2_dico == "Non" & Q39D_new_2 == "Non" ~ 4
-  ),
-  labels = c( # Création du nom des catégories.
-    "Canada et Quebec", 
-    "Canada seule", 
-    "Quebec seule", 
-    "Aucun"),
-  levels = c( # Ordonnancement des catégories.
-    1, 
-    2, 
-    3, 
-    4)))
+#trajipaq <-
+#  trajipaq %>% 
+#  mutate(Q39D_new_2 = case_when( # Création d'une nouvelle variable.
+ #        Q39D <= 2 ~ "Oui", 
+  #       Q39D == 3 | Q39D == 4 ~ "Non", 
+   #      Q39D >= 97 ~ NA_character_)) %>% 
+#  mutate(VD5 = factor(case_when( # Création de la variable "VD5".
+ #   VD2_dico == "Oui" & Q39D_new_2 == "Oui" ~ 1,
+  #  VD2_dico == "Oui" & Q39D_new_2 == "Non" ~ 2,
+   # VD2_dico == "Non" & Q39D_new_2 == "Oui" ~ 3,
+    #VD2_dico == "Non" & Q39D_new_2 == "Non" ~ 4
+#  ),
+ # labels = c( # Création du nom des catégories.
+  #  "Canada et Quebec", 
+   # "Canada seule", 
+    #"Quebec seule", 
+    #"Aucun"),
+  #levels = c( # Ordonnancement des catégories.
+   # 1, 
+    #2, 
+    #3, 
+    #4)))
 
-freq(trajipaq$VD5)
+#freq(trajipaq$VD5)
 
 ```
 
@@ -491,17 +469,17 @@ trajipaq <-
   trajipaq %>%
   rowwise() %>%
   mutate(sumVI4 = sum(c_across(all_of(v_VI4)), na.rm = TRUE)) %>%
-  mutate(VI4 = (sumVI4 - nbre_rep_rep_2) / ((nbre_lvl_2 - 1)*nbre_rep_rep_2)) %>%
-  mutate(VI4 = if (nbre_rep_rep_2 == 0) NA_real_ else VI4) %>%
+  mutate(discrim_score = (sumVI4 - nbre_rep_rep_2) / ((nbre_lvl_2 - 1)*nbre_rep_rep_2)) %>%
+  mutate(discrim_score = if (nbre_rep_rep_2 == 0) NA_real_ else discrim_score) %>%
   ungroup()
 
-descr(trajipaq$VI4)
+descr(trajipaq$discrim_score)
 
 ```
 
 ```{r}
 
-ggplot(data = trajipaq, mapping = aes(x = VI4)) +
+ggplot(data = trajipaq, mapping = aes(x = discrim_score)) +
   geom_histogram(na.rm = TRUE, fill = "pink", binwidth = 0.01) +
   labs(
     title = "Distribution de la discrimination subie au cours des 12 derniers mois",
@@ -512,12 +490,37 @@ ggplot(data = trajipaq, mapping = aes(x = VI4)) +
 
 
 ```
+### VC4 : région d'origine
 
+```{r}
+
+# region_naissance = de quelle région du monde êtes-vous originaire ?
+trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
+
+trajipaq <- merge(trajipaq, pays, by.x = "Q11",
+                by.y = "Country Name", all.x = TRUE)
+
+trajipaq <-
+  trajipaq %>%
+  mutate(origine = Region)
+
+trajipaq <-
+  trajipaq %>%
+  mutate(origine = case_when( # Création de la variable "region".
+    Subregion == "Amérique du Nord" ~ "Amérique du Nord",
+    Subregion == "Amérique latine et Caraïbes" ~ "Amérique latine et Caraïbes",
+    Subregion == "Afrique subsaharienne" ~ "Afrique subsaharienne",
+    Subregion == "Afrique du Nord" ~ "Afrique du Nord",
+    Subregion == "Afrique subsaharienne" ~ "Afrique subsaharienne",
+    TRUE ~ origine
+  ))
+
+freq(trajipaq$origine)
+
+```
 # WGI
 
 ```{r}
-trajipaq <- as_factor(trajipaq, only_labelled = TRUE)
-
 wgidataset <-
   wgidataset %>%
   mutate(countryname = recode(countryname, 
@@ -591,7 +594,6 @@ wgidataset <-
                               "Yemen, Rep." = "Yémen"
                               ))
 
-
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"),
                 by.y = c("year", "countryname"), all.x = TRUE)
 
@@ -633,9 +635,7 @@ trajipaq <- trajipaq %>%
   mutate(WGI_origine_arrival = sum(c_across(all_of(V_WGI_origine_arrival)), na.rm = TRUE)/length(V_WGI_origine_arrival))
 
 trajipaq <- trajipaq %>% #enlever les répondants d'origine canadienne (977 restants)
-  filter(origine != "Canada")
-
-freq(trajipaq$origine)
+  filter(Q11 != "Canada")
 
 ```
 
@@ -657,13 +657,12 @@ Trajipaq_sentiment_cr <-
          "religion",
          "statut_mat",
          "Q11",
-         "VD1",
-         "VD2_dico",
-         "VD2_long",
-         "VD3",
-         "VD4",
-         "VD5",
-         "VI4",
+         "sentimapp_QC",
+         "sentimapp_can_dico",
+         "sentimapp_can_long",
+         "sentimapp_origine_dico",
+         "sentimapp_can_origine",
+         "discrim_score",
          "vae_arrival",
          "pve_arrival",
          "gee_arrival",

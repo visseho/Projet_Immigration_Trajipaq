@@ -1,0 +1,189 @@
+Country Name,Region,Subregion
+Algérie,Afrique,Afrique du Nord
+Égypte,Afrique,Afrique du Nord
+Libye,Afrique,Afrique du Nord
+Mauritanie,Afrique,Afrique du Nord
+Maroc,Afrique,Afrique du Nord
+Soudan,Afrique,Afrique du Nord
+Tunisie,Afrique,Afrique du Nord
+Angola,Afrique,Afrique subsaharienne
+Bénin,Afrique,Afrique subsaharienne
+Botswana,Afrique,Afrique subsaharienne
+Burkina Faso,Afrique,Afrique subsaharienne
+Burundi,Afrique,Afrique subsaharienne
+Cameroun,Afrique,Afrique subsaharienne
+Cap-Vert,Afrique,Afrique subsaharienne
+République centrafricaine,Afrique,Afrique subsaharienne
+Tchad,Afrique,Afrique subsaharienne
+Comores,Afrique,Afrique subsaharienne
+Congo (Brazzaville),Afrique,Afrique subsaharienne
+Congo (Kinshasa),Afrique,Afrique subsaharienne
+Djibouti,Afrique,Afrique subsaharienne
+Guinée équatoriale,Afrique,Afrique subsaharienne
+Érythrée,Afrique,Afrique subsaharienne
+Eswatini,Afrique,Afrique subsaharienne
+Éthiopie,Afrique,Afrique subsaharienne
+Gabon,Afrique,Afrique subsaharienne
+Gambie,Afrique,Afrique subsaharienne
+Ghana,Afrique,Afrique subsaharienne
+Guinée,Afrique,Afrique subsaharienne
+Guinée-Bissau,Afrique,Afrique subsaharienne
+Côte d'Ivoire,Afrique,Afrique subsaharienne
+Kenya,Afrique,Afrique subsaharienne
+Lesotho,Afrique,Afrique subsaharienne
+Libéria,Afrique,Afrique subsaharienne
+Madagascar,Afrique,Afrique subsaharienne
+Malawi,Afrique,Afrique subsaharienne
+Mali,Afrique,Afrique subsaharienne
+Maurice,Afrique,Afrique subsaharienne
+Mozambique,Afrique,Afrique subsaharienne
+Namibie,Afrique,Afrique subsaharienne
+Niger,Afrique,Afrique subsaharienne
+Nigéria,Afrique,Afrique subsaharienne
+Rwanda,Afrique,Afrique subsaharienne
+Sao Tomé et Principe,Afrique,Afrique subsaharienne
+Sénégal,Afrique,Afrique subsaharienne
+Seychelles,Afrique,Afrique subsaharienne
+Sierra Leone,Afrique,Afrique subsaharienne
+Somalie,Afrique,Afrique subsaharienne
+Afrique du Sud,Afrique,Afrique subsaharienne
+Soudan du Sud,Afrique,Afrique subsaharienne
+Tanzanie,Afrique,Afrique subsaharienne
+Togo,Afrique,Afrique subsaharienne
+Ouganda,Afrique,Afrique subsaharienne
+Zambie,Afrique,Afrique subsaharienne
+Zimbabwe,Afrique,Afrique subsaharienne
+Argentine,Amériques,Amérique latine et Caraïbes
+Belize,Amériques,Amérique latine et Caraïbes
+Bolivie,Amériques,Amérique latine et Caraïbes
+Brésil,Amériques,Amérique latine et Caraïbes
+Chili,Amériques,Amérique latine et Caraïbes
+Colombie,Amériques,Amérique latine et Caraïbes
+Costa Rica,Amériques,Amérique latine et Caraïbes
+Cuba,Amériques,Amérique latine et Caraïbes
+République dominicaine,Amériques,Amérique latine et Caraïbes
+Équateur,Amériques,Amérique latine et Caraïbes
+Salvador,Amériques,Amérique latine et Caraïbes
+Haïti,Amériques,Amérique latine et Caraïbes
+Honduras,Amériques,Amérique latine et Caraïbes
+Jamaïque,Amériques,Amérique latine et Caraïbes
+Mexique,Amériques,Amérique latine et Caraïbes
+Nicaragua,Amériques,Amérique latine et Caraïbes
+Panama,Amériques,Amérique latine et Caraïbes
+Paraguay,Amériques,Amérique latine et Caraïbes
+Pérou,Amériques,Amérique latine et Caraïbes
+Uruguay,Amériques,Amérique latine et Caraïbes
+Venezuela,Amériques,Amérique latine et Caraïbes
+Canada,Amériques,Amérique du Nord
+États-Unis,Amériques,Amérique du Nord
+Kazakhstan,Asie,Asie centrale
+Kirghizistan,Asie,Asie centrale
+Tadjikistan,Asie,Asie centrale
+Turkménistan,Asie,Asie centrale
+Ouzbékistan,Asie,Asie centrale
+Chine,Asie,Asie de l'Est
+Japon,Asie,Asie de l'Est
+Mongolie,Asie,Asie de l'Est
+Corée du Nord,Asie,Asie de l'Est
+Corée du Sud,Asie,Asie de l'Est
+Taïwan,Asie,Asie de l'Est
+Afghanistan,Asie,Asie du Sud
+Bangladesh,Asie,Asie du Sud
+Bhoutan,Asie,Asie du Sud
+Inde,Asie,Asie du Sud
+Iran,Asie,Asie du Sud
+Maldives,Asie,Asie du Sud
+Népal,Asie,Asie du Sud
+Pakistan,Asie,Asie du Sud
+Sri Lanka,Asie,Asie du Sud
+Brunéi,Asie,Asie du Sud-Est
+Cambodge,Asie,Asie du Sud-Est
+Indonésie,Asie,Asie du Sud-Est
+Laos,Asie,Asie du Sud-Est
+Malaisie,Asie,Asie du Sud-Est
+Myanmar,Asie,Asie du Sud-Est
+Philippines,Asie,Asie du Sud-Est
+Singapour,Asie,Asie du Sud-Est
+Thaïlande,Asie,Asie du Sud-Est
+Timor oriental,Asie,Asie du Sud-Est
+Viêt Nam,Asie,Asie du Sud-Est
+Arménie,Asie,Asie de l'Ouest
+Azerbaïdjan,Asie,Asie de l'Ouest
+Bahreïn,Asie,Asie de l'Ouest
+Chypre,Asie,Asie de l'Ouest
+Géorgie,Asie,Asie de l'Ouest
+Irak,Asie,Asie de l'Ouest
+Israël,Asie,Asie de l'Ouest
+Jordanie,Asie,Asie de l'Ouest
+Koweït,Asie,Asie de l'Ouest
+Liban,Asie,Asie de l'Ouest
+Oman,Asie,Asie de l'Ouest
+Palestine,Asie,Asie de l'Ouest
+Qatar,Asie,Asie de l'Ouest
+Arabie saoudite,Asie,Asie de l'Ouest
+Syrie,Asie,Asie de l'Ouest
+Turquie,Asie,Asie de l'Ouest
+Émirats arabes unis,Asie,Asie de l'Ouest
+Yémen,Asie,Asie de l'Ouest
+Biélorussie,Europe,Europe de l'Est
+Bulgarie,Europe,Europe de l'Est
+République tchèque,Europe,Europe de l'Est
+Hongrie,Europe,Europe de l'Est
+Pologne,Europe,Europe de l'Est
+Moldavie,Europe,Europe de l'Est
+Roumanie,Europe,Europe de l'Est
+Russie,Europe,Europe de l'Est
+Slovaquie,Europe,Europe de l'Est
+Ukraine,Europe,Europe de l'Est
+Danemark,Europe,Europe du Nord
+Estonie,Europe,Europe du Nord
+Finlande,Europe,Europe du Nord
+Islande,Europe,Europe du Nord
+Irlande,Europe,Europe du Nord
+Lettonie,Europe,Europe du Nord
+Lituanie,Europe,Europe du Nord
+Norvège,Europe,Europe du Nord
+Suède,Europe,Europe du Nord
+Royaume-Uni,Europe,Europe du Nord
+Albanie,Europe,Europe du Sud
+Andorre,Europe,Europe du Sud
+Bosnie-Herzégovine,Europe,Europe du Sud
+Croatie,Europe,Europe du Sud
+Grèce,Europe,Europe du Sud
+Italie,Europe,Europe du Sud
+Malte,Europe,Europe du Sud
+Monténégro,Europe,Europe du Sud
+Macédoine du Nord,Europe,Europe du Sud
+Portugal,Europe,Europe du Sud
+Saint-Marin,Europe,Europe du Sud
+Serbie,Europe,Europe du Sud
+Slovénie,Europe,Europe du Sud
+Espagne,Europe,Europe du Sud
+Autriche,Europe,Europe de l'Ouest
+Belgique,Europe,Europe de l'Ouest
+France,Europe,Europe de l'Ouest
+Allemagne,Europe,Europe de l'Ouest
+Liechtenstein,Europe,Europe de l'Ouest
+Luxembourg,Europe,Europe de l'Ouest
+Monaco,Europe,Europe de l'Ouest
+Pays-Bas,Europe,Europe de l'Ouest
+Suisse,Europe,Europe de l'Ouest
+Australie,Océanie,Australie et Nouvelle-Zélande
+Nouvelle-Zélande,Océanie,Australie et Nouvelle-Zélande
+Fidji,Océanie,Mélanésie
+Papouasie-Nouvelle-Guinée,Océanie,Mélanésie
+Îles Salomon,Océanie,Mélanésie
+Vanuatu,Océanie,Mélanésie
+États fédérés de Micronésie,Océanie,Micronésie
+Kiribati,Océanie,Micronésie
+Îles Marshall,Océanie,Micronésie
+Nauru,Océanie,Micronésie
+Palaos,Océanie,Micronésie
+Samoa américaines,Océanie,Polynésie
+Îles Cook,Océanie,Polynésie
+Polynésie française,Océanie,Polynésie
+Niue,Océanie,Polynésie
+Samoa,Océanie,Polynésie
+Tonga,Océanie,Polynésie
+Tuvalu,Océanie,Polynésie
+Wallis et Futuna,Océanie,Polynésie
