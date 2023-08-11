@@ -528,7 +528,7 @@ trajipaq <-
 freq(trajipaq$origine)
 
 ```
-# WGI
+## WGI
 
 ```{r}
 wgidataset <-
@@ -603,28 +603,50 @@ wgidataset <-
                               "Vietnam" = "Viet Nam",
                               "Yemen, Rep." = "Yémen"
                               ))
+```
+
+### WGI origin/canada et arrival/2021
+
+```{r}
+wgi_origin_2021 <- filter(wgidataset, year == 2021) # Origine en 2021
+wgi_can <- filter(wgidataset, countryname == "Canada") #Canada à l'arrivée
+wgi_can_2021 <- filter(wgidataset, countryname == "Canada" & year == 2021)
+  col_can_2021 <- c("vae", "pve", "gee", "rqe", "rle", "cce")
 
 trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"), # Origine à l'arrivée
                 by.y = c("year", "countryname"), all.x = TRUE)
 
-wgidataset_origin_2021 <- filter(wgidataset, year == 2021) # Origine en 2021
-wgidataset_canada <- filter(wgidataset, countryname == "Canada") #Canada à l'arrivée
-wgidataset_canada_2021 <- filter(wgidataset, countryname == "Canada" & year == 2021)
+trajipaq <- trajipaq %>%
+  left_join(wgi_origin_2021, by = c("Q11" = "countryname"), suffix = c("", "_origin_arrival")) %>%
+  left_join(wgi_can, by = c("annee_qc" = "year"), suffix = c("", "_origin_2021")) %>%
+  left_join(wgi_can_2021, select(wgi_can_2021, all_of(col_can_2021)), 
+            by = character(0), suffix = c("", "_can_2021"))%>%
+  mutate(vae_can_arrival = vae,
+         pve_can_arrival = pve,
+         gee_can_arrival = gee,
+         rqe_can_arrival = rqe,
+         rle_can_arrival = rle,
+         cce_can_arrival = cce) %>%
+  select(-vae, -pve, -gee, -rqe, -rle, -cce)
+
+```
+
+### Score WGI
+
+```{r}
+V_origin_arrival <- c("vae_origin_arrival", "pve_origin_arrival", "gee_origin_arrival", "rqe_origin_arrival", "rle_origin_arrival", "cce_origin_arrival")
+V_origin_2021 <- c("vae_origin_2021", "pve_origin_2021", "gee_origin_2021", "rqe_origin_2021", "rle_origin_2021", "cce_origin_2021")
+V_can_arrival <- c("vae_can_arrival", "pve_can_arrival", "gee_can_arrival", "rqe_can_arrival", "rle_can_arrival", "cce_can_arrival")
+V_can_2021 <- c("vae_can_2021", "pve_can_2021", "gee_can_2021", "rqe_can_2021", "rle_can_2021", "cce_can_2021")
 
 trajipaq <- trajipaq %>%
-  left_join(wgidataset_origin_2021, by = c("Q11" = "countryname"))%>%
-  left_join(wgidataset_canada, by = c("annee_qc" = "year"))
+  rowwise()%>%
+  mutate(wgi_origin_arrival_score = sum(c_across(all_of(V_origin_arrival)), na.rm = TRUE)/length(V_origin_arrival)) %>%
+  mutate(wgi_origin_2021_score = sum(c_across(all_of(V_origin_2021)), na.rm = TRUE)/length(V_origin_2021)) %>%
+  mutate(wgi_can_arrival_score = sum(c_across(all_of(V_can_arrival)), na.rm = TRUE)/length(V_can_arrival)) %>%
+  mutate(wgi_can_2021_score = sum(c_across(all_of(V_can_2021)), na.rm = TRUE)/length(V_can_2021))
 
-trajipaq <- trajipaq %>%
-  rename_with(~sub("\\.y$", "_2021_origin", .), ends_with(".y"))%>%
-  rename_with(~sub("\\.x$", "_arrival_canada", .), ends_with(".x"))
-
-trajipaq <- rename(trajipaq, "vae_can" = "vae")
-trajipaq <- rename(trajipaq, "pve_can" = "pve")
-trajipaq <- rename(trajipaq, "gee_can" = "gee")
-trajipaq <- rename(trajipaq, "rqe_can" = "rqe")
-trajipaq <- rename(trajipaq, "rle_can" = "rle")
-trajipaq <- rename(trajipaq, "cce_can" = "cce")
+```
 
 trajipaq <- trajipaq %>% # création des WGI diff (can-home)
   rowwise() %>%
@@ -635,22 +657,6 @@ trajipaq <- trajipaq %>% # création des WGI diff (can-home)
   mutate(rle_arrival_diff = rle_can - rle_arrival) %>%
   mutate(cce_arrival_diff = cce_can - cce_arrival)
 
-V_WGI_origine_arrival <- c("vae_arrival", "pve_arrival", "gee_arrival", "rqe_arrival", "rle_arrival", "cce_arrival")
-
-trajipaq <- trajipaq %>%
-  rowwise()%>%
-  mutate(WGI_origine_arrival = sum(c_across(all_of(V_WGI_origine_arrival)), na.rm = TRUE)/length(V_WGI_origine_arrival))
-
-trajipaq <- trajipaq %>%
-  rowwise()%>%
-  mutate(WGI_origine_arrival = sum(c_across(all_of(V_WGI_origine_arrival)), na.rm = TRUE)/length(V_WGI_origine_arrival))
-
-trajipaq <- trajipaq %>% #enlever les répondants d'origine canadienne (977 restants)
-  filter(Q11 != "Canada")
-
-```
-
-
 
 # Création de la nouvelle base de données
 
@@ -658,6 +664,7 @@ trajipaq <- trajipaq %>% #enlever les répondants d'origine canadienne (977 rest
 
 Trajipaq_sentiment_cr <-
   trajipaq %>%
+  filter(Q11 != "Canada")%>%
   select("age", # Création de la base de données dédiée à l'analyse.
          "education",
          "sexe",
@@ -674,32 +681,16 @@ Trajipaq_sentiment_cr <-
          "sentimapp_origine_dico",
          "sentimapp_can_origine",
          "discrim_score",
-         "vae_arrival",
-         "pve_arrival",
-         "gee_arrival",
-         "rqe_arrival",
-         "rle_arrival",
-         "cce_arrival",
-         "vae_2021",
-         "pve_2021",
-         "gee_2021",
-         "rqe_2021",
-         "rle_2021",
-         "cce_2021",
-         "vae_can",
-         "pve_can",
-         "gee_can",
-         "rqe_can",
-         "rle_can",
-         "cce_can",
-         "vae_arrival_diff",
-         "pve_arrival_diff",
-         "gee_arrival_diff",
-         "rqe_arrival_diff",
-         "rle_arrival_diff",
-         "cce_arrival_diff"
+         starts_with("vae"),
+         starts_with("pve"),
+         starts_with("gee"),
+         starts_with("rqe"),
+         starts_with("rle"),
+         starts_with("cce"),
+         ends_with("score")
          )
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
 
 ```
+
