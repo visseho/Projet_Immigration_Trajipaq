@@ -614,40 +614,166 @@ ctable(trajipaq$VD3, trajipaq$VD1_f)
 ```{r}
 #Au moment de l'immigration
 
-reg_WGI_can1 <- glm(formula = VD2_dico ~ vae_arrival, data = trajipaq, family = "binomial") # VD2 dichotomique
-reg_WGI_can1_ctrl <- glm(formula = VD2_dico ~ vae_arrival  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
+reg_WGI_can_arrival_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
+reg_WGI_can_arrival_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
 
-summary(reg_WGI_can1)
-summary(reg_WGI_can1_ctrl)
+reg_WGI_can_arrival_long <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival_score, data = trajipaq) # VD2 dichotomique
+reg_WGI_can_arrival_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
+
+summary(reg_WGI_can_arrival_dico) # p = 0.000116 ***
+summary(reg_WGI_can_arrival_dico_ctrl) # p = 0.0203 *
+summary(reg_WGI_can_arrival_long) # p = 8.7e-07 ***
+summary(reg_WGI_can_arrival_long_ctrl) # p = 0.00678 **
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can2 <- glm(formula = VD2_dico ~ vae_2021 , data = trajipaq, family = "binomial") # VD2 non regroupée
-reg_WGI_can2_ctrl <- glm(formula = VD2_dico ~ vae_2021  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
+reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
+reg_WGI_can_2021_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
+
+reg_WGI_can_2021_long <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score, data = trajipaq) # VD2 dichotomique
+reg_WGI_can_2021_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
+
+summary(reg_WGI_can_2021_dico) # 2.38e-05 ***
+summary(reg_WGI_can_2021_dico_ctrl) # p = 0.03426 *
+summary(reg_WGI_can_2021_long) # p = 5.5e-08 ***
+summary(reg_WGI_can_2021_long_ctrl) # p = 0.0124 *
+```
 
 
-summary(reg_WGI_can2)
-summary(reg_WGI_can2_ctrl)
+```{r}
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  reg_WGI_can_arrival_long,
+  reg_WGI_can_arrival_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+
+
+
+stargazer(
+  reg_WGI_can_2021_dico,
+  reg_WGI_can_2021_dico_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+stargazer(
+  reg_WGI_can_2021_dico,
+  reg_WGI_can_2021_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_dico_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  reg_WGI_can_2021_dico,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  reg_WGI_can_2021_dico_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+
+
+stargazer(
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+stargazer(
+  reg_WGI_can_2021_dico,
+  reg_WGI_can_2021_dico_ctrl,
+  reg_WGI_can_2021_long,
+  reg_WGI_can_2021_long_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+ # reg_WGI_can_2021_dico,
+ # reg_WGI_can_2021_dico_ctrl,  
+
+freq(trajipaq$sentimapp_can_dico)
+freq(trajipaq$wgi_origin_arrival_score)
+freq(trajipaq$sentimapp_can_long)
+freq(trajipaq$wgi_origin_2021_score)
+
+trajipaq$age <- as.factor(trajipaq$age)
+trajipaq$education <- as.factor(trajipaq$education)
+trajipaq$sexe <- as.factor(trajipaq$sexe)
+trajipaq$origine <- as.factor(trajipaq$origine)
+trajipaq$revenu <- as.factor(trajipaq$revenu)
+trajipaq$langue_mat <- as.factor(trajipaq$langue_mat)
+trajipaq$religion <- as.factor(trajipaq$religion)
+trajipaq$statut_mat <- as.factor(trajipaq$statut_mat)
+
+```
+ 
+  
+ 
+  
 
 # À l'arrivée et au moment de l'enquête
 
-reg_WGI_can3 <- glm(formula = VD2_dico ~ vae_2021 + vae_arrival , data = trajipaq, family = "binomial") # VD2 non regroupée
-reg_WGI_can3_ctrl <- glm(formula = VD2_dico ~ vae_2021 + vae_arrival + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")# VD2 contrôlée par CSD
+reg_WGI_can_both_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score + wgi_origin_arrival_score , data = trajipaq, family = "binomial") # VD2 non regroupée
+reg_WGI_can_both_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score + wgi_origin_arrival_score + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")# VD2 contrôlée par CSD
 
 
-summary(reg_WGI_can3)
-summary(reg_WGI_can3_ctrl)
+summary(reg_WGI_can_both_dico)
+summary(reg_WGI_can_both_dico_ctrl)
 
 freq(trajipaq$VD2_long)
 
-```
-
-# WGI X Québec
+## WGI X Québec
 
 ```{r}
 # Au moment de l'immigration
 
-reg_WGI_qc1 <- lm(formula = VD1  ~ vae_arrival, data = trajipaq) # VD1
+reg__qc1 <- lm(formula = VD1  ~ vae_arrival, data = trajipaq) # VD1
 reg_WGI_qc1_ctrl <- lm(formula = VD1 ~ vae_arrival  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD1 contrôlée par CSD
 
 summary(reg_WGI_qc1)
@@ -671,8 +797,17 @@ reg_WGI_qc3_ctrl <- lm(formula = VD1 ~ vae_2021 + vae_arrival + age + education 
 summary(reg_WGI_qc3)
 summary(reg_WGI_qc3_ctrl)
 ```
-Résumé des résultats Can + QC
+
+## WGI X can_qc
+
 ```{r}
+reg_WGI_can_origin <- lm(formula = sentimapp_can_origin_N ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
+
+reg_WGI_can_origin_ctrl <- lm(formula = sentimapp_can_origin_N ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
+
+summary(reg_WGI_can_origin)
+summary(reg_WGI_can_origin_ctrl)
+
 stargazer(reg_WGI_can2, reg_WGI_qc2, reg_WGI_can2_ctrl, reg_WGI_qc2_ctrl, title="Results",align=TRUE, type = "text")
 
 

@@ -382,14 +382,22 @@ freq(trajipaq$sentimapp_origine_dico)
 
 trajipaq <-
   trajipaq %>% 
-  mutate(sentimapp_can_origine = case_when( # Création de la variable "VD4".
+  mutate(sentimapp_can_origin = case_when( # Création de la variable "VD4".
     sentimapp_can_dico == 1 & sentimapp_origine_dico == 1 ~ "Integre",
     sentimapp_can_dico == 1 & sentimapp_origine_dico == 0 ~ "Assimile",
     sentimapp_can_dico == 0 & sentimapp_origine_dico == 1 ~ "Separe",
     sentimapp_can_dico == 0 & sentimapp_origine_dico == 0 ~ "Marginalise"
   ))
 
-freq(trajipaq$sentimapp_can_origine)
+trajipaq <-
+  trajipaq %>% 
+  mutate(sentimapp_can_origin_N = case_when( # Création de la variable "VD4".
+    sentimapp_can_dico == 1 & sentimapp_origine_dico == 1 ~ "1",
+    sentimapp_can_dico == 1 & sentimapp_origine_dico == 0 ~ "2",
+    sentimapp_can_dico == 0 & sentimapp_origine_dico == 1 ~ "3",
+    sentimapp_can_dico == 0 & sentimapp_origine_dico == 0 ~ "4"
+  ))
+freq(trajipaq$sentimapp_can_origin)
 
 ```
 
@@ -617,16 +625,16 @@ trajipaq <- merge(trajipaq, wgidataset, by.x = c("annee_qc", "Q11"), # Origine �
                 by.y = c("year", "countryname"), all.x = TRUE)
 
 trajipaq <- trajipaq %>%
-  left_join(wgi_origin_2021, by = c("Q11" = "countryname"), suffix = c("", "_origin_arrival")) %>%
-  left_join(wgi_can, by = c("annee_qc" = "year"), suffix = c("", "_origin_2021")) %>%
+  left_join(wgi_origin_2021, by = c("Q11" = "countryname"), suffix = c("", "_origin_2021")) %>%
+  left_join(wgi_can, by = c("annee_qc" = "year"), suffix = c("", "_can_arrival")) %>%
   left_join(wgi_can_2021, select(wgi_can_2021, all_of(col_can_2021)), 
             by = character(0), suffix = c("", "_can_2021"))%>%
-  mutate(vae_can_arrival = vae,
-         pve_can_arrival = pve,
-         gee_can_arrival = gee,
-         rqe_can_arrival = rqe,
-         rle_can_arrival = rle,
-         cce_can_arrival = cce) %>%
+  mutate(vae_origin_arrival = vae,
+         pve_origin_arrival = pve,
+         gee_origin_arrival = gee,
+         rqe_origin_arrival = rqe,
+         rle_origin_arrival = rle,
+         cce_origin_arrival = cce) %>%
   select(-vae, -pve, -gee, -rqe, -rle, -cce)
 
 ```
@@ -642,9 +650,13 @@ V_can_2021 <- c("vae_can_2021", "pve_can_2021", "gee_can_2021", "rqe_can_2021", 
 trajipaq <- trajipaq %>%
   rowwise()%>%
   mutate(wgi_origin_arrival_score = sum(c_across(all_of(V_origin_arrival)), na.rm = TRUE)/length(V_origin_arrival)) %>%
+  mutate(wgi_origin_arrival_score = if (wgi_origin_arrival_score == 0) NA_real_ else wgi_origin_arrival_score) %>%
   mutate(wgi_origin_2021_score = sum(c_across(all_of(V_origin_2021)), na.rm = TRUE)/length(V_origin_2021)) %>%
+  mutate(wgi_origin_2021_score = if (wgi_origin_2021_score == 0) NA_real_ else wgi_origin_2021_score) %>%
   mutate(wgi_can_arrival_score = sum(c_across(all_of(V_can_arrival)), na.rm = TRUE)/length(V_can_arrival)) %>%
-  mutate(wgi_can_2021_score = sum(c_across(all_of(V_can_2021)), na.rm = TRUE)/length(V_can_2021))
+  mutate(wgi_can_arrival_score = if (wgi_can_arrival_score == 0) NA_real_ else wgi_can_arrival_score) %>%
+  mutate(wgi_can_2021_score = sum(c_across(all_of(V_can_2021)), na.rm = TRUE)/length(V_can_2021)) %>%
+  mutate(wgi_can_2021_score = if (wgi_can_2021_score == 0) NA_real_ else wgi_can_2021_score)
 
 ```
 
@@ -679,7 +691,8 @@ Trajipaq_sentiment_cr <-
          "sentimapp_can_dico",
          "sentimapp_can_long",
          "sentimapp_origine_dico",
-         "sentimapp_can_origine",
+         "sentimapp_can_origin",
+         "sentimapp_can_origin_N",
          "discrim_score",
          starts_with("vae"),
          starts_with("pve"),
