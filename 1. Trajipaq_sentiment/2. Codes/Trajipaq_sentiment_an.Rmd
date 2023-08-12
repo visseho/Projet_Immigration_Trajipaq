@@ -627,7 +627,7 @@ summary(reg_WGI_can_arrival_long_ctrl) # p = 0.00678 **
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
+reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial", na.action = na.pass) ## VD2 dichotomique
 reg_WGI_can_2021_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
 
 reg_WGI_can_2021_long <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score, data = trajipaq) # VD2 dichotomique
@@ -642,92 +642,9 @@ summary(reg_WGI_can_2021_long_ctrl) # p = 0.0124 *
 
 ```{r}
 stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  reg_WGI_can_arrival_long,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-
-
-
-stargazer(
-  reg_WGI_can_2021_dico,
-  reg_WGI_can_2021_dico_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-stargazer(
-  reg_WGI_can_2021_dico,
-  reg_WGI_can_2021_long_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_dico_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  reg_WGI_can_2021_dico,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  reg_WGI_can_2021_dico_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-
-
-stargazer(
-  reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
-stargazer(
   reg_WGI_can_2021_dico,
   reg_WGI_can_2021_dico_ctrl,
   reg_WGI_can_2021_long,
-  reg_WGI_can_2021_long_ctrl,
   title = "Results", 
   align = TRUE, 
   type = "text"
