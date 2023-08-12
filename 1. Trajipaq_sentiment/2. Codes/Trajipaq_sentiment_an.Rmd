@@ -645,7 +645,6 @@ stargazer(
   reg_WGI_can_2021_long,
   reg_WGI_can_2021_long_ctrl,
   reg_WGI_can_arrival_long,
-  reg_WGI_can_arrival_long_ctrl,
   title = "Results", 
   align = TRUE, 
   type = "text"
