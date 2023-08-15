@@ -658,17 +658,12 @@ trajipaq <- trajipaq %>%
   mutate(wgi_can_2021_score = sum(c_across(all_of(V_can_2021)), na.rm = TRUE)/length(V_can_2021)) %>%
   mutate(wgi_can_2021_score = if (wgi_can_2021_score == 0) NA_real_ else wgi_can_2021_score)
 
-```
-
-trajipaq <- trajipaq %>% # création des WGI diff (can-home)
+trajipaq <- trajipaq %>%
   rowwise() %>%
-  mutate(vae_arrival_diff = vae_can - vae_arrival) %>%
-  mutate(pve_arrival_diff = pve_can - pve_arrival) %>%
-  mutate(gee_arrival_diff = gee_can - gee_arrival) %>%
-  mutate(rqe_arrival_diff = rqe_can - rqe_arrival) %>%
-  mutate(rle_arrival_diff = rle_can - rle_arrival) %>%
-  mutate(cce_arrival_diff = cce_can - cce_arrival)
+  mutate(wgi_arrival_diff = wgi_origin_arrival_score - wgi_can_arrival_score) %>%
+  mutate(wgi_2021_diff = wgi_origin_2021_score - wgi_can_2021_score)
 
+```
 
 # Création de la nouvelle base de données
 
@@ -700,7 +695,8 @@ Trajipaq_sentiment_cr <-
          starts_with("rqe"),
          starts_with("rle"),
          starts_with("cce"),
-         ends_with("score")
+         ends_with("score"),
+         ends_with("diff")
          )
 
 write.csv(Trajipaq_sentiment_cr, "../3. Data/Trajipaq_sentiment_cr.csv") # Ecriture de la nouvelle base de données.
