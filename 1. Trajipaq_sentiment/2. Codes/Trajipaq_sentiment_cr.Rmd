@@ -271,10 +271,10 @@ freq(trajipaq$statut_mat)
 trajipaq <-
   trajipaq %>%
   mutate(sentimapp_can_long = case_when( # Création de la variable "VD2".
-    Q39E == 1 ~ 1,
-    Q39E == 2 ~ 2,
-    Q39E == 3 ~ 3,
-    Q39E == 4 ~ 4,
+    Q39E == 1 ~ 4,
+    Q39E == 2 ~ 3,
+    Q39E == 3 ~ 2,
+    Q39E == 4 ~ 1,
     Q39E == 98 ~ NA,
     Q39E == 99 ~ NA
   ))
@@ -660,6 +660,10 @@ trajipaq <- trajipaq %>%
 
 trajipaq <- trajipaq %>%
   rowwise() %>%
+  mutate(wgi_arrival_diff = wgi_origin_arrival_score - wgi_can_arrival_score) %>%
+  mutate(wgi_2021_diff = wgi_origin_2021_score - wgi_can_2021_score)
+
+trajipaq <- trajipaq %>%
   mutate(wgi_arrival_diff = wgi_origin_arrival_score - wgi_can_arrival_score) %>%
   mutate(wgi_2021_diff = wgi_origin_2021_score - wgi_can_2021_score)
 

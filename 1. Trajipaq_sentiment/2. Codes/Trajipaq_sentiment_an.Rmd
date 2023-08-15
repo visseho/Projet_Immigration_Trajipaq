@@ -609,78 +609,61 @@ trajipaq <-
 ctable(trajipaq$VD3, trajipaq$VD1_f)
 
 ```
+
+# Uniformisation de la DB (NA)
+
+```{r}
+
+v_CSD <- c("age", "education", "revenu", "sexe", "origine", "langue_mat", "statut_mat", "religion")
+
+trajipaq <- trajipaq %>%
+  filter(rowSums(!is.na(across(all_of(v_CSD)))) == length(v_CSD))
+```
+
+
 # WGI X Canada
 
 ```{r}
 #Au moment de l'immigration
 
-reg_WGI_can_arrival_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
-reg_WGI_can_arrival_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
+reg_WGI_can_arrival <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
+reg_WGI_can_arrival_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
 
-reg_WGI_can_arrival_long <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival_score, data = trajipaq) # VD2 dichotomique
-reg_WGI_can_arrival_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
+reg_WGI_arrival_diff <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff, data = trajipaq, family = "binomial")
+reg_WGI_arrival_diff_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
 
-reg_WGI_arrival_diff_dico <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff, data = trajipaq, family = "binomial")
-reg_WGI_arrival_diff_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
-
-reg_WGI_arrival_diff_long <- lm(formula = sentimapp_can_long ~ wgi_arrival_diff, data = trajipaq)
-reg_WGI_arrival_diff_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq)
-
-summary(reg_WGI_can_arrival_dico) # p = 0.000116 ***
+summary(reg_WGI_can_arrival) # p = 0.000116 ***
   # Plus le score WGI du pays d'origine au moment de l'immigration est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
 
-summary(reg_WGI_can_arrival_dico_ctrl) # p = 0.0203 *
+summary(reg_WGI_can_arrival_ctrl) # p = 0.0203 *
   # aucune variable de contrôle significative (age [50;99] p = 0.0894)
 
-summary(reg_WGI_can_arrival_long) # p = 8.7e-07 ***
-  # Plus le score WGI du pays d'origine au moment del'immigration est élevé, plus le sentiment d'appartenance au Canada est élevé. Relation positive
-
-summary(reg_WGI_can_arrival_long_ctrl) # p = 0.00678 **
-  # aucune variable de contrôle significative
-
-summary(reg_WGI_arrival_diff_dico)
-summary(reg_WGI_arrival_diff_dico_ctrl)
-summary(reg_WGI_arrival_diff_long)
-summary(reg_WGI_arrival_diff_long_ctrl)
+summary(reg_WGI_arrival_diff)
+summary(reg_WGI_arrival_diff_ctrl)
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
-reg_WGI_can_2021_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
+reg_WGI_can_2021 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
+reg_WGI_can_2021_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
 
-reg_WGI_can_2021_long <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score, data = trajipaq) # VD2 dichotomique
-reg_WGI_can_2021_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
+reg_WGI_2021_diff <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff, data = trajipaq, family = "binomial")
+reg_WGI_2021_diff_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
 
-reg_WGI_2021_diff_dico <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff, data = trajipaq, family = "binomial")
-reg_WGI_2021_diff_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
-
-reg_WGI_2021_diff_long <- lm(formula = sentimapp_can_long ~ wgi_2021_diff, data = trajipaq)
-reg_WGI_2021_diff_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq)
-
-summary(reg_WGI_can_2021_dico) # 2.38e-05 ***
+summary(reg_WGI_can_2021) # 2.38e-05 ***
   # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
 
-summary(reg_WGI_can_2021_dico_ctrl) # p = 0.03426 *
+summary(reg_WGI_can_2021_ctrl) # p = 0.03426 *
   # Seul l'âge [50;99] estr significative p = 0.04311
 
-summary(reg_WGI_can_2021_long) # p = 5.5e-08 ***
-  # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est élevé. Relation positive.
-
-summary(reg_WGI_can_2021_long_ctrl) # p = 0.0124 *
-  # Seul l'âge [50;99] est significative p = 0.0210 et Origin (Océanie p = 0.0369)
-
-summary(reg_WGI_2021_diff_dico)
-summary(reg_WGI_2021_diff_dico_ctrl)
-summary(reg_WGI_2021_diff_long)
-summary(reg_WGI_2021_diff_long_ctrl)
-
+summary(reg_WGI_2021_diff)
+summary(reg_WGI_2021_diff_ctrl)
 ```
 
 ## Visualisation
 
 ```{r}
 
-ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_can_dico)), aes(x = wgi_origin_arrival_score, y = sentimapp_can_dico)) +
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_can)), aes(x = wgi_origin_arrival_score, y = sentimapp_can_dico)) +
   stat_smooth(method = "glm",
               formula = "y ~ x",
               color = "pink", 
@@ -692,18 +675,7 @@ ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_ca
     y = "Sentiment d'appartenance au Canada") +
   theme_bw()
 
-ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_can_long)), aes(x = wgi_origin_arrival_score, y = sentimapp_can_long)) +
-  stat_smooth(method = "lm",
-              formula = "y ~ x",
-              color = "pink", 
-              se = FALSE) +
-  labs(
-    title = "Sentiment d'appartenance au Canada (long) selon le score \nde gouvernementalité du pays d'origine au moment de l'immigration", 
-    x = "Score de gouvernementalité du pays d'origine", 
-    y = "Sentiment d'appartenance au Canada") +
-  theme_bw()
-
-ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can_dico)), aes(x = wgi_origin_2021_score, y = sentimapp_can_dico)) +
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can)), aes(x = wgi_origin_2021_score, y = sentimapp_can_dico)) +
   stat_smooth(method = "glm",
               formula = "y ~ x",
               color = "pink", 
@@ -714,18 +686,7 @@ ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can_d
     y = "Sentiment d'appartenance au Canada") +
   theme_bw()
 
-ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can_long)), aes(x = wgi_origin_2021_score, y = sentimapp_can_long)) +
-  stat_smooth(method = "lm",
-              formula = "y ~ x",
-              color = "pink", 
-              se = FALSE) +
-  labs(
-    title = "Sentiment d'appartenance au Canada (long) selon le score \nde gouvernementalité du pays d'origine au moment de l'enquête",
-    x = "Score de gouvernementalité du pays d'origine", 
-    y = "Sentiment d'appartenance au Canada") +
-  theme_bw()
-
-ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can_dico)), aes(x = wgi_arrival_difffre, y = sentimapp_can_dico)) +
+ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can)), aes(x = wgi_arrival_diff, y = sentimapp_can_dico)) +
   stat_smooth(method = "glm",
               formula = "y ~ x",
               color = "pink", 
@@ -736,34 +697,46 @@ ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can_dico)), a
     y = "Sentiment d'appartenance au Canada") +
   theme_bw()
 
-ggplot(trajipaq %>% filter(!is.na(wgi_arrival_diff), !is.na(sentimapp_can_long)), aes(x = wgi_2021_diff, y = sentimapp_can_long)) +
-  stat_smooth(method = "lm",
-              formula = "y ~ x",
-              color = "pink", 
-              se = FALSE) +
-  labs(
-    title = "Sentiment d'appartenance au Canada (dico) selon la différence de score \nde gouvernementalité du pays d'origine et du Canada au moment de l'enquête", 
-    x = "Écart du score de gouvernementalité du pays d'origine et du Canada", 
-    y = "Sentiment d'appartenance au Canada") +
-  theme_bw()
-
 ```
 
 
 ```{r}
 stargazer(
-  reg_WGI_can_2021_dico,
-  reg_WGI_can_2021_dico_ctrl,
-  reg_WGI_can_2021_long,
+  reg_WGI_can_2021,
+  reg_WGI_can_2021_ctrl,
   title = "Results", 
   align = TRUE, 
   type = "text"
 )
 
+stargazer(
+  reg_WGI_can_arrival,
+  reg_WGI_can_arrival_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+ stargazer(
+  reg_WGI_arrival_diff,
+  reg_WGI_arrival_diff_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+)
+
+ stargazer(
+  reg_WGI_2021_diff,
+  reg_WGI_2021_diff_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+) 
+  
  # reg_WGI_can_2021_dico,
  # reg_WGI_can_2021_dico_ctrl,  
 
-freq(trajipaq$sentimapp_can_dico)
+freq(trajipaq$sentimapp_can)
 freq(trajipaq$wgi_origin_arrival_score)
 freq(trajipaq$sentimapp_can_long)
 freq(trajipaq$wgi_origin_2021_score)
@@ -795,79 +768,3 @@ summary(reg_WGI_can_both_dico_ctrl)
 freq(trajipaq$VD2_long)
 
 ## WGI X Québec
-
-```{r}
-# Au moment de l'immigration
-
-reg__qc1 <- lm(formula = VD1  ~ vae_arrival, data = trajipaq) # VD1
-reg_WGI_qc1_ctrl <- lm(formula = VD1 ~ vae_arrival  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD1 contrôlée par CSD
-
-summary(reg_WGI_qc1)
-summary(reg_WGI_qc1_ctrl)
-
-# Au moment de l'enquête
-
-reg_WGI_qc2 <- lm(formula = VD1 ~ vae_2021 , data = trajipaq) # VD1
-reg_WGI_qc2_ctrl <- lm(formula = VD1 ~ vae_2021  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) # VD1 contrôlée par CSD
-
-
-summary(reg_WGI_qc2)
-summary(reg_WGI_qc2_ctrl)
-
-# À l'arrivée et au moment de l'enquête
-
-reg_WGI_qc3 <- lm(formula = VD1 ~ vae_2021 + vae_arrival , data = trajipaq) # VD1
-reg_WGI_qc3_ctrl <- lm(formula = VD1 ~ vae_2021 + vae_arrival + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq)# VD1 contrôlée par CSD
-
-
-summary(reg_WGI_qc3)
-summary(reg_WGI_qc3_ctrl)
-```
-
-## WGI X can_qc
-
-```{r}
-reg_WGI_can_origin <- lm(formula = sentimapp_can_origin_N ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
-
-reg_WGI_can_origin_ctrl <- lm(formula = sentimapp_can_origin_N ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
-
-summary(reg_WGI_can_origin)
-summary(reg_WGI_can_origin_ctrl)
-
-stargazer(reg_WGI_can2, reg_WGI_qc2, reg_WGI_can2_ctrl, reg_WGI_qc2_ctrl, title="Results",align=TRUE, type = "text")
-
-
-```
-
-```{r}
-cor.test(trajipaq$vae_arrival, trajipaq$VD2)
-
-ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD1)), aes(x = vae_arrival, y = VD1)) +
-  geom_smooth(method = "glm",
-              formula = "y ~ x",
-              color = "pink", 
-              se = FALSE) +
-  labs(
-    title = "Sentiment d'appartenance au Québec et indice de gouvernementalité du pays d'origine, au moment de l'immigration", 
-    x = "indice de gouvernementalité du pays d'origine au moment de l'immigration", 
-    y = "Sentiment d'appartenance au Québec") +
-  theme_bw()
-
-ggplot(trajipaq %>% filter(!is.na(vae_arrival), !is.na(VD2)), aes(x = vae_arrival, y = VD1)) +
-  stat_smooth(method = "glm",
-              formula = "y ~ x",
-              color = "pink", 
-              se = FALSE) +
-  labs(
-    title = "Sentiment d'appartenance au Canada et indice de gouvernementalité du pays d'origine, au moment de l'immigration", 
-    x = "indice de gouvernementalité du pays d'origine au moment de l'immigration", 
-    y = "Sentiment d'appartenance au Canada") +
-  theme_bw()
-```
-
-
-```{r}
-
-chisq.test(trajipaq$VD3, trajipaq$VD1_f)
-
-```
