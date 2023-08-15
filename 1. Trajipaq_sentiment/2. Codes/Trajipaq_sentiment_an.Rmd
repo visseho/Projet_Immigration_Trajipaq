@@ -621,22 +621,89 @@ reg_WGI_can_arrival_long <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival
 reg_WGI_can_arrival_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
 
 summary(reg_WGI_can_arrival_dico) # p = 0.000116 ***
+  # Plus le score WGI du pays d'origine au moment de l'immigration est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
+
 summary(reg_WGI_can_arrival_dico_ctrl) # p = 0.0203 *
+  # aucune variable de contrôle significative (age [50;99] p = 0.0894)
+
 summary(reg_WGI_can_arrival_long) # p = 8.7e-07 ***
+  # Plus le score WGI du pays d'origine au moment del'immigration est élevé, plus le sentiment d'appartenance au Canada est élevé. Relation positive
+
 summary(reg_WGI_can_arrival_long_ctrl) # p = 0.00678 **
+  # aucune variable de contrôle significative
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial", na.action = na.pass) ## VD2 dichotomique
+reg_WGI_can_2021_dico <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
 reg_WGI_can_2021_dico_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
 
 reg_WGI_can_2021_long <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score, data = trajipaq) # VD2 dichotomique
 reg_WGI_can_2021_long_ctrl <- lm(formula = sentimapp_can_long ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq) #VD2 contrôlée par CSD
 
 summary(reg_WGI_can_2021_dico) # 2.38e-05 ***
+  # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
+
 summary(reg_WGI_can_2021_dico_ctrl) # p = 0.03426 *
+  # Seul l'âge [50;99] estr significative p = 0.04311
+
 summary(reg_WGI_can_2021_long) # p = 5.5e-08 ***
+  # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est élevé. Relation positive.
+
 summary(reg_WGI_can_2021_long_ctrl) # p = 0.0124 *
+  # Seul l'âge [50;99] est significative p = 0.0210 et Origin (Océanie p = 0.0369)
+```
+
+## Visualisation
+
+```{r}
+
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_can_dico)), aes(x = wgi_origin_arrival_score, y = sentimapp_can_dico)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance au Canada (dico) selon le score \nde gouvernementalité du pays d'origine au moment de l'immigraition", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_arrival_score), !is.na(sentimapp_can_long)), aes(x = wgi_origin_arrival_score, y = sentimapp_can_long)) +
+  stat_smooth(method = "lm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada (long) selon le score \nde gouvernementalité du pays d'origine au moment de l'immigraition", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can_dico)), aes(x = wgi_origin_2021_score, y = sentimapp_can_dico)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada (long) selon le score \nde gouvernementalité du pays d'origine au moment de l'immigraition", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can_long)), aes(x = wgi_origin_2021_score, y = sentimapp_can_long)) +
+  stat_smooth(method = "lm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada (long) selon le score \nde gouvernementalité du pays d'origine au moment de l'immigraition", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+
+
 ```
 
 
