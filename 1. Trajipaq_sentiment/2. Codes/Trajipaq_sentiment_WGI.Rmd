@@ -1,0 +1,123 @@
+---
+title: "Trajipaq_sentiment_WGI"
+author: "Vincent Bertyrand-Huneault"
+date: "2023-08-16"
+output: pdf_document
+---
+
+```{r}
+library(summarytools)
+library(tidyverse)
+library(ggthemes)
+library(haven)
+library(stargazer)
+library(gtsummary)
+
+trajipaq <- read_csv("../3. Data/Trajipaq_sentiment_cr.csv")
+#view(trajipaq)
+```
+
+# Uniformisation de la DB (NA)
+```{r}
+v_noNA <- c("age", "education", "revenu", "sexe", "origine", "langue_mat", "statut_mat", "religion", "sentimapp_can", "wgi_origin_arrival_score", "wgi_arrival_diff", "wgi_origin_2021_score", "wgi_2021_diff")
+
+
+
+trajipaq <- trajipaq %>%
+  filter(rowSums(!is.na(across(all_of(v_noNA)))) == length(v_noNA))
+```
+
+# Régressions logistiques
+```{r}
+#Au moment de l'immigration
+
+reg1 <- glm(formula = sentimapp_can ~ wgi_origin_arrival_score, data = trajipaq, family = binomial)
+reg2 <- glm(formula = sentimapp_can ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+reg3 <- glm(formula = sentimapp_can ~ wgi_arrival_diff, data = trajipaq, family = binomial)
+reg4 <- glm(formula = sentimapp_can ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+
+# Au moment de l'enquête (like)
+
+reg5 <- glm(formula = sentimapp_can ~ wgi_origin_2021_score, data = trajipaq, family = binomial)
+reg6 <- glm(formula = sentimapp_can ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+reg7 <- glm(formula = sentimapp_can ~ wgi_2021_diff, data = trajipaq, family = binomial)
+reg8 <- glm(formula = sentimapp_can ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+""
+reg_order <- c("wgi_origin_arrival_score", "wgi_arrival_diff", "wgi_origin_2021_score", "wgi_2021_diff")
+
+stargazer(
+  reg1,
+  reg2,
+  reg3,
+  reg4,
+  reg5,
+  reg6,
+  reg7,
+  reg8,
+  title = "Results", 
+  align = TRUE, 
+  type = "text",
+  order = reg_order
+)
+```
+
+# Visualisations
+
+## Origin_arrival
+
+```{r}
+ggplot(trajipaq, aes(x = wgi_origin_arrival_score, y = sentimapp_can)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE,
+              method.args = list(family = binomial)) +
+  labs(
+    title = "Sentiment d'appartenance au Canada selon le score \nde gouvernementalité du pays d'origine au moment de l'immigration", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+```
+
+## Origin_2021
+```{r}
+ggplot(trajipaq %>% filter(!is.na(wgi_origin_2021_score), !is.na(sentimapp_can)), aes(x = wgi_origin_2021_score, y = sentimapp_can)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada selon le score \nde gouvernementalité du pays d'origine au moment de l'enquête", 
+    x = "Score de gouvernementalité du pays d'origine", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+```
+
+##2021_diff
+```{r}
+ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can)), aes(x = wgi_2021_diff, y = sentimapp_can)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada selon la différence de score \nde gouvernementalité du pays d'origine et du Canada au moment de l'immigraition", 
+    x = "Écart du score de gouvernementalité du pays d'origine et du Canada", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+
+```
+
+## Avrrival_diff
+```{r}
+ggplot(trajipaq %>% filter(!is.na(wgi_arrival_diff), !is.na(sentimapp_can)), aes(x = wgi_arrival_diff, y = sentimapp_can)) +
+  stat_smooth(method = "glm",
+              formula = "y ~ x",
+              color = "pink", 
+              se = FALSE) +
+  labs(
+    title = "Sentiment d'appartenance au Canada selon la différence de score \nde gouvernementalité du pays d'origine et du Canada au moment de l'immigraition", 
+    x = "Écart du score de gouvernementalité du pays d'origine et du Canada", 
+    y = "Sentiment d'appartenance au Canada") +
+  theme_bw()
+```

@@ -628,37 +628,33 @@ trajipaq <- trajipaq %>%
 ```{r}
 #Au moment de l'immigration
 
-reg_WGI_can_arrival <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score, data = trajipaq, family = "binomial") # VD2 dichotomique
-reg_WGI_can_arrival_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial") #VD2 contrôlée par CSD
-
-reg_WGI_arrival_diff <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff, data = trajipaq, family = "binomial")
-reg_WGI_arrival_diff_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
-
-summary(reg_WGI_can_arrival) # p = 0.000116 ***
-  # Plus le score WGI du pays d'origine au moment de l'immigration est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
-
-summary(reg_WGI_can_arrival_ctrl) # p = 0.0203 *
-  # aucune variable de contrôle significative (age [50;99] p = 0.0894)
-
-summary(reg_WGI_arrival_diff)
-summary(reg_WGI_arrival_diff_ctrl)
+reg1 <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score, data = trajipaq, family = binomial)
+reg2 <- glm(formula = sentimapp_can_dico ~ wgi_origin_arrival_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+reg3 <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff, data = trajipaq, family = binomial)
+reg4 <- glm(formula = sentimapp_can_dico ~ wgi_arrival_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can_2021 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score, data = trajipaq, family = "binomial") ## VD2 dichotomique
-reg_WGI_can_2021_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
+reg5 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score, data = trajipaq, family = binomial)
+reg6 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
+reg7 <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff, data = trajipaq, family = binomial)
+reg8 <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = binomial)
 
-reg_WGI_2021_diff <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff, data = trajipaq, family = "binomial")
-reg_WGI_2021_diff_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")
+stargazer(
+  reg1,
+  reg2,
+  reg3,
+  reg4,
+  reg5,
+  reg6,
+  reg7,
+  reg8,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+) 
 
-summary(reg_WGI_can_2021) # 2.38e-05 ***
-  # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
 
-summary(reg_WGI_can_2021_ctrl) # p = 0.03426 *
-  # Seul l'âge [50;99] estr significative p = 0.04311
-
-summary(reg_WGI_2021_diff)
-summary(reg_WGI_2021_diff_ctrl)
 ```
 
 ## Visualisation
@@ -701,61 +697,18 @@ ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can)), aes(x 
 
 ```
 
+summary(reg_WGI_can_arrival) # p = 0.000116 ***
+  # Plus le score WGI du pays d'origine au moment de l'immigration est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
 
-```{r}
- stargazer(
-  reg_WGI_can_arrival,
-  reg_WGI_can_arrival_ctrl,
-  reg_WGI_arrival_diff,
-  reg_WGI_arrival_diff_ctrl,
-  reg_WGI_can_2021,
-  reg_WGI_can_2021_ctrl,
-  reg_WGI_2021_diff,
-  reg_WGI_2021_diff_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-) 
+summary(reg_WGI_can_arrival_ctrl) # p = 0.0203 *
+  # aucune variable de contrôle significative (age [50;99] p = 0.0894)
 
-stargazer(
-  reg_WGI_can_2021,
-  reg_WGI_can_2021_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
+summary(reg_WGI_can_2021) # 2.38e-05 ***
+  # Plus le score WGI du pays d'origine au moment de l'enquête est élevé, plus le sentiment d'appartenance au Canada est faible. Relation négative.
 
-stargazer(
-  reg_WGI_can_arrival,
-  reg_WGI_can_arrival_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
+summary(reg_WGI_can_2021_ctrl) # p = 0.03426 *
+  # Seul l'âge [50;99] estr significative p = 0.04311
 
- stargazer(
-  reg_WGI_arrival_diff,
-  reg_WGI_arrival_diff_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-)
-
- stargazer(
-  reg_WGI_2021_diff,
-  reg_WGI_2021_diff_ctrl,
-  title = "Results", 
-  align = TRUE, 
-  type = "text"
-) 
-  
- # reg_WGI_can_2021_dico,
- # reg_WGI_can_2021_dico_ctrl,  
-
-freq(trajipaq$sentimapp_can)
-freq(trajipaq$wgi_origin_arrival_score)
-freq(trajipaq$sentimapp_can_long)
-freq(trajipaq$wgi_origin_2021_score)
 
 trajipaq$age <- as.factor(trajipaq$age)
 trajipaq$education <- as.factor(trajipaq$education)

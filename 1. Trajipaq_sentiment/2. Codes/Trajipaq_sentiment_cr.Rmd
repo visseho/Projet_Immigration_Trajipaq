@@ -281,7 +281,7 @@ trajipaq <-
 
 trajipaq <-
   trajipaq %>%
-  mutate(sentimapp_can_dico = case_when( # Création de la variable "VD2".
+  mutate(sentimapp_can = case_when( # Création de la variable "VD2".
     Q39E == 1 ~ 1,
     Q39E == 2 ~ 1,
     Q39E == 3 ~ 0,
@@ -291,7 +291,7 @@ trajipaq <-
   ))
 
 freq(trajipaq$sentimapp_can_long)
-freq(trajipaq$sentimapp_can_dico)
+freq(trajipaq$sentimapp_can)
 ```
 
 ### VD2 : sentiment d'appartenance au Québec
@@ -383,19 +383,19 @@ freq(trajipaq$sentimapp_origine_dico)
 trajipaq <-
   trajipaq %>% 
   mutate(sentimapp_can_origin = case_when( # Création de la variable "VD4".
-    sentimapp_can_dico == 1 & sentimapp_origine_dico == 1 ~ "Integre",
-    sentimapp_can_dico == 1 & sentimapp_origine_dico == 0 ~ "Assimile",
-    sentimapp_can_dico == 0 & sentimapp_origine_dico == 1 ~ "Separe",
-    sentimapp_can_dico == 0 & sentimapp_origine_dico == 0 ~ "Marginalise"
+    sentimapp_can == 1 & sentimapp_can == 1 ~ "Integre",
+    sentimapp_can == 1 & sentimapp_can == 0 ~ "Assimile",
+    sentimapp_can == 0 & sentimapp_can == 1 ~ "Separe",
+    sentimapp_can == 0 & sentimapp_can == 0 ~ "Marginalise"
   ))
 
 trajipaq <-
   trajipaq %>% 
   mutate(sentimapp_can_origin_N = case_when( # Création de la variable "VD4".
-    sentimapp_can_dico == 1 & sentimapp_origine_dico == 1 ~ "1",
-    sentimapp_can_dico == 1 & sentimapp_origine_dico == 0 ~ "2",
-    sentimapp_can_dico == 0 & sentimapp_origine_dico == 1 ~ "3",
-    sentimapp_can_dico == 0 & sentimapp_origine_dico == 0 ~ "4"
+    sentimapp_can == 1 & sentimapp_can == 1 ~ "1",
+    sentimapp_can == 1 & sentimapp_can == 0 ~ "2",
+    sentimapp_can == 0 & sentimapp_can == 1 ~ "3",
+    sentimapp_can == 0 & sentimapp_can == 0 ~ "4"
   ))
 freq(trajipaq$sentimapp_can_origin)
 
@@ -616,6 +616,16 @@ wgidataset <-
 ### WGI origin/canada et arrival/2021
 
 ```{r}
+
+trajipaq$age <- as.factor(trajipaq$age)
+trajipaq$education <- as.factor(trajipaq$education)
+trajipaq$sexe <- as.factor(trajipaq$sexe)
+trajipaq$origine <- as.factor(trajipaq$origine)
+trajipaq$revenu <- as.factor(trajipaq$revenu)
+trajipaq$langue_mat <- as.factor(trajipaq$langue_mat)
+trajipaq$religion <- as.factor(trajipaq$religion)
+trajipaq$statut_mat <- as.factor(trajipaq$statut_mat)
+
 wgi_origin_2021 <- filter(wgidataset, year == 2021) # Origine en 2021
 wgi_can <- filter(wgidataset, countryname == "Canada") #Canada à l'arrivée
 wgi_can_2021 <- filter(wgidataset, countryname == "Canada" & year == 2021)
@@ -687,7 +697,7 @@ Trajipaq_sentiment_cr <-
          "statut_mat",
          "Q11",
          "sentimapp_QC",
-         "sentimapp_can_dico",
+         "sentimapp_can",
          "sentimapp_can_long",
          "sentimapp_origine_dico",
          "sentimapp_can_origin",
