@@ -645,7 +645,7 @@ summary(reg_WGI_arrival_diff_ctrl)
 
 # Au moment de l'enquête (like)
 
-reg_WGI_can_2021 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score , data = trajipaq, family = "binomial") ## VD2 dichotomique
+reg_WGI_can_2021 <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score, data = trajipaq, family = "binomial") ## VD2 dichotomique
 reg_WGI_can_2021_ctrl <- glm(formula = sentimapp_can_dico ~ wgi_origin_2021_score  + age + education + sexe + origine + revenu + langue_mat + religion + statut_mat , data = trajipaq, family = "binomial")#VD2 contrôlée par CSD
 
 reg_WGI_2021_diff <- glm(formula = sentimapp_can_dico ~ wgi_2021_diff, data = trajipaq, family = "binomial")
@@ -710,7 +710,6 @@ ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can)), aes(x 
   reg_WGI_arrival_diff_ctrl,
   reg_WGI_can_2021,
   reg_WGI_can_2021_ctrl,
-  reg_WGI_2021_diff,
   reg_WGI_2021_diff,
   reg_WGI_2021_diff_ctrl,
   title = "Results", 
