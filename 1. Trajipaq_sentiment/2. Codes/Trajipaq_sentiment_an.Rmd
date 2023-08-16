@@ -614,10 +614,12 @@ ctable(trajipaq$VD3, trajipaq$VD1_f)
 
 ```{r}
 
-v_CSD <- c("age", "education", "revenu", "sexe", "origine", "langue_mat", "statut_mat", "religion")
+v_noNA <- c("age", "education", "revenu", "sexe", "origine", "langue_mat", "statut_mat", "religion", "sentimapp_can_dico", "wgi_origin_arrival_score", "wgi_arrival_diff", "wgi_origin_2021_score", "wgi_2021_diff")
+
+
 
 trajipaq <- trajipaq %>%
-  filter(rowSums(!is.na(across(all_of(v_CSD)))) == length(v_CSD))
+  filter(rowSums(!is.na(across(all_of(v_noNA)))) == length(v_noNA))
 ```
 
 
@@ -701,6 +703,21 @@ ggplot(trajipaq %>% filter(!is.na(wgi_2021_diff), !is.na(sentimapp_can)), aes(x 
 
 
 ```{r}
+ stargazer(
+  reg_WGI_can_arrival,
+  reg_WGI_can_arrival_ctrl,
+  reg_WGI_arrival_diff,
+  reg_WGI_arrival_diff_ctrl,
+  reg_WGI_can_2021,
+  reg_WGI_can_2021_ctrl,
+  reg_WGI_2021_diff,
+  reg_WGI_2021_diff,
+  reg_WGI_2021_diff_ctrl,
+  title = "Results", 
+  align = TRUE, 
+  type = "text"
+) 
+
 stargazer(
   reg_WGI_can_2021,
   reg_WGI_can_2021_ctrl,
